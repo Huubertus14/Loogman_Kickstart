@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 328210580}
   - component: {fileID: 328210579}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: Player
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -234,6 +234,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f30c0b30c942224faba9145371c1611, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AudioPrefab: {fileID: 1184130074908478, guid: 2b1c5efa85b0a3e40bf027d8c4ea818a,
+    type: 2}
 --- !u!1 &1409736303
 GameObject:
   m_ObjectHideFlags: 0
@@ -305,6 +307,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f44e98f4d711ecf468781b42ce5831c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Player: {fileID: 0}
 --- !u!1 &1723359904
 GameObject:
   m_ObjectHideFlags: 0
@@ -410,4 +413,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a692a1f11ddaae2448f19256fce99a80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TestSample: {fileID: 0}
