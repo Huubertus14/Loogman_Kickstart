@@ -15,10 +15,23 @@ public class GameManager : MonoBehaviour
 
     [Header("References")]
     public GameObject Player;
-    
+
+    [Header("Values")]
+    public string Name;
+    public int Score;
+
 
     public GameObject CurrentPlayer
     {
         get { return Player; }
     }
+
+    /// <summary>
+    /// Called when the game is about to start
+    /// </summary>
+    public void StartGame()
+    {
+
+    }
+
 }
