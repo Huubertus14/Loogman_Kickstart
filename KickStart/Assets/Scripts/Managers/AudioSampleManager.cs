@@ -10,6 +10,5 @@ public class AudioSampleManager : MonoBehaviour {
     {
         Instance = this;
     }
-
-    public AudioClip TestSample;
+    
 }

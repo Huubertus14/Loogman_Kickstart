@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 328210580}
   - component: {fileID: 328210579}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: Player
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -234,6 +234,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f30c0b30c942224faba9145371c1611, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AudioPrefab: {fileID: 1184130074908478, guid: 2b1c5efa85b0a3e40bf027d8c4ea818a,
+    type: 2}
+--- !u!1001 &1378660808
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 400000, guid: d418c88afd808cf448602106c7ead664, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -1.472168
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d418c88afd808cf448602106c7ead664, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 9.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d418c88afd808cf448602106c7ead664, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0.1274414
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d418c88afd808cf448602106c7ead664, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d418c88afd808cf448602106c7ead664, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d418c88afd808cf448602106c7ead664, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d418c88afd808cf448602106c7ead664, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: -0.00000004371139
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: d418c88afd808cf448602106c7ead664, type: 2}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: d418c88afd808cf448602106c7ead664, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1409736303
 GameObject:
   m_ObjectHideFlags: 0
@@ -305,6 +349,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f44e98f4d711ecf468781b42ce5831c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Player: {fileID: 0}
+  Name: 
+  Score: 0
 --- !u!1 &1723359904
 GameObject:
   m_ObjectHideFlags: 0
@@ -410,4 +457,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a692a1f11ddaae2448f19256fce99a80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TestSample: {fileID: 0}
