@@ -50,14 +50,14 @@ namespace HoloToolkit.Unity
 
         private static void PrefabInstanceUpdated(GameObject instance)
         {
-            var prefab = PrefabUtility.GetCorrespondingObjectFromSource(instance) as GameObject;
+           /* var prefab = PrefabUtility.GetCorrespondingObjectFromSource(instance) as GameObject;
             foreach (var atlasPrefabReference in References)
             {
                 if (atlasPrefabReference.Prefabs.Contains(prefab))
                 {
                     UpdateAtlasReferences(atlasPrefabReference);
                 }
-            }
+            }*/
         }
         private static AssetDeleteResult OnWillDeleteAsset(string assetPath, RemoveAssetOptions options)
         {

@@ -108,7 +108,7 @@ namespace HoloToolkit.Unity.SpatialMapping
 
             surfaceObject.Collider = surfaceObject.Object.GetComponent<MeshCollider>();
 
-            surfaceObject.Renderer.enabled = false;
+           // surfaceObject.Renderer.enabled = false;
 
             // Reset the surface mesh collider to fit the updated mesh. 
             // Unity tribal knowledge indicates that to change the mesh assigned to a
@@ -118,7 +118,6 @@ namespace HoloToolkit.Unity.SpatialMapping
             surfaceObject.Collider.sharedMesh = surfaceObject.Filter.sharedMesh;
 
             //Make sure to shoot at things
-            surfaceObject.Object.AddComponent(typeof(ShootingBehaviour));
 
             return surfaceObject;
         }
