@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour {
+public class AudioSampleManager : MonoBehaviour {
 
+    public static AudioSampleManager Instance;
 
-    public static GameManager Instance;
     private void Awake()
     {
         Instance = this;
     }
+
+    public AudioClip TestSample;
 }
