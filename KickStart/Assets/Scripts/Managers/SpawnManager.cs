@@ -42,7 +42,7 @@ public class SpawnManager : MonoBehaviour {
             //Set right spawn point 
             Vector3 _direction =  new Vector3(Random.Range(-1,1), Random.Range(-1, 1), Random.Range(-1, 1));
             float _distance = Random.Range(-10, 10);
-            Debug.Log(_direction * _distance);
+           // Debug.Log(_direction * _distance);
             if (_distance < 5)
             {
                 _distance = 5;
