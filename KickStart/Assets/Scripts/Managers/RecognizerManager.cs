@@ -1,12 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using System;
 using System.IO;
 using System.Linq;
-using UnityEngine;
 using UnityEngine.XR.WSA.Input;
-using UnityEngine.XR.WSA.WebCam;
 
 public class RecognizerManager : MonoBehaviour {
 
