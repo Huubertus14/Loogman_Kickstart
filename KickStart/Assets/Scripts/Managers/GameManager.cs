@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
 
     [Header("References")]
     public GameObject Player;
+    public GameObject Cursor;
 
     [Header("Values")]
     public string Name;

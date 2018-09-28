@@ -564,7 +564,7 @@ PlayerSettings:
   m_MobileRenderingPath: 1
   metroPackageName: KickStart
   metroPackageVersion: 1.0.0.0
-  metroCertificatePath: D:\Loogman\Loogman_Kickstart\KickStart\Assets\WSATestCertificate.pfx
+  metroCertificatePath: Assets\WSATestCertificate.pfx
   metroCertificatePassword: 
   metroCertificateSubject: DefaultCompany
   metroCertificateIssuer: DefaultCompany
@@ -661,7 +661,8 @@ PlayerSettings:
     daydream:
       daydreamIconForeground: {fileID: 0}
       daydreamIconBackground: {fileID: 0}
-  cloudServicesEnabled: {}
+  cloudServicesEnabled:
+    UNet: 1
   facebookSdkVersion: 7.9.4
   apiCompatibilityLevel: 3
   cloudProjectId: d6ff94c7-3839-4cc6-bb4e-6e3afd00f917
