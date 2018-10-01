@@ -17,6 +17,10 @@ public class GameManager : MonoBehaviour
     public GameObject Player;
     public GameObject Cursor;
 
+    [Tooltip("The Object the player is currently looking at")]
+    [SerializeField]
+    private GameObject hoverObject;
+
     [Header("Values")]
     public string Name;
     public int Score;
@@ -35,4 +39,25 @@ public class GameManager : MonoBehaviour
 
     }
 
+    #region Property's
+    public GameObject GetHoverObject
+    {
+        get {
+            if (hoverObject)
+            {
+                return hoverObject;
+            }
+            else
+            {
+                Debug.LogError("No Current Hovering Object!");
+                return null;
+            }
+        }
+    }
+
+    public void SetHoverObject(GameObject _hoverObject)
+    {
+        hoverObject = _hoverObject;
+    }
+    #endregion
 }

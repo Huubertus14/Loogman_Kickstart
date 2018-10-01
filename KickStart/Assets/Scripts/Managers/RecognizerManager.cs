@@ -28,7 +28,7 @@ public class RecognizerManager : MonoBehaviour {
     /// </summary>
     private void TapHandler(TappedEventArgs obj)
     {
-
+        
         Debug.Log("BIEM!");
     }
 
