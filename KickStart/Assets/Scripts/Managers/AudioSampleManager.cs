@@ -10,5 +10,20 @@ public class AudioSampleManager : MonoBehaviour {
     {
         Instance = this;
     }
+
+    public AudioClip Seagull;
+    public AudioClip Crow;
+    public AudioClip Chicken;
+    public AudioClip Duck;
+    public AudioClip SeagullDeluxe;
+    public AudioClip CrowDeluxe;
+
+    public AudioClip[] BirdSounds;
+
+    public AudioClip getBirdSounds()
+    {
+        int x = Random.Range(0, BirdSounds.Length);
+        return BirdSounds[x];
+    }
     
 }
