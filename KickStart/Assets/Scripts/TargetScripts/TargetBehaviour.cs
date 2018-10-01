@@ -39,11 +39,7 @@ public class TargetBehaviour : MonoBehaviour
     {
         SpawnManager.Instance.CurrentBirdCount--;
     }
-
-    void OnSelect()
-    {
-
-    }
+    
 
     private void Update()
     {

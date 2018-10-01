@@ -9,12 +9,11 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-
-        Player = Camera.main.gameObject;
+        
     }
 
     [Header("References")]
-    public GameObject Player;
+    public PlayerBehaviour Player;
     public GameObject Cursor;
 
     [Tooltip("The Object the player is currently looking at")]
@@ -22,14 +21,18 @@ public class GameManager : MonoBehaviour
     private GameObject hoverObject;
 
     [Header("Values")]
-    public string Name;
+    public string PlayerName;
     public int Score;
 
+    [Space]
+    public float BulletForce;
 
-    public GameObject CurrentPlayer
+    private void Start()
     {
-        get { return Player; }
+        PlayerName = "Loogman Develop";
+        Score = 0;
     }
+
 
     /// <summary>
     /// Called when the game is about to start
@@ -40,6 +43,12 @@ public class GameManager : MonoBehaviour
     }
 
     #region Property's
+
+    public GameObject CurrentPlayer
+    {
+        get { return Player.gameObject; }
+    }
+
     public GameObject GetHoverObject
     {
         get {
