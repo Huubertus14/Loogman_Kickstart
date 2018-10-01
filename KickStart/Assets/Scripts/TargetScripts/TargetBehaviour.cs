@@ -7,6 +7,8 @@ public class TargetBehaviour : MonoBehaviour {
     [Header("Bird Values:")]
     [Range(1,15)]
     public float Speed = 1;
+    public float BirdSoundCounter;
+    public float BirdSoundTimer;// = Random.Range(2f, 6f);
     
     private Vector3 endPoint;
 
@@ -48,5 +50,14 @@ public class TargetBehaviour : MonoBehaviour {
         {
             Destroy(gameObject);
         }
+
+        BirdSoundCounter += Time.deltaTime;
+        if (BirdSoundCounter > BirdSoundTimer)
+        {
+            BirdSoundCounter = 0;
+            AudioManager.Instance.PlayAudio(AudioSampleManager.Instance.getBirdSounds(), 1, transform.position);
+        }
+
+        BirdSoundTimer = Random.Range(3f, 6f);
     }
 }
