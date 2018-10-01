@@ -63,7 +63,8 @@ public class CursorBehaviour : MonoBehaviour
         else
         {
             // If the raycast did not hit a hologram, hide the cursor mesh.
-            meshRenderer.enabled = false;
+            //meshRenderer.enabled = false;
+            transform.position = gazeDirection * 10; ;
         }
     }
 }
