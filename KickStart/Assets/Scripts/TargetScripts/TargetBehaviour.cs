@@ -10,7 +10,8 @@ public class TargetBehaviour : MonoBehaviour
     public float Speed = 1;
     public float BirdSoundCounter;
     public float BirdSoundTimer;// = Random.Range(2f, 6f);
-    
+    [Space]
+    public GameObject DeathParticle;
     private Vector3 endPoint;
 
     private void Start()
@@ -39,6 +40,7 @@ public class TargetBehaviour : MonoBehaviour
 
     private void OnDestroy()
     {
+       
         SpawnManager.Instance.CurrentBirdCount--;
     }
     
