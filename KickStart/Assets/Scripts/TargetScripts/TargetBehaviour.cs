@@ -40,7 +40,9 @@ public class TargetBehaviour : MonoBehaviour
 
     private void OnDestroy()
     {
-       
+        //Check if killed or missed!
+        //Depending on type of death add effect
+
         SpawnManager.Instance.CurrentBirdCount--;
     }
     
