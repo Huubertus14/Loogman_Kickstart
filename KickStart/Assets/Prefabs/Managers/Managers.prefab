@@ -258,6 +258,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
   Cursor: {fileID: 0}
+  ScoreText: {fileID: 0}
   hoverObject: {fileID: 0}
   PlayerName: 
   Score: 0

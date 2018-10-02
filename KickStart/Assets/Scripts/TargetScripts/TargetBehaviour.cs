@@ -15,7 +15,7 @@ public class TargetBehaviour : MonoBehaviour
 
     private void Start()
     {
-        Speed = Random.Range(0.02f, 0.05f);
+        Speed = Random.Range(0.01f, 0.015f);
         GetEndPoint();
     }
 
@@ -32,7 +32,7 @@ public class TargetBehaviour : MonoBehaviour
 
         //get opposite position of player
         endPoint = transform.position + (_dirToPlayer * _disToPlayer);
-        endPoint.y = 2.5f;
+        endPoint.y = Random.Range(0.5f, 2.6f);
 
         transform.LookAt(endPoint);
     }

@@ -28,6 +28,7 @@ public class BulletBehaviour : MonoBehaviour {
         {
             //Target HIT!
             GameManager.Instance.Score++;
+            GameManager.Instance.SetScoreText();
             Destroy(collision.gameObject);
             Destroy(gameObject);
         }
