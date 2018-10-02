@@ -17,9 +17,11 @@ public class GameManager : MonoBehaviour
     public PlayerBehaviour Player;
     public GameObject Cursor;
     public Text ScoreText;
+    public GameObject PlayerCanvas;
+
 
     [Tooltip("The Object the player is currently looking at")]
-    [SerializeField]
+   // [SerializeField]
     private GameObject hoverObject;
 
     [Header("Values")]

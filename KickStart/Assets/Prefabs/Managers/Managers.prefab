@@ -259,7 +259,7 @@ MonoBehaviour:
   Player: {fileID: 0}
   Cursor: {fileID: 0}
   ScoreText: {fileID: 0}
-  hoverObject: {fileID: 0}
+  PlayerCanvas: {fileID: 0}
   PlayerName: 
   Score: 0
   BulletForce: 240

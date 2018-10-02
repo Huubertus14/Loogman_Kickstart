@@ -216,9 +216,19 @@ Prefab:
       propertyPath: ScoreText
       value: 
       objectReference: {fileID: 184243517}
+    - target: {fileID: 114755208706617680, guid: 20c13879b59ae4a4f85b04cacea06003,
+        type: 2}
+      propertyPath: PlayerCanvas
+      value: 
+      objectReference: {fileID: 890563022}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 20c13879b59ae4a4f85b04cacea06003, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &890563022 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1434415379666018, guid: 98b022620337e7545b5838b8492866a0,
+    type: 2}
+  m_PrefabInternal: {fileID: 184243516}
 --- !u!1 &1312042404
 GameObject:
   m_ObjectHideFlags: 0

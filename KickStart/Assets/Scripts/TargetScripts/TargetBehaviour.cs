@@ -11,7 +11,7 @@ public class TargetBehaviour : MonoBehaviour
     public float BirdSoundCounter;
     public float BirdSoundTimer;// = Random.Range(2f, 6f);
     [Space]
-    public GameObject DeathParticle;
+    public GameObject GarbagePrefab;
     private Vector3 endPoint;
 
     private void Start()
@@ -63,5 +63,12 @@ public class TargetBehaviour : MonoBehaviour
         }
 
         BirdSoundTimer = Random.Range(3f, 6f);
+    }
+
+    public void TrowGarbage()
+    {
+        Instantiate(GarbagePrefab,transform.position, Quaternion.identity);
+        Debug.Log("Trow Garbage");
+        
     }
 }
