@@ -28,7 +28,7 @@ public class BulletBehaviour : MonoBehaviour {
         if (collision.gameObject.tag.Contains("Target"))
         {
             //Target HIT!
-            GameObject _part = Instantiate(DeathParticle, transform.position, Quaternion.identity);
+            Instantiate(DeathParticle, transform.position, Quaternion.identity);
             GameManager.Instance.Score++;
             GameManager.Instance.SetScoreText();
             Destroy(collision.gameObject);
