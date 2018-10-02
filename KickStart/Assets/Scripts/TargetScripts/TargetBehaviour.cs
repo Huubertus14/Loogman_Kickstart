@@ -10,12 +10,13 @@ public class TargetBehaviour : MonoBehaviour
     public float Speed = 1;
     public float BirdSoundCounter;
     public float BirdSoundTimer;// = Random.Range(2f, 6f);
-    
+    [Space]
+    public GameObject DeathParticle;
     private Vector3 endPoint;
 
     private void Start()
     {
-        Speed = Random.Range(0.02f, 0.05f);
+        Speed = Random.Range(0.01f, 0.015f);
         GetEndPoint();
     }
 
@@ -32,13 +33,14 @@ public class TargetBehaviour : MonoBehaviour
 
         //get opposite position of player
         endPoint = transform.position + (_dirToPlayer * _disToPlayer);
-        endPoint.y = 2.5f;
+        endPoint.y = Random.Range(0.5f, 2.6f);
 
         transform.LookAt(endPoint);
     }
 
     private void OnDestroy()
     {
+       
         SpawnManager.Instance.CurrentBirdCount--;
     }
     

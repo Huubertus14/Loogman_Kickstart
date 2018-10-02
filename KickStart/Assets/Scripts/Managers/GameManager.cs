@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class GameManager : MonoBehaviour
     [Header("References")]
     public PlayerBehaviour Player;
     public GameObject Cursor;
+    public Text ScoreText;
 
     [Tooltip("The Object the player is currently looking at")]
     [SerializeField]
@@ -31,6 +33,7 @@ public class GameManager : MonoBehaviour
     {
         PlayerName = "Loogman Develop";
         Score = 0;
+        SetScoreText();
     }
 
 
@@ -40,6 +43,11 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
 
+    }
+
+    public void SetScoreText()
+    {
+        ScoreText.text = "Score: " + Score.ToString();
     }
 
     #region Property's

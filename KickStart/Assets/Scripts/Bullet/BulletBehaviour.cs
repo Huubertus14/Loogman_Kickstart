@@ -5,9 +5,10 @@ using UnityEngine;
 public class BulletBehaviour : MonoBehaviour {
 
     private Rigidbody rb;
+    public GameObject DeathParticle;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         rb = GetComponent<Rigidbody>();
 	}
 
@@ -27,9 +28,12 @@ public class BulletBehaviour : MonoBehaviour {
         if (collision.gameObject.tag.Contains("Target"))
         {
             //Target HIT!
+            GameObject _part = Instantiate(DeathParticle, transform.position, Quaternion.identity);
             GameManager.Instance.Score++;
+            GameManager.Instance.SetScoreText();
             Destroy(collision.gameObject);
-            Destroy(gameObject);
         }
+
+        //Destroy(gameObject);
     }
 }

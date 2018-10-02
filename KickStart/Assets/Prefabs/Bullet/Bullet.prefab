@@ -213,6 +213,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a29c5bf973c2e6a4e9579400ad07d797, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  DeathParticle: {fileID: 1222976583829746, guid: d166581bdd55b1e43ab19118f1ce3ecf,
+    type: 2}
 --- !u!135 &135333127697537214
 SphereCollider:
   m_ObjectHideFlags: 1

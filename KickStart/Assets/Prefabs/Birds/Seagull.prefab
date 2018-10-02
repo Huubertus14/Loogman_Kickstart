@@ -447,6 +447,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 1.72
+  BirdSoundCounter: 0
+  BirdSoundTimer: 0
+  DeathParticle: {fileID: 1222976583829746, guid: d166581bdd55b1e43ab19118f1ce3ecf,
+    type: 2}
 --- !u!136 &136044347719346488
 CapsuleCollider:
   m_ObjectHideFlags: 1
