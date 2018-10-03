@@ -50,6 +50,7 @@ public class GameManager : MonoBehaviour
     public void SetScoreText()
     {
         ScoreText.text = "Score: " + Score.ToString();
+        
     }
 
     #region Property's
