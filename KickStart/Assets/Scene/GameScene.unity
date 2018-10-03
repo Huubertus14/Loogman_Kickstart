@@ -156,6 +156,16 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 224605432796522218, guid: 98b022620337e7545b5838b8492866a0,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 12.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 224605432796522218, guid: 98b022620337e7545b5838b8492866a0,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: -20.32
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 98b022620337e7545b5838b8492866a0, type: 2}
   m_IsPrefabParent: 0
@@ -298,6 +308,54 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1 &1386274402 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1151114614783974, guid: 98b022620337e7545b5838b8492866a0,
+    type: 2}
+  m_PrefabInternal: {fileID: 184243516}
+--- !u!114 &1386274405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1386274402}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 920e81380064887419c4831974da2391, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Duration: 0.4
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1.0023041
+      inSlope: 3.6658685
+      outSlope: 3.6658685
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.39070803
+      value: 1.23239
+      inSlope: -1.821017
+      outSlope: -1.821017
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.59974587
+      value: 1.2918776
+      inSlope: -0.08353299
+      outSlope: -0.08353299
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.9874878
+      value: 0.9960556
+      inSlope: -0.12548308
+      outSlope: -0.12548308
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  FlashColor: {r: 0.8206897, g: 1, b: 0, a: 1}
 --- !u!1001 &1856598945
 Prefab:
   m_ObjectHideFlags: 0
@@ -340,6 +398,10 @@ Prefab:
     - target: {fileID: 114000011154029958, guid: 2ed75ffdf9031c94e8bce4b3d17b9928,
         type: 2}
       propertyPath: drawVisualMeshes
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000010302963436, guid: 2ed75ffdf9031c94e8bce4b3d17b9928, type: 2}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

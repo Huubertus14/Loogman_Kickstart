@@ -25,5 +25,21 @@ public class AudioSampleManager : MonoBehaviour {
         int x = Random.Range(0, BirdSounds.Length);
         return BirdSounds[x];
     }
+
+    public AudioClip[] ShootSounds;
+
+    public AudioClip GetShootSound()
+    {
+        int x = Random.Range(0, ShootSounds.Length);
+        return ShootSounds[x];
+    }
+
+    public AudioClip[]ExplosionSounds;
+
+    public AudioClip GetExplosionSound()
+    {
+        int x = Random.Range(0, ExplosionSounds.Length);
+        return ExplosionSounds[x];
+    }
     
 }

@@ -8,6 +8,9 @@ public class PlayerBehaviour : MonoBehaviour {
     [Header("Prefabs:")]
     public GameObject BulletPrefab;
 
+
+    [Header("Refs:")]
+    public TextFlashing ScoreTextFlash;
     //public GameObject MudPrefab;
     //public Sprite[] MudSprites;
 
@@ -18,6 +21,7 @@ public class PlayerBehaviour : MonoBehaviour {
     //Player Shoots a bullet
     public void Shoot()
     {
+        AudioManager.Instance.PlayAudio(AudioSampleManager.Instance.GetShootSound(), 1);
         GameObject _bullet = Instantiate(BulletPrefab, transform.position, Quaternion.identity);
         _bullet.GetComponent<BulletBehaviour>().ShootBullet();
     }
@@ -33,6 +37,11 @@ public class PlayerBehaviour : MonoBehaviour {
         //    mudObjects.Add(_mud);
         //    _mud.transform.localPosition = new Vector3(Random.Range(-30,30), Random.Range(-25,25),0);
         //}
+    }
+
+    public void ScoreFlash()
+    {
+        ScoreTextFlash.StartEffect();
     }
 
 

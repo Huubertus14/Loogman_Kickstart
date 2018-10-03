@@ -9,10 +9,8 @@ public class PlayerMudBoxScript : MonoBehaviour {
         //Bird trows dirt at you
         if (other.gameObject.tag.Contains("Target"))
         {
-            Debug.Log("YEET");
             other.gameObject.GetComponent<TargetBehaviour>().TrowGarbage();
             GameManager.Instance.Player.GetMud();
         }
-        Debug.Log("YEET@2");
     }
 }
