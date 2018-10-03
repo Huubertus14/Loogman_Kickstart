@@ -23,6 +23,10 @@ public class SpawnManager : MonoBehaviour {
 
     private void Update()
     {
+        if (!GameManager.Instance.GameStarted)
+        {
+            return;
+        }
         spawnTimer += Time.deltaTime;
         if (spawnTimer > SpawnInterval)
         {

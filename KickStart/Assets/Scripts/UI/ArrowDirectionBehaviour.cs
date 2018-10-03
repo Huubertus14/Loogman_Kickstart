@@ -17,15 +17,29 @@ public class ArrowDirectionBehaviour : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        
+
         if (!targetBird)
         {
             targetBird = SpawnManager.Instance.GetLastBird;
             ren.enabled = false;
+            if (!GameManager.Instance.GameStarted)
+            {
+                ren.enabled = false;
+            }
         }
         else
         {
             ren.enabled = true;
             transform.LookAt(targetBird.transform,Vector3.right);
+            if (!GameManager.Instance.GameStarted)
+            {
+                ren.enabled = false;
+            }
+        }
+        if (!GameManager.Instance.GameStarted)
+        {
+            ren.enabled = false;
         }
     }
 }

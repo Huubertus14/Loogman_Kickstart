@@ -267,7 +267,13 @@ MonoBehaviour:
   Player: {fileID: 0}
   Cursor: {fileID: 0}
   ScoreText: {fileID: 0}
+  GarbageText: {fileID: 0}
+  TimeText: {fileID: 0}
+  EndScoreText: {fileID: 0}
   PlayerCanvas: {fileID: 0}
+  GameStarted: 0
   PlayerName: 
   Score: 0
+  HitByGarbage: 0
+  TimePlayed: 0
   BulletForce: 240

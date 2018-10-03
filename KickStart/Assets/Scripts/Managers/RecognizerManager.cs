@@ -28,6 +28,10 @@ public class RecognizerManager : MonoBehaviour {
     /// </summary>
     private void TapHandler(TappedEventArgs obj)
     {
+        if (!GameManager.Instance.GameStarted)
+        {
+            return;
+        }
         GameManager.Instance.Player.Shoot();
     }
 

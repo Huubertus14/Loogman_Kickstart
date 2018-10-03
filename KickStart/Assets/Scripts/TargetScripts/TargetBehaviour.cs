@@ -49,6 +49,11 @@ public class TargetBehaviour : MonoBehaviour
 
     private void Update()
     {
+
+        if (!GameManager.Instance.GameStarted)
+        {
+            Destroy(gameObject);
+        }
         transform.position = Vector3.MoveTowards(transform.position, endPoint, Speed);
 
         //Id end point is reached...

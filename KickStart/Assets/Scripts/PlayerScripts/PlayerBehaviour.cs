@@ -11,6 +11,7 @@ public class PlayerBehaviour : MonoBehaviour {
 
     [Header("Refs:")]
     public TextFlashing ScoreTextFlash;
+    public TextFlashing GarbageTextFlash;
     //public GameObject MudPrefab;
     //public Sprite[] MudSprites;
 
@@ -44,5 +45,9 @@ public class PlayerBehaviour : MonoBehaviour {
         ScoreTextFlash.StartEffect();
     }
 
+    public void GarbageFlash()
+    {
+        GarbageTextFlash.StartEffect();
+    }
 
 }
