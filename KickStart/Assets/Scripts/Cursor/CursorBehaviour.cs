@@ -45,9 +45,14 @@ public class CursorBehaviour : MonoBehaviour
 
             // Move the cursor to the point where the raycast hit.
             //  transform.position = gazeHitInfo.point;
-
-            rectDistance = Vector3.Distance(gazeHitInfo.transform.position, headPosition);
-
+            if (!gazeHitInfo.transform.gameObject.tag.Contains("Bullet"))
+            {
+                rectDistance = Vector3.Distance(gazeHitInfo.transform.position, headPosition);
+            }
+            else
+            {
+                rectDistance = 150;
+            }
         }
         else
         {

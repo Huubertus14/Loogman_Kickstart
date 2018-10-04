@@ -75,7 +75,7 @@ public class TargetBehaviour : MonoBehaviour
     public void TrowGarbage()
     {
         Instantiate(GarbagePrefab,transform.position, Quaternion.identity);
-        Debug.Log("Trow Garbage");
+       // Debug.Log("Trow Garbage");
         
     }
 }
