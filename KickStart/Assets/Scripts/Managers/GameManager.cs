@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     public Text EndScoreText;
     public GameObject PlayerCanvas;
 
+    public List<Renderer> Targets = new List<Renderer>();
 
     [Tooltip("The Object the player is currently looking at")]
     // [SerializeField]
@@ -29,6 +30,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Values")]
     public bool GameStarted;
+    public bool GameOver;
     public string PlayerName;
     public int Score;
     public int HitByGarbage;
@@ -37,27 +39,42 @@ public class GameManager : MonoBehaviour
     [Space]
     public float BulletForce;
 
+    //Timer to run when the game is over and will reset
+    private float GameOverTimer;
+
     private void Start()
     {
-        StartGame();
-        PlayerName = "Loogman Develop";
-        Score = 0;
-        HitByGarbage = 0;
-        SetScoreText();
+        GameStarted = false;
     }
+
+    [HideInInspector]
+    public bool CanContinueToNExtGame;
 
     private void Update()
     {
-        if (TimePlayed > 180)
+        if (GameStarted)
         {
-            GameStarted = false;
-            TimeText.text = "";
-            ShowEndScore();
+            if (TimePlayed > 180)
+            {
+                GameStarted = false;
+                TimeText.text = "";
+                GameOver = true;
+                ShowEndScore();
+            }
+            else
+            {
+                TimePlayed += Time.deltaTime;
+                SetTimeText();
+            }
         }
-        else
+
+        if (GameOver)
         {
-            TimePlayed += Time.deltaTime;
-            SetTimeText();
+            GameOverTimer += Time.deltaTime;
+            if (GameOverTimer > 8)
+            {
+                CanContinueToNExtGame = true;
+            }
         }
     }
 
@@ -66,9 +83,37 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void StartGame()
     {
+        CanContinueToNExtGame = false;
+        GameOver = false;
         EndScoreText.text = "";
         GameStarted = true;
         TimePlayed = 0;
+        PlayerName = "Loogman Develop";
+        Score = 0;
+        HitByGarbage = 0;
+        GameOverTimer = 0;
+        SetScoreText();
+    }
+
+    public bool IsSeeingAnEnemy()
+    {
+        if (Targets.Count < 1)
+        {
+            return false;
+        }
+        for (int i = 0; i < Targets.Count; i++)
+        {
+            if (!Targets[i])
+            {
+                Targets.RemoveAt(i);
+            }
+            if (Targets[i].isVisible)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public void SetScoreText()

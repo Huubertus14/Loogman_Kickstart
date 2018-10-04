@@ -33,7 +33,7 @@ public class TargetBehaviour : MonoBehaviour
 
         //get opposite position of player
         endPoint = transform.position + (_dirToPlayer * _disToPlayer);
-        endPoint.y = Random.Range(0.5f, 2.6f);
+        endPoint.y = Random.Range(0.1f, 1.8f);
 
         transform.LookAt(endPoint);
     }

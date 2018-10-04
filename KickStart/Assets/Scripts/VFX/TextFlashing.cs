@@ -40,7 +40,6 @@ public class TextFlashing : MonoBehaviour {
             timeTweenKey += Time.deltaTime / Duration;
 
             tweenValue = curve.Evaluate(timeTweenKey);
-            Debug.Log(tweenValue);
 
             rect.localScale = orginScale * tweenValue;
 

@@ -5,7 +5,6 @@ using UnityEngine;
 public class ArrowDirectionBehaviour : MonoBehaviour {
 
     private GameObject targetBird;
-    private float speed = 10f;
 
     private Renderer ren;
 
@@ -17,29 +16,30 @@ public class ArrowDirectionBehaviour : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        
-
-        if (!targetBird)
-        {
-            targetBird = SpawnManager.Instance.GetLastBird;
-            ren.enabled = false;
-            if (!GameManager.Instance.GameStarted)
-            {
-                ren.enabled = false;
-            }
-        }
-        else
-        {
-            ren.enabled = true;
-            transform.LookAt(targetBird.transform,Vector3.right);
-            if (!GameManager.Instance.GameStarted)
-            {
-                ren.enabled = false;
-            }
-        }
         if (!GameManager.Instance.GameStarted)
         {
             ren.enabled = false;
+            return;
         }
+
+        //if (GameManager.Instance.IsSeeingAnEnemy())
+        {
+          //  ren.enabled = false;
+        }
+       // else
+        {
+            if (!targetBird)
+            {
+                targetBird = SpawnManager.Instance.GetLastBird;
+                ren.enabled = false;
+
+            }
+            else
+            {
+                ren.enabled = true;
+                transform.LookAt(targetBird.transform, Vector3.right);
+            }
+        }
+        
     }
 }
