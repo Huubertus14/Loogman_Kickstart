@@ -12,32 +12,49 @@ public class PlayerBehaviour : MonoBehaviour {
     [Header("Refs:")]
     public TextFlashing ScoreTextFlash;
     public TextFlashing GarbageTextFlash;
-    //public GameObject MudPrefab;
-    //public Sprite[] MudSprites;
+    public SliderLerp WaterAmounfSlider;
+    public UIWiggle WaterUIWiggle;
 
-  //  private List<GameObject> mudObjects = new List<GameObject>();
+    [Header("Values:")]
+    public float AmountOfWater;
+    public float MaxAmountOfWater;
+    public float TimeToRecharge;
     
- 
+    public void ResetPlayerValues()
+    {
+        AmountOfWater = MaxAmountOfWater;
+        WaterAmounfSlider.SetMaxValue(MaxAmountOfWater);
+        WaterAmounfSlider.SetGoalValue(AmountOfWater);
+    }
 
     //Player Shoots a bullet
     public void Shoot()
     {
-        AudioManager.Instance.PlayAudio(AudioSampleManager.Instance.GetShootSound(), 1);
-        GameObject _bullet = Instantiate(BulletPrefab, transform.position, Quaternion.identity);
-        _bullet.GetComponent<BulletBehaviour>().ShootBullet();
+        if (AmountOfWater > 1)
+        {
+            AudioManager.Instance.PlayAudio(AudioSampleManager.Instance.GetShootSound(), 1);
+            GameObject _bullet = Instantiate(BulletPrefab, transform.position, Quaternion.identity);
+            _bullet.GetComponent<BulletBehaviour>().ShootBullet();
+
+            AmountOfWater--;
+            WaterAmounfSlider.SetGoalValue(AmountOfWater);
+        }
+        else
+        {
+            WaterUIWiggle.StartAnimation();
+        }
     }
 
-
-    public void GetMud()
+    private void Update()
     {
-        //for (int i = 0; i < Random.Range(3,5); i++)
-        //{
-        //    GameObject _mud = Instantiate(MudPrefab, Vector3.zero, Quaternion.identity, GameManager.Instance.PlayerCanvas.transform);
-        //    _mud.GetComponent<Image>().sprite = MudSprites[Random.Range(0, MudSprites.Length)];
-        //    _mud.GetComponent<Image>().color = Color.green;
-        //    mudObjects.Add(_mud);
-        //    _mud.transform.localPosition = new Vector3(Random.Range(-30,30), Random.Range(-25,25),0);
-        //}
+        //Increase Water Value
+        if (!GameManager.Instance.GameStarted)
+        {
+            return;
+        }
+
+        AmountOfWater += Time.deltaTime/ TimeToRecharge;
+        WaterAmounfSlider.SetGoalValue(AmountOfWater);
     }
 
     public void ScoreFlash()

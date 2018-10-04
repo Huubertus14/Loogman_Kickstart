@@ -36,8 +36,12 @@ public class GameManager : MonoBehaviour
     public int HitByGarbage;
     public float TimePlayed;
 
+
     [Space]
     public float BulletForce;
+
+    [HideInInspector]
+    public bool CanContinueToNExtGame;
 
     //Timer to run when the game is over and will reset
     private float GameOverTimer;
@@ -47,8 +51,7 @@ public class GameManager : MonoBehaviour
         GameStarted = false;
     }
 
-    [HideInInspector]
-    public bool CanContinueToNExtGame;
+
 
     private void Update()
     {
@@ -83,6 +86,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public void StartGame()
     {
+        Player.ResetPlayerValues();
         CanContinueToNExtGame = false;
         GameOver = false;
         EndScoreText.text = "";
@@ -130,7 +134,7 @@ public class GameManager : MonoBehaviour
     {
         int _min = (int)TimePlayed / 60;
         int _sec = (int)TimePlayed % 60;
-        
+
         if (_sec < 10)
         {
             TimeText.text = _min + ":0" + _sec;
@@ -143,7 +147,7 @@ public class GameManager : MonoBehaviour
 
     public void ShowEndScore()
     {
-        EndScoreText.text = "You Got " + Score.ToString() + " Points\n And was Hit " + HitByGarbage.ToString()+" Times by Garbage";
+        EndScoreText.text = "You Got " + Score.ToString() + " Points\n And was Hit " + HitByGarbage.ToString() + " Times by Garbage";
     }
 
     #region Property's

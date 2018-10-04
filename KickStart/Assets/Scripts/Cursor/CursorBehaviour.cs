@@ -1,30 +1,32 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public class CursorBehaviour : MonoBehaviour
 {
-
     /// <summary>
     /// The cursor (this object) mesh renderer
     /// </summary>
-    private MeshRenderer meshRenderer;
+    private RectTransform rect;
+    private Image img;
+
+    private float rectDistance;
 
     /// <summary>
     /// Runs at initialization right after the Awake method
     /// </summary>
     void Start()
     {
-        // Grab the mesh renderer that is on the same object as this script.
-        meshRenderer = gameObject.GetComponent<MeshRenderer>();
+        // Take the objects
+        rect = GetComponent<RectTransform>();
+        img = GetComponent<Image>();
+        img.color = Color.white;
 
         // Set the cursor reference
         GameManager.Instance.Cursor = gameObject;
-        gameObject.GetComponent<Renderer>().material.color = Color.green;
 
-        // If you wish to change the size of the cursor you can do so here
-        gameObject.transform.localScale = new Vector3(0.01f, 0.01f, 0.01f);
     }
 
     /// <summary>
@@ -40,31 +42,19 @@ public class CursorBehaviour : MonoBehaviour
         if (Physics.Raycast(headPosition, gazeDirection, out gazeHitInfo, Mathf.Infinity))
         {
             // If the raycast hit a hologram, display the cursor mesh.
-            meshRenderer.enabled = true;
-            
-            if (gazeHitInfo.transform.gameObject.GetComponent<TargetBehaviour>())
-            {
-                // Move the cursor to the point where the raycast hit.
-                transform.position = gazeHitInfo.point;
-                // Rotate the cursor to hug the surface of the hologram.
-                transform.rotation = Quaternion.FromToRotation(Vector3.up, gazeHitInfo.normal);
-                //Debug.Log(gazeHitInfo.transform.gameObject);
-            }
-            else
-            {
-                // Move the cursor to the point where the raycast hit.
-                transform.position = gazeHitInfo.point;
-                // Rotate the cursor to hug the surface of the hologram.
-                transform.rotation = Quaternion.FromToRotation(Vector3.up, gazeHitInfo.normal);
-            }
 
-            
+            // Move the cursor to the point where the raycast hit.
+            //  transform.position = gazeHitInfo.point;
+
+            rectDistance = Vector3.Distance(gazeHitInfo.transform.position, headPosition);
+
         }
         else
         {
             // If the raycast did not hit a hologram, hide the cursor mesh.
-            //meshRenderer.enabled = false;
-            transform.position = gazeDirection * 10; ;
+            rectDistance = 150;
         }
+
+        rect.localPosition = new Vector3(0, 0, rectDistance);
     }
 }
