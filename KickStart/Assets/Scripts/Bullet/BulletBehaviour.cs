@@ -29,7 +29,7 @@ public class BulletBehaviour : MonoBehaviour {
             //Target HIT!
             AudioManager.Instance.PlayAudio(AudioSampleManager.Instance.GetExplosionSound(), 1);
             Instantiate(DeathParticle, transform.position, Quaternion.identity);
-            GameManager.Instance.Score++;
+            GameManager.Instance.Player.Score++;
             GameManager.Instance.SetScoreText();
             GameManager.Instance.Player.ScoreTextFlash.StartEffect();
             Destroy(collision.gameObject);

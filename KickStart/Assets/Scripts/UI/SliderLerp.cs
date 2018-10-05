@@ -17,7 +17,7 @@ public class SliderLerp : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        slider.value = Mathf.Lerp(slider.value, goalValue, Time.deltaTime);
+        slider.value = Mathf.Lerp(slider.value, goalValue, Time.deltaTime * Speed);
 	}
 
     public void SetGoalValue(float _value)

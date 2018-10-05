@@ -42,8 +42,6 @@ public class TextFlashing : MonoBehaviour {
             tweenValue = curve.Evaluate(timeTweenKey);
 
             rect.localScale = orginScale * tweenValue;
-
-            
         }
         else
         {

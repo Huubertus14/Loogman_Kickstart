@@ -16,6 +16,9 @@ public class PlayerBehaviour : MonoBehaviour {
     public UIWiggle WaterUIWiggle;
 
     [Header("Values:")]
+    public string PlayerName;
+    public int Score;
+    public int HitByGarbage;
     public float AmountOfWater;
     public float MaxAmountOfWater;
     public float TimeToRecharge;
@@ -25,6 +28,9 @@ public class PlayerBehaviour : MonoBehaviour {
         AmountOfWater = MaxAmountOfWater;
         WaterAmounfSlider.SetMaxValue(MaxAmountOfWater);
         WaterAmounfSlider.SetGoalValue(AmountOfWater);
+        Score = 0;
+        PlayerName = "Loogman Devop";
+        HitByGarbage = 0;
     }
 
     //Player Shoots a bullet

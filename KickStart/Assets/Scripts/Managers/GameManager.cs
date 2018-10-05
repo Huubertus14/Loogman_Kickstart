@@ -23,18 +23,18 @@ public class GameManager : MonoBehaviour
     public GameObject PlayerCanvas;
     public GestureImage TutorialThing;
 
+    public GameObject[] GestureInstructions;
+
+    [HideInInspector] //Bah
     public List<Renderer> Targets = new List<Renderer>();
 
     [Tooltip("The Object the player is currently looking at")]
-    // [SerializeField]
     private GameObject hoverObject;
 
     [Header("Values")]
     public bool GameStarted;
     public bool GameOver;
-    public string PlayerName;
-    public int Score;
-    public int HitByGarbage;
+
     public float TimePlayed;
 
 
@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
     {
         if (GameStarted)
         {
-            if (TimePlayed > 180)
+            if (TimePlayed <= 0)
             {
                 GameStarted = false;
                 TimeText.text = "";
@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                TimePlayed += Time.deltaTime;
+                TimePlayed -= Time.deltaTime;
                 SetTimeText();
             }
         }
@@ -77,6 +77,7 @@ public class GameManager : MonoBehaviour
             {
                 CanContinueToNExtGame = true;
                 TutorialThing.IsVisible = true;
+                SetGestureInstructions(true);
             }
         }
     }
@@ -91,12 +92,20 @@ public class GameManager : MonoBehaviour
         GameOver = false;
         EndScoreText.text = "";
         GameStarted = true;
-        TimePlayed = 0;
-        PlayerName = "Loogman Develop";
-        Score = 0;
-        HitByGarbage = 0;
+        TimePlayed = 180;
         GameOverTimer = 0;
         SetScoreText();
+
+        //remove all instructions
+        SetGestureInstructions(false);
+    }
+
+    public void SetGestureInstructions(bool _value)
+    {
+        foreach (var item in GestureInstructions)
+        {
+            item.SetActive(_value);
+        }
     }
 
     public bool IsSeeingAnEnemy()
@@ -122,12 +131,12 @@ public class GameManager : MonoBehaviour
 
     public void SetScoreText()
     {
-        ScoreText.text = "Score: " + Score.ToString();
+        ScoreText.text = "Score: " + Player.Score.ToString();
     }
 
     public void SetGarbageText()
     {
-        GarbageText.text = "You've been hit by " + HitByGarbage.ToString() + " Pieces of Garbage!";
+        GarbageText.text = "You've been hit by " + Player.HitByGarbage.ToString() + " Pieces of Garbage!";
     }
 
     public void SetTimeText()
@@ -147,7 +156,7 @@ public class GameManager : MonoBehaviour
 
     public void ShowEndScore()
     {
-        EndScoreText.text = "You Got " + Score.ToString() + " Points!";
+        EndScoreText.text = "You Got " + Player.Score.ToString() + " Points!";
     }
 
     #region Property's

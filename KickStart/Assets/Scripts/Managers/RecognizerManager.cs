@@ -10,6 +10,9 @@ public class RecognizerManager : MonoBehaviour {
 
     private GestureRecognizer recognizer;
 
+    private float LastGestureTimer;
+    public float HintTimer;
+
     private void Awake()
     {
         Instance = this;
@@ -28,6 +31,7 @@ public class RecognizerManager : MonoBehaviour {
     /// </summary>
     private void TapHandler(TappedEventArgs obj)
     {
+        LastGestureTimer = 0;
         if (!GameManager.Instance.GameStarted)
         {
             if (GameManager.Instance.GameOver)
@@ -48,6 +52,16 @@ public class RecognizerManager : MonoBehaviour {
 
     private void Update()
     {
+        LastGestureTimer += Time.deltaTime;
+        if (LastGestureTimer > HintTimer)
+        {
+            Debug.Log("Show Gestures Again");
+        }
+        else
+        {
+            Debug.Log("Remove Gestures etc");
+        }
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (!GameManager.Instance.GameStarted)

@@ -200,6 +200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8999a8c4b9de7534d8da816a362094a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  HintTimer: 0
 --- !u!114 &114256099600199432
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -213,7 +214,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BirdPrefab: {fileID: 100000, guid: d418c88afd808cf448602106c7ead664, type: 2}
   SpawnInterval: 3
-  MaxBirdCount: 5
+  MaxBirdCount: 8
   CurrentBirdCount: 0
 --- !u!114 &114322428844149892
 MonoBehaviour:
@@ -272,12 +273,12 @@ MonoBehaviour:
   EndScoreText: {fileID: 0}
   PlayerCanvas: {fileID: 0}
   TutorialThing: {fileID: 0}
+  GestureInstructions:
+  - {fileID: 0}
+  - {fileID: 0}
   Targets: []
   GameStarted: 0
   GameOver: 0
-  PlayerName: 
-  Score: 0
-  HitByGarbage: 0
   TimePlayed: 0
   BulletForce: 240
   CanContinueToNExtGame: 0
