@@ -271,10 +271,13 @@ MonoBehaviour:
   TimeText: {fileID: 0}
   EndScoreText: {fileID: 0}
   PlayerCanvas: {fileID: 0}
+  TutorialThing: {fileID: 0}
   Targets: []
   GameStarted: 0
+  GameOver: 0
   PlayerName: 
   Score: 0
   HitByGarbage: 0
   TimePlayed: 0
   BulletForce: 240
+  CanContinueToNExtGame: 0

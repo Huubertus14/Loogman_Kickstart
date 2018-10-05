@@ -34,6 +34,14 @@ public class CursorBehaviour : MonoBehaviour
     /// </summary>
     void Update()
     {
+        if (!GameManager.Instance.GameStarted)
+        {
+
+            img.enabled = false;
+            return;
+        }
+
+        img.enabled = true;
         // Do a raycast into the world based on the user's head position and orientation.
         Vector3 headPosition = Camera.main.transform.position;
         Vector3 gazeDirection = Camera.main.transform.forward;

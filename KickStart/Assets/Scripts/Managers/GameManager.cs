@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     public Text TimeText;
     public Text EndScoreText;
     public GameObject PlayerCanvas;
+    public GestureImage TutorialThing;
 
     public List<Renderer> Targets = new List<Renderer>();
 
@@ -51,8 +52,6 @@ public class GameManager : MonoBehaviour
         GameStarted = false;
     }
 
-
-
     private void Update()
     {
         if (GameStarted)
@@ -74,9 +73,10 @@ public class GameManager : MonoBehaviour
         if (GameOver)
         {
             GameOverTimer += Time.deltaTime;
-            if (GameOverTimer > 8)
+            if (GameOverTimer > 2)
             {
                 CanContinueToNExtGame = true;
+                TutorialThing.IsVisible = true;
             }
         }
     }
@@ -147,7 +147,7 @@ public class GameManager : MonoBehaviour
 
     public void ShowEndScore()
     {
-        EndScoreText.text = "You Got " + Score.ToString() + " Points\n And was Hit " + HitByGarbage.ToString() + " Times by Garbage";
+        EndScoreText.text = "You Got " + Score.ToString() + " Points!";
     }
 
     #region Property's

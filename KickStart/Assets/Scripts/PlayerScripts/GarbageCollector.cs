@@ -12,7 +12,7 @@ public class GarbageCollector : MonoBehaviour {
             Debug.Log("Garbage fell on you!");
             GameManager.Instance.HitByGarbage++;
             GameManager.Instance.SetGarbageText();
-            GameManager.Instance.Player.GarbageTextFlash.StartEffect();
+           // GameManager.Instance.Player.GarbageTextFlash.StartEffect();
             other.gameObject.transform.SetParent(transform);
 
             //Destroy(other.gameObject, 1.5f);
