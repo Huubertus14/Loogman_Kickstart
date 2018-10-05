@@ -10,7 +10,6 @@ public class PlayerMudBoxScript : MonoBehaviour {
         if (other.gameObject.tag.Contains("Target"))
         {
             other.gameObject.GetComponent<TargetBehaviour>().TrowGarbage();
-            GameManager.Instance.Player.GetMud();
         }
     }
 }

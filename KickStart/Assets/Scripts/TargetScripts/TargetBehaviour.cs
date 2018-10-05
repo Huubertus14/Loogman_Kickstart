@@ -33,7 +33,7 @@ public class TargetBehaviour : MonoBehaviour
 
         //get opposite position of player
         endPoint = transform.position + (_dirToPlayer * _disToPlayer);
-        endPoint.y = Random.Range(0.5f, 2.6f);
+        endPoint.y = Random.Range(0.1f, 1.8f);
 
         transform.LookAt(endPoint);
     }
@@ -49,6 +49,11 @@ public class TargetBehaviour : MonoBehaviour
 
     private void Update()
     {
+
+        if (!GameManager.Instance.GameStarted)
+        {
+            Destroy(gameObject);
+        }
         transform.position = Vector3.MoveTowards(transform.position, endPoint, Speed);
 
         //Id end point is reached...
@@ -70,7 +75,7 @@ public class TargetBehaviour : MonoBehaviour
     public void TrowGarbage()
     {
         Instantiate(GarbagePrefab,transform.position, Quaternion.identity);
-        Debug.Log("Trow Garbage");
+       // Debug.Log("Trow Garbage");
         
     }
 }

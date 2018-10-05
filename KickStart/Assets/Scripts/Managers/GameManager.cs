@@ -10,46 +10,144 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        
+
     }
 
     [Header("References")]
     public PlayerBehaviour Player;
     public GameObject Cursor;
     public Text ScoreText;
+    public Text GarbageText;
+    public Text TimeText;
+    public Text EndScoreText;
     public GameObject PlayerCanvas;
+    public GestureImage TutorialThing;
 
+    public List<Renderer> Targets = new List<Renderer>();
 
     [Tooltip("The Object the player is currently looking at")]
-   // [SerializeField]
+    // [SerializeField]
     private GameObject hoverObject;
 
     [Header("Values")]
+    public bool GameStarted;
+    public bool GameOver;
     public string PlayerName;
     public int Score;
+    public int HitByGarbage;
+    public float TimePlayed;
+
 
     [Space]
     public float BulletForce;
 
+    [HideInInspector]
+    public bool CanContinueToNExtGame;
+
+    //Timer to run when the game is over and will reset
+    private float GameOverTimer;
+
     private void Start()
     {
-        PlayerName = "Loogman Develop";
-        Score = 0;
-        SetScoreText();
+        GameStarted = false;
     }
 
+    private void Update()
+    {
+        if (GameStarted)
+        {
+            if (TimePlayed > 180)
+            {
+                GameStarted = false;
+                TimeText.text = "";
+                GameOver = true;
+                ShowEndScore();
+            }
+            else
+            {
+                TimePlayed += Time.deltaTime;
+                SetTimeText();
+            }
+        }
+
+        if (GameOver)
+        {
+            GameOverTimer += Time.deltaTime;
+            if (GameOverTimer > 2)
+            {
+                CanContinueToNExtGame = true;
+                TutorialThing.IsVisible = true;
+            }
+        }
+    }
 
     /// <summary>
     /// Called when the game is about to start
     /// </summary>
     public void StartGame()
     {
+        Player.ResetPlayerValues();
+        CanContinueToNExtGame = false;
+        GameOver = false;
+        EndScoreText.text = "";
+        GameStarted = true;
+        TimePlayed = 0;
+        PlayerName = "Loogman Develop";
+        Score = 0;
+        HitByGarbage = 0;
+        GameOverTimer = 0;
+        SetScoreText();
+    }
 
+    public bool IsSeeingAnEnemy()
+    {
+        if (Targets.Count < 1)
+        {
+            return false;
+        }
+        for (int i = 0; i < Targets.Count; i++)
+        {
+            if (!Targets[i])
+            {
+                Targets.RemoveAt(i);
+            }
+            if (Targets[i].isVisible)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public void SetScoreText()
     {
         ScoreText.text = "Score: " + Score.ToString();
+    }
+
+    public void SetGarbageText()
+    {
+        GarbageText.text = "You've been hit by " + HitByGarbage.ToString() + " Pieces of Garbage!";
+    }
+
+    public void SetTimeText()
+    {
+        int _min = (int)TimePlayed / 60;
+        int _sec = (int)TimePlayed % 60;
+
+        if (_sec < 10)
+        {
+            TimeText.text = _min + ":0" + _sec;
+        }
+        else
+        {
+            TimeText.text = _min + ":" + _sec;
+        }
+    }
+
+    public void ShowEndScore()
+    {
+        EndScoreText.text = "You Got " + Score.ToString() + " Points!";
     }
 
     #region Property's
@@ -61,7 +159,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject GetHoverObject
     {
-        get {
+        get
+        {
             if (hoverObject)
             {
                 return hoverObject;

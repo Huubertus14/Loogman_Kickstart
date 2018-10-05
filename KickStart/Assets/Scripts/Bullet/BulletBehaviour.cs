@@ -24,7 +24,6 @@ public class BulletBehaviour : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision)
     {
-        //if other if target
         if (collision.gameObject.tag.Contains("Target"))
         {
             //Target HIT!
@@ -32,9 +31,8 @@ public class BulletBehaviour : MonoBehaviour {
             Instantiate(DeathParticle, transform.position, Quaternion.identity);
             GameManager.Instance.Score++;
             GameManager.Instance.SetScoreText();
+            GameManager.Instance.Player.ScoreTextFlash.StartEffect();
             Destroy(collision.gameObject);
         }
-
-        //Destroy(gameObject);
     }
 }

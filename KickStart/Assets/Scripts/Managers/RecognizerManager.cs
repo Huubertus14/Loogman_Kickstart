@@ -28,7 +28,43 @@ public class RecognizerManager : MonoBehaviour {
     /// </summary>
     private void TapHandler(TappedEventArgs obj)
     {
+        if (!GameManager.Instance.GameStarted)
+        {
+            if (GameManager.Instance.GameOver)
+            {
+                if (GameManager.Instance.CanContinueToNExtGame)
+                {
+                    GameManager.Instance.StartGame();
+                    return;
+                }
+                return;
+            }
+
+            GameManager.Instance.StartGame();
+            return;
+        }
         GameManager.Instance.Player.Shoot();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (!GameManager.Instance.GameStarted)
+            {
+                if (GameManager.Instance.GameOver)
+                {
+                    if (GameManager.Instance.CanContinueToNExtGame)
+                    {
+                        GameManager.Instance.StartGame();
+                        return;
+                    }
+                    return;
+                }
+
+                GameManager.Instance.StartGame();
+                return;
+            }
+        }
+    }
 }

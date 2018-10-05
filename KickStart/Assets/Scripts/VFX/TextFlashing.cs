@@ -17,7 +17,12 @@ public class TextFlashing : MonoBehaviour {
     private RectTransform rect;
     private Text textObject;
     private Color orginColor = Color.white;
+
     public Color FlashColor;
+
+    [Space]
+    public float TextVisibleTime;
+    private float TextAlpha;
 
 	// Use this for initialization
 	void Start () {
@@ -25,6 +30,7 @@ public class TextFlashing : MonoBehaviour {
         rect = GetComponent<RectTransform>();
         timeTweenKey = 2;
         orginScale = rect.localScale;
+        TextAlpha = 0;
 	}
 	
 	// Update is called once per frame
@@ -34,7 +40,6 @@ public class TextFlashing : MonoBehaviour {
             timeTweenKey += Time.deltaTime / Duration;
 
             tweenValue = curve.Evaluate(timeTweenKey);
-            Debug.Log(tweenValue);
 
             rect.localScale = orginScale * tweenValue;
 
@@ -46,6 +51,21 @@ public class TextFlashing : MonoBehaviour {
             textObject.color = Color.Lerp(textObject.color, orginColor, Time.deltaTime  * 5);
             
         }
+
+        //Set alpha for text
+        textObject.color = new Color(textObject.color.r, textObject.color.g, textObject.color.b , TextAlpha);
+
+        if (TextAlpha > 0)
+        {
+            TextAlpha -= Time.deltaTime / TextVisibleTime;
+        }
+        else
+        {
+            TextAlpha = 0;
+        }
+        
+
+        //Test tool for effect
         if (Input.GetKeyDown(KeyCode.O))
         {
             StartEffect();
@@ -57,6 +77,7 @@ public class TextFlashing : MonoBehaviour {
     {
         timeTweenKey = 0;
         textObject.color = FlashColor;
+        TextAlpha = 1;
     }
 
 }
