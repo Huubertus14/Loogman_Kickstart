@@ -2,7 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using GamingStates;
 
+namespace GamingStates
+{
+    public enum GameStates
+    {
+        Playing,
+        Instructions,
+        GameEnd,
+        Waiting
+    }
+}
 public class GameManager : MonoBehaviour
 {
 
@@ -36,6 +47,7 @@ public class GameManager : MonoBehaviour
     private GameObject hoverObject;
 
     [Header("Values")]
+    public GameStates gameState;
     public bool GameStarted;
     public bool GameOver;
     [Space]
@@ -54,12 +66,18 @@ public class GameManager : MonoBehaviour
     {
         BulletForce = 240;
         GameStarted = false;
+        gameState = GameStates.Instructions;
     }
 
     private void Update()
     {
-        if (GameStarted)
+        if (gameState == GameStates.Instructions)
         {
+            //Wait for instructions
+        }
+        if (gameState == GameStates.Playing)
+        {
+            //Game is started
             if (TimePlayed <= 0)
             {
                 GameStarted = false;
@@ -73,9 +91,13 @@ public class GameManager : MonoBehaviour
                 SetTimeText();
             }
         }
-
-        if (GameOver)
+        if (gameState == GameStates.Waiting)
         {
+            //Wait for something
+        }
+        if (gameState == GameStates.GameEnd)
+        {
+            //Game has end
             GameOverTimer += Time.deltaTime;
             if (GameOverTimer > 2)
             {
@@ -83,6 +105,16 @@ public class GameManager : MonoBehaviour
                 TutorialThing.IsVisible = true;
                 SetGestureInstructions(true);
             }
+        }
+
+        if (GameStarted)
+        {
+           
+        }
+
+        if (GameOver)
+        {
+            
         }
     }
 
