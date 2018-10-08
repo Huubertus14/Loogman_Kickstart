@@ -6,6 +6,8 @@ TagManager:
   tags:
   - SpawnPoint
   - Target
+  - Bullet
+  - Garbage
   layers:
   - Default
   - TransparentFX

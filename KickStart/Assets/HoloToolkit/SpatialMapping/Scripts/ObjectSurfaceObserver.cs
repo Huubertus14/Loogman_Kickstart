@@ -30,7 +30,7 @@ namespace HoloToolkit.Unity.SpatialMapping
                 }
             }
         }
-
+        
         /// <summary>
         /// Loads the SpatialMapping mesh from the specified room object.
         /// </summary>

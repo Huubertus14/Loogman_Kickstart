@@ -511,8 +511,9 @@ MonoBehaviour:
   BirdSounds:
   - {fileID: 8300000, guid: d447a9aefecb5fa438e68e073eaa8680, type: 3}
   - {fileID: 8300000, guid: 711efcdc7e1dc2f47815e34f455e621b, type: 3}
-  - {fileID: 8300000, guid: 1197eea4cd90bba4586a9b4ded96c264, type: 3}
+  - {fileID: 8300000, guid: 833f0488d7b0b70478a33b29aaed7141, type: 3}
   - {fileID: 8300000, guid: af92273eb57b90a4b829bc08cdedb530, type: 3}
+  - {fileID: 8300000, guid: 1197eea4cd90bba4586a9b4ded96c264, type: 3}
 --- !u!1 &1752769160
 GameObject:
   m_ObjectHideFlags: 0

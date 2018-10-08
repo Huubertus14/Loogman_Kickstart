@@ -21,6 +21,6 @@ public class SpawnBehaviour : MonoBehaviour {
 
     private void spawnEnemy()
     {
-        GameObject tempEnemy = Instantiate(Enemy, new Vector3(Random.Range(-10, 10), Random.Range(-10, 10), Random.Range(-10, 10)), Quaternion.identity);
+        Instantiate(Enemy, new Vector3(Random.Range(-10, 10), Random.Range(-10, 10), Random.Range(-10, 10)), Quaternion.identity);
     }
 }
