@@ -3,6 +3,7 @@ using System;
 using System.IO;
 using System.Linq;
 using UnityEngine.XR.WSA.Input;
+using GamingStates;
 
 public class RecognizerManager : MonoBehaviour {
 
@@ -32,22 +33,16 @@ public class RecognizerManager : MonoBehaviour {
     private void TapHandler(TappedEventArgs obj)
     {
         LastGestureTimer = 0;
-        if (!GameManager.Instance.GameStarted)
+        if (GameManager.Instance.gameState == GameStates.Instructions)
         {
-            if (GameManager.Instance.GameOver)
-            {
-                if (GameManager.Instance.CanContinueToNExtGame)
-                {
-                    GameManager.Instance.StartGame();
-                    return;
-                }
-                return;
-            }
-
             GameManager.Instance.StartGame();
-            return;
         }
-        GameManager.Instance.Player.Shoot();
+
+        //Only shoot in the gaming stage
+        if (GameManager.Instance.gameState == GameStates.Playing)
+        {
+            GameManager.Instance.Player.Shoot();
+        }
     }
 
     private void Update()
