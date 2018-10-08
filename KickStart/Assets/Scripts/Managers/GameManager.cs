@@ -103,11 +103,11 @@ public class GameManager : MonoBehaviour
             {
                 SightBoxes.SetActive(false);
                 SightBoxesText.gameObject.SetActive(false);
-
                 GestureImage.SetActive(false);
                 GestureImageText01.gameObject.SetActive(false);
                 GestureImageText02.gameObject.SetActive(false);
                 HandPlaceImage.gameObject.SetActive(false);
+
                 StartGame();
             }
 
@@ -158,6 +158,7 @@ public class GameManager : MonoBehaviour
         GameStarted = false;
         TimeText.text = "";
         GameOver = true;
+        gameState = GameStates.GameEnd;
         ShowEndScore();
     }
 

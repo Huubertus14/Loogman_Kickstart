@@ -36,6 +36,7 @@ public class RecognizerManager : MonoBehaviour {
         if (GameManager.Instance.gameState == GameStates.Instructions)
         {
             GameManager.Instance.InstrucionAmount++;
+            return;
         }
 
         if (GameManager.Instance.gameState == GameStates.GameEnd)
@@ -43,6 +44,7 @@ public class RecognizerManager : MonoBehaviour {
             if (GameManager.Instance.CanContinueToNExtGame)
             {
                 GameManager.Instance.ResetGame();
+                return;
             }
         }
 
@@ -50,8 +52,10 @@ public class RecognizerManager : MonoBehaviour {
         if (GameManager.Instance.gameState == GameStates.Playing)
         {
             GameManager.Instance.Player.Shoot();
+            return;
         }
     }
+
 
     private void Update()
     {
@@ -67,20 +71,19 @@ public class RecognizerManager : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (!GameManager.Instance.GameStarted)
+            if (GameManager.Instance.gameState == GameStates.Instructions)
             {
-                if (GameManager.Instance.GameOver)
+                GameManager.Instance.InstrucionAmount++;
+                return;
+            }
+
+            if (GameManager.Instance.gameState == GameStates.GameEnd)
+            {
+                if (GameManager.Instance.CanContinueToNExtGame)
                 {
-                    if (GameManager.Instance.CanContinueToNExtGame)
-                    {
-                        GameManager.Instance.StartGame();
-                        return;
-                    }
+                    GameManager.Instance.ResetGame();
                     return;
                 }
-
-                GameManager.Instance.StartGame();
-                return;
             }
         }
     }
