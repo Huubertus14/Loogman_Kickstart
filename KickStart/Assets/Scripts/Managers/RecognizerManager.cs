@@ -38,6 +38,14 @@ public class RecognizerManager : MonoBehaviour {
             GameManager.Instance.InstrucionAmount++;
         }
 
+        if (GameManager.Instance.gameState == GameStates.GameEnd)
+        {
+            if (GameManager.Instance.CanContinueToNExtGame)
+            {
+                GameManager.Instance.ResetGame();
+            }
+        }
+
         //Only shoot in the gaming stage
         if (GameManager.Instance.gameState == GameStates.Playing)
         {

@@ -278,6 +278,7 @@ MonoBehaviour:
   GestureImage: {fileID: 0}
   GestureImageText01: {fileID: 0}
   GestureImageText02: {fileID: 0}
+  HandPlaceImage: {fileID: 0}
   Targets: []
   gameState: 0
   GameStarted: 0

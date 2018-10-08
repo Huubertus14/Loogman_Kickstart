@@ -71,13 +71,12 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         BulletForce = 240;
-        GameStarted = false;
-        gameState = GameStates.Instructions;
+        ResetGame();
     }
 
     private void Update()
     {
-        if (gameState == GameStates.Instructions)
+        if (gameState == GameStates.Instructions) // do this when youare in the instructions
         {
             //Wait for instructions
             if (InstrucionAmount == 0)
@@ -142,7 +141,13 @@ public class GameManager : MonoBehaviour
                 InstrucionAmount = 0;
             }
         }
-        
+    }
+
+    public void ResetGame()
+    {
+        InstrucionAmount = 0;
+        GameStarted = false;
+        gameState = GameStates.Instructions;
     }
 
     /// <summary>
