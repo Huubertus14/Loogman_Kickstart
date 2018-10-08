@@ -35,7 +35,7 @@ public class RecognizerManager : MonoBehaviour {
         LastGestureTimer = 0;
         if (GameManager.Instance.gameState == GameStates.Instructions)
         {
-
+            GameManager.Instance.StartGame();
         }
 
         //Only shoot in the gaming stage

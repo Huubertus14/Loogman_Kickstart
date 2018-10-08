@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
     public bool GameOver;
     [Space]
     public float TimePlayed;
-    
+
     [HideInInspector]
     public float BulletForce;
 
@@ -74,16 +74,15 @@ public class GameManager : MonoBehaviour
         if (gameState == GameStates.Instructions)
         {
             //Wait for instructions
+
+            //start the game from the gesture manager
         }
         if (gameState == GameStates.Playing)
         {
             //Game is started
             if (TimePlayed <= 0)
             {
-                GameStarted = false;
-                TimeText.text = "";
-                GameOver = true;
-                ShowEndScore();
+                SetGameOver();
             }
             else
             {
@@ -109,13 +108,21 @@ public class GameManager : MonoBehaviour
 
         if (GameStarted)
         {
-           
+
         }
 
         if (GameOver)
         {
-            
+
         }
+    }
+
+    public void SetGameOver()
+    {
+        GameStarted = false;
+        TimeText.text = "";
+        GameOver = true;
+        ShowEndScore();
     }
 
     /// <summary>
