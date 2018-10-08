@@ -267,12 +267,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
   Cursor: {fileID: 0}
+  PlayerCanvas: {fileID: 0}
+  TutorialThing: {fileID: 0}
   ScoreText: {fileID: 0}
   GarbageText: {fileID: 0}
   TimeText: {fileID: 0}
   EndScoreText: {fileID: 0}
-  PlayerCanvas: {fileID: 0}
-  TutorialThing: {fileID: 0}
   GestureInstructions:
   - {fileID: 0}
   - {fileID: 0}

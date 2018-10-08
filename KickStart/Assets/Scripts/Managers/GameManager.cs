@@ -13,16 +13,20 @@ public class GameManager : MonoBehaviour
 
     }
 
-    [Header("References")]
+    [Header("References:s")]
     public PlayerBehaviour Player;
     public GameObject Cursor;
+
+    public GameObject PlayerCanvas;
+    public GestureImage TutorialThing;
+
+    [Header("UI Elements:")]
     public Text ScoreText;
     public Text GarbageText;
     public Text TimeText;
     public Text EndScoreText;
-    public GameObject PlayerCanvas;
-    public GestureImage TutorialThing;
 
+    [Space]
     public GameObject[] GestureInstructions;
 
     [HideInInspector] //Bah
@@ -34,11 +38,10 @@ public class GameManager : MonoBehaviour
     [Header("Values")]
     public bool GameStarted;
     public bool GameOver;
-
-    public float TimePlayed;
-
-
     [Space]
+    public float TimePlayed;
+    
+    [HideInInspector]
     public float BulletForce;
 
     [HideInInspector]
@@ -49,6 +52,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        BulletForce = 240;
         GameStarted = false;
     }
 

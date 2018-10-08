@@ -177,6 +177,16 @@ Prefab:
       objectReference: {fileID: 345691404}
     - target: {fileID: 114755208706617680, guid: 20c13879b59ae4a4f85b04cacea06003,
         type: 2}
+      propertyPath: PlayerCanvas
+      value: 
+      objectReference: {fileID: 890563022}
+    - target: {fileID: 114755208706617680, guid: 20c13879b59ae4a4f85b04cacea06003,
+        type: 2}
+      propertyPath: TutorialThing
+      value: 
+      objectReference: {fileID: 133112273}
+    - target: {fileID: 114755208706617680, guid: 20c13879b59ae4a4f85b04cacea06003,
+        type: 2}
       propertyPath: ScoreText
       value: 
       objectReference: {fileID: 184243517}
@@ -195,16 +205,6 @@ Prefab:
       propertyPath: EndScoreText
       value: 
       objectReference: {fileID: 860630016}
-    - target: {fileID: 114755208706617680, guid: 20c13879b59ae4a4f85b04cacea06003,
-        type: 2}
-      propertyPath: PlayerCanvas
-      value: 
-      objectReference: {fileID: 890563022}
-    - target: {fileID: 114755208706617680, guid: 20c13879b59ae4a4f85b04cacea06003,
-        type: 2}
-      propertyPath: TutorialThing
-      value: 
-      objectReference: {fileID: 133112273}
     - target: {fileID: 114755208706617680, guid: 20c13879b59ae4a4f85b04cacea06003,
         type: 2}
       propertyPath: GestureInstructions.Array.data[0]

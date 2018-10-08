@@ -12,7 +12,7 @@ public class RecognizerManager : MonoBehaviour {
 
     private float LastGestureTimer;
     public float HintTimer;
-
+    
     private void Awake()
     {
         Instance = this;
@@ -55,11 +55,11 @@ public class RecognizerManager : MonoBehaviour {
         LastGestureTimer += Time.deltaTime;
         if (LastGestureTimer > HintTimer)
         {
-            Debug.Log("Show Gestures Again");
+            //Debug.Log("Show Gestures Again");
         }
         else
         {
-            Debug.Log("Remove Gestures etc");
+            //Debug.Log("Remove Gestures etc");
         }
 
         if (Input.GetKeyDown(KeyCode.Space))

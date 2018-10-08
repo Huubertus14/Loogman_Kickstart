@@ -1481,7 +1481,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: And mimix the gesture
+  m_Text: And mimic the gesture
 --- !u!114 &114478785661108844
 MonoBehaviour:
   m_ObjectHideFlags: 1
