@@ -37,8 +37,13 @@ public class GameManager : MonoBehaviour
     public Text TimeText;
     public Text EndScoreText;
 
-    [Space]
-    public GameObject[] GestureInstructions;
+    [Header("Instructions:")]
+    public GameObject SightBoxes;
+    public Text SightBoxesText;
+    public GameObject GestureImage;
+    public Text GestureImageText01;
+    public Text GestureImageText02;
+    public Image HandPlaceImage;
 
     [HideInInspector] //Bah
     public List<Renderer> Targets = new List<Renderer>();
@@ -52,6 +57,7 @@ public class GameManager : MonoBehaviour
     public bool GameOver;
     [Space]
     public float TimePlayed;
+    public int InstrucionAmount;
 
     [HideInInspector]
     public float BulletForce;
@@ -74,6 +80,37 @@ public class GameManager : MonoBehaviour
         if (gameState == GameStates.Instructions)
         {
             //Wait for instructions
+            if (InstrucionAmount == 0)
+            {
+                //SHow one thing  //The bounding Boxes
+                SightBoxes.SetActive(true);
+                SightBoxesText.gameObject.SetActive(true);
+                GestureImage.SetActive(true);
+                GestureImageText01.gameObject.SetActive(false);
+                GestureImageText02.gameObject.SetActive(false);
+                HandPlaceImage.gameObject.SetActive(false);
+            }
+            if (InstrucionAmount == 1)
+            {
+                //Show gesture thing
+                SightBoxes.SetActive(false);
+                SightBoxesText.gameObject.SetActive(false);
+                GestureImage.SetActive(true);
+                GestureImageText01.gameObject.SetActive(true);
+                GestureImageText02.gameObject.SetActive(true);
+                HandPlaceImage.gameObject.SetActive(true);
+            }
+            if (InstrucionAmount == 2)
+            {
+                SightBoxes.SetActive(false);
+                SightBoxesText.gameObject.SetActive(false);
+
+                GestureImage.SetActive(false);
+                GestureImageText01.gameObject.SetActive(false);
+                GestureImageText02.gameObject.SetActive(false);
+                HandPlaceImage.gameObject.SetActive(false);
+                StartGame();
+            }
 
             //start the game from the gesture manager
         }
@@ -102,21 +139,15 @@ public class GameManager : MonoBehaviour
             {
                 CanContinueToNExtGame = true;
                 TutorialThing.IsVisible = true;
-                SetGestureInstructions(true);
+                InstrucionAmount = 0;
             }
         }
-
-        if (GameStarted)
-        {
-
-        }
-
-        if (GameOver)
-        {
-
-        }
+        
     }
 
+    /// <summary>
+    /// Call this when the player is game over
+    /// </summary>
     public void SetGameOver()
     {
         GameStarted = false;
@@ -140,17 +171,11 @@ public class GameManager : MonoBehaviour
         SetScoreText();
 
         //remove all instructions
-        SetGestureInstructions(false);
+        gameState = GameStates.Playing;
     }
+    
 
-    public void SetGestureInstructions(bool _value)
-    {
-        foreach (var item in GestureInstructions)
-        {
-            item.SetActive(_value);
-        }
-    }
-
+    //Does not work right now
     public bool IsSeeingAnEnemy()
     {
         if (Targets.Count < 1)
@@ -172,16 +197,25 @@ public class GameManager : MonoBehaviour
         return false;
     }
 
+    /// <summary>
+    /// Set the score text of the player
+    /// </summary>
     public void SetScoreText()
     {
         ScoreText.text = "Score: " + Player.Score.ToString();
     }
 
+    /// <summary>
+    /// Set garbage text, Might be obsolete
+    /// </summary>
     public void SetGarbageText()
     {
         GarbageText.text = "You've been hit by " + Player.HitByGarbage.ToString() + " Pieces of Garbage!";
     }
 
+    /// <summary>
+    /// Set the time text of the player
+    /// </summary>
     public void SetTimeText()
     {
         int _min = (int)TimePlayed / 60;
@@ -197,6 +231,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Show the total end score
+    /// </summary>
     public void ShowEndScore()
     {
         EndScoreText.text = "You Got " + Player.Score.ToString() + " Points!";

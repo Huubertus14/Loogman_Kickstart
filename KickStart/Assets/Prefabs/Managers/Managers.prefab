@@ -273,12 +273,16 @@ MonoBehaviour:
   GarbageText: {fileID: 0}
   TimeText: {fileID: 0}
   EndScoreText: {fileID: 0}
-  GestureInstructions:
-  - {fileID: 0}
-  - {fileID: 0}
+  SightBoxes: {fileID: 0}
+  SightBoxesText: {fileID: 0}
+  GestureImage: {fileID: 0}
+  GestureImageText01: {fileID: 0}
+  GestureImageText02: {fileID: 0}
   Targets: []
+  gameState: 0
   GameStarted: 0
   GameOver: 0
   TimePlayed: 0
+  InstrucionAmount: 0
   BulletForce: 240
   CanContinueToNExtGame: 0
