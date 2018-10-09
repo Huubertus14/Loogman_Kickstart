@@ -467,6 +467,11 @@ MonoBehaviour:
   BirdSoundTimer: 0
   GarbagePrefab: {fileID: 1707182630852220, guid: 1e46d6e988cfbda4a9207b7a1512db44,
     type: 2}
+  IsHit: 0
+  DeathParticle: {fileID: 1222976583829746, guid: d166581bdd55b1e43ab19118f1ce3ecf,
+    type: 2}
+  SmokeParticles: {fileID: 1774362150817566, guid: ac14dba2f78a0214090c60ac3d1c45e4,
+    type: 2}
 --- !u!136 &136044347719346488
 CapsuleCollider:
   m_ObjectHideFlags: 1
