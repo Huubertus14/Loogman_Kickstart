@@ -9,7 +9,7 @@ public class PlayerMudBoxScript : MonoBehaviour {
         //Bird trows dirt at you
         if (other.gameObject.tag.Contains("Target"))
         {
-            other.gameObject.GetComponent<TargetBehaviour>().TrowGarbage();
+            other.gameObject.GetComponent<TargetBehaviour>().ThrowGarbage();
         }
     }
 }

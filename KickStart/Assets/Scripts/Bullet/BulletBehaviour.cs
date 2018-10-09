@@ -5,7 +5,6 @@ using UnityEngine;
 public class BulletBehaviour : MonoBehaviour {
     
     private Rigidbody rb;
-    public GameObject DeathParticle;
 
     // Use this for initialization
     void Start () {
@@ -28,7 +27,7 @@ public class BulletBehaviour : MonoBehaviour {
         {
             //Target HIT!
             AudioManager.Instance.PlayAudio(AudioSampleManager.Instance.GetExplosionSound(), 1);
-            Instantiate(DeathParticle, transform.position, Quaternion.identity);
+            collision.gameObject.GetComponent<TargetBehaviour>().IsHit = true;
             GameManager.Instance.Player.Score++;
             GameManager.Instance.SetScoreText();
             GameManager.Instance.Player.ScoreTextFlash.StartEffect();
