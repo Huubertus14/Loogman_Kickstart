@@ -59,6 +59,7 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public bool CanContinueToNExtGame;
 
+    //Test
     //Timer to run when the game is over and will reset
     private float GameOverTimer;
 
