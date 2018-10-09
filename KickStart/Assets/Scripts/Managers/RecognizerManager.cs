@@ -59,6 +59,7 @@ public class RecognizerManager : MonoBehaviour {
 
     private void Update()
     {
+        //Obsolete?
         LastGestureTimer += Time.deltaTime;
         if (LastGestureTimer > HintTimer)
         {
