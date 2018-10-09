@@ -3,7 +3,7 @@ using System;
 using System.IO;
 using System.Linq;
 using UnityEngine.XR.WSA.Input;
-using GamingStates;
+using EnumStates;
 
 public class RecognizerManager : MonoBehaviour {
 
@@ -35,15 +35,27 @@ public class RecognizerManager : MonoBehaviour {
         LastGestureTimer = 0;
         if (GameManager.Instance.gameState == GameStates.Instructions)
         {
-            GameManager.Instance.StartGame();
+            GameManager.Instance.InstrucionAmount++;
+            return;
+        }
+
+        if (GameManager.Instance.gameState == GameStates.GameEnd)
+        {
+            if (GameManager.Instance.CanContinueToNExtGame)
+            {
+                GameManager.Instance.ResetGame();
+                return;
+            }
         }
 
         //Only shoot in the gaming stage
         if (GameManager.Instance.gameState == GameStates.Playing)
         {
             GameManager.Instance.Player.Shoot();
+            return;
         }
     }
+
 
     private void Update()
     {
@@ -59,20 +71,19 @@ public class RecognizerManager : MonoBehaviour {
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (!GameManager.Instance.GameStarted)
+            if (GameManager.Instance.gameState == GameStates.Instructions)
             {
-                if (GameManager.Instance.GameOver)
+                GameManager.Instance.InstrucionAmount++;
+                return;
+            }
+
+            if (GameManager.Instance.gameState == GameStates.GameEnd)
+            {
+                if (GameManager.Instance.CanContinueToNExtGame)
                 {
-                    if (GameManager.Instance.CanContinueToNExtGame)
-                    {
-                        GameManager.Instance.StartGame();
-                        return;
-                    }
+                    GameManager.Instance.ResetGame();
                     return;
                 }
-
-                GameManager.Instance.StartGame();
-                return;
             }
         }
     }
