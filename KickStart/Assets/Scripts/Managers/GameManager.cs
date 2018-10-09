@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using GamingStates;
+using EnumStates;
 
-namespace GamingStates
+namespace EnumStates
 {
     public enum GameStates
     {
@@ -12,6 +12,15 @@ namespace GamingStates
         Instructions,
         GameEnd,
         Waiting
+    }
+
+    public enum HandStates
+    {
+        Visible,
+        NotVisible,
+        Select,
+        Observing,
+        Release
     }
 }
 public class GameManager : MonoBehaviour
@@ -53,6 +62,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Values")]
     public GameStates gameState;
+    public HandStates CurrentHandState;
     public bool GameStarted;
     public bool GameOver;
     [Space]
@@ -70,6 +80,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        CurrentHandState = HandStates.NotVisible;
         BulletForce = 240;
         ResetGame();
     }
@@ -271,6 +282,11 @@ public class GameManager : MonoBehaviour
     public void SetHoverObject(GameObject _hoverObject)
     {
         hoverObject = _hoverObject;
+    }
+
+    public void SetHandState(HandStates _state)
+    {
+        CurrentHandState = _state;
     }
     #endregion
 }

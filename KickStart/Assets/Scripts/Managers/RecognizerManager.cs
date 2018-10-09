@@ -3,7 +3,7 @@ using System;
 using System.IO;
 using System.Linq;
 using UnityEngine.XR.WSA.Input;
-using GamingStates;
+using EnumStates;
 
 public class RecognizerManager : MonoBehaviour {
 

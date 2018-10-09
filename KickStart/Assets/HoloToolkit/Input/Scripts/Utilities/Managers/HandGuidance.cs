@@ -50,12 +50,7 @@ namespace HoloToolkit.Unity.InputModule
                 Debug.LogError("Please include a GameObject for the Cursor to display the indicator around.");
             }
 
-            if (HandGuidanceIndicator != null)
-            {
-                // Cache the initial rotation of the HandGuidanceIndicator so future rotations 
-                // can be done with respect to this rotation.
-                defaultHandGuidanceRotation = HandGuidanceIndicator.transform.rotation;
-            }
+           
 
             // Create an object in the scene for the guidance indicator and default it to not be visible.
             handGuidanceIndicatorGameObject = Instantiate(HandGuidanceIndicator);
@@ -72,6 +67,13 @@ namespace HoloToolkit.Unity.InputModule
             InteractionManager.SourceUpdated += InteractionManager_SourceUpdated;
             InteractionManager.SourceReleased += InteractionManager_SourceReleased;
 #endif
+
+            if (HandGuidanceIndicator != null)
+            {
+                // Cache the initial rotation of the HandGuidanceIndicator so future rotations 
+                // can be done with respect to this rotation.
+                defaultHandGuidanceRotation = HandGuidanceIndicator.transform.rotation;
+            }
         }
 
         private void ShowHandGuidanceIndicator(InteractionSourceState hand)
