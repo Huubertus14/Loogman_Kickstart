@@ -21,6 +21,7 @@ public class TargetBehaviour : MonoBehaviour
 
     private void Start()
     {
+        GameManager.Instance.Indicator.AddIndicator(transform, 0);
         Speed = Random.Range(0.01f, 0.015f);
         GetEndPoint();
     }
@@ -48,6 +49,7 @@ public class TargetBehaviour : MonoBehaviour
         //Check if killed or missed!
         //Depending on type of death add effect
 
+        GameManager.Instance.Indicator.RemoveIndicator(transform);
         SpawnManager.Instance.CurrentBirdCount--;
         if (IsHit)
         {

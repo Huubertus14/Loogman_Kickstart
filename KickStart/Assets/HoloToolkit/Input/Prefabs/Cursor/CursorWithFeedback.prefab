@@ -453,6 +453,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pivotAxis: 0
+  targetTransform: {fileID: 0}
 --- !u!114 &114000011803902180
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -474,6 +475,7 @@ MonoBehaviour:
   RotationLerpTime: 0.01
   LookRotationBlend: 0.5
   PrimaryCursorVisual: {fileID: 0}
+  isVisible: 1
   CursorStateData:
   - Name: On Hologram No Hands
     CursorState: 1
@@ -516,3 +518,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pivotAxis: 0
+  targetTransform: {fileID: 0}

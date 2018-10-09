@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using HoloToolkit.Unity.InputModule;
 using EnumStates;
+using Greyman;
 
 namespace EnumStates
 {
@@ -39,20 +41,14 @@ public class GameManager : MonoBehaviour
 
     public GameObject PlayerCanvas;
     public GestureImage TutorialThing;
+    public OffScreenIndicator Indicator;
+    
 
     [Header("UI Elements:")]
     public Text ScoreText;
     public Text GarbageText;
     public Text TimeText;
     public Text EndScoreText;
-
-    [Header("Instructions:")]
-    public GameObject SightBoxes;
-    public Text SightBoxesText;
-    public GameObject GestureImage;
-    public Text GestureImageText01;
-    public Text GestureImageText02;
-    public Image HandPlaceImage;
 
     [HideInInspector] //Bah
     public List<Renderer> Targets = new List<Renderer>();
@@ -69,6 +65,15 @@ public class GameManager : MonoBehaviour
     public float TimePlayed;
     public int InstrucionAmount;
 
+    [Header("Tutorial values")]
+    public Text TutorialFeedbackText;
+    public Image HandPlaceBox;
+    public GameObject GestureAnimation;
+    public GameObject BoundairyIndicators;
+
+    private float instructionTimer;
+    private float instructionCounter;
+
     [HideInInspector]
     public float BulletForce;
 
@@ -81,6 +86,12 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        instructionTimer = 5.5f;
+
+        TutorialFeedbackText.text = "";
+        EndScoreText.text = "";
+        TimeText.text = "";
+        
         CurrentHandState = HandStates.NotVisible;
         BulletForce = 240;
         ResetGame();
@@ -90,40 +101,7 @@ public class GameManager : MonoBehaviour
     {
         if (gameState == GameStates.Instructions) // do this when youare in the instructions
         {
-            //Wait for instructions
-            if (InstrucionAmount == 0)
-            {
-                //SHow one thing  //The bounding Boxes
-                SightBoxes.SetActive(true);
-                SightBoxesText.gameObject.SetActive(true);
-                GestureImage.SetActive(true);
-                GestureImageText01.gameObject.SetActive(false);
-                GestureImageText02.gameObject.SetActive(false);
-                HandPlaceImage.gameObject.SetActive(false);
-            }
-            if (InstrucionAmount == 1)
-            {
-                //Show gesture thing
-                SightBoxes.SetActive(false);
-                SightBoxesText.gameObject.SetActive(false);
-                GestureImage.SetActive(true);
-                GestureImageText01.gameObject.SetActive(true);
-                GestureImageText02.gameObject.SetActive(true);
-                HandPlaceImage.gameObject.SetActive(true);
-            }
-            if (InstrucionAmount == 2)
-            {
-                SightBoxes.SetActive(false);
-                SightBoxesText.gameObject.SetActive(false);
-                GestureImage.SetActive(false);
-                GestureImageText01.gameObject.SetActive(false);
-                GestureImageText02.gameObject.SetActive(false);
-                HandPlaceImage.gameObject.SetActive(false);
-
-                StartGame();
-            }
-
-            //start the game from the gesture manager
+            Instructions();
         }
         if (gameState == GameStates.Playing)
         {
@@ -134,6 +112,10 @@ public class GameManager : MonoBehaviour
             }
             else
             {
+                if (TimePlayed < 170)
+                {
+                    TutorialFeedbackText.text = "";
+                }
                 TimePlayed -= Time.deltaTime;
                 SetTimeText();
             }
@@ -155,8 +137,90 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Instructions()
+    {
+        EndScoreText.text = "";
+        if (CurrentHandState == HandStates.NotVisible)
+        {
+            TutorialFeedbackText.text = "Hold your hand in front of you";
+        }
+        if (InstrucionAmount == 0)
+        {
+            //Check if the hannd is visible
+            if (CurrentHandState == HandStates.NotVisible)
+            {
+                TutorialFeedbackText.text = "Hold your hand in the box";
+                HandPlaceBox.gameObject.SetActive(true);
+                GestureAnimation.SetActive(false);
+                //Show visualBox
+                BoundairyIndicators.SetActive(true);
+            }
+            else
+            {
+                TutorialFeedbackText.text = "Try to mimic the gesture";
+                HandPlaceBox.gameObject.SetActive(true);
+
+                GestureAnimation.SetActive(true);
+
+                BoundairyIndicators.SetActive(true);
+            }
+
+            return;
+        }
+
+        if (InstrucionAmount == 1)
+        {
+            instructionCounter += Time.deltaTime;
+            //Check if the hannd is visible
+            if (CurrentHandState == HandStates.NotVisible)
+            {
+                TutorialFeedbackText.text = "Hold your hand in the box";
+                HandPlaceBox.gameObject.SetActive(true);
+                GestureAnimation.SetActive(false);
+                InstrucionAmount = 0;
+                instructionCounter = 0;
+                //Show visualBox
+                BoundairyIndicators.SetActive(false);
+            }
+            else
+            {
+                TutorialFeedbackText.text = "Great! Try it again!";
+                HandPlaceBox.gameObject.SetActive(true);
+                GestureAnimation.SetActive(true);
+
+                BoundairyIndicators.SetActive(false);
+
+                if (instructionCounter > instructionTimer)
+                {
+                    instructionCounter = 0;
+                    InstrucionAmount = 0;
+                    BoundairyIndicators.SetActive(true);
+                }
+            }
+
+            return;
+        }
+
+        //start the game from the gesture manager
+        if (InstrucionAmount >= 2)
+        {
+            TutorialFeedbackText.text = "Try to shoot as many Birds as possible!";
+            //remove boxes
+            GestureAnimation.SetActive(false);
+            HandPlaceBox.gameObject.SetActive(false);
+
+            //rempve arrows
+            BoundairyIndicators.SetActive(false);
+            
+
+            StartGame();
+            return;
+        }
+    }
+
     public void ResetGame()
     {
+        ScoreText.text = "";
         InstrucionAmount = 0;
         GameStarted = false;
         gameState = GameStates.Instructions;
@@ -171,7 +235,14 @@ public class GameManager : MonoBehaviour
         TimeText.text = "";
         GameOver = true;
         gameState = GameStates.GameEnd;
+
+        Invoke("SetGestureActive", 3f);
         ShowEndScore();
+    }
+
+    private  void SetGestureActive()
+    {
+        GestureAnimation.SetActive(true);
     }
 
     /// <summary>
@@ -191,7 +262,7 @@ public class GameManager : MonoBehaviour
         //remove all instructions
         gameState = GameStates.Playing;
     }
-    
+
 
     //Does not work right now
     public bool IsSeeingAnEnemy()
