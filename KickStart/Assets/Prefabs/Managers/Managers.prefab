@@ -768,7 +768,7 @@ MonoBehaviour:
     offScreenRotates: 1
     targetOffset: {x: 0, y: 0, z: 0}
     transition: 2
-    transitionDuration: 0.1
+    transitionDuration: 0.2
   targets: []
 --- !u!114 &114755208706617680
 MonoBehaviour:

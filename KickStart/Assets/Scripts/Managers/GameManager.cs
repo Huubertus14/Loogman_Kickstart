@@ -90,11 +90,9 @@ namespace VrFox
         private void Start()
         {
             instructionTimer = 5.5f;
-
-
-
+            
             CurrentHandState = HandStates.NotVisible;
-            BulletForce = 240*8;
+            BulletForce = 240*3;
             ResetGame();
         }
 

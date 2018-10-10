@@ -49,7 +49,6 @@ public class TargetBehaviour : MonoBehaviour
     {
         //Check if killed or missed!
         //Depending on type of death add effect
-
         GameManager.Instance.Indicator.RemoveIndicator(transform);
         SpawnManager.Instance.CurrentBirdCount--;
         if (IsHit)

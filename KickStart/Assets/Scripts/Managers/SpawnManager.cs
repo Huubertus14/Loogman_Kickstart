@@ -73,4 +73,5 @@ public class SpawnManager : MonoBehaviour {
     {
         get { return lastBird; }
     }
+     
 }
