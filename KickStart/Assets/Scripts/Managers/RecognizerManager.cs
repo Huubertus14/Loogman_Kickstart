@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using UnityEngine.XR.WSA.Input;
 using EnumStates;
+using VrFox;
 
 public class RecognizerManager : MonoBehaviour {
 
@@ -62,7 +63,7 @@ public class RecognizerManager : MonoBehaviour {
         {
             if (GameManager.Instance.gameState == GameStates.Instructions)
             {
-                GameManager.Instance.InstrucionAmount++;
+                GameManager.Instance.StartGame();
                 return;
             }
 

@@ -36,6 +36,7 @@ GameObject:
   - component: {fileID: 4110721914491712}
   - component: {fileID: 33331326307108652}
   - component: {fileID: 23807237312899622}
+  - component: {fileID: 64018230360334906}
   m_Layer: 0
   m_Name: DUSTY_pCylinder28
   m_TagString: Untagged
@@ -53,6 +54,7 @@ GameObject:
   - component: {fileID: 4592009853326720}
   - component: {fileID: 33008254245406006}
   - component: {fileID: 23216324002442086}
+  - component: {fileID: 64361846844249992}
   m_Layer: 0
   m_Name: topHead_DUSTY
   m_TagString: Untagged
@@ -70,6 +72,7 @@ GameObject:
   - component: {fileID: 4863878420616322}
   - component: {fileID: 33660002230077048}
   - component: {fileID: 23803264928826018}
+  - component: {fileID: 64773677624447216}
   m_Layer: 0
   m_Name: DUSTY_pCube4
   m_TagString: Untagged
@@ -87,6 +90,7 @@ GameObject:
   - component: {fileID: 4969491441251824}
   - component: {fileID: 33857967940760512}
   - component: {fileID: 23680237572901746}
+  - component: {fileID: 64008008773559986}
   m_Layer: 0
   m_Name: DUSTY_nurbsToSubd2
   m_TagString: Untagged
@@ -104,6 +108,7 @@ GameObject:
   - component: {fileID: 4875815965676392}
   - component: {fileID: 33037650591561270}
   - component: {fileID: 23996948281789088}
+  - component: {fileID: 64351249383435796}
   m_Layer: 0
   m_Name: DUSTY_group2_bottomHead1
   m_TagString: Untagged
@@ -136,6 +141,7 @@ GameObject:
   - component: {fileID: 4352560729234600}
   - component: {fileID: 33590055702682096}
   - component: {fileID: 23451889844599832}
+  - component: {fileID: 64287627995096468}
   m_Layer: 0
   m_Name: pCylinder27_DUSTY
   m_TagString: Untagged
@@ -153,6 +159,7 @@ GameObject:
   - component: {fileID: 4206440249836006}
   - component: {fileID: 33489352595225884}
   - component: {fileID: 23822687693596198}
+  - component: {fileID: 64942117247975006}
   m_Layer: 0
   m_Name: DUSTY_pCube5
   m_TagString: Untagged
@@ -168,6 +175,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4332455281980256}
+  - component: {fileID: 111363906863874462}
   m_Layer: 0
   m_Name: Head
   m_TagString: Untagged
@@ -185,6 +193,7 @@ GameObject:
   - component: {fileID: 4425277476627612}
   - component: {fileID: 33093483488509038}
   - component: {fileID: 23814492208750468}
+  - component: {fileID: 64696612140816542}
   m_Layer: 0
   m_Name: DUSTY_pCube2
   m_TagString: Untagged
@@ -202,6 +211,7 @@ GameObject:
   - component: {fileID: 4367602085059384}
   - component: {fileID: 33973001816613560}
   - component: {fileID: 23460583239891150}
+  - component: {fileID: 64983167200549614}
   m_Layer: 0
   m_Name: DUSTY_pCube3
   m_TagString: Untagged
@@ -219,6 +229,7 @@ GameObject:
   - component: {fileID: 4944918907649824}
   - component: {fileID: 33216598283112762}
   - component: {fileID: 23205881510127888}
+  - component: {fileID: 64738995449248948}
   m_Layer: 0
   m_Name: DUSTY_innerHead1
   m_TagString: Untagged
@@ -234,6 +245,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4403223191107180}
+  - component: {fileID: 114148161255576132}
   m_Layer: 0
   m_Name: Dusty
   m_TagString: Untagged
@@ -267,6 +279,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4007314787392044}
+  - component: {fileID: 114251187229641556}
   m_Layer: 0
   m_Name: Dusty_Arm
   m_TagString: Untagged
@@ -330,7 +343,7 @@ Transform:
   - {fileID: 4592009853326720}
   m_Father: {fileID: 4892688712916130}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -0.287, y: -371.887, z: -0.48100004}
 --- !u!4 &4352560729234600
 Transform:
   m_ObjectHideFlags: 1
@@ -363,15 +376,15 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1897241166778766}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 46.072968, y: 0.8577428, z: 122.616234}
+  m_LocalRotation: {x: -0, y: 0.8100783, z: -0, w: 0.58632165}
+  m_LocalPosition: {x: -3.2320373, y: 0, z: 0.77309614}
   m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
   m_Children:
   - {fileID: 4892688712916130}
   - {fileID: 4007314787392044}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 108.20701, z: 0}
 --- !u!4 &4425277476627612
 Transform:
   m_ObjectHideFlags: 1
@@ -948,6 +961,146 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1883226184433878}
   m_Mesh: {fileID: 4300002, guid: a80d7c20a57c691489c8753a0b3d2200, type: 3}
+--- !u!64 &64008008773559986
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1325074991379162}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300004, guid: 0aab673c669a6c04d91bc0803923634e, type: 3}
+--- !u!64 &64018230360334906
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1194113678010270}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300010, guid: 0aab673c669a6c04d91bc0803923634e, type: 3}
+--- !u!64 &64287627995096468
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1443009669131060}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300004, guid: a80d7c20a57c691489c8753a0b3d2200, type: 3}
+--- !u!64 &64351249383435796
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1405407617793966}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: 0aab673c669a6c04d91bc0803923634e, type: 3}
+--- !u!64 &64361846844249992
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1279973385438588}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300012, guid: 0aab673c669a6c04d91bc0803923634e, type: 3}
+--- !u!64 &64696612140816542
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1748370766600140}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: a80d7c20a57c691489c8753a0b3d2200, type: 3}
+--- !u!64 &64738995449248948
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1896124402777944}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300002, guid: 0aab673c669a6c04d91bc0803923634e, type: 3}
+--- !u!64 &64773677624447216
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1286953035403870}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300006, guid: 0aab673c669a6c04d91bc0803923634e, type: 3}
+--- !u!64 &64942117247975006
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1446225419966308}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300008, guid: 0aab673c669a6c04d91bc0803923634e, type: 3}
+--- !u!64 &64983167200549614
+MeshCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1883226184433878}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300002, guid: a80d7c20a57c691489c8753a0b3d2200, type: 3}
 --- !u!65 &65024909015045038
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -960,3 +1113,45 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!111 &111363906863874462
+Animation:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1556541875605084}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: de19fd473e004be46944f694b3c9b71d, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: de19fd473e004be46944f694b3c9b71d, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
+--- !u!114 &114148161255576132
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1897241166778766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a7694cf1c0036b488007f9f5effd909, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Head: {fileID: 1556541875605084}
+  LeftArm: {fileID: 0}
+  RightArm: {fileID: 0}
+  Torso: {fileID: 0}
+--- !u!114 &114251187229641556
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1963312777940878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee7859cb925040546949873b2ea8ab7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ArmRotationSpeed: 50

@@ -4,6 +4,7 @@
 using System;
 using UnityEngine;
 using EnumStates;
+using VrFox;
 
 namespace HoloToolkit.Unity.InputModule
 {
@@ -50,7 +51,7 @@ namespace HoloToolkit.Unity.InputModule
         {
             base.OnCursorStateChange(state);
 
-            Debug.Log(state);
+           // Debug.Log(state);
 
             if (state != CursorStateEnum.Contextual)
             {

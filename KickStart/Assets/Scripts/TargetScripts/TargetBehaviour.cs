@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using VrFox;
 
 public class TargetBehaviour : MonoBehaviour
 {
@@ -89,7 +90,7 @@ public class TargetBehaviour : MonoBehaviour
 
     public void ThrowGarbage()
     {
-        Instantiate(GarbagePrefab,transform.position, Quaternion.identity);
+       // Instantiate(GarbagePrefab,transform.position, Quaternion.identity);
        // Debug.Log("Trow Garbage");
         
     }

@@ -590,7 +590,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BirdPrefab: {fileID: 100000, guid: d418c88afd808cf448602106c7ead664, type: 2}
   SpawnInterval: 3
-  MaxBirdCount: 8
+  MaxBirdCount: 3
   CurrentBirdCount: 0
 --- !u!114 &114264856961313424
 MonoBehaviour:
@@ -784,9 +784,6 @@ MonoBehaviour:
   PlayerCanvas: {fileID: 0}
   TutorialThing: {fileID: 0}
   Indicator: {fileID: 114722359190857508}
-  pointerSelector: {fileID: 114053586982531386}
-  IntroCursor: {fileID: 0}
-  GameCursor: {fileID: 0}
   ScoreText: {fileID: 0}
   GarbageText: {fileID: 0}
   TimeText: {fileID: 0}
