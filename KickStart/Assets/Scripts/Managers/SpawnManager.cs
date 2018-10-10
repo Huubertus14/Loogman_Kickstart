@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using VrFox;
 
 public class SpawnManager : MonoBehaviour {
 
@@ -12,7 +13,7 @@ public class SpawnManager : MonoBehaviour {
 
     [Header("Prefabs")]
     public GameObject BirdPrefab;
-
+    
     [Header("Values")]
     public float SpawnInterval;
     private float spawnTimer;
@@ -67,6 +68,7 @@ public class SpawnManager : MonoBehaviour {
             _bird.transform.position = new Vector3(_bird.transform.position.x, Random.Range(-0.5f, 1.2f), _bird.transform.position.z);
 
             lastBird = _bird;
+            
         }
     }
 
@@ -90,4 +92,5 @@ public class SpawnManager : MonoBehaviour {
     {
         get { return lastBird; }
     }
+     
 }

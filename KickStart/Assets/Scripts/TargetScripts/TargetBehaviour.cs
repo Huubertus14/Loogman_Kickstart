@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using VrFox;
 
 public class TargetBehaviour : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class TargetBehaviour : MonoBehaviour
 
     private void Start()
     {
+        GameManager.Instance.Indicator.AddIndicator(transform, 0);
         Speed = Random.Range(0.01f, 0.015f);
         GetEndPoint();
     }
@@ -66,7 +68,7 @@ public class TargetBehaviour : MonoBehaviour
         if (BirdSoundCounter > BirdSoundTimer)
         {
             BirdSoundCounter = 0;
-            AudioManager.Instance.PlayAudio(AudioSampleManager.Instance.getBirdSounds(), 1, transform.position);
+            AudioManager.Instance.PlayAudio(AudioSampleManager.Instance.getBirdSounds(), 1, gameObject);
         }
 
         BirdSoundTimer = Random.Range(3f, 6f);
@@ -74,7 +76,7 @@ public class TargetBehaviour : MonoBehaviour
 
     public void ThrowGarbage()
     {
-        Instantiate(GarbagePrefab,transform.position, Quaternion.identity);
+       // Instantiate(GarbagePrefab,transform.position, Quaternion.identity);
        // Debug.Log("Trow Garbage");
         
     }

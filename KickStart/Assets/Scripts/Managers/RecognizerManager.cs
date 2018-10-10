@@ -4,14 +4,14 @@ using System.IO;
 using System.Linq;
 using UnityEngine.XR.WSA.Input;
 using EnumStates;
+using VrFox;
 
 public class RecognizerManager : MonoBehaviour {
 
     public static RecognizerManager Instance;
 
     private GestureRecognizer recognizer;
-
-    private float LastGestureTimer;
+    
     public float HintTimer;
     
     private void Awake()
@@ -32,7 +32,7 @@ public class RecognizerManager : MonoBehaviour {
     /// </summary>
     private void TapHandler(TappedEventArgs obj)
     {
-        LastGestureTimer = 0;
+
         if (GameManager.Instance.gameState == GameStates.Instructions)
         {
             GameManager.Instance.InstrucionAmount++;
@@ -59,21 +59,11 @@ public class RecognizerManager : MonoBehaviour {
 
     private void Update()
     {
-        LastGestureTimer += Time.deltaTime;
-        if (LastGestureTimer > HintTimer)
-        {
-            //Debug.Log("Show Gestures Again");
-        }
-        else
-        {
-            //Debug.Log("Remove Gestures etc");
-        }
-
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (GameManager.Instance.gameState == GameStates.Instructions)
             {
-                GameManager.Instance.InstrucionAmount++;
+                GameManager.Instance.StartGame();
                 return;
             }
 
