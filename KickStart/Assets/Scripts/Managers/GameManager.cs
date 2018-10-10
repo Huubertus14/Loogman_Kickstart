@@ -94,7 +94,7 @@ namespace VrFox
 
 
             CurrentHandState = HandStates.NotVisible;
-            BulletForce = 240*2;
+            BulletForce = 240*8;
             ResetGame();
         }
 

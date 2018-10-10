@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DustyManager : MonoBehaviour {
+public class DustyManager : MonoBehaviour
+{
 
     public static DustyManager Instance;
     private void Awake()
@@ -16,11 +17,22 @@ public class DustyManager : MonoBehaviour {
     public GameObject RightArm;
     public GameObject Torso;
 
+    Animation ani;
+
+    float headSpinTimer;
+    private void Start()
+    {
+        ani = Head.GetComponent<Animation>();
+    }
+
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        headSpinTimer += Time.deltaTime;
+        if (headSpinTimer > 15)
         {
-            Head.GetComponent<Animation>().Play();
+            headSpinTimer = 0;
+            ani.Play();
         }
+
     }
 }
