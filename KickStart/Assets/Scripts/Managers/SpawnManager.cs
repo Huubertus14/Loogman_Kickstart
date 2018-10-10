@@ -19,6 +19,9 @@ public class SpawnManager : MonoBehaviour {
     private float spawnTimer;
     public int MaxBirdCount;
     public int CurrentBirdCount;
+    [Space]
+    public GameObject DeathParticle;
+    public GameObject SmokeParticles;
 
     private GameObject lastBird;
 
@@ -66,6 +69,22 @@ public class SpawnManager : MonoBehaviour {
 
             lastBird = _bird;
             
+        }
+    }
+
+    public void CreateParticleEffect(bool _IsHit)
+    {
+        //Check if killed or missed!
+        //Depending on type of death add effect
+
+        CurrentBirdCount--;
+        if (_IsHit)
+        {
+            Instantiate(DeathParticle, transform.position, Quaternion.identity);
+        }
+        else
+        {
+            Instantiate(SmokeParticles, transform.position, Quaternion.identity);
         }
     }
 

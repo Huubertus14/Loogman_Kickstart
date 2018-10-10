@@ -12,13 +12,11 @@ public class TargetBehaviour : MonoBehaviour
     public float BirdSoundCounter;
     public float BirdSoundTimer;// = Random.Range(2f, 6f);
     [Space]
-    public GameObject GarbagePrefab;
     public bool IsHit;
+    public GameObject GarbagePrefab;
     private Vector3 endPoint;
-    [Space]
 
-    public GameObject DeathParticle;
-    public GameObject SmokeParticles;
+    
 
     private void Start()
     {
@@ -47,18 +45,7 @@ public class TargetBehaviour : MonoBehaviour
 
     private void OnDestroy()
     {
-        //Check if killed or missed!
-        //Depending on type of death add effect
-        GameManager.Instance.Indicator.RemoveIndicator(transform);
-        SpawnManager.Instance.CurrentBirdCount--;
-        if (IsHit)
-        {
-            Instantiate(DeathParticle, transform.position, Quaternion.identity);
-        }
-        else
-        {
-            Instantiate(SmokeParticles, transform.position, Quaternion.identity);
-        }
+        SpawnManager.Instance.CreateParticleEffect(IsHit);
     }
     
 
