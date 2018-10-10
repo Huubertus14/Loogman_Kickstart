@@ -647,6 +647,8 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 833f0488d7b0b70478a33b29aaed7141, type: 3}
   - {fileID: 8300000, guid: af92273eb57b90a4b829bc08cdedb530, type: 3}
   - {fileID: 8300000, guid: 1197eea4cd90bba4586a9b4ded96c264, type: 3}
+  - {fileID: 8300000, guid: 8e26156e7ac0d83448b69ce04991d737, type: 3}
+  - {fileID: 8300000, guid: e78dea8f3a5fed54999307c7d482255a, type: 3}
   ShootSounds:
   - {fileID: 8300000, guid: 94dbd4febab734210a43c84263f5e116, type: 3}
   - {fileID: 8300000, guid: 3ff9fcf8763db443d8c48710cdf9ab60, type: 3}
