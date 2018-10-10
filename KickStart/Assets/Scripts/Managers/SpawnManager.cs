@@ -72,7 +72,7 @@ public class SpawnManager : MonoBehaviour {
         }
     }
 
-    public void CreateParticleEffect(bool _IsHit)
+    public void CreateParticleEffect(bool _IsHit, Vector3 _birdPosition)
     {
         //Check if killed or missed!
         //Depending on type of death add effect
@@ -82,14 +82,14 @@ public class SpawnManager : MonoBehaviour {
         {
             if (DeathParticle)
             {
-                Instantiate(DeathParticle, transform.position, Quaternion.identity);
+                Instantiate(DeathParticle, _birdPosition, Quaternion.identity);
             }
         }
         else
         {
             if (SmokeParticles)
             {
-                Instantiate(SmokeParticles, transform.position, Quaternion.identity);
+                Instantiate(SmokeParticles, _birdPosition, Quaternion.identity);
             }
         }
     }

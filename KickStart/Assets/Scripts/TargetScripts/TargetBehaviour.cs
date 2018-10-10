@@ -48,7 +48,6 @@ public class TargetBehaviour : MonoBehaviour
     {
         audioSource.Stop();
         GameManager.Instance.Indicator.RemoveIndicator(transform);
-        SpawnManager.Instance.CreateParticleEffect(IsHit);
     }
     
 
@@ -64,6 +63,7 @@ public class TargetBehaviour : MonoBehaviour
         //Id end point is reached...
         if (Vector3.Distance(transform.position, endPoint) < 1)
         {
+            SpawnManager.Instance.CreateParticleEffect(IsHit, transform.position);
             Destroy(gameObject);
         }
 
