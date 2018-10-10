@@ -81,7 +81,7 @@ public class TargetBehaviour : MonoBehaviour
         if (BirdSoundCounter > BirdSoundTimer)
         {
             BirdSoundCounter = 0;
-            AudioManager.Instance.PlayAudio(AudioSampleManager.Instance.getBirdSounds(), 1, transform.position);
+            AudioManager.Instance.PlayAudio(AudioSampleManager.Instance.getBirdSounds(), 1, gameObject);
         }
 
         BirdSoundTimer = Random.Range(3f, 6f);
