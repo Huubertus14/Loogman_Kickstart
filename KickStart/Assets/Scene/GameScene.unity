@@ -292,6 +292,18 @@ Prefab:
       propertyPath: BoundairyIndicators
       value: 
       objectReference: {fileID: 562177044}
+    - target: {fileID: 114256099600199432, guid: 20c13879b59ae4a4f85b04cacea06003,
+        type: 2}
+      propertyPath: DeathParticle
+      value: 
+      objectReference: {fileID: 1222976583829746, guid: d166581bdd55b1e43ab19118f1ce3ecf,
+        type: 2}
+    - target: {fileID: 114256099600199432, guid: 20c13879b59ae4a4f85b04cacea06003,
+        type: 2}
+      propertyPath: SmokeParticles
+      value: 
+      objectReference: {fileID: 1774362150817566, guid: ac14dba2f78a0214090c60ac3d1c45e4,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 20c13879b59ae4a4f85b04cacea06003, type: 2}
   m_IsPrefabParent: 0

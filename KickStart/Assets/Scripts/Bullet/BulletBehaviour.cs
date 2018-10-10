@@ -32,6 +32,7 @@ public class BulletBehaviour : MonoBehaviour {
             GameManager.Instance.Player.Score++;
             GameManager.Instance.SetScoreText();
             GameManager.Instance.Player.ScoreTextFlash.StartEffect();
+            SpawnManager.Instance.CreateParticleEffect(true,transform.position);
             Destroy(collision.gameObject);
         }
     }

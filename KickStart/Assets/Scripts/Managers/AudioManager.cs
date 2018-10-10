@@ -46,7 +46,10 @@ public class AudioManager : MonoBehaviour
             _source.clip = _clip;
             _source.volume = _volume;
 
-            _source.Play();
+            if (!_source.isPlaying)
+            {
+                _source.Play();
+            }
 
             return;
         }

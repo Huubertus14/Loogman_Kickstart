@@ -72,7 +72,7 @@ public class SpawnManager : MonoBehaviour {
         }
     }
 
-    public void CreateParticleEffect(bool _IsHit)
+    public void CreateParticleEffect(bool _IsHit, Vector3 _birdPosition)
     {
         //Check if killed or missed!
         //Depending on type of death add effect
@@ -80,13 +80,21 @@ public class SpawnManager : MonoBehaviour {
         CurrentBirdCount--;
         if (_IsHit)
         {
-            Instantiate(DeathParticle, transform.position, Quaternion.identity);
+            if (DeathParticle)
+            {
+                Instantiate(DeathParticle, _birdPosition, Quaternion.identity);
+            }
         }
         else
         {
-            Instantiate(SmokeParticles, transform.position, Quaternion.identity);
+            if (SmokeParticles)
+            {
+                Instantiate(SmokeParticles, _birdPosition, Quaternion.identity);
+            }
         }
     }
+
+    
 
     public GameObject GetLastBird
     {
