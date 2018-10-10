@@ -15,11 +15,12 @@ public class TargetBehaviour : MonoBehaviour
     public bool IsHit;
     public GameObject GarbagePrefab;
     private Vector3 endPoint;
-
+    private AudioSource audioSource;
     
 
     private void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         GameManager.Instance.Indicator.AddIndicator(transform, 0);
         Speed = Random.Range(0.01f, 0.015f);
         GetEndPoint();
@@ -45,6 +46,8 @@ public class TargetBehaviour : MonoBehaviour
 
     private void OnDestroy()
     {
+        audioSource.Stop();
+        GameManager.Instance.Indicator.RemoveIndicator(transform);
         SpawnManager.Instance.CreateParticleEffect(IsHit);
     }
     

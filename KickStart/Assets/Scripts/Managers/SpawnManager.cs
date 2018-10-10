@@ -80,13 +80,21 @@ public class SpawnManager : MonoBehaviour {
         CurrentBirdCount--;
         if (_IsHit)
         {
-            Instantiate(DeathParticle, transform.position, Quaternion.identity);
+            if (DeathParticle)
+            {
+                Instantiate(DeathParticle, transform.position, Quaternion.identity);
+            }
         }
         else
         {
-            Instantiate(SmokeParticles, transform.position, Quaternion.identity);
+            if (SmokeParticles)
+            {
+                Instantiate(SmokeParticles, transform.position, Quaternion.identity);
+            }
         }
     }
+
+    
 
     public GameObject GetLastBird
     {
