@@ -4,6 +4,7 @@
 using System;
 using UnityEngine;
 using EnumStates;
+using VrFox;
 
 namespace HoloToolkit.Unity.InputModule
 {
@@ -50,11 +51,11 @@ namespace HoloToolkit.Unity.InputModule
         {
             base.OnCursorStateChange(state);
 
-            Debug.Log(state);
-            
+           // Debug.Log(state);
+
             if (state != CursorStateEnum.Contextual)
             {
-                
+
                 //Set here the current cursor state
                 switch (state)
                 {
@@ -84,19 +85,34 @@ namespace HoloToolkit.Unity.InputModule
                         GameManager.Instance.SetHandState(HandStates.NotVisible);
                         break;
                 }
-                
+
                 // Hide all children first
-                for(int i = 0; i < ParentTransform.childCount; i++)
+                for (int i = 0; i < ParentTransform.childCount; i++)
                 {
                     ParentTransform.GetChild(i).gameObject.SetActive(false);
                 }
 
-                // Set active any that match the current state
-                for (int i = 0; i < CursorStateData.Length; i++)
+                //Pnly show these things when you are in instructions
+                if (GameManager.Instance.gameState == GameStates.Instructions)
                 {
-                    if (CursorStateData[i].CursorState == state)
+                    // Set active any that match the current state
+                    for (int i = 0; i < CursorStateData.Length; i++)
                     {
-                        CursorStateData[i].CursorObject.SetActive(true);
+                        if (CursorStateData[i].CursorState == state)
+                        {
+                            CursorStateData[i].CursorObject.SetActive(true);
+                        }
+                    }
+                }
+                else if (GameManager.Instance.gameState == GameStates.Playing)
+                {
+                    // Set active any that match the current state
+                    for (int i = 0; i < CursorStateData.Length; i++)
+                    {
+                        if (CursorStateData[i].CursorState == state)
+                        {
+                            CursorStateData[i].CursorObject.SetActive(true);
+                        }
                     }
                 }
             }

@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using HoloToolkit.Unity.InputModule;
 using EnumStates;
+using Greyman;
+using VrFox;
 
 namespace EnumStates
 {
@@ -23,271 +26,321 @@ namespace EnumStates
         Release
     }
 }
-public class GameManager : MonoBehaviour
+
+namespace VrFox
 {
-
-    public static GameManager Instance;
-    private void Awake()
+    public class GameManager : MonoBehaviour
     {
-        Instance = this;
 
-    }
-
-    [Header("References:s")]
-    public PlayerBehaviour Player;
-    public GameObject Cursor;
-
-    public GameObject PlayerCanvas;
-    public GestureImage TutorialThing;
-
-    [Header("UI Elements:")]
-    public Text ScoreText;
-    public Text GarbageText;
-    public Text TimeText;
-    public Text EndScoreText;
-
-    [Header("Instructions:")]
-    public GameObject SightBoxes;
-    public Text SightBoxesText;
-    public GameObject GestureImage;
-    public Text GestureImageText01;
-    public Text GestureImageText02;
-    public Image HandPlaceImage;
-
-    [HideInInspector] //Bah
-    public List<Renderer> Targets = new List<Renderer>();
-
-    [Tooltip("The Object the player is currently looking at")]
-    private GameObject hoverObject;
-
-    [Header("Values")]
-    public GameStates gameState;
-    public HandStates CurrentHandState;
-    public bool GameStarted;
-    public bool GameOver;
-    [Space]
-    public float TimePlayed;
-    public int InstrucionAmount;
-
-    [HideInInspector]
-    public float BulletForce;
-
-    [HideInInspector]
-    public bool CanContinueToNExtGame;
-
-    //Test
-    //Timer to run when the game is over and will reset
-    private float GameOverTimer;
-
-    private void Start()
-    {
-        CurrentHandState = HandStates.NotVisible;
-        BulletForce = 240;
-        ResetGame();
-    }
-
-    private void Update()
-    {
-        if (gameState == GameStates.Instructions) // do this when youare in the instructions
+        public static GameManager Instance;
+        private void Awake()
         {
-            //Wait for instructions
+            Instance = this;
+
+        }
+
+        [Header("References:s")]
+        public PlayerBehaviour Player;
+        public GameObject Cursor;
+
+        public GameObject PlayerCanvas;
+        public GestureImage TutorialThing;
+        public OffScreenIndicator Indicator;
+        
+        [Header("UI Elements:")]
+        public Text ScoreText;
+        public Text GarbageText;
+        public Text TimeText;
+        public Text EndScoreText;
+
+        [HideInInspector] //Bah
+        public List<Renderer> Targets = new List<Renderer>();
+
+        [Tooltip("The Object the player is currently looking at")]
+        private GameObject hoverObject;
+
+        [Header("Values")]
+        public GameStates gameState;
+        public HandStates CurrentHandState;
+        public bool GameStarted;
+        public bool GameOver;
+        [Space]
+        public float TimePlayed;
+        public int InstrucionAmount;
+
+        [Header("Tutorial values")]
+        public Text TutorialFeedbackText;
+        public Image HandPlaceBox;
+        public GameObject GestureAnimation;
+        public GameObject BoundairyIndicators;
+
+        private float instructionTimer;
+        private float instructionCounter;
+
+        [HideInInspector]
+        public float BulletForce;
+
+        [HideInInspector]
+        public bool CanContinueToNExtGame;
+
+        //Test
+        //Timer to run when the game is over and will reset
+        private float GameOverTimer;
+
+        private void Start()
+        {
+            instructionTimer = 5.5f;
+
+
+
+            CurrentHandState = HandStates.NotVisible;
+            BulletForce = 240*8;
+            ResetGame();
+        }
+
+        private void Update()
+        {
+            if (gameState == GameStates.Instructions) // do this when youare in the instructions
+            {
+                Instructions();
+            }
+            if (gameState == GameStates.Playing)
+            {
+                //Game is started
+                if (TimePlayed <= 0)
+                {
+                    SetGameOver();
+                }
+                else
+                {
+                    if (TimePlayed < 170)
+                    {
+                        TutorialFeedbackText.text = "";
+                    }
+                    TimePlayed -= Time.deltaTime;
+                    SetTimeText();
+                }
+            }
+            if (gameState == GameStates.Waiting)
+            {
+                //Wait for something
+            }
+            if (gameState == GameStates.GameEnd)
+            {
+                //Game has end
+                GameOverTimer += Time.deltaTime;
+                if (GameOverTimer > 2)
+                {
+                    CanContinueToNExtGame = true;
+                    TutorialThing.IsVisible = true;
+                    InstrucionAmount = 0;
+                }
+            }
+        }
+
+        private void Instructions()
+        {
+            EndScoreText.text = "";
+            if (CurrentHandState == HandStates.NotVisible)
+            {
+                TutorialFeedbackText.text = "Hold your hand in front of you";
+            }
             if (InstrucionAmount == 0)
             {
-                //SHow one thing  //The bounding Boxes
-                SightBoxes.SetActive(true);
-                SightBoxesText.gameObject.SetActive(true);
-                GestureImage.SetActive(true);
-                GestureImageText01.gameObject.SetActive(false);
-                GestureImageText02.gameObject.SetActive(false);
-                HandPlaceImage.gameObject.SetActive(false);
+                //Check if the hannd is visible
+                if (CurrentHandState == HandStates.NotVisible)
+                {
+                    TutorialFeedbackText.text = "Hold your index finger in the box";
+                    HandPlaceBox.gameObject.SetActive(true);
+                    GestureAnimation.SetActive(false);
+                    //Show visualBox
+                    BoundairyIndicators.SetActive(true);
+                }
+                else
+                {
+                    TutorialFeedbackText.text = "Try to mimic the gesture";
+                    HandPlaceBox.gameObject.SetActive(true);
+
+                    GestureAnimation.SetActive(true);
+
+                    BoundairyIndicators.SetActive(true);
+                }
+
+                return;
             }
+
             if (InstrucionAmount == 1)
             {
-                //Show gesture thing
-                SightBoxes.SetActive(false);
-                SightBoxesText.gameObject.SetActive(false);
-                GestureImage.SetActive(true);
-                GestureImageText01.gameObject.SetActive(true);
-                GestureImageText02.gameObject.SetActive(true);
-                HandPlaceImage.gameObject.SetActive(true);
-            }
-            if (InstrucionAmount == 2)
-            {
-                SightBoxes.SetActive(false);
-                SightBoxesText.gameObject.SetActive(false);
-                GestureImage.SetActive(false);
-                GestureImageText01.gameObject.SetActive(false);
-                GestureImageText02.gameObject.SetActive(false);
-                HandPlaceImage.gameObject.SetActive(false);
+                instructionCounter += Time.deltaTime;
+                //Check if the hannd is visible
+                if (CurrentHandState == HandStates.NotVisible)
+                {
+                    TutorialFeedbackText.text = "Hold your index finger in the box";
+                    HandPlaceBox.gameObject.SetActive(true);
+                    GestureAnimation.SetActive(false);
+                    InstrucionAmount = 0;
+                    instructionCounter = 0;
+                    //Show visualBox
+                    BoundairyIndicators.SetActive(false);
+                }
+                else
+                {
+                    TutorialFeedbackText.text = "Great! Try it again!";
+                    HandPlaceBox.gameObject.SetActive(true);
+                    GestureAnimation.SetActive(true);
 
-                StartGame();
+                    BoundairyIndicators.SetActive(false);
+
+                    if (instructionCounter > instructionTimer)
+                    {
+                        instructionCounter = 0;
+                        InstrucionAmount = 0;
+                        BoundairyIndicators.SetActive(true);
+                    }
+                }
+
+                return;
             }
 
             //start the game from the gesture manager
-        }
-        if (gameState == GameStates.Playing)
-        {
-            //Game is started
-            if (TimePlayed <= 0)
+            if (InstrucionAmount >= 2)
             {
-                SetGameOver();
+                TutorialFeedbackText.text = "Try to shoot as many Birds as possible!";
+                //remove boxes
+                GestureAnimation.SetActive(false);
+                HandPlaceBox.gameObject.SetActive(false);
+
+                //rempve arrows
+                BoundairyIndicators.SetActive(false);
+
+
+                StartGame();
+                return;
+            }
+        }
+
+        public void ResetGame()
+        {
+            TutorialFeedbackText.text = "";
+            EndScoreText.text = "";
+            TimeText.text = "";
+            ScoreText.text = "";
+            InstrucionAmount = 0;
+            GameStarted = false;
+            gameState = GameStates.Instructions;
+        }
+
+        /// <summary>
+        /// Call this when the player is game over
+        /// </summary>
+        public void SetGameOver()
+        {
+            GameStarted = false;
+            TimeText.text = "";
+            GameOver = true;
+            gameState = GameStates.GameEnd;
+
+            Invoke("SetGestureActive", 3f);
+            ShowEndScore();
+        }
+
+        private void SetGestureActive()
+        {
+            GestureAnimation.SetActive(true);
+        }
+
+        /// <summary>
+        /// Called when the game is about to start
+        /// </summary>
+        public void StartGame()
+        {
+            Player.ResetPlayerValues();
+            CanContinueToNExtGame = false;
+            GameOver = false;
+            EndScoreText.text = "";
+            GameStarted = true;
+            TimePlayed = 180;
+            GameOverTimer = 0;
+            SetScoreText();
+
+            //remove all instructions
+            gameState = GameStates.Playing;
+        }
+
+        /// <summary>
+        /// Set the score text of the player
+        /// </summary>
+        public void SetScoreText()
+        {
+            ScoreText.text = "Score: " + Player.Score.ToString();
+        }
+
+        /// <summary>
+        /// Set garbage text, Might be obsolete
+        /// </summary>
+        public void SetGarbageText()
+        {
+            GarbageText.text = "You've been hit by " + Player.HitByGarbage.ToString() + " Pieces of Garbage!";
+        }
+
+        /// <summary>
+        /// Set the time text of the player
+        /// </summary>
+        public void SetTimeText()
+        {
+            int _min = (int)TimePlayed / 60;
+            int _sec = (int)TimePlayed % 60;
+
+            if (_sec < 10)
+            {
+                TimeText.text = _min + ":0" + _sec;
             }
             else
             {
-                TimePlayed -= Time.deltaTime;
-                SetTimeText();
+                TimeText.text = _min + ":" + _sec;
             }
         }
-        if (gameState == GameStates.Waiting)
+
+        /// <summary>
+        /// Show the total end score
+        /// </summary>
+        public void ShowEndScore()
         {
-            //Wait for something
+            EndScoreText.text = "You Got " + Player.Score.ToString() + " Points!";
         }
-        if (gameState == GameStates.GameEnd)
+
+        #region Property's
+
+        public GameObject CurrentPlayer
         {
-            //Game has end
-            GameOverTimer += Time.deltaTime;
-            if (GameOverTimer > 2)
+            get { return Player.gameObject; }
+        }
+
+        public GameObject GetHoverObject
+        {
+            get
             {
-                CanContinueToNExtGame = true;
-                TutorialThing.IsVisible = true;
-                InstrucionAmount = 0;
-            }
-        }
-    }
-
-    public void ResetGame()
-    {
-        InstrucionAmount = 0;
-        GameStarted = false;
-        gameState = GameStates.Instructions;
-    }
-
-    /// <summary>
-    /// Call this when the player is game over
-    /// </summary>
-    public void SetGameOver()
-    {
-        GameStarted = false;
-        TimeText.text = "";
-        GameOver = true;
-        gameState = GameStates.GameEnd;
-        ShowEndScore();
-    }
-
-    /// <summary>
-    /// Called when the game is about to start
-    /// </summary>
-    public void StartGame()
-    {
-        Player.ResetPlayerValues();
-        CanContinueToNExtGame = false;
-        GameOver = false;
-        EndScoreText.text = "";
-        GameStarted = true;
-        TimePlayed = 180;
-        GameOverTimer = 0;
-        SetScoreText();
-
-        //remove all instructions
-        gameState = GameStates.Playing;
-    }
-    
-
-    //Does not work right now
-    public bool IsSeeingAnEnemy()
-    {
-        if (Targets.Count < 1)
-        {
-            return false;
-        }
-        for (int i = 0; i < Targets.Count; i++)
-        {
-            if (!Targets[i])
-            {
-                Targets.RemoveAt(i);
-            }
-            if (Targets[i].isVisible)
-            {
-                return true;
+                if (hoverObject)
+                {
+                    return hoverObject;
+                }
+                else
+                {
+                    Debug.LogError("No Current Hovering Object!");
+                    return null;
+                }
             }
         }
 
-        return false;
-    }
-
-    /// <summary>
-    /// Set the score text of the player
-    /// </summary>
-    public void SetScoreText()
-    {
-        ScoreText.text = "Score: " + Player.Score.ToString();
-    }
-
-    /// <summary>
-    /// Set garbage text, Might be obsolete
-    /// </summary>
-    public void SetGarbageText()
-    {
-        GarbageText.text = "You've been hit by " + Player.HitByGarbage.ToString() + " Pieces of Garbage!";
-    }
-
-    /// <summary>
-    /// Set the time text of the player
-    /// </summary>
-    public void SetTimeText()
-    {
-        int _min = (int)TimePlayed / 60;
-        int _sec = (int)TimePlayed % 60;
-
-        if (_sec < 10)
+        public void SetHoverObject(GameObject _hoverObject)
         {
-            TimeText.text = _min + ":0" + _sec;
+            hoverObject = _hoverObject;
         }
-        else
+
+        public void SetHandState(HandStates _state)
         {
-            TimeText.text = _min + ":" + _sec;
+            CurrentHandState = _state;
         }
+        #endregion
     }
-
-    /// <summary>
-    /// Show the total end score
-    /// </summary>
-    public void ShowEndScore()
-    {
-        EndScoreText.text = "You Got " + Player.Score.ToString() + " Points!";
-    }
-
-    #region Property's
-
-    public GameObject CurrentPlayer
-    {
-        get { return Player.gameObject; }
-    }
-
-    public GameObject GetHoverObject
-    {
-        get
-        {
-            if (hoverObject)
-            {
-                return hoverObject;
-            }
-            else
-            {
-                Debug.LogError("No Current Hovering Object!");
-                return null;
-            }
-        }
-    }
-
-    public void SetHoverObject(GameObject _hoverObject)
-    {
-        hoverObject = _hoverObject;
-    }
-
-    public void SetHandState(HandStates _state)
-    {
-        CurrentHandState = _state;
-    }
-    #endregion
 }

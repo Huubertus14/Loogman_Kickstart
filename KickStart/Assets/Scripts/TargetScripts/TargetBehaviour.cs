@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using VrFox;
 
 public class TargetBehaviour : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class TargetBehaviour : MonoBehaviour
 
     private void Start()
     {
+        GameManager.Instance.Indicator.AddIndicator(transform, 0);
         Speed = Random.Range(0.01f, 0.015f);
         GetEndPoint();
     }
@@ -48,6 +50,7 @@ public class TargetBehaviour : MonoBehaviour
         //Check if killed or missed!
         //Depending on type of death add effect
 
+        GameManager.Instance.Indicator.RemoveIndicator(transform);
         SpawnManager.Instance.CurrentBirdCount--;
         if (IsHit)
         {
@@ -87,7 +90,7 @@ public class TargetBehaviour : MonoBehaviour
 
     public void ThrowGarbage()
     {
-        Instantiate(GarbagePrefab,transform.position, Quaternion.identity);
+       // Instantiate(GarbagePrefab,transform.position, Quaternion.identity);
        // Debug.Log("Trow Garbage");
         
     }

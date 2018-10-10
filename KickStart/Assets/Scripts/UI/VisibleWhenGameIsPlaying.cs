@@ -1,33 +1,37 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using VrFox;
 
-public class VisibleWhenGameIsPlaying : MonoBehaviour {
-
-    RectTransform rect;
-    Vector3 orginScale;
-    UIWiggle wig;
-
-    private void Start()
+namespace VrFox
+{
+    public class VisibleWhenGameIsPlaying : MonoBehaviour
     {
-        wig = GetComponent<UIWiggle>();
-        rect = GetComponent<RectTransform>();
-        orginScale = rect.localScale;
+    
+        RectTransform rect;
+        Vector3 orginScale;
+        UIWiggle wig;
 
-    }
-
-    private void Update()
-    {
-        if (GameManager.Instance.GameStarted)
+        private void Start()
         {
-            rect.localScale = orginScale;
-            wig.enabled = true;
+            wig = GetComponent<UIWiggle>();
+            rect = GetComponent<RectTransform>();
+            orginScale = rect.localScale;
+
         }
-        else
+
+        private void Update()
         {
-            rect.localScale = Vector3.zero;
-            wig.enabled = false;
+            if (GameManager.Instance.GameStarted)
+            {
+                rect.localScale = orginScale;
+                wig.enabled = true;
+            }
+            else
+            {
+                rect.localScale = Vector3.zero;
+                wig.enabled = false;
+            }
         }
     }
-
 }

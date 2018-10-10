@@ -172,6 +172,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1644284130004964
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4241661355379730}
+  - component: {fileID: 114722359190857508}
+  m_Layer: 0
+  m_Name: OffScreenIndicatorLogic
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1833247584714216
 GameObject:
   m_ObjectHideFlags: 0
@@ -294,6 +310,19 @@ Transform:
   m_Father: {fileID: 4431195185167114}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4241661355379730
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1644284130004964}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4431195185167114}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4319076525994526
 Transform:
   m_ObjectHideFlags: 1
@@ -368,6 +397,7 @@ Transform:
   - {fileID: 4491561298047702}
   - {fileID: 4240907626247346}
   - {fileID: 4344326096096244}
+  - {fileID: 4241661355379730}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -560,7 +590,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BirdPrefab: {fileID: 100000, guid: d418c88afd808cf448602106c7ead664, type: 2}
   SpawnInterval: 3
-  MaxBirdCount: 8
+  MaxBirdCount: 3
   CurrentBirdCount: 0
 --- !u!114 &114264856961313424
 MonoBehaviour:
@@ -707,6 +737,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AudioPrefab: {fileID: 1184130074908478, guid: 2b1c5efa85b0a3e40bf027d8c4ea818a,
     type: 2}
+--- !u!114 &114722359190857508
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1644284130004964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d40e1f01a734cf74da01af624c2fb725, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enableDebug: 1
+  VirtualRealitySupported: 0
+  VR_cameraDistance: 5
+  VR_radius: 1.8
+  VR_indicatorScale: 0.01
+  canvas: {fileID: 0}
+  Canvas_circleRadius: 5
+  Canvas_border: 10
+  Canvas_indicatorSize: 40
+  indicators:
+  - onScreenSprite: {fileID: 0}
+    onScreenColor: {r: 0.3241377, g: 0, b: 1, a: 1}
+    onScreenRotates: 0
+    offScreenSprite: {fileID: 21300000, guid: c94b23e59bd617e43ae03cc154ec0cb0, type: 3}
+    offScreenColor: {r: 1, g: 0, b: 0, a: 1}
+    offScreenRotates: 1
+    targetOffset: {x: 0, y: 0, z: 0}
+    transition: 2
+    transitionDuration: 0.1
+  targets: []
 --- !u!114 &114755208706617680
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -722,22 +783,22 @@ MonoBehaviour:
   Cursor: {fileID: 0}
   PlayerCanvas: {fileID: 0}
   TutorialThing: {fileID: 0}
+  Indicator: {fileID: 114722359190857508}
   ScoreText: {fileID: 0}
   GarbageText: {fileID: 0}
   TimeText: {fileID: 0}
   EndScoreText: {fileID: 0}
-  SightBoxes: {fileID: 0}
-  SightBoxesText: {fileID: 0}
-  GestureImage: {fileID: 0}
-  GestureImageText01: {fileID: 0}
-  GestureImageText02: {fileID: 0}
-  HandPlaceImage: {fileID: 0}
   Targets: []
   gameState: 0
+  CurrentHandState: 0
   GameStarted: 0
   GameOver: 0
   TimePlayed: 0
   InstrucionAmount: 0
+  TutorialFeedbackText: {fileID: 0}
+  HandPlaceBox: {fileID: 0}
+  GestureAnimation: {fileID: 0}
+  BoundairyIndicators: {fileID: 0}
   BulletForce: 240
   CanContinueToNExtGame: 0
 --- !u!114 &114771691676672076
