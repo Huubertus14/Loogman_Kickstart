@@ -589,9 +589,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BirdPrefab: {fileID: 100000, guid: d418c88afd808cf448602106c7ead664, type: 2}
+  StaticBirdPrefab: {fileID: 100000, guid: 7816352bcfafc054f80acbd80b76718e, type: 2}
   SpawnInterval: 3
   MaxBirdCount: 3
   CurrentBirdCount: 0
+  DeathParticle: {fileID: 1222976583829746, guid: d166581bdd55b1e43ab19118f1ce3ecf,
+    type: 2}
+  SmokeParticles: {fileID: 1774362150817566, guid: ac14dba2f78a0214090c60ac3d1c45e4,
+    type: 2}
 --- !u!114 &114264856961313424
 MonoBehaviour:
   m_ObjectHideFlags: 1

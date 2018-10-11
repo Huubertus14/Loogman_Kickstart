@@ -115,8 +115,11 @@ namespace VrFox
                     {
                         TutorialFeedbackText.text = "";
                     }
-                    TimePlayed -= Time.deltaTime;
-                    SetTimeText();
+                    if (Player.Score > 3)
+                    {
+                        TimePlayed -= Time.deltaTime;
+                        SetTimeText();
+                    }
                 }
             }
             if (gameState == GameStates.Waiting)

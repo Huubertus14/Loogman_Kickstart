@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 54786150995786564}
   - component: {fileID: 82521578632056178}
   m_Layer: 0
-  m_Name: Seagull
+  m_Name: StaticSeagull
   m_TagString: Target
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -546,7 +546,7 @@ MonoBehaviour:
   Speed: 1.72
   BirdSoundCounter: 0
   BirdSoundTimer: 0
-  MovingBird: 1
+  MovingBird: 0
   IsHit: 0
   GarbagePrefab: {fileID: 1707182630852220, guid: 1e46d6e988cfbda4a9207b7a1512db44,
     type: 2}
