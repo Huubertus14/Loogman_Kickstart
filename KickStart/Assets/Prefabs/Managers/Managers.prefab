@@ -791,6 +791,7 @@ MonoBehaviour:
   PlayerCanvas: {fileID: 0}
   TutorialThing: {fileID: 0}
   Indicator: {fileID: 114722359190857508}
+  messageText: {fileID: 0}
   ScoreText: {fileID: 0}
   GarbageText: {fileID: 0}
   TimeText: {fileID: 0}

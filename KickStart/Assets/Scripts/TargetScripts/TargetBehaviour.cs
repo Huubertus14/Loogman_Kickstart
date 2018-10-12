@@ -13,11 +13,14 @@ public class TargetBehaviour : MonoBehaviour
     public float BirdSoundTimer;// = Random.Range(2f, 6f);
     public bool MovingBird;
     [Space]
+    [HideInInspector]
     public bool IsHit;
     public GameObject GarbagePrefab;
     private Vector3 endPoint;
     private AudioSource audioSource;
-    
+
+    [Header("Refs:")]
+    public GameObject Diaper;
 
     private void Start()
     {

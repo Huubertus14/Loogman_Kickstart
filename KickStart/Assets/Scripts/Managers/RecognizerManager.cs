@@ -1,7 +1,4 @@
 ﻿using UnityEngine;
-using System;
-using System.IO;
-using System.Linq;
 using UnityEngine.XR.WSA.Input;
 using EnumStates;
 using VrFox;
@@ -35,7 +32,16 @@ public class RecognizerManager : MonoBehaviour {
 
         if (GameManager.Instance.gameState == GameStates.Instructions)
         {
-            GameManager.Instance.InstrucionAmount++;
+            if (GameManager.Instance.CurrentHandState == HandStates.NotVisible)
+            {
+                GameManager.Instance.InstrucionAmount += 3;
+                Debug.Log("Clicker is used");
+            }
+            else
+            {
+                GameManager.Instance.InstrucionAmount++;
+                Debug.Log("Gesture is used");
+            }
             return;
         }
 
@@ -56,6 +62,7 @@ public class RecognizerManager : MonoBehaviour {
         }
     }
 
+    
 
     private void Update()
     {
