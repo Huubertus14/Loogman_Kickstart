@@ -11,12 +11,16 @@ public class TargetBehaviour : MonoBehaviour
     public float Speed = 1;
     public float BirdSoundCounter;
     public float BirdSoundTimer;// = Random.Range(2f, 6f);
+    public bool MovingBird;
     [Space]
+    [HideInInspector]
     public bool IsHit;
     public GameObject GarbagePrefab;
     private Vector3 endPoint;
     private AudioSource audioSource;
-    
+
+    [Header("Refs:")]
+    public GameObject Diaper;
 
     private void Start()
     {
@@ -58,15 +62,17 @@ public class TargetBehaviour : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        transform.position = Vector3.MoveTowards(transform.position, endPoint, Speed);
-
-        //Id end point is reached...
-        if (Vector3.Distance(transform.position, endPoint) < 1)
+        if (MovingBird)
         {
-            SpawnManager.Instance.CreateParticleEffect(IsHit, transform.position);
-            Destroy(gameObject);
-        }
+            transform.position = Vector3.MoveTowards(transform.position, endPoint, Speed);
 
+            //Id end point is reached...
+            if (Vector3.Distance(transform.position, endPoint) < 1)
+            {
+                SpawnManager.Instance.CreateParticleEffect(IsHit, transform.position);
+                Destroy(gameObject);
+            }
+        }
         BirdSoundCounter += Time.deltaTime;
         if (BirdSoundCounter > BirdSoundTimer)
         {

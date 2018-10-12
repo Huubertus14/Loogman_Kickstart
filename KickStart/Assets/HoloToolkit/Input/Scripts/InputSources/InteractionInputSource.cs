@@ -465,7 +465,7 @@ namespace HoloToolkit.Unity.InputModule
             handedness = default(Handedness);
             return false;
         }
-
+        
         #region BaseInputSource implementations
 
         public override SupportedInputInfo GetSupportedInputInfo(uint sourceId)
@@ -1170,6 +1170,8 @@ namespace HoloToolkit.Unity.InputModule
         #endregion //Raise GestureRecognizer Events
 #endif
 #endif
+
+
 
     }
 }

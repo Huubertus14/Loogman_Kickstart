@@ -62,12 +62,6 @@ public class TextFlashing : MonoBehaviour {
             TextAlpha = 0;
         }
         
-
-        //Test tool for effect
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            StartEffect();
-        }
 	}
 
 

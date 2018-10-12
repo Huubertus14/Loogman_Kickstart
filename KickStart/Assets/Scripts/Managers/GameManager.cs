@@ -46,6 +46,7 @@ namespace VrFox
         public GameObject PlayerCanvas;
         public GestureImage TutorialThing;
         public OffScreenIndicator Indicator;
+        public MessageTextBehaviour messageText;
         
         [Header("UI Elements:")]
         public Text ScoreText;
@@ -115,8 +116,11 @@ namespace VrFox
                     {
                         TutorialFeedbackText.text = "";
                     }
-                    TimePlayed -= Time.deltaTime;
-                    SetTimeText();
+                    if (Player.Score > 3)
+                    {
+                        TimePlayed -= Time.deltaTime;
+                        SetTimeText();
+                    }
                 }
             }
             if (gameState == GameStates.Waiting)
@@ -305,6 +309,11 @@ namespace VrFox
         public void ShowEndScore()
         {
             EndScoreText.text = "You Got " + Player.Score.ToString() + " Points!";
+        }
+
+        public void SendTextMessage(string _mes,float _dur, Vector2 _offset)
+        {
+            messageText.Message(_mes,_dur, _offset);
         }
 
         #region Property's

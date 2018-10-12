@@ -13,6 +13,7 @@ public class SpawnManager : MonoBehaviour {
 
     [Header("Prefabs")]
     public GameObject BirdPrefab;
+    public GameObject StaticBirdPrefab;
     
     [Header("Values")]
     public float SpawnInterval;
@@ -35,7 +36,16 @@ public class SpawnManager : MonoBehaviour {
         if (spawnTimer > SpawnInterval)
         {
             spawnTimer = 0;
-            SpawnBird();
+            if (GameManager.Instance.Player.Score > 3)
+            {
+                //spawn normal bird
+                SpawnBird();
+            }
+            else
+            {
+                //spawn Static bird
+                SpawnBirdInFrontOfPlayer();
+            }
         }
     }
 
@@ -70,6 +80,28 @@ public class SpawnManager : MonoBehaviour {
             lastBird = _bird;
             
         }
+    }
+
+    public void SpawnBirdInFrontOfPlayer()
+    {
+        if (CurrentBirdCount > 0)
+        {
+            return;
+        }
+        CurrentBirdCount++;
+
+        //Spawn bird
+        GameObject _bird = Instantiate(StaticBirdPrefab, transform.position, Quaternion.identity);
+        GameManager.Instance.Targets.Add(_bird.GetComponentInChildren<Renderer>());
+
+        //Set right spawn point 
+        Vector3 _direction = Camera.main.transform.forward;
+        float _distance = Random.Range(2, 5);
+        
+        _bird.transform.position = _direction * _distance;
+        _bird.transform.position = new Vector3(_bird.transform.position.x, Random.Range(-0.5f, 1.2f), _bird.transform.position.z);
+
+        lastBird = _bird;
     }
 
     public void CreateParticleEffect(bool _IsHit, Vector3 _birdPosition)
