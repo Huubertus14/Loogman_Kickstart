@@ -14,7 +14,7 @@ public class TargetBehaviour : MonoBehaviour
     public bool MovingBird;
     [Space]
     [HideInInspector]
-    public bool IsHit;
+    private bool IsHit;
     public GameObject GarbagePrefab;
     private Vector3 endPoint;
     private AudioSource audioSource;
@@ -27,6 +27,9 @@ public class TargetBehaviour : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         GameManager.Instance.Indicator.AddIndicator(transform, 0);
         Speed = Random.Range(0.01f, 0.015f);
+
+        Diaper.SetActive(false);
+
         GetEndPoint();
     }
 
@@ -53,7 +56,22 @@ public class TargetBehaviour : MonoBehaviour
         audioSource.Stop();
         GameManager.Instance.Indicator.RemoveIndicator(transform);
     }
-    
+
+    public void Hit()
+    {
+        IsHit = !IsHit;
+
+        if (IsHit)
+        {
+            Diaper.SetActive(true);
+            GameManager.Instance.Player.Score++;
+        }
+        else
+        {
+            Diaper.SetActive(false);
+            GameManager.Instance.Player.Score -= 2;
+        }
+    }
 
     private void Update()
     {
@@ -85,8 +103,8 @@ public class TargetBehaviour : MonoBehaviour
 
     public void ThrowGarbage()
     {
-       // Instantiate(GarbagePrefab,transform.position, Quaternion.identity);
-       // Debug.Log("Trow Garbage");
-        
+        // Instantiate(GarbagePrefab,transform.position, Quaternion.identity);
+        // Debug.Log("Trow Garbage");
+
     }
 }

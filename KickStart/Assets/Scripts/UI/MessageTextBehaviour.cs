@@ -28,11 +28,6 @@ public class MessageTextBehaviour : MonoBehaviour {
             tweenValue = ScaleCurve.Evaluate(timeTweenKey);
             rect.localScale = new Vector3(tweenValue,tweenValue,tweenValue);
         }
-
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            Message("YEET", 5, new Vector2(100,3));
-        }
 	}
 
 
