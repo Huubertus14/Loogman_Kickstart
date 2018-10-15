@@ -73,7 +73,7 @@ namespace VrFox
         public Text TutorialFeedbackText;
         public Image HandPlaceBox;
         public GameObject GestureAnimation;
-        public GameObject BoundairyIndicators;
+        public GameObject BoundaryIndicators;
 
         private float instructionTimer;
         private float instructionCounter;
@@ -156,7 +156,7 @@ namespace VrFox
                     HandPlaceBox.gameObject.SetActive(true);
                     GestureAnimation.SetActive(false);
                     //Show visualBox
-                    BoundairyIndicators.SetActive(true);
+                    BoundaryIndicators.SetActive(true);
                 }
                 else
                 {
@@ -165,7 +165,7 @@ namespace VrFox
 
                     GestureAnimation.SetActive(true);
 
-                    BoundairyIndicators.SetActive(true);
+                    BoundaryIndicators.SetActive(true);
                 }
 
                 return;
@@ -183,7 +183,7 @@ namespace VrFox
                     InstrucionAmount = 0;
                     instructionCounter = 0;
                     //Show visualBox
-                    BoundairyIndicators.SetActive(false);
+                    BoundaryIndicators.SetActive(false);
                 }
                 else
                 {
@@ -191,13 +191,13 @@ namespace VrFox
                     HandPlaceBox.gameObject.SetActive(true);
                     GestureAnimation.SetActive(true);
 
-                    BoundairyIndicators.SetActive(false);
+                    BoundaryIndicators.SetActive(false);
 
                     if (instructionCounter > instructionTimer)
                     {
                         instructionCounter = 0;
                         InstrucionAmount = 0;
-                        BoundairyIndicators.SetActive(true);
+                        BoundaryIndicators.SetActive(true);
                     }
                 }
 
@@ -213,7 +213,7 @@ namespace VrFox
                 HandPlaceBox.gameObject.SetActive(false);
 
                 //rempve arrows
-                BoundairyIndicators.SetActive(false);
+                BoundaryIndicators.SetActive(false);
 
 
                 StartGame();
