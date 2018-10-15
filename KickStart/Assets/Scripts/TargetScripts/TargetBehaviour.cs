@@ -14,26 +14,37 @@ public class TargetBehaviour : MonoBehaviour
     public bool MovingBird;
     [Space]
     [HideInInspector]
-    public bool IsHit;
+    private bool IsHit;
     public GameObject GarbagePrefab;
     private Vector3 endPoint;
     private AudioSource audioSource;
 
-    [Header("Refs:")]
-    public GameObject Diaper;
+    //[Header("Refs:")]
+    private GameObject Diaper;
 
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
         GameManager.Instance.Indicator.AddIndicator(transform, 0);
         Speed = Random.Range(0.01f, 0.015f);
+        if (!Diaper)
+        {
+            Diaper = GetComponentInChildren<DiaperBehaviour>().gameObject;
+        }
+        if (GameManager.Instance.Player.Score > 9)
+        {
+            IsHit = (Random.Range(1, 10) % 2 == 0);
+        }
+        else
+        {
+            IsHit = false;
+        }
+        Diaper.SetActive(IsHit);
         GetEndPoint();
     }
 
     private void GetEndPoint()
     {
-        //get end point
-
         //Get direction to player
         Vector3 _dirToPlayer = GameManager.Instance.CurrentPlayer.transform.position - transform.position;
         _dirToPlayer.Normalize();
@@ -43,7 +54,7 @@ public class TargetBehaviour : MonoBehaviour
 
         //get opposite position of player
         endPoint = transform.position + (_dirToPlayer * _disToPlayer);
-        endPoint.y = Random.Range(0.1f, 1.8f);
+        endPoint.y = Camera.main.transform.position.y + Random.Range(-0.2f, 0.2f);
 
         transform.LookAt(endPoint);
     }
@@ -51,9 +62,40 @@ public class TargetBehaviour : MonoBehaviour
     private void OnDestroy()
     {
         audioSource.Stop();
+        SpawnManager.Instance.CurrentBirdCount--;
         GameManager.Instance.Indicator.RemoveIndicator(transform);
     }
-    
+
+    public void Hit()
+    {
+        if (!Diaper)
+        {
+            Diaper = GetComponentInChildren<DiaperBehaviour>().gameObject;
+        }
+
+        SpawnManager.Instance.BirdHit(transform.position);
+
+        IsHit = !IsHit;
+
+        if (IsHit)
+        {
+            Diaper.SetActive(true);
+            GameManager.Instance.Player.Score++;
+        }
+        else
+        {
+            Diaper.SetActive(false);
+            GameManager.Instance.Player.Score -= 2;
+            GameManager.Instance.SendTextMessage("Don't Shoot those whom already have a diaper on!", 2.5f, Vector2.zero);
+        }
+
+        if (GameManager.Instance.Player.Score < 5)
+        {
+            //Check if first thing
+            gameObject.AddComponent<CleanUp>();
+            GetComponent<CleanUp>().LifeTime = 3;
+        }
+    }
 
     private void Update()
     {
@@ -85,8 +127,8 @@ public class TargetBehaviour : MonoBehaviour
 
     public void ThrowGarbage()
     {
-       // Instantiate(GarbagePrefab,transform.position, Quaternion.identity);
-       // Debug.Log("Trow Garbage");
-        
+        // Instantiate(GarbagePrefab,transform.position, Quaternion.identity);
+        // Debug.Log("Trow Garbage");
+
     }
 }
