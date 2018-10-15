@@ -54,7 +54,7 @@ public class TargetBehaviour : MonoBehaviour
 
         //get opposite position of player
         endPoint = transform.position + (_dirToPlayer * _disToPlayer);
-        endPoint.y = Random.Range(0.1f, 1.8f);
+        endPoint.y = Camera.main.transform.position.y + Random.Range(-0.2f, 0.2f);
 
         transform.LookAt(endPoint);
     }

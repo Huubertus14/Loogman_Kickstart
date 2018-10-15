@@ -60,7 +60,9 @@ public class SpawnManager : MonoBehaviour {
             //Spawn bird
             GameObject _bird = Instantiate(BirdPrefab, transform.position, Quaternion.identity);
             GameManager.Instance.Targets.Add(_bird.GetComponentInChildren<Renderer>());
-            
+
+            float _spawnY = Camera.main.transform.position.y + Random.Range(-0.2f,0.2f);
+
             //Set right spawn point 
             Vector3 _direction =  new Vector3(Random.Range(-1,1), Random.Range(-1, 1), Random.Range(-1, 1));
             float _distance = Random.Range(-22, 22);
@@ -76,7 +78,7 @@ public class SpawnManager : MonoBehaviour {
             }
 
             _bird.transform.position = _direction * _distance;
-            _bird.transform.position = new Vector3(_bird.transform.position.x, Random.Range(-0.5f, 1.2f), _bird.transform.position.z);
+            _bird.transform.position = new Vector3(_bird.transform.position.x, _spawnY, _bird.transform.position.z);
 
             lastBird = _bird;
             
