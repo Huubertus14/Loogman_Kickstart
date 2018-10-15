@@ -23,6 +23,7 @@ public class SpawnManager : MonoBehaviour {
     [Space]
     public GameObject DeathParticle;
     public GameObject SmokeParticles;
+    public GameObject BirdHitEffect;
 
     private GameObject lastBird;
 
@@ -126,7 +127,10 @@ public class SpawnManager : MonoBehaviour {
         }
     }
 
-    
+    public void BirdHit(Vector3 _position)
+    {
+        Instantiate(BirdHitEffect, _position, Quaternion.identity);
+    }
 
     public GameObject GetLastBird
     {

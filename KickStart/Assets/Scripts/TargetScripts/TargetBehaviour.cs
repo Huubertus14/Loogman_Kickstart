@@ -19,24 +19,32 @@ public class TargetBehaviour : MonoBehaviour
     private Vector3 endPoint;
     private AudioSource audioSource;
 
-    [Header("Refs:")]
-    public GameObject Diaper;
+    //[Header("Refs:")]
+    private GameObject Diaper;
 
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
         GameManager.Instance.Indicator.AddIndicator(transform, 0);
         Speed = Random.Range(0.01f, 0.015f);
-
-        Diaper.SetActive(false);
-
+        if (!Diaper)
+        {
+            Diaper = GetComponentInChildren<DiaperBehaviour>().gameObject;
+        }
+        if (GameManager.Instance.Player.Score > 9)
+        {
+            IsHit = (Random.Range(1, 10) % 2 == 0);
+        }
+        else
+        {
+            IsHit = false;
+        }
+        Diaper.SetActive(IsHit);
         GetEndPoint();
     }
 
     private void GetEndPoint()
     {
-        //get end point
-
         //Get direction to player
         Vector3 _dirToPlayer = GameManager.Instance.CurrentPlayer.transform.position - transform.position;
         _dirToPlayer.Normalize();
@@ -54,11 +62,19 @@ public class TargetBehaviour : MonoBehaviour
     private void OnDestroy()
     {
         audioSource.Stop();
+        SpawnManager.Instance.CurrentBirdCount--;
         GameManager.Instance.Indicator.RemoveIndicator(transform);
     }
 
     public void Hit()
     {
+        if (!Diaper)
+        {
+            Diaper = GetComponentInChildren<DiaperBehaviour>().gameObject;
+        }
+
+        SpawnManager.Instance.BirdHit(transform.position);
+
         IsHit = !IsHit;
 
         if (IsHit)
@@ -70,6 +86,14 @@ public class TargetBehaviour : MonoBehaviour
         {
             Diaper.SetActive(false);
             GameManager.Instance.Player.Score -= 2;
+            GameManager.Instance.SendTextMessage("Don't Shoot those whom already have a diaper on!", 2.5f, Vector2.zero);
+        }
+
+        if (GameManager.Instance.Player.Score < 5)
+        {
+            //Check if first thing
+            gameObject.AddComponent<CleanUp>();
+            GetComponent<CleanUp>().LifeTime = 3;
         }
     }
 
