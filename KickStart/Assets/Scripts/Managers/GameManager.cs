@@ -84,6 +84,8 @@ namespace VrFox
         [HideInInspector]
         public bool CanContinueToNExtGame;
 
+        private float marianneTimer;
+
         //Test
         //Timer to run when the game is over and will reset
         private float GameOverTimer;
@@ -99,6 +101,13 @@ namespace VrFox
 
         private void Update()
         {
+            marianneTimer += Time.deltaTime;
+            if (marianneTimer > 70)
+            {
+                marianneTimer = 0;
+                AudioManager.Instance.PlayAudio(AudioSampleManager.Instance.TestVoice, 1);
+            }
+
             if (gameState == GameStates.Instructions) // do this when youare in the instructions
             {
                 Instructions();
