@@ -14,7 +14,6 @@ public class MessageTextBehaviour : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         timeTweenKey = 2;
-
         messageText = GetComponent<Text>();
         rect = GetComponent<RectTransform>();
         rect.localScale = Vector3.zero;

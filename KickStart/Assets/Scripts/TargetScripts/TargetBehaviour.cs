@@ -117,7 +117,15 @@ public class TargetBehaviour : MonoBehaviour
                 SpawnManager.Instance.CreateParticleEffect(IsHit, transform.position);
                 Destroy(gameObject);
             }
-        } // plays flying/flapping sound of bird
+        }
+
+        // plays flying/flapping sound of bird
+        BirdFlapSound();
+       
+    }
+
+    private void BirdFlapSound()
+    {
         BirdSoundCounter += Time.deltaTime;
         if (BirdSoundCounter > BirdSoundTimer)
         {

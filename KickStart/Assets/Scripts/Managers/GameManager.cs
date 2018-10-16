@@ -252,6 +252,9 @@ namespace VrFox
             gameState = GameStates.GameEnd;
 
             Invoke("SetGestureActive", 3f);
+
+            //Destroy all birds
+
             ShowEndScore();
         }
 

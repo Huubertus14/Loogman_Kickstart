@@ -11,8 +11,7 @@ public class BulletBehaviour : MonoBehaviour {
     void Start () {
         rb = GetComponent<Rigidbody>();
 	}
-
-
+    
     public void ShootBullet()
     {
         if (!rb)
