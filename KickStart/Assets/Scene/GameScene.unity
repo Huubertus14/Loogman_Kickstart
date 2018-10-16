@@ -378,11 +378,6 @@ Prefab:
       propertyPath: Cursor
       value: 
       objectReference: {fileID: 1998867488}
-    - target: {fileID: 114322428844149892, guid: 20c13879b59ae4a4f85b04cacea06003,
-        type: 2}
-      propertyPath: TestVoice
-      value: 
-      objectReference: {fileID: 8300000, guid: df43d4e33c6963a4f87b3330b4134fb5, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 20c13879b59ae4a4f85b04cacea06003, type: 2}
   m_IsPrefabParent: 0

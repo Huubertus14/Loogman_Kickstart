@@ -40,7 +40,7 @@ public class BulletBehaviour : MonoBehaviour {
 
             //SpawnManager.Instance.CreateParticleEffect(true,transform.position);
 
-            Debug.Log("Create Smoke effect");
+            //Debug.Log("Create Smoke effect");
 
             Destroy(gameObject);
         }
