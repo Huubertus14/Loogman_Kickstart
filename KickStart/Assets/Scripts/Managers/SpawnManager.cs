@@ -129,10 +129,6 @@ public class SpawnManager : MonoBehaviour {
         }
     }
 
-    public void BirdHit(Vector3 _position)
-    {
-        Instantiate(BirdHitEffect, _position, Quaternion.identity);
-    }
 
     public GameObject GetLastBird
     {

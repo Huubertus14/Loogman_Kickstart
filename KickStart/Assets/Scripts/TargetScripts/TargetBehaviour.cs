@@ -39,6 +39,7 @@ public class TargetBehaviour : MonoBehaviour
         {
             IsHit = false;
         }
+
         Diaper.SetActive(IsHit);
         GetEndPoint();
     }
@@ -72,8 +73,6 @@ public class TargetBehaviour : MonoBehaviour
         {
             Diaper = GetComponentInChildren<DiaperBehaviour>().gameObject;
         }
-
-        SpawnManager.Instance.BirdHit(transform.position);
 
         IsHit = !IsHit;
 
