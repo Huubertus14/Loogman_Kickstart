@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using VrFox;
 
 public class TargetBehaviour : MonoBehaviour
@@ -25,6 +23,12 @@ public class TargetBehaviour : MonoBehaviour
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        
+        //plays spawn sound of bird
+        BirdSoundTimer = Random.Range(3f, 6f);
+        BirdSoundCounter = 0;
+        AudioManager.Instance.PlayAudio(AudioSampleManager.Instance.getBirdSpawnSounds(), 1, gameObject);
+
         GameManager.Instance.Indicator.AddIndicator(transform, 0);
         Speed = Random.Range(0.01f, 0.015f);
         GetEndPoint();
@@ -53,7 +57,7 @@ public class TargetBehaviour : MonoBehaviour
         audioSource.Stop();
         GameManager.Instance.Indicator.RemoveIndicator(transform);
     }
-    
+
 
     private void Update()
     {
@@ -72,12 +76,12 @@ public class TargetBehaviour : MonoBehaviour
                 SpawnManager.Instance.CreateParticleEffect(IsHit, transform.position);
                 Destroy(gameObject);
             }
-        }
+        } // plays flying/flapping sound of bird
         BirdSoundCounter += Time.deltaTime;
         if (BirdSoundCounter > BirdSoundTimer)
         {
             BirdSoundCounter = 0;
-            AudioManager.Instance.PlayAudio(AudioSampleManager.Instance.getBirdSounds(), 1, gameObject);
+            AudioManager.Instance.PlayAudio(AudioSampleManager.Instance.getBirdFlapSounds(), 1, gameObject);
         }
 
         BirdSoundTimer = Random.Range(3f, 6f);
@@ -85,8 +89,8 @@ public class TargetBehaviour : MonoBehaviour
 
     public void ThrowGarbage()
     {
-       // Instantiate(GarbagePrefab,transform.position, Quaternion.identity);
-       // Debug.Log("Trow Garbage");
-        
+        // Instantiate(GarbagePrefab,transform.position, Quaternion.identity);
+        // Debug.Log("Trow Garbage");
+
     }
 }
