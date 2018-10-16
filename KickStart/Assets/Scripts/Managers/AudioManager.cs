@@ -28,14 +28,7 @@ public class AudioManager : MonoBehaviour
         AudioSource _source;
 
         //clamp volume
-        if (_volume < 0)
-        {
-            _volume = 0;
-        }
-        if (_volume > 1)
-        {
-            _volume = 1;
-        }
+        _volume = Mathf.Clamp01(_volume);
 
         //Check if the current object has a audiosource
         if (_sourceObject.GetComponent<AudioSource>())
@@ -83,15 +76,8 @@ public class AudioManager : MonoBehaviour
         //Create the audio object
         GameObject _audioSource = Instantiate(AudioPrefab, Camera.main.transform.position, Quaternion.identity);
         AudioSource _source = _audioSource.GetComponent<AudioSource>();
-
-        if (_volume < 0)
-        {
-            _volume = 0;
-        }
-        if (_volume > 1)
-        {
-            _volume = 1;
-        }
+        
+        _volume = Mathf.Clamp01(_volume);
 
         //Set the values
         _source.clip = _clip;
