@@ -308,16 +308,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114722359190857508, guid: 20c13879b59ae4a4f85b04cacea06003,
-        type: 2}
-      propertyPath: canvas
-      value: 
-      objectReference: {fileID: 890563022}
-    - target: {fileID: 114053586982531386, guid: 20c13879b59ae4a4f85b04cacea06003,
-        type: 2}
-      propertyPath: Cursor
-      value: 
-      objectReference: {fileID: 1998867488}
     - target: {fileID: 114755208706617680, guid: 20c13879b59ae4a4f85b04cacea06003,
         type: 2}
       propertyPath: Player
@@ -375,9 +365,19 @@ Prefab:
       objectReference: {fileID: 210844091}
     - target: {fileID: 114755208706617680, guid: 20c13879b59ae4a4f85b04cacea06003,
         type: 2}
-      propertyPath: BoundairyIndicators
+      propertyPath: BoundaryIndicators
       value: 
       objectReference: {fileID: 562177044}
+    - target: {fileID: 114053586982531386, guid: 20c13879b59ae4a4f85b04cacea06003,
+        type: 2}
+      propertyPath: Cursor
+      value: 
+      objectReference: {fileID: 1998867488}
+    - target: {fileID: 114722359190857508, guid: 20c13879b59ae4a4f85b04cacea06003,
+        type: 2}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 890563022}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 20c13879b59ae4a4f85b04cacea06003, type: 2}
   m_IsPrefabParent: 0
