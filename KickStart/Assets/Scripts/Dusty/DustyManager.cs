@@ -40,7 +40,7 @@ public class DustyManager : MonoBehaviour
     public List<DustyTextFile> Messages = new List<DustyTextFile>();
 
     private float idleTextCounter, idleTextTimer;
-
+    
 
     private void Start()
     {
@@ -60,12 +60,21 @@ public class DustyManager : MonoBehaviour
         //Add massages
         Messages.Add(new DustyTextFile("Hallo daar", 3, 5));
         Messages.Add(new DustyTextFile("Ik ben Dusty", 4, 5));
-        Messages.Add(new DustyTextFile("En jij moet mij vandaag helpen", 7, 5));
+        Messages.Add(new DustyTextFile("En jij moet mij vandaag helpen", 5, 5));
         Messages.Add(new DustyTextFile("Loogman heeft een probleem", 4, 5));
         Messages.Add(new DustyTextFile("Er zijn allemaal vogels binnen de wasstraat", 5, 5));
         Messages.Add(new DustyTextFile("En zij maken alle schone auto's weer vies!", 4, 5));
         Messages.Add(new DustyTextFile("Nu is het aan jou om dat te voorkomen!", 6, 5));
         Messages.Add(new DustyTextFile("Anders word jouw auto straks ook weer vies", 3, 5));
+        Messages.Add(new DustyTextFile("Je moet proberen om bij zo veel mogelijk\n vogels een luier om te schieten", 6, 5));
+        Messages.Add(new DustyTextFile("Hoe doe je dat?", 2, 5));
+        Messages.Add(new DustyTextFile("Simpel!", 1, 5));
+        Messages.Add(new DustyTextFile("Volg de instructies die recht voor je staan", 3, 5));
+        Messages.Add(new DustyTextFile("Of gebruik de clicker die is mee gegeven!", 4, 5));
+        Messages.Add(new DustyTextFile("Voor elke vogel die je raakt krijg je een punt", 4, 5));
+        Messages.Add(new DustyTextFile("En als je er een raakt die al een luier aan heeft...", 4, 5));
+        Messages.Add(new DustyTextFile("Dan zal zijn luier afvallen en krijg je twee straf punten", 5, 5));
+        Messages.Add(new DustyTextFile("Succes", 2, 5));
     }
 
     private void Update()

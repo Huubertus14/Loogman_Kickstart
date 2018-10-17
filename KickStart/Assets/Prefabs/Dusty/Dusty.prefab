@@ -397,7 +397,7 @@ Transform:
   m_GameObject: {fileID: 1897241166778766}
   m_LocalRotation: {x: -0, y: 0.8100783, z: -0, w: 0.58632165}
   m_LocalPosition: {x: -3.565, y: -0.255, z: 0.25}
-  m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
+  m_LocalScale: {x: 0.02, y: 0.02, z: 0.02}
   m_Children:
   - {fileID: 4892688712916130}
   - {fileID: 4007314787392044}
@@ -1187,7 +1187,7 @@ TextMesh:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1154549362197776}
-  m_Text: Hello World
+  m_Text: Dusty
   m_OffsetZ: 0
   m_CharacterSize: 1
   m_LineSpacing: 1
@@ -1245,7 +1245,7 @@ MonoBehaviour:
   RightArm: {fileID: 0}
   Torso: {fileID: 0}
   TextBillboard: {fileID: 1154549362197776}
-  PositionAwayFromPlayer: {x: 0, y: -0.05, z: 1.6}
+  PositionAwayFromPlayer: {x: 0, y: -0.2, z: 1.6}
   DustyState: 0
   YPosition:
     serializedVersion: 2

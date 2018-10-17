@@ -107,6 +107,15 @@ namespace VrFox
         private void Update()
         {
 
+            if (Input.GetKey(KeyCode.Space))
+            {
+                Time.timeScale = 2.5f;
+            }
+            else
+            {
+                Time.timeScale = 1;
+            }
+
             if (gameState == GameStates.Instructions) // do this when youare in the instructions
             {
                 Instructions();

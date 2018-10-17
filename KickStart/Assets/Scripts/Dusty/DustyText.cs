@@ -50,6 +50,8 @@ public class DustyText : MonoBehaviour
         goalColor = fadeInColor;
         lerpSpeed = _file.GetFadeSpeed;
 
+        AudioManager.Instance.PlayAudio(AudioSampleManager.Instance.GetDustyTalkSound(), 1, gameObject);
+
         lifeTime = 0;
     }
 

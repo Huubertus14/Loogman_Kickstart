@@ -664,6 +664,12 @@ MonoBehaviour:
   ExplosionSounds:
   - {fileID: 8300000, guid: 7bef0064f8567430cac22499c6b93d4f, type: 3}
   - {fileID: 8300000, guid: cd5817e224b2b4d579cf0d0d8bfce316, type: 3}
+  DustyTalkSound:
+  - {fileID: 8300000, guid: fcd5d098c38604817b2230c81c3464c9, type: 3}
+  - {fileID: 8300000, guid: 82c301eb8421a45e8bfefeb8dfc2ec04, type: 3}
+  - {fileID: 8300000, guid: 9f1c0cfd29144487897c70634618f6c5, type: 3}
+  - {fileID: 8300000, guid: fe54d5b62bb934310b134320b1d7532d, type: 3}
+  - {fileID: 8300000, guid: 19b86d8abf6bb401fa08e795c07e45c7, type: 3}
   TestVoice: {fileID: 8300000, guid: df43d4e33c6963a4f87b3330b4134fb5, type: 3}
 --- !u!114 &114323474305805848
 MonoBehaviour:
