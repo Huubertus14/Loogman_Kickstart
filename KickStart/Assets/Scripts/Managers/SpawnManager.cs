@@ -64,7 +64,7 @@ public class SpawnManager : MonoBehaviour {
             float _spawnY = Camera.main.transform.position.y + Random.Range(-0.2f,0.2f);
 
             //Set right spawn point 
-            Vector3 _direction =  new Vector3(Random.Range(-1,1), Random.Range(-1, 1), Random.Range(-1, 1));
+            Vector3 _direction =  new Vector3(Random.Range(-0.7f,0.7f), Random.Range(-1, 1), 1);
             float _distance = Random.Range(-22, 22);
            
             // Debug.Log(_direction * _distance);

@@ -100,6 +100,7 @@ namespace VrFox
 
         private void Update()
         {
+            
             if (gameState == GameStates.Instructions) // do this when youare in the instructions
             {
                 Instructions();
