@@ -83,8 +83,7 @@ namespace VrFox
 
         [HideInInspector]
         public bool CanContinueToNExtGame;
-
-        private float marianneTimer;
+        
 
         //Test
         //Timer to run when the game is over and will reset
