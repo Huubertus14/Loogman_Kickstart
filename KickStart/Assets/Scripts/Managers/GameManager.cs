@@ -38,7 +38,6 @@ namespace VrFox
 {
     public class GameManager : MonoBehaviour
     {
-
         public static GameManager Instance;
         private void Awake()
         {
@@ -54,7 +53,7 @@ namespace VrFox
         public GestureImage TutorialThing;
         public OffScreenIndicator Indicator;
         public MessageTextBehaviour messageText;
-        
+
         [Header("UI Elements:")]
         public Text ScoreText;
         public Text GarbageText;
@@ -90,7 +89,7 @@ namespace VrFox
 
         [HideInInspector]
         public bool CanContinueToNExtGame;
-        
+
 
         //Test
         //Timer to run when the game is over and will reset
@@ -99,15 +98,15 @@ namespace VrFox
         private void Start()
         {
             instructionTimer = 5.5f;
-            
+
             CurrentHandState = HandStates.NotVisible;
-            BulletForce = 240*3;
+            BulletForce = 240 * 3;
             ResetGame();
         }
 
         private void Update()
         {
-            
+
             if (gameState == GameStates.Instructions) // do this when youare in the instructions
             {
                 Instructions();
@@ -323,9 +322,9 @@ namespace VrFox
             EndScoreText.text = "You Got " + Player.Score.ToString() + " Points!";
         }
 
-        public void SendTextMessage(string _mes,float _dur, Vector2 _offset)
+        public void SendTextMessage(string _mes, float _dur, Vector2 _offset)
         {
-            messageText.Message(_mes,_dur, _offset);
+            messageText.Message(_mes, _dur, _offset);
         }
 
         #region Property's
@@ -359,6 +358,39 @@ namespace VrFox
         public void SetHandState(HandStates _state)
         {
             CurrentHandState = _state;
+        }
+
+        public string GetDustyQuote
+        {
+            get
+            {
+                string[] _quote = new string[] {
+                    "Biem!",
+                    "Is nou eigenlijk\n Kikker of Kinker?" ,
+                    "Loogman best Man",
+                    "Kobe",
+                    "Yeet",
+                    "WOW",
+                    "Merci for Waluigi",
+                    "Ik wist niet dat je Loog Man",
+                    "TOTO - Africa",
+                    "Bless the rains down in Africa",
+                    "Tututututu",
+                    "Ik wil Kaas",
+                    "WAAAAAAAAAA",
+                    "REEEEEEEEEEEEEEEEEEEEEEEE",
+                    "@@@@@@@@@@@@@@@@@@@@@@@@@@",
+                    "Alexa, play Despacito",
+                "( ._. )",
+                "ಠ_ಠ",
+                "(╯°□°）╯︵ ┻━┻"
+                };
+
+                int _x = Random.Range(0, _quote.Length);
+
+                return _quote[_x];
+            }
+
         }
         #endregion
     }
