@@ -25,6 +25,13 @@ namespace EnumStates
         Observing,
         Release
     }
+
+    public enum DustyStates
+    {
+        Idle,
+        Pointing,
+        Talking
+    }
 }
 
 namespace VrFox
@@ -83,8 +90,7 @@ namespace VrFox
 
         [HideInInspector]
         public bool CanContinueToNExtGame;
-
-        private float marianneTimer;
+        
 
         //Test
         //Timer to run when the game is over and will reset
@@ -101,6 +107,7 @@ namespace VrFox
 
         private void Update()
         {
+            
             if (gameState == GameStates.Instructions) // do this when youare in the instructions
             {
                 Instructions();

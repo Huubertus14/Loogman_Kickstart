@@ -104,7 +104,7 @@ public class TargetBehaviour : MonoBehaviour
     }
 
     private void Update()
-    {
+    {        
         if (!GameManager.Instance.GameStarted)
         {
             Destroy(gameObject);

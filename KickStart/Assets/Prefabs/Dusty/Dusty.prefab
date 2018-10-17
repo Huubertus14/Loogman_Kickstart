@@ -377,7 +377,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1897241166778766}
   m_LocalRotation: {x: -0, y: 0.8100783, z: -0, w: 0.58632165}
-  m_LocalPosition: {x: -3.2320373, y: 0, z: 0.77309614}
+  m_LocalPosition: {x: -3.565, y: -0.255, z: 0.25}
   m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
   m_Children:
   - {fileID: 4892688712916130}
@@ -1143,6 +1143,38 @@ MonoBehaviour:
   LeftArm: {fileID: 0}
   RightArm: {fileID: 0}
   Torso: {fileID: 0}
+  PositionAwayFromPlayer: {x: 0, y: -0.05, z: 1.6}
+  DustyState: 0
+  YPosition:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: -0.004173279
+      inSlope: 3.4617572
+      outSlope: 3.4617572
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.16510642
+      value: 0.4140396
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.72301656
+      value: -0.31129134
+      inSlope: -0.32127574
+      outSlope: -0.32127574
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: -0.004173279
+      inSlope: 1.221126
+      outSlope: 1.221126
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!114 &114251187229641556
 MonoBehaviour:
   m_ObjectHideFlags: 1
