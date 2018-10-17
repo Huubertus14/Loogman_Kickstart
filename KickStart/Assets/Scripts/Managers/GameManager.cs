@@ -101,13 +101,6 @@ namespace VrFox
 
         private void Update()
         {
-            marianneTimer += Time.deltaTime;
-            if (marianneTimer > 70)
-            {
-                marianneTimer = 0;
-                AudioManager.Instance.PlayAudio(AudioSampleManager.Instance.TestVoice, 1);
-            }
-
             if (gameState == GameStates.Instructions) // do this when youare in the instructions
             {
                 Instructions();

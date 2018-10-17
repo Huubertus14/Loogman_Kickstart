@@ -20,6 +20,9 @@ public class TargetBehaviour : MonoBehaviour
     //[Header("Refs:")]
     private GameObject Diaper;
 
+    public bool OnScreen;
+    Vector3 screenPoint;// = playerHead.leftCamera.WorldToViewportPoint(targetPoint.position);
+
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -102,7 +105,6 @@ public class TargetBehaviour : MonoBehaviour
 
     private void Update()
     {
-
         if (!GameManager.Instance.GameStarted)
         {
             Destroy(gameObject);
