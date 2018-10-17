@@ -25,6 +25,13 @@ namespace EnumStates
         Observing,
         Release
     }
+
+    public enum DustyStates
+    {
+        Idle,
+        Pointing,
+        Talking
+    }
 }
 
 namespace VrFox
