@@ -91,6 +91,7 @@ public class DustyManager : MonoBehaviour
         }
         else
         {
+            //Reset the curve timer
             yPosTimer = 0;
         }
 
