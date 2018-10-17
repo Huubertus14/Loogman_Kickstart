@@ -40,5 +40,6 @@ public class AudioSampleManager : MonoBehaviour
         int x = Random.Range(0, ExplosionSounds.Length);
         return ExplosionSounds[x];
     }
-
+    [Space]
+    public AudioClip TestVoice;
 }

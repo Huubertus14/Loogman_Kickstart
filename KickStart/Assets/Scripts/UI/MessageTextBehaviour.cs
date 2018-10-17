@@ -14,7 +14,6 @@ public class MessageTextBehaviour : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         timeTweenKey = 2;
-
         messageText = GetComponent<Text>();
         rect = GetComponent<RectTransform>();
         rect.localScale = Vector3.zero;
@@ -27,11 +26,6 @@ public class MessageTextBehaviour : MonoBehaviour {
             timeTweenKey += Time.deltaTime / duration;
             tweenValue = ScaleCurve.Evaluate(timeTweenKey);
             rect.localScale = new Vector3(tweenValue,tweenValue,tweenValue);
-        }
-
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            Message("YEET", 5, new Vector2(100,3));
         }
 	}
 

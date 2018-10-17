@@ -597,6 +597,8 @@ MonoBehaviour:
     type: 2}
   SmokeParticles: {fileID: 1774362150817566, guid: ac14dba2f78a0214090c60ac3d1c45e4,
     type: 2}
+  BirdHitEffect: {fileID: 1270126634788680, guid: efa467f120f58fe43931dd8e35c2d187,
+    type: 2}
 --- !u!114 &114264856961313424
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -646,12 +648,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a692a1f11ddaae2448f19256fce99a80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BirdSounds:
-  - {fileID: 8300000, guid: d447a9aefecb5fa438e68e073eaa8680, type: 3}
+  BirdSpawnSounds:
   - {fileID: 8300000, guid: 711efcdc7e1dc2f47815e34f455e621b, type: 3}
-  - {fileID: 8300000, guid: 833f0488d7b0b70478a33b29aaed7141, type: 3}
+  - {fileID: 8300000, guid: d447a9aefecb5fa438e68e073eaa8680, type: 3}
   - {fileID: 8300000, guid: af92273eb57b90a4b829bc08cdedb530, type: 3}
-  - {fileID: 8300000, guid: 1197eea4cd90bba4586a9b4ded96c264, type: 3}
+  - {fileID: 8300000, guid: b71e7f59587f3704a8aed67cf82f2eb9, type: 3}
+  BirdFlapSounds:
   - {fileID: 8300000, guid: 8e26156e7ac0d83448b69ce04991d737, type: 3}
   - {fileID: 8300000, guid: e78dea8f3a5fed54999307c7d482255a, type: 3}
   ShootSounds:
@@ -662,6 +664,7 @@ MonoBehaviour:
   ExplosionSounds:
   - {fileID: 8300000, guid: 7bef0064f8567430cac22499c6b93d4f, type: 3}
   - {fileID: 8300000, guid: cd5817e224b2b4d579cf0d0d8bfce316, type: 3}
+  TestVoice: {fileID: 8300000, guid: df43d4e33c6963a4f87b3330b4134fb5, type: 3}
 --- !u!114 &114323474305805848
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -806,7 +809,7 @@ MonoBehaviour:
   TutorialFeedbackText: {fileID: 0}
   HandPlaceBox: {fileID: 0}
   GestureAnimation: {fileID: 0}
-  BoundairyIndicators: {fileID: 0}
+  BoundaryIndicators: {fileID: 0}
   BulletForce: 240
   CanContinueToNExtGame: 0
 --- !u!114 &114771691676672076

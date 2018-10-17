@@ -35,12 +35,12 @@ public class RecognizerManager : MonoBehaviour {
             if (GameManager.Instance.CurrentHandState == HandStates.NotVisible)
             {
                 GameManager.Instance.InstrucionAmount += 3;
-                Debug.Log("Clicker is used");
+                //Debug.Log("Clicker is used");
             }
             else
             {
                 GameManager.Instance.InstrucionAmount++;
-                Debug.Log("Gesture is used");
+              //  Debug.Log("Gesture is used");
             }
             return;
         }
@@ -63,7 +63,6 @@ public class RecognizerManager : MonoBehaviour {
     }
 
     
-
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))

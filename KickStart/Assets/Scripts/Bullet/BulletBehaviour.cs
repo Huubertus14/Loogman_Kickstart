@@ -11,8 +11,7 @@ public class BulletBehaviour : MonoBehaviour {
     void Start () {
         rb = GetComponent<Rigidbody>();
 	}
-
-
+    
     public void ShootBullet()
     {
         if (!rb)
@@ -28,16 +27,21 @@ public class BulletBehaviour : MonoBehaviour {
         {
             //Target HIT!
             AudioManager.Instance.PlayAudio(AudioSampleManager.Instance.GetExplosionSound(), 1);
-            collision.gameObject.GetComponent<TargetBehaviour>().IsHit = true;
+            collision.gameObject.GetComponent<TargetBehaviour>().Hit();
             
-            GameManager.Instance.Player.Score++;
+            
             if (GameManager.Instance.Player.Score > 4)
             {
                 GameManager.Instance.Player.ScoreTextFlash.StartEffect();
             }
+
             GameManager.Instance.SetScoreText();
-            SpawnManager.Instance.CreateParticleEffect(true,transform.position);
-            Destroy(collision.gameObject);
+
+            //SpawnManager.Instance.CreateParticleEffect(true,transform.position);
+
+            //Debug.Log("Create Smoke effect");
+
+            Destroy(gameObject);
         }
     }
 }
