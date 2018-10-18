@@ -17,6 +17,8 @@ public class TargetBehaviour : MonoBehaviour
     private Vector3 endPoint;
     private AudioSource audioSource;
 
+    private Vector3 newEndPoint;
+
     //[Header("Refs:")]
     private GameObject Diaper;
 
@@ -26,7 +28,7 @@ public class TargetBehaviour : MonoBehaviour
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        
+
         //plays spawn sound of bird
         BirdSoundTimer = Random.Range(3f, 6f);
         BirdSoundCounter = 0;
@@ -53,18 +55,39 @@ public class TargetBehaviour : MonoBehaviour
 
     private void GetEndPoint()
     {
-        //Get direction to player
-        Vector3 _dirToPlayer = GameManager.Instance.CurrentPlayer.transform.position - transform.position;
-        _dirToPlayer.Normalize();
+        if ((int)Random.Range(0, 4) == 1)
+        {
+            //Get direction to player
+            Vector3 _dirToPlayer = GameManager.Instance.CurrentPlayer.transform.position - transform.position;
+            _dirToPlayer.Normalize();
 
-        //get Distance to player
-        float _disToPlayer = Vector3.Distance(transform.position, GameManager.Instance.CurrentPlayer.transform.position) * 2;
+            //get Distance to player
+            float _disToPlayer = Vector3.Distance(transform.position, GameManager.Instance.CurrentPlayer.transform.position) * 2;
 
-        //get opposite position of player
-        endPoint = transform.position + (_dirToPlayer * _disToPlayer);
-        endPoint.y = Camera.main.transform.position.y + Random.Range(-0.2f, 0.2f);
+            //get opposite position of player
+            endPoint = transform.position + (_disToPlayer * _dirToPlayer);
+            endPoint.y = Camera.main.transform.position.y + Random.Range(-0.2f, 0.2f);
 
-        transform.LookAt(endPoint);
+            transform.LookAt(endPoint);
+        }
+        else
+        {
+            //Get direction to player
+            Vector3 _dirToPlayer = GameManager.Instance.CurrentPlayer.transform.position - transform.position;
+
+            //Randomize _dirToPlayer
+            _dirToPlayer.x = Random.Range(-5, 5);
+            _dirToPlayer.z = Random.Range(-10, -5);
+            _dirToPlayer.Normalize();
+            //Debug
+            //Debug.Log(_dirToPlayer);
+
+            //Create endpoint in front of player
+            endPoint = transform.position + (Random.Range(5, 10) * _dirToPlayer);
+            endPoint.y = Camera.main.transform.position.y + Random.Range(-0.2f, 0.2f);
+
+            transform.LookAt(endPoint);
+        }
     }
 
     private void OnDestroy()
@@ -104,7 +127,7 @@ public class TargetBehaviour : MonoBehaviour
     }
 
     private void Update()
-    {        
+    {
         if (!GameManager.Instance.GameStarted)
         {
             Destroy(gameObject);
@@ -118,12 +141,43 @@ public class TargetBehaviour : MonoBehaviour
             {
                 SpawnManager.Instance.CreateParticleEffect(IsHit, transform.position);
                 Destroy(gameObject);
+
+            }
+            else if (CheckIfBirdBehindPlayer())
+            {
+                SpawnManager.Instance.CreateParticleEffect(IsHit, transform.position);
+                Destroy(gameObject);
             }
         }
 
         // plays flying/flapping sound of bird
         BirdFlapSound();
-       
+
+    }
+
+    private bool CheckIfBirdBehindPlayer()
+    {
+
+        if (transform.position.z < (Camera.main.transform.position.z - 0.5))
+        {
+            Debug.Log(transform.position.x);
+            return true;
+        }
+        if (transform.position.x < (Camera.main.transform.position.x) - 3.8)
+        {
+            if (transform.position.z < Camera.main.transform.position.z - 0.5)
+            {
+                return true;
+            }
+        }
+        if (transform.position.x > (Camera.main.transform.position.x) + 3.8)
+        {
+            if (transform.position.z < (Camera.main.transform.position.z) - 0.5)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void BirdFlapSound()
