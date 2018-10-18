@@ -369,6 +369,9 @@ namespace VrFox
             CurrentHandState = _state;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public string GetDustyQuote
         {
             get
@@ -390,13 +393,12 @@ namespace VrFox
                     "REEEEEEEEEEEEEEEEEEEEEEEE",
                     "@@@@@@@@@@@@@@@@@@@@@@@@@@",
                     "Alexa, play Despacito",
-                "( ._. )",
-                "ಠ_ಠ",
-                "(╯°□°）╯︵ ┻━┻"
+                    "( ._. )",
+                    "ಠ_ಠ",
+                    "(╯°□°）╯︵ ┻━┻"
                 };
 
                 int _x = Random.Range(0, _quote.Length);
-
                 return _quote[_x];
             }
 

@@ -254,6 +254,11 @@ Prefab:
       propertyPath: m_PlaneDistance
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 23787768683380162, guid: 98b022620337e7545b5838b8492866a0,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 98b022620337e7545b5838b8492866a0, type: 2}
   m_IsPrefabParent: 0
@@ -623,16 +628,6 @@ Prefab:
     - target: {fileID: 4403223191107180, guid: c6503e495b8bf8048bb5684a5bb6e4df, type: 2}
       propertyPath: m_RootOrder
       value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114148161255576132, guid: c6503e495b8bf8048bb5684a5bb6e4df,
-        type: 2}
-      propertyPath: PositionAwayFromPlayer.y
-      value: -0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 102077317981081644, guid: c6503e495b8bf8048bb5684a5bb6e4df,
-        type: 2}
-      propertyPath: m_Text
-      value: Dusty
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c6503e495b8bf8048bb5684a5bb6e4df, type: 2}
