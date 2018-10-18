@@ -45,6 +45,11 @@ namespace VrFox
 
         }
 
+        
+        //Key and URL used for the photo recognition
+        private readonly string predictionEndPoint = "https://southcentralus.api.cognitive.microsoft.com/customvision/v2.0/Prediction/92a36c67-658a-4ac6-85c4-3cde6f501d22/image";
+        private readonly string predictionKey = "88559f30c5c44cbb986359fcd7126920";
+
         [Header("References:s")]
         public PlayerBehaviour Player;
         public GameObject Cursor;
@@ -402,6 +407,22 @@ namespace VrFox
                 return _quote[_x];
             }
 
+        }
+
+        public string GetPredictionKey
+        {
+            get
+            {
+                return predictionKey;
+            }
+        }
+
+        public string GetPredictionURL
+        {
+            get
+            {
+                return predictionEndPoint;
+            }
         }
         #endregion
     }

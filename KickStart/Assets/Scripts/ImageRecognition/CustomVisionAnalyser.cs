@@ -3,6 +3,7 @@ using System.Collections;
 using System.IO;
 using UnityEngine;
 using UnityEngine.Networking;
+using VrFox;
 
 public class CustomVisionAnalyser : MonoBehaviour {
 
@@ -14,12 +15,12 @@ public class CustomVisionAnalyser : MonoBehaviour {
     /// <summary>
     /// Insert your prediction key here
     /// </summary>
-    private string predictionKey = "88559f30c5c44cbb986359fcd7126920";
+    private string predictionKey = GameManager.Instance.GetPredictionKey;
 
     /// <summary>
     /// Insert your prediction endpoint here
     /// </summary>
-    private string predictionEndpoint = "https://southcentralus.api.cognitive.microsoft.com/customvision/v2.0/Prediction/92a36c67-658a-4ac6-85c4-3cde6f501d22/image";
+    private string predictionEndpoint = GameManager.Instance.GetPredictionURL;
 
     /// <summary>
     /// Bite array of the image to submit for analysis

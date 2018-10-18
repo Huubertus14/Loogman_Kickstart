@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.XR.WSA.Input;
 using UnityEngine.XR.WSA.WebCam;
 using VrFox;
+using EnumStates;
 
 public class ImageCapture : MonoBehaviour {
     /// <summary>
@@ -77,11 +78,16 @@ public class ImageCapture : MonoBehaviour {
     /// </summary>
     private void TapHandler(TappedEventArgs obj)
     {
+        //Dont take a picture when you are playin
+        TakePhoto();
+    }
+
+    public void TakePhoto()
+    {
         if (!captureIsActive)
         {
-            GameManager.Instance.SendTextMessage("Maak foto", 5, Vector2.zero);
             captureIsActive = true;
-            
+
             // Begin the capture loop
             Invoke("ExecuteImageCaptureAndAnalysis", 0);
         }
@@ -163,7 +169,7 @@ public class ImageCapture : MonoBehaviour {
     internal void ResetImageCapture()
     {
         captureIsActive = false;
-        GameManager.Instance.SendTextMessage("Kllar voor nieuwe Foto", 5, Vector2.zero);
+      //  GameManager.Instance.SendTextMessage("Kllar voor nieuwe Foto", 5, Vector2.zero);
         // Set the cursor color to green
         //SceneOrganiser.Instance.cursor.GetComponent<Renderer>().material.color = Color.green;
 
