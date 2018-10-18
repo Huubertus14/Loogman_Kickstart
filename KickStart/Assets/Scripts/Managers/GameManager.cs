@@ -370,7 +370,7 @@ namespace VrFox
         }
 
         /// <summary>
-        /// 
+        /// Get a random quote 
         /// </summary>
         public string GetDustyQuote
         {
