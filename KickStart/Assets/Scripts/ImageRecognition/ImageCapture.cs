@@ -65,26 +65,22 @@ public class ImageCapture : MonoBehaviour {
                 Debug.LogFormat("Cannot delete file: ", file.Name);
             }
         }
-
-        // Subscribing to the Microsoft HoloLens API gesture recognizer to track user gestures
-        recognizer = new GestureRecognizer();
-        recognizer.SetRecognizableGestures(GestureSettings.Tap);
-        recognizer.Tapped += TapHandler;
-        recognizer.StartCapturingGestures();
+        
     }
 
-    /// <summary>
-    /// Respond to Tap Input.
-    /// </summary>
-    private void TapHandler(TappedEventArgs obj)
+
+    private void Update()
     {
-        //Dont take a picture when you are playin
-        TakePhoto();
+        //Only do this when waiting
+        if (GameManager.Instance.gameState == GameStates.Waiting)
+        {
+            TakePhoto();
+        }
     }
 
     public void TakePhoto()
     {
-        if (!captureIsActive)
+       // if (!captureIsActive)
         {
             captureIsActive = true;
 

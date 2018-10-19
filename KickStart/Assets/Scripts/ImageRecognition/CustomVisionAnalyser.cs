@@ -15,12 +15,12 @@ public class CustomVisionAnalyser : MonoBehaviour {
     /// <summary>
     /// Insert your prediction key here
     /// </summary>
-    private string predictionKey = GameManager.Instance.GetPredictionKey;
+    private string predictionKey = "";
 
     /// <summary>
     /// Insert your prediction endpoint here
     /// </summary>
-    private string predictionEndpoint = GameManager.Instance.GetPredictionURL;
+    private string predictionEndpoint = "";
 
     /// <summary>
     /// Bite array of the image to submit for analysis
@@ -34,8 +34,19 @@ public class CustomVisionAnalyser : MonoBehaviour {
     {
         // Allows this instance to behave like a singleton
         Instance = this;
+       
+        
     }
 
+    private void Start()
+    {
+        if (!GameManager.Instance)
+        {
+            Debug.LogError("GameManager Not Found!");
+        }
+        predictionKey = GameManager.Instance.GetPredictionKey;
+        predictionEndpoint = GameManager.Instance.GetPredictionURL;
+    }
     /// <summary>
     /// Call the Computer Vision Service to submit the image.
     /// </summary>

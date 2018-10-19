@@ -121,6 +121,7 @@ namespace VrFox
                 Time.timeScale = 1;
             }
 
+
             if (gameState == GameStates.Instructions) // do this when youare in the instructions
             {
                 Instructions();
@@ -147,7 +148,7 @@ namespace VrFox
             }
             if (gameState == GameStates.Waiting)
             {
-                //Wait for something
+                //Wait for picture to find
             }
             if (gameState == GameStates.GameEnd)
             {
@@ -251,7 +252,15 @@ namespace VrFox
             ScoreText.text = "";
             InstrucionAmount = 0;
             GameStarted = false;
-            gameState = GameStates.Instructions;
+
+            //remove boxes
+            GestureAnimation.SetActive(false);
+            HandPlaceBox.gameObject.SetActive(false);
+
+            //rempve arrows
+            BoundaryIndicators.SetActive(false);
+
+            gameState = GameStates.Waiting;
         }
 
         /// <summary>
