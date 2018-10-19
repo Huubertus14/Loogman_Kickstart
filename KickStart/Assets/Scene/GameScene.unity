@@ -301,6 +301,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114322428844149892, guid: 20c13879b59ae4a4f85b04cacea06003,
+        type: 2}
+      propertyPath: BirdSpawnSounds.Array.size
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4431195185167114, guid: 20c13879b59ae4a4f85b04cacea06003, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -403,6 +408,26 @@ Prefab:
       propertyPath: Cursor
       value: 
       objectReference: {fileID: 1998867488}
+    - target: {fileID: 114256099600199432, guid: 20c13879b59ae4a4f85b04cacea06003,
+        type: 2}
+      propertyPath: OrientationHolder
+      value: 
+      objectReference: {fileID: 1265798817}
+    - target: {fileID: 114322428844149892, guid: 20c13879b59ae4a4f85b04cacea06003,
+        type: 2}
+      propertyPath: BirdSpawnSounds.Array.data[4]
+      value: 
+      objectReference: {fileID: 8300000, guid: 30ad5e660c7e880438de551bdc7a6fe0, type: 3}
+    - target: {fileID: 114322428844149892, guid: 20c13879b59ae4a4f85b04cacea06003,
+        type: 2}
+      propertyPath: BirdSpawnSounds.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 7aa5c5aa546063445adbf86200aa9d37, type: 3}
+    - target: {fileID: 114322428844149892, guid: 20c13879b59ae4a4f85b04cacea06003,
+        type: 2}
+      propertyPath: BirdSpawnSounds.Array.data[5]
+      value: 
+      objectReference: {fileID: 8300000, guid: a54b5e1ca715ff94d8700894507efabd, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 20c13879b59ae4a4f85b04cacea06003, type: 2}
   m_IsPrefabParent: 0
@@ -440,6 +465,46 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 257546416}
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+--- !u!1 &1265798817
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1265798818}
+  - component: {fileID: 1265798819}
+  m_Layer: 0
+  m_Name: OrientationHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1265798818
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1265798817}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1265798819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1265798817}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6614f70c52e17eb47867879c8fe1743a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1312042404
 GameObject:
   m_ObjectHideFlags: 0

@@ -25,6 +25,8 @@ public class SpawnManager : MonoBehaviour {
     public GameObject SmokeParticles;
     public GameObject BirdHitEffect;
 
+    public GameObject OrientationHolder;
+
     private GameObject lastBird;
 
     private void Update()
@@ -37,16 +39,8 @@ public class SpawnManager : MonoBehaviour {
         if (spawnTimer > SpawnInterval)
         {
             spawnTimer = 0;
-            if (GameManager.Instance.Player.Score > 3)
-            {
                 //spawn normal bird
                 SpawnBird();
-            }
-            else
-            {
-                //spawn Static bird
-                SpawnBirdInFrontOfPlayer();
-            }
         }
     }
 
@@ -64,8 +58,8 @@ public class SpawnManager : MonoBehaviour {
             float _spawnY = Camera.main.transform.position.y + Random.Range(-0.2f,0.2f);
 
             //Set right spawn point 
-            Vector3 _direction =  new Vector3(Random.Range(-0.7f,0.7f), Random.Range(-1, 1), 1);
-            float _distance = Random.Range(-22, 22);
+            Vector3 _direction =  new Vector3(Random.Range(-0.8f,0.8f), Random.Range(-1, 1), 1);
+            float _distance = Random.Range(-22, -7);
            
             // Debug.Log(_direction * _distance);
             if (_distance < 5)
