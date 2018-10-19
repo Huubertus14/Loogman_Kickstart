@@ -45,6 +45,11 @@ namespace VrFox
 
         }
 
+        
+        //Key and URL used for the photo recognition
+        private readonly string predictionEndPoint = "https://southcentralus.api.cognitive.microsoft.com/customvision/v2.0/Prediction/92a36c67-658a-4ac6-85c4-3cde6f501d22/image";
+        private readonly string predictionKey = "88559f30c5c44cbb986359fcd7126920";
+
         [Header("References:s")]
         public PlayerBehaviour Player;
         public GameObject Cursor;
@@ -116,6 +121,7 @@ namespace VrFox
                 Time.timeScale = 1;
             }
 
+
             if (gameState == GameStates.Instructions) // do this when youare in the instructions
             {
                 Instructions();
@@ -142,7 +148,7 @@ namespace VrFox
             }
             if (gameState == GameStates.Waiting)
             {
-                //Wait for something
+                //Wait for picture to find
             }
             if (gameState == GameStates.GameEnd)
             {
@@ -246,7 +252,15 @@ namespace VrFox
             ScoreText.text = "";
             InstrucionAmount = 0;
             GameStarted = false;
-            gameState = GameStates.Instructions;
+
+            //remove boxes
+            GestureAnimation.SetActive(false);
+            HandPlaceBox.gameObject.SetActive(false);
+
+            //rempve arrows
+            BoundaryIndicators.SetActive(false);
+
+            gameState = GameStates.Waiting;
         }
 
         /// <summary>
@@ -402,6 +416,22 @@ namespace VrFox
                 return _quote[_x];
             }
 
+        }
+
+        public string GetPredictionKey
+        {
+            get
+            {
+                return predictionKey;
+            }
+        }
+
+        public string GetPredictionURL
+        {
+            get
+            {
+                return predictionEndPoint;
+            }
         }
         #endregion
     }
