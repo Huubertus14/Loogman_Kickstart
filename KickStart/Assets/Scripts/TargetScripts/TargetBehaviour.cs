@@ -121,7 +121,7 @@ public class TargetBehaviour : MonoBehaviour
         if (GameManager.Instance.Player.Score < 5)
         {
             //Check if first thing
-            gameObject.AddComponent<CleanUp>();
+            //gameObject.AddComponent<CleanUp>();
             GetComponent<CleanUp>().LifeTime = 3;
         }
     }
