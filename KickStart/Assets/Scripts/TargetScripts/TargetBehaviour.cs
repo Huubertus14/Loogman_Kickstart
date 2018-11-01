@@ -33,16 +33,19 @@ public class TargetBehaviour : MonoBehaviour
         BirdSoundTimer = Random.Range(3f, 6f);
         BirdSoundCounter = 0;
         AudioManager.Instance.PlayAudio(AudioSampleManager.Instance.getBirdSpawnSounds(), 1, gameObject);
-
+        
         GameManager.Instance.Indicator.AddIndicator(transform, 0);
+
         Speed = Random.Range(0.01f, 0.015f);
+
         if (!Diaper)
         {
             Diaper = GetComponentInChildren<DiaperBehaviour>().gameObject;
         }
+
         if (GameManager.Instance.Player.Score > 9)
         {
-            IsHit = (Random.Range(1, 10) % 2 == 0);
+            IsHit = ((int)Random.Range(0, 4) == 2);
         }
         else
         {

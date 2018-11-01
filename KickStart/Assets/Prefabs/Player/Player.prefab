@@ -551,6 +551,7 @@ GameObject:
   - component: {fileID: 124220340723711116}
   - component: {fileID: 81843060934152242}
   - component: {fileID: 114159479943759654}
+  - component: {fileID: 114958335209807410}
   m_Layer: 0
   m_Name: Player
   m_TagString: MainCamera
@@ -1790,6 +1791,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 786d6105c6e7d9345bf769bafd7b1911, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ScaleCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0.005432129
+      value: 0
+      inSlope: 10.243828
+      outSlope: 10.243828
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -0.00526256
+      outSlope: -0.00526256
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+--- !u!114 &114958335209807410
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1944380140953310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c378ac0bf2f490b4290044449dca946d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114967671644604186
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1986,7 +2016,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 20513156627450102}
-  m_PlaneDistance: 100
+  m_PlaneDistance: 1
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -2059,7 +2089,7 @@ RectTransform:
   m_GameObject: {fileID: 1893433148649406}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.0274247, y: 1.0274245, z: 1.0274245}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224854440420695506}
   m_RootOrder: 4
@@ -2496,7 +2526,7 @@ RectTransform:
   m_GameObject: {fileID: 1872096841355866}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3179891, y: 0.31798917, z: 0.31798917}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 224594699721173474}
   - {fileID: 224020687410444356}

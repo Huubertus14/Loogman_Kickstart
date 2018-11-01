@@ -29,6 +29,10 @@ public class RecognizerManager : MonoBehaviour {
     /// </summary>
     private void TapHandler(TappedEventArgs obj)
     {
+        if (GameManager.Instance.gameState == GameStates.Waiting)
+        {
+            ImageCapture.Instance.TakePhoto(false);
+        }
 
         if (GameManager.Instance.gameState == GameStates.Instructions)
         {

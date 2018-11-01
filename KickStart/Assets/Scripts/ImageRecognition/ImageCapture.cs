@@ -67,23 +67,24 @@ public class ImageCapture : MonoBehaviour {
         }
         
     }
-
+    
 
     private void Update()
     {
         //Only do this when waiting
         if (GameManager.Instance.gameState == GameStates.Waiting)
         {
-            TakePhoto();
+            TakePhoto(captureIsActive);
         }
     }
 
-    public void TakePhoto()
+    public void TakePhoto(bool _cap)
     {
-       // if (!captureIsActive)
+        if (!_cap)
         {
             captureIsActive = true;
-
+            
+            GameManager.Instance.SendTextMessage("Scanning the area",0.7f, new Vector2(UnityEngine.Random.Range(-2,2), UnityEngine.Random.Range(-2, 2)));
             // Begin the capture loop
             Invoke("ExecuteImageCaptureAndAnalysis", 0);
         }

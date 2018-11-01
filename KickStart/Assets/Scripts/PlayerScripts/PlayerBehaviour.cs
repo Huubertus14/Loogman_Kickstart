@@ -69,6 +69,10 @@ namespace VrFox
         public void ScoreFlash()
         {
             ScoreTextFlash.StartEffect();
+            if (Score > 9 && Score < 11)
+            {
+                //GameManager.Instance.SendTextMessage("Some may spawn with a diaper", 3, Vector2.zero);
+            }
         }
 
         public void GarbageFlash()

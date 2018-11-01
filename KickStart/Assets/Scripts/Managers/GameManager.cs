@@ -230,7 +230,8 @@ namespace VrFox
             //start the game from the gesture manager
             if (InstrucionAmount >= 2)
             {
-                TutorialFeedbackText.text = "Try to shoot as many Birds as possible!";
+                TutorialFeedbackText.text = "";
+                SendTextMessage("Try to shoot as many birds as possible!", 12, Vector2.zero);
                 //remove boxes
                 GestureAnimation.SetActive(false);
                 HandPlaceBox.gameObject.SetActive(false);
@@ -260,7 +261,7 @@ namespace VrFox
             //rempve arrows
             BoundaryIndicators.SetActive(false);
 
-            gameState = GameStates.Waiting;
+            gameState = GameStates.Instructions;
         }
 
         /// <summary>
@@ -290,6 +291,11 @@ namespace VrFox
         /// </summary>
         public void StartGame()
         {
+            if (GameStarted)
+            {
+                return;
+            }
+
             Player.ResetPlayerValues();
             CanContinueToNExtGame = false;
             GameOver = false;
@@ -298,6 +304,15 @@ namespace VrFox
             TimePlayed = 180;
             GameOverTimer = 0;
             SetScoreText();
+
+            SpawnManager.Instance.spawnStatic = true;
+            
+            //remove boxes
+            GestureAnimation.SetActive(false);
+            HandPlaceBox.gameObject.SetActive(false);
+
+            //rempve arrows
+            BoundaryIndicators.SetActive(false);
 
             //remove all instructions
             gameState = GameStates.Playing;
