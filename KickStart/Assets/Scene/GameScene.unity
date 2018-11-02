@@ -179,6 +179,11 @@ Prefab:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 20513156627450102, guid: 98b022620337e7545b5838b8492866a0,
+        type: 2}
+      propertyPath: near clip plane
+      value: 0.85
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 98b022620337e7545b5838b8492866a0, type: 2}
   m_IsPrefabParent: 0
@@ -328,6 +333,11 @@ Prefab:
       propertyPath: BirdSpawnSounds.Array.data[5]
       value: 
       objectReference: {fileID: 8300000, guid: a54b5e1ca715ff94d8700894507efabd, type: 3}
+    - target: {fileID: 114256099600199432, guid: 20c13879b59ae4a4f85b04cacea06003,
+        type: 2}
+      propertyPath: MaxBirdCount
+      value: 12
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 20c13879b59ae4a4f85b04cacea06003, type: 2}
   m_IsPrefabParent: 0

@@ -32,6 +32,14 @@ namespace EnumStates
         Pointing,
         Talking
     }
+
+    public enum Difficulty
+    {
+        Noob,
+        Beginner,
+        Normal,
+        Hard
+    }
 }
 
 namespace VrFox
@@ -447,6 +455,11 @@ namespace VrFox
             {
                 return predictionEndPoint;
             }
+        }
+
+        public Difficulty GetDiffictuly
+        {
+            get { return Player.PlayerLevel; }
         }
         #endregion
     }

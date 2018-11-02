@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using VrFox;
+using EnumStates;
 
 public class TargetBehaviour : MonoBehaviour
 {
@@ -36,20 +37,30 @@ public class TargetBehaviour : MonoBehaviour
         
         GameManager.Instance.Indicator.AddIndicator(transform, 0);
 
-        Speed = Random.Range(0.01f, 0.015f);
-
         if (!Diaper)
         {
             Diaper = GetComponentInChildren<DiaperBehaviour>().gameObject;
         }
+        
+        Speed = Random.Range(0.01f, 0.015f);
 
-        if (GameManager.Instance.Player.Score > 9)
+        switch (GameManager.Instance.GetDiffictuly)
         {
-            IsHit = ((int)Random.Range(0, 4) == 2);
-        }
-        else
-        {
-            IsHit = false;
+            case Difficulty.Noob:
+                Speed *= 0.8f;
+                break;
+            case Difficulty.Beginner:
+                break;
+            case Difficulty.Normal:
+                Speed *= 1.1f;
+                IsHit = ((int)Random.Range(0, 8) == 2);
+                break;
+            case Difficulty.Hard:
+                Speed *= 1.3f;
+                IsHit = ((int)Random.Range(0, 6) == 2);
+                break;
+            default:
+                break;
         }
 
         Diaper.SetActive(IsHit);

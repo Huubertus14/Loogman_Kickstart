@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using VrFox;
+using EnumStates;
 
 namespace VrFox
 {
@@ -25,6 +26,9 @@ namespace VrFox
         public float AmountOfWater;
         public float MaxAmountOfWater;
         public float TimeToRecharge;
+        public Difficulty PlayerLevel;
+
+
 
         public void ResetPlayerValues()
         {
@@ -34,6 +38,7 @@ namespace VrFox
             Score = 0;
             PlayerName = "Loogman Devop";
             HitByGarbage = 0;
+            PlayerLevel = Difficulty.Noob;
         }
 
         //Player Shoots a bullet
@@ -51,6 +56,39 @@ namespace VrFox
             else
             {
                 WaterUIWiggle.StartAnimation();
+            }
+
+            if (Score < 10)
+            {
+                if (PlayerLevel != Difficulty.Noob)
+                {
+                    DustyManager.Instance.Messages.Add(new DustyTextFile("Try your best!", 2f, 1f));
+                }
+                PlayerLevel = Difficulty.Noob;
+            }
+            else if (Score < 15)
+            {
+                if (PlayerLevel != Difficulty.Beginner)
+                {
+                    DustyManager.Instance.Messages.Add(new DustyTextFile("More are coming!", 2f, 1f));
+                }
+                PlayerLevel = Difficulty.Beginner;
+            }
+            else if (Score < 25)
+            {
+                if (PlayerLevel != Difficulty.Normal)
+                {
+                    DustyManager.Instance.Messages.Add(new DustyTextFile("Let's make it a bit more difficult!", 2f, 1f));
+                }
+                PlayerLevel = Difficulty.Normal;
+            }
+            else
+            {
+                if (PlayerLevel != Difficulty.Hard)
+                {
+                    DustyManager.Instance.Messages.Add(new DustyTextFile("There is no going back now! Keep Shooting!", 2f, 1f));
+                }
+                PlayerLevel = Difficulty.Hard;
             }
         }
 
@@ -72,6 +110,23 @@ namespace VrFox
             if (Score > 9 && Score < 11)
             {
                 //GameManager.Instance.SendTextMessage("Some may spawn with a diaper", 3, Vector2.zero);
+            }
+
+            if (Score < 10)
+            {
+                PlayerLevel = Difficulty.Noob;
+            }
+            else if (Score < 15)
+            {
+                PlayerLevel = Difficulty.Beginner;
+            }
+            else if (Score < 25)
+            {
+                PlayerLevel = Difficulty.Normal;
+            }
+            else
+            {
+                PlayerLevel = Difficulty.Hard;
             }
         }
 
