@@ -358,6 +358,8 @@ namespace VrFox
             {
                 TimeText.text = _min + ":" + _sec;
             }
+
+            TimeText.text = (1f / Time.deltaTime).ToString();
         }
 
         /// <summary>
