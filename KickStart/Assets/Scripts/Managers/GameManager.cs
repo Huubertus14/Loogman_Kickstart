@@ -87,6 +87,9 @@ namespace VrFox
         [Space]
         public float TimePlayed;
         public int InstrucionAmount;
+        [Space]
+        public float DurationToImpusle;
+        public float DurationFromImpulse;
 
         [Header("Tutorial values")]
         public Text TutorialFeedbackText;

@@ -14,13 +14,16 @@ namespace VrFox
 
         private MeshRenderer rend;
 
-        private  float durationTo = 180;
-        private  float durationFrom = 80;
+        private  float durationTo;
+        private  float durationFrom;
 
         // Use this for initialization
         void Start()
         {
             //All init values
+            durationFrom = GameManager.Instance.DurationFromImpulse;
+            durationTo = GameManager.Instance.DurationToImpusle;
+
             rend = GetComponent<MeshRenderer>();
             isHit = false;
         }
@@ -29,7 +32,7 @@ namespace VrFox
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                HitBySonar(Color.red, GameManager.Instance.Player.transform.position);
+                HitBySonar(Color.cyan, GameManager.Instance.Player.transform.position);
             }
         }
 

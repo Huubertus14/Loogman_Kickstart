@@ -591,7 +591,7 @@ MonoBehaviour:
   BirdPrefab: {fileID: 100000, guid: d418c88afd808cf448602106c7ead664, type: 2}
   StaticBirdPrefab: {fileID: 100000, guid: 7816352bcfafc054f80acbd80b76718e, type: 2}
   SpawnInterval: 3
-  MaxBirdCount: 3
+  MaxBirdCount: 12
   CurrentBirdCount: 0
   DeathParticle: {fileID: 1222976583829746, guid: d166581bdd55b1e43ab19118f1ce3ecf,
     type: 2}
@@ -599,6 +599,8 @@ MonoBehaviour:
     type: 2}
   BirdHitEffect: {fileID: 1270126634788680, guid: efa467f120f58fe43931dd8e35c2d187,
     type: 2}
+  OrientationHolder: {fileID: 0}
+  spawnStatic: 0
 --- !u!114 &114264856961313424
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -651,8 +653,10 @@ MonoBehaviour:
   BirdSpawnSounds:
   - {fileID: 8300000, guid: 711efcdc7e1dc2f47815e34f455e621b, type: 3}
   - {fileID: 8300000, guid: d447a9aefecb5fa438e68e073eaa8680, type: 3}
-  - {fileID: 8300000, guid: af92273eb57b90a4b829bc08cdedb530, type: 3}
+  - {fileID: 8300000, guid: 7aa5c5aa546063445adbf86200aa9d37, type: 3}
   - {fileID: 8300000, guid: b71e7f59587f3704a8aed67cf82f2eb9, type: 3}
+  - {fileID: 8300000, guid: 30ad5e660c7e880438de551bdc7a6fe0, type: 3}
+  - {fileID: 8300000, guid: a54b5e1ca715ff94d8700894507efabd, type: 3}
   BirdFlapSounds:
   - {fileID: 8300000, guid: 8e26156e7ac0d83448b69ce04991d737, type: 3}
   - {fileID: 8300000, guid: e78dea8f3a5fed54999307c7d482255a, type: 3}
@@ -812,6 +816,8 @@ MonoBehaviour:
   GameOver: 0
   TimePlayed: 0
   InstrucionAmount: 0
+  DurationToImpusle: 210
+  DurationFromImpulse: 120
   TutorialFeedbackText: {fileID: 0}
   HandPlaceBox: {fileID: 0}
   GestureAnimation: {fileID: 0}
