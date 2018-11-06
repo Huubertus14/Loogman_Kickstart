@@ -9,6 +9,8 @@ namespace VrFox
 {
     public class PlayerBehaviour : MonoBehaviour
     {
+        [Header("InCarWash")]
+        public bool InCarWash;
         [Header("Prefabs:")]
         public GameObject BulletPrefab;
 
@@ -29,8 +31,8 @@ namespace VrFox
 
         [Space]
         public bool IsSynced;
-        public Vector3[] lastPositions = new Vector3[5];
-        public int posIndex;
+        private Vector3[] lastPositions = new Vector3[5];
+        private int posIndex;
 
         public void ResetPlayerValues()
         {
@@ -111,6 +113,12 @@ namespace VrFox
                 return;
             }
 
+            if (!InCarWash)
+            {
+                transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + (Time.deltaTime /46) * 110);
+                Debug.Log((Time.deltaTime / 46) * 110);
+            }
+
             AmountOfWater += Time.deltaTime / TimeToRecharge;
             WaterAmounfSlider.SetGoalValue(AmountOfWater);
 
@@ -170,14 +178,13 @@ namespace VrFox
             }
 
             Vector3 _direction = lastPositions[_lastIndex] - lastPositions[_currentIndex];
-            _direction *= 10;
-            Debug.Log(_currentIndex + " Cur");
-            Debug.Log(_lastIndex + " last");
+            _direction *= 100;
             Debug.Log(_direction);
 
             _direction.Normalize();
+            Quaternion _newWorldRot = Quaternion.EulerAngles(_direction);
 
-            CarWashWorld.Instance.transform.rotation = Quaternion.Euler(_direction);
+            CarWashWorld.Instance.transform.rotation =_newWorldRot;
 
         }
     }

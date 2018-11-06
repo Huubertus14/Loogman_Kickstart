@@ -42,7 +42,6 @@ public class CarWashWorld : MonoBehaviour {
 
     public void ShowImpulse(Vector3 _impulsePosition)
     {
-        return;
         foreach (var xRay in allXRayObjects)
         {
             int x = Random.Range(0, cols.Length);
