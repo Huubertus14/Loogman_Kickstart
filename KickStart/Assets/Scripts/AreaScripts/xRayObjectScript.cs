@@ -32,7 +32,7 @@ namespace VrFox
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                HitBySonar(Color.cyan, GameManager.Instance.Player.transform.position);
+                HitBySonar(Color.red, GameManager.Instance.Player.transform.position);
             }
         }
 

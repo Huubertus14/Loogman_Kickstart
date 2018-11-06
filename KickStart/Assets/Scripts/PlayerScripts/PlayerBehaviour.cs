@@ -12,7 +12,6 @@ namespace VrFox
         [Header("Prefabs:")]
         public GameObject BulletPrefab;
 
-
         [Header("Refs:")]
         public TextFlashing ScoreTextFlash;
         public TextFlashing GarbageTextFlash;
@@ -28,17 +27,29 @@ namespace VrFox
         public float TimeToRecharge;
         public Difficulty PlayerLevel;
 
-
+        [Space]
+        public bool IsSynced;
+        public Vector3[] lastPositions = new Vector3[5];
+        public int posIndex;
 
         public void ResetPlayerValues()
         {
             AmountOfWater = MaxAmountOfWater;
             WaterAmounfSlider.SetMaxValue(MaxAmountOfWater);
             WaterAmounfSlider.SetGoalValue(AmountOfWater);
+
             Score = 0;
             PlayerName = "Loogman Devop";
             HitByGarbage = 0;
             PlayerLevel = Difficulty.Noob;
+
+            IsSynced = false;
+
+            for (int i = 0; i < lastPositions.Length; i++)
+            {
+                lastPositions[i] = Vector3.zero;
+            }
+            posIndex = 0;
         }
 
         //Player Shoots a bullet
@@ -102,6 +113,22 @@ namespace VrFox
 
             AmountOfWater += Time.deltaTime / TimeToRecharge;
             WaterAmounfSlider.SetGoalValue(AmountOfWater);
+
+            if (!IsSynced)
+            {
+                //fill last positions
+                lastPositions[posIndex] = transform.position;
+                posIndex++;
+                if (posIndex >= lastPositions.Length)
+                {
+                    posIndex = 0;
+                }
+            }
+
+            if (Input.GetKeyDown(KeyCode.T))
+            {
+                SyncCarWashWithPlayer();
+            }
         }
 
         public void ScoreFlash()
@@ -130,10 +157,28 @@ namespace VrFox
             }
         }
 
-        public void GarbageFlash()
+        public void SyncCarWashWithPlayer()
         {
-            GarbageTextFlash.StartEffect();
-        }
 
+            IsSynced = true;
+
+            int _currentIndex = posIndex;
+            int _lastIndex = posIndex + 1;
+            if (_lastIndex > 4)
+            {
+                _lastIndex = 0;
+            }
+
+            Vector3 _direction = lastPositions[_lastIndex] - lastPositions[_currentIndex];
+            _direction *= 10;
+            Debug.Log(_currentIndex + " Cur");
+            Debug.Log(_lastIndex + " last");
+            Debug.Log(_direction);
+
+            _direction.Normalize();
+
+            CarWashWorld.Instance.transform.rotation = Quaternion.Euler(_direction);
+
+        }
     }
 }

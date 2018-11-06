@@ -20,9 +20,7 @@ public class BulletBehaviour : MonoBehaviour {
         }
         rb.AddForce(Camera.main.transform.forward * GameManager.Instance.BulletForce);
     }
-
-    private Color[] cols = new Color[] {Color.red,Color.blue,Color.green,Color.cyan };
-
+    
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "xRayObject")

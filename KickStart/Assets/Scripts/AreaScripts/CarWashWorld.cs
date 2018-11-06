@@ -32,17 +32,17 @@ public class CarWashWorld : MonoBehaviour {
         {
             if (child.GetComponent<MeshRenderer>())
             {
-                child.GetComponent<MeshRenderer>().material = XRayMaterial;
-                child.gameObject.AddComponent<xRayObjectScript>();
+                //child.GetComponent<MeshRenderer>().material = XRayMaterial;
+              //  child.gameObject.AddComponent<xRayObjectScript>();
                 child.gameObject.tag = "xRayObject";
-                allXRayObjects.Add(child.gameObject.GetComponent<xRayObjectScript>());
+               // allXRayObjects.Add(child.gameObject.GetComponent<xRayObjectScript>());
             }
         }
     }
 
     public void ShowImpulse(Vector3 _impulsePosition)
     {
-        
+        return;
         foreach (var xRay in allXRayObjects)
         {
             int x = Random.Range(0, cols.Length);
