@@ -115,7 +115,7 @@ namespace VrFox
 
             if (!InCarWash)
             {
-                transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + (Time.deltaTime /46) * 110);
+                transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + (Time.deltaTime / 46) * 110);
                 Debug.Log((Time.deltaTime / 46) * 110);
             }
 
@@ -182,10 +182,15 @@ namespace VrFox
             Debug.Log(_direction);
 
             _direction.Normalize();
-            Quaternion _newWorldRot = Quaternion.EulerAngles(_direction);
 
-            CarWashWorld.Instance.transform.rotation =_newWorldRot;
+            //Set y to de direction of the player
+            _direction.y = _direction.z;
 
+            _direction.z = 0;
+            _direction.x = 0;
+            Quaternion _newWorldRot = Quaternion.Euler(_direction);
+
+            CarWashWorld.Instance.transform.rotation = _newWorldRot;
         }
     }
 }
