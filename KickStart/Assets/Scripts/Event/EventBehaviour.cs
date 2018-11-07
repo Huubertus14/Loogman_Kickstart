@@ -51,7 +51,7 @@ public class EventBehaviour : MonoBehaviour
             if (spawnInterval[i] < 0.7f)
             {
                 FillIntervalArray();
-                return;
+                break;
             }
         }
     }
