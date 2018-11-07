@@ -17,7 +17,7 @@ public class CarWashWorld : MonoBehaviour {
     [Header("Prefabs:")]
     public Material XRayMaterial;
     
-    public List<xRayObjectScript> allXRayObjects = new List<xRayObjectScript>();
+    private List<xRayObjectScript> allXRayObjects = new List<xRayObjectScript>();
     private Color[] cols = new Color[] { Color.red, Color.blue, Color.green, Color.cyan };
 
     private void Start()

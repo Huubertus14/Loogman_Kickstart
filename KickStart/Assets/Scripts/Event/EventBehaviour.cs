@@ -61,8 +61,10 @@ public class EventBehaviour : MonoBehaviour
         spawnTimer += Time.deltaTime;
         duration += Time.deltaTime;
 
+        //Keep index in range of array
         if (intervalIndex < spawnInterval.Length)
         {
+            //Check if time has passed
             if (spawnTimer > spawnInterval[intervalIndex])
             {
                 intervalIndex++;
@@ -70,6 +72,7 @@ public class EventBehaviour : MonoBehaviour
                 Debug.Log("Spawn");
             }
         }
+        //End of the event object
         if (duration > eventData.Duration + 0.1f)
         {
             Debug.Log("destroy");

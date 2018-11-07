@@ -51,7 +51,7 @@ public class RecognizerManager : MonoBehaviour {
 
         if (GameManager.Instance.gameState == GameStates.GameEnd)
         {
-            if (GameManager.Instance.CanContinueToNExtGame)
+            if (GameManager.Instance.CanContinueNextGame)
             {
                 GameManager.Instance.ResetGame();
                 return;
@@ -79,7 +79,7 @@ public class RecognizerManager : MonoBehaviour {
 
             if (GameManager.Instance.gameState == GameStates.GameEnd)
             {
-                if (GameManager.Instance.CanContinueToNExtGame)
+                if (GameManager.Instance.CanContinueNextGame)
                 {
                     GameManager.Instance.ResetGame();
                     return;

@@ -26,6 +26,7 @@ public class BulletBehaviour : MonoBehaviour {
         if (collision.gameObject.tag == "xRayObject")
         {
             CarWashWorld.Instance.ShowImpulse(transform.position);
+            Destroy(gameObject);
         }
 
         if (collision.gameObject.tag.Contains("Target"))
@@ -41,11 +42,7 @@ public class BulletBehaviour : MonoBehaviour {
             }
 
             GameManager.Instance.SetScoreText();
-
-            //SpawnManager.Instance.CreateParticleEffect(true,transform.position);
-
-            //Debug.Log("Create Smoke effect");
-
+            
             Destroy(gameObject);
         }
     }
