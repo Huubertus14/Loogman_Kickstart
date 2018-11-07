@@ -588,8 +588,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 882144032aefc0947b380d7e8b5d00dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BirdPrefab: {fileID: 100000, guid: d418c88afd808cf448602106c7ead664, type: 2}
+  BirdPrefab: {fileID: 1315388206692908, guid: 0ad3357da30a64241bdb11810c946224, type: 2}
   StaticBirdPrefab: {fileID: 100000, guid: 7816352bcfafc054f80acbd80b76718e, type: 2}
+  Spawns: []
   SpawnInterval: 3
   MaxBirdCount: 12
   CurrentBirdCount: 0

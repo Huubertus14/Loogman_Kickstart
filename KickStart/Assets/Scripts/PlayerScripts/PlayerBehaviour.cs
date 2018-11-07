@@ -54,6 +54,8 @@ namespace VrFox
                 lastPositions[i] = Vector3.zero;
             }
             posIndex = 0;
+
+            SyncCarWashWithPlayer();
         }
 
         //Player Shoots a bullet
