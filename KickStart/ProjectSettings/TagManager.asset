@@ -8,6 +8,7 @@ TagManager:
   - Target
   - Bullet
   - Garbage
+  - xRayObject
   layers:
   - Default
   - TransparentFX

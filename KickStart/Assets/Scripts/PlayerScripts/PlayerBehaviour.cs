@@ -9,9 +9,10 @@ namespace VrFox
 {
     public class PlayerBehaviour : MonoBehaviour
     {
+        [Header("InCarWash")]
+        public bool InCarWash;
         [Header("Prefabs:")]
         public GameObject BulletPrefab;
-
 
         [Header("Refs:")]
         public TextFlashing ScoreTextFlash;
@@ -27,18 +28,34 @@ namespace VrFox
         public float MaxAmountOfWater;
         public float TimeToRecharge;
         public Difficulty PlayerLevel;
+        public bool InPrewash;
 
-
+        [Space]
+        public bool IsSynced;
+        private Vector3[] lastPositions = new Vector3[5];
+        private int posIndex;
 
         public void ResetPlayerValues()
         {
             AmountOfWater = MaxAmountOfWater;
             WaterAmounfSlider.SetMaxValue(MaxAmountOfWater);
             WaterAmounfSlider.SetGoalValue(AmountOfWater);
+
             Score = 0;
             PlayerName = "Loogman Devop";
             HitByGarbage = 0;
             PlayerLevel = Difficulty.Noob;
+            InPrewash = true;
+
+            IsSynced = false;
+
+            for (int i = 0; i < lastPositions.Length; i++)
+            {
+                lastPositions[i] = Vector3.zero;
+            }
+            posIndex = 0;
+
+            SyncCarWashWithPlayer();
         }
 
         //Player Shoots a bullet
@@ -100,8 +117,30 @@ namespace VrFox
                 return;
             }
 
+            if (!InCarWash)
+            {
+                //+ (Time.deltaTime / 46) * 110)
+                transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + (Time.deltaTime / 46) * 110);
+            }
+
             AmountOfWater += Time.deltaTime / TimeToRecharge;
             WaterAmounfSlider.SetGoalValue(AmountOfWater);
+
+            if (!IsSynced)
+            {
+                //fill last positions
+                lastPositions[posIndex] = transform.position;
+                posIndex++;
+                if (posIndex >= lastPositions.Length)
+                {
+                    posIndex = 0;
+                }
+            }
+
+            if (Input.GetKeyDown(KeyCode.T))
+            {
+                SyncCarWashWithPlayer();
+            }
         }
 
         public void ScoreFlash()
@@ -130,10 +169,41 @@ namespace VrFox
             }
         }
 
-        public void GarbageFlash()
+        public void SyncCarWashWithPlayer()
         {
-            GarbageTextFlash.StartEffect();
-        }
+            
+            IsSynced = true;
 
+            //Fix the right rotation
+            int _currentIndex = posIndex;
+            int _lastIndex = posIndex + 1;
+            if (_lastIndex > 4)
+            {
+                _lastIndex = 0;
+            }
+
+            Vector3 _direction = lastPositions[_lastIndex] - lastPositions[_currentIndex];
+
+            //Normalize the values
+            _direction.Normalize();
+
+            //Set vertical values to 0
+            _direction.y = 0;
+
+            //Calculate the Y angle
+            float _angle = Mathf.Atan2(_direction.x, _direction.z) * Mathf.Rad2Deg;
+
+            Quaternion _newWorldRot = Quaternion.AngleAxis(_angle, CarWashWorld.Instance.transform.up);
+
+            CarWashWorld.Instance.transform.rotation = _newWorldRot;
+            
+            //Place player in the right position
+
+            //Chaeck later for eventual more becons
+
+            CarWashWorld.Instance.transform.position = transform.position;
+            
+
+        }
     }
 }

@@ -10,6 +10,7 @@ public class AudioSampleManager : MonoBehaviour
         Instance = this;
     }
 
+    [Header("Audio Clips:")]
     public AudioClip[] BirdSpawnSounds;
     public AudioClip[] BirdFlapSounds;
     public AudioClip getBirdSpawnSounds()

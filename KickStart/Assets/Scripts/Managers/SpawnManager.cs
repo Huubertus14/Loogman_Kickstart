@@ -18,6 +18,10 @@ namespace VrFox
         public GameObject BirdPrefab;
         public GameObject StaticBirdPrefab;
 
+        [Header("Refs:")]
+        public List<GameObject> Spawns = new List<GameObject>();
+
+
         [Header("Values")]
         public float SpawnInterval;
         private float spawnTimer;

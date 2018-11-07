@@ -66,7 +66,7 @@ namespace VrFox
         public GestureImage TutorialThing;
         public OffScreenIndicator Indicator;
         public MessageTextBehaviour messageText;
-
+        
         [Header("UI Elements:")]
         public Text ScoreText;
         public Text GarbageText;
@@ -87,6 +87,9 @@ namespace VrFox
         [Space]
         public float TimePlayed;
         public int InstrucionAmount;
+        [Space]
+        public float DurationToImpusle;
+        public float DurationFromImpulse;
 
         [Header("Tutorial values")]
         public Text TutorialFeedbackText;
@@ -417,7 +420,6 @@ namespace VrFox
             {
                 string[] _quote = new string[] {
                     "Biem!",
-                    "Is nou eigenlijk\n Kikker of Kinker?" ,
                     "Loogman best Man",
                     "Kobe",
                     "Yeet",
@@ -426,13 +428,12 @@ namespace VrFox
                     "Ik wist niet dat je Loog Man",
                     "TOTO - Africa",
                     "Bless the rains down in Africa",
-                    "Tututututu",
                     "Ik wil Kaas",
                     "WAAAAAAAAAA",
                     "REEEEEEEEEEEEEEEEEEEEEEEE",
                     "@@@@@@@@@@@@@@@@@@@@@@@@@@",
                     "Alexa, play Despacito",
-                    "( ._. )",
+                    "( ._. )-/",
                     "ಠ_ಠ",
                     "(╯°□°）╯︵ ┻━┻"
                 };

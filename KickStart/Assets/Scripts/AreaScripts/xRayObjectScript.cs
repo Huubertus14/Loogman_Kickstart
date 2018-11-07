@@ -14,13 +14,16 @@ namespace VrFox
 
         private MeshRenderer rend;
 
-        private  float durationTo = 180;
-        private  float durationFrom = 80;
+        private  float durationTo;
+        private  float durationFrom;
 
         // Use this for initialization
         void Start()
         {
             //All init values
+            durationFrom = GameManager.Instance.DurationFromImpulse;
+            durationTo = GameManager.Instance.DurationToImpusle;
+
             rend = GetComponent<MeshRenderer>();
             isHit = false;
         }

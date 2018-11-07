@@ -20,15 +20,12 @@ public class BulletBehaviour : MonoBehaviour {
         }
         rb.AddForce(Camera.main.transform.forward * GameManager.Instance.BulletForce);
     }
-
-    private Color[] cols = new Color[] {Color.red,Color.blue,Color.green,Color.cyan };
-
+    
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.GetComponent<xRayObjectScript>())
+        if (collision.gameObject.tag == "xRayObject")
         {
-            int x = Random.Range(0, cols.Length);
-            collision.gameObject.GetComponent<xRayObjectScript>().HitBySonar(cols[x], transform.position);
+            CarWashWorld.Instance.ShowImpulse(transform.position);
         }
 
         if (collision.gameObject.tag.Contains("Target"))

@@ -22,10 +22,7 @@ public class TargetBehaviour : MonoBehaviour
 
     //[Header("Refs:")]
     private GameObject Diaper;
-
-    public bool OnScreen;
-    Vector3 screenPoint;// = playerHead.leftCamera.WorldToViewportPoint(targetPoint.position);
-
+    
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -171,10 +168,8 @@ public class TargetBehaviour : MonoBehaviour
 
     private bool CheckIfBirdBehindPlayer()
     {
-
         if (transform.position.z < (Camera.main.transform.position.z - 0.5))
         {
-            Debug.Log(transform.position.x);
             return true;
         }
         if (transform.position.x < (Camera.main.transform.position.x) - 3.8)
