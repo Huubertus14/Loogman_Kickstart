@@ -116,7 +116,7 @@ namespace VrFox
             if (!InCarWash)
             {
                 //+ (Time.deltaTime / 46) * 110)
-                transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+                transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + (Time.deltaTime / 46) * 110);
             }
 
             AmountOfWater += Time.deltaTime / TimeToRecharge;
@@ -167,9 +167,10 @@ namespace VrFox
 
         public void SyncCarWashWithPlayer()
         {
-
+            
             IsSynced = true;
 
+            //Fix the right rotation
             int _currentIndex = posIndex;
             int _lastIndex = posIndex + 1;
             if (_lastIndex > 4)
@@ -191,6 +192,9 @@ namespace VrFox
             Quaternion _newWorldRot = Quaternion.AngleAxis(_angle, CarWashWorld.Instance.transform.up);
 
             CarWashWorld.Instance.transform.rotation = _newWorldRot;
+
+            //Place player in the right position
+            CarWashWorld.Instance.transform.position = transform.position;
         }
     }
 }
