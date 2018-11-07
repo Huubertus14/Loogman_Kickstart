@@ -28,6 +28,7 @@ namespace VrFox
         public float MaxAmountOfWater;
         public float TimeToRecharge;
         public Difficulty PlayerLevel;
+        public bool InPrewash;
 
         [Space]
         public bool IsSynced;
@@ -44,6 +45,7 @@ namespace VrFox
             PlayerName = "Loogman Devop";
             HitByGarbage = 0;
             PlayerLevel = Difficulty.Noob;
+            InPrewash = true;
 
             IsSynced = false;
 
@@ -192,9 +194,14 @@ namespace VrFox
             Quaternion _newWorldRot = Quaternion.AngleAxis(_angle, CarWashWorld.Instance.transform.up);
 
             CarWashWorld.Instance.transform.rotation = _newWorldRot;
-
+            
             //Place player in the right position
+
+            //Chaeck later for eventual more becons
+
             CarWashWorld.Instance.transform.position = transform.position;
+            
+
         }
     }
 }

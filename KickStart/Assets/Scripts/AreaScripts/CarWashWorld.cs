@@ -22,7 +22,7 @@ public class CarWashWorld : MonoBehaviour {
 
     private void Start()
     {
-        //CreateXRayWorld();
+        CreateXRayWorld();
     }
 
     private void CreateXRayWorld()
