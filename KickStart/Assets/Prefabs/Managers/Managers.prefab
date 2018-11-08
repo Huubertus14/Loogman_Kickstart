@@ -588,7 +588,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 882144032aefc0947b380d7e8b5d00dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BirdPrefab: {fileID: 1315388206692908, guid: 0ad3357da30a64241bdb11810c946224, type: 2}
+  BirdPrefab: {fileID: 100000, guid: d418c88afd808cf448602106c7ead664, type: 2}
   StaticBirdPrefab: {fileID: 100000, guid: 7816352bcfafc054f80acbd80b76718e, type: 2}
   Spawns: []
   SpawnInterval: 3
@@ -783,7 +783,7 @@ MonoBehaviour:
     onScreenColor: {r: 0.3241377, g: 0, b: 1, a: 1}
     onScreenRotates: 0
     offScreenSprite: {fileID: 21300000, guid: c94b23e59bd617e43ae03cc154ec0cb0, type: 3}
-    offScreenColor: {r: 0.9034482, g: 1, b: 0, a: 1}
+    offScreenColor: {r: 1, g: 0, b: 0, a: 1}
     offScreenRotates: 1
     targetOffset: {x: 0, y: 0, z: 0}
     transition: 2

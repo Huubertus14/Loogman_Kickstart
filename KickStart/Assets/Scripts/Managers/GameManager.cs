@@ -253,7 +253,7 @@ namespace VrFox
             //remove all instructions
             gameState = GameStates.Playing;
 
-            Player.SyncCarWashWithPlayer(0);
+            Player.SyncCarWashWithPlayer(1);
         }
 
         /// <summary>

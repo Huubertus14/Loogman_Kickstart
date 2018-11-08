@@ -152,6 +152,7 @@ namespace HoloToolkit.Unity.InputModule
 
                 if ((foundCursors == null) || (foundCursors.Length == 0))
                 {
+                    return;
                     Debug.LogErrorFormat(this, "Couldn't find cursor for \"{0}.{1}\".", name, GetType().Name);
                 }
                 else if (foundCursors.Length > 1)
