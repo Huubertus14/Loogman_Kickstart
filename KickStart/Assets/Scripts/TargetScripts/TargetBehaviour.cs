@@ -32,8 +32,6 @@ public class TargetBehaviour : MonoBehaviour
         BirdSoundCounter = 0;
         AudioManager.Instance.PlayAudio(AudioSampleManager.Instance.getBirdSpawnSounds(), 1, gameObject);
         
-        GameManager.Instance.Indicator.AddIndicator(transform, 0);
-
         if (!Diaper)
         {
             Diaper = GetComponentInChildren<DiaperBehaviour>().gameObject;
@@ -61,6 +59,10 @@ public class TargetBehaviour : MonoBehaviour
         }
 
         Diaper.SetActive(IsHit);
+        if (!IsHit)
+        {
+            GameManager.Instance.Indicator.AddIndicator(transform, 0);
+        }
         GetEndPoint();
     }
 
@@ -121,12 +123,14 @@ public class TargetBehaviour : MonoBehaviour
         {
             Diaper.SetActive(true);
             GameManager.Instance.Player.Score++;
+            GameManager.Instance.Indicator.RemoveIndicator(transform);
         }
         else
         {
             Diaper.SetActive(false);
             GameManager.Instance.Player.Score -= 2;
             GameManager.Instance.SendTextMessage("Don't Shoot those whom already have a diaper on!", 2.5f, Vector2.zero);
+            GameManager.Instance.Indicator.AddIndicator(transform, 0);
         }
 
         if (GameManager.Instance.Player.Score < 5)

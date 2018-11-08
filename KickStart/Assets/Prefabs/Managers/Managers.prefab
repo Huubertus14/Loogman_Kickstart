@@ -783,7 +783,7 @@ MonoBehaviour:
     onScreenColor: {r: 0.3241377, g: 0, b: 1, a: 1}
     onScreenRotates: 0
     offScreenSprite: {fileID: 21300000, guid: c94b23e59bd617e43ae03cc154ec0cb0, type: 3}
-    offScreenColor: {r: 1, g: 0, b: 0, a: 1}
+    offScreenColor: {r: 0.9034482, g: 1, b: 0, a: 1}
     offScreenRotates: 1
     targetOffset: {x: 0, y: 0, z: 0}
     transition: 2
@@ -812,7 +812,6 @@ MonoBehaviour:
   EndScoreText: {fileID: 0}
   Targets: []
   gameState: 0
-  CurrentHandState: 0
   GameStarted: 0
   GameOver: 0
   TimePlayed: 0
@@ -824,7 +823,7 @@ MonoBehaviour:
   GestureAnimation: {fileID: 0}
   BoundaryIndicators: {fileID: 0}
   BulletForce: 240
-  CanContinueToNExtGame: 0
+  CanContinueNextGame: 0
 --- !u!114 &114771691676672076
 MonoBehaviour:
   m_ObjectHideFlags: 1

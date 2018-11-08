@@ -29,26 +29,6 @@ public class RecognizerManager : MonoBehaviour {
     /// </summary>
     private void TapHandler(TappedEventArgs obj)
     {
-        if (GameManager.Instance.gameState == GameStates.Waiting)
-        {
-            ImageCapture.Instance.TakePhoto(false);
-        }
-
-        if (GameManager.Instance.gameState == GameStates.Instructions)
-        {
-            if (GameManager.Instance.CurrentHandState == HandStates.NotVisible)
-            {
-                GameManager.Instance.InstrucionAmount += 3;
-                //Debug.Log("Clicker is used");
-            }
-            else
-            {
-                GameManager.Instance.InstrucionAmount++;
-              //  Debug.Log("Gesture is used");
-            }
-            return;
-        }
-
         if (GameManager.Instance.gameState == GameStates.GameEnd)
         {
             if (GameManager.Instance.CanContinueNextGame)
@@ -56,6 +36,12 @@ public class RecognizerManager : MonoBehaviour {
                 GameManager.Instance.ResetGame();
                 return;
             }
+        }
+
+        if (GameManager.Instance.gameState == GameStates.Instructions)
+        {
+            GameManager.Instance.InstrucionAmount++;
+            return;
         }
 
         //Only shoot in the gaming stage

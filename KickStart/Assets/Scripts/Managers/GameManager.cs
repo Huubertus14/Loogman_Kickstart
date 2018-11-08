@@ -16,16 +16,7 @@ namespace EnumStates
         GameEnd,
         Waiting
     }
-
-    public enum HandStates
-    {
-        Visible,
-        NotVisible,
-        Select,
-        Observing,
-        Release
-    }
-
+    
     public enum DustyStates
     {
         Idle,
@@ -81,7 +72,6 @@ namespace VrFox
 
         [Header("Values")]
         public GameStates gameState;
-        public HandStates CurrentHandState;
         public bool GameStarted;
         public bool GameOver;
         [Space]
@@ -96,10 +86,7 @@ namespace VrFox
         public Image HandPlaceBox;
         public GameObject GestureAnimation;
         public GameObject BoundaryIndicators;
-
-        private float instructionTimer;
-        private float instructionCounter;
-
+        
         [HideInInspector]
         public float BulletForce;
 
@@ -113,26 +100,12 @@ namespace VrFox
 
         private void Start()
         {
-            instructionTimer = 5.5f;
-
-            CurrentHandState = HandStates.NotVisible;
             BulletForce = 240 * 3;
             ResetGame();
         }
 
         private void Update()
         {
-
-            if (Input.GetKey(KeyCode.Space))
-            {
-                Time.timeScale = 2.5f;
-            }
-            else
-            {
-                Time.timeScale = 1;
-            }
-
-
             if (gameState == GameStates.Instructions) // do this when youare in the instructions
             {
                 Instructions();
@@ -177,69 +150,19 @@ namespace VrFox
         private void Instructions()
         {
             EndScoreText.text = "";
-            if (CurrentHandState == HandStates.NotVisible)
-            {
-                TutorialFeedbackText.text = "Hold your hand in front of you";
-            }
+          
             if (InstrucionAmount == 0)
             {
-                //Check if the hannd is visible
-                if (CurrentHandState == HandStates.NotVisible)
-                {
-                    TutorialFeedbackText.text = "Hold your index finger in the box";
-                    HandPlaceBox.gameObject.SetActive(true);
-                    GestureAnimation.SetActive(false);
-                    //Show visualBox
-                    BoundaryIndicators.SetActive(true);
-                }
-                else
-                {
-                    TutorialFeedbackText.text = "Try to mimic the gesture";
-                    HandPlaceBox.gameObject.SetActive(true);
+                TutorialFeedbackText.text = "Click with the clicker!";
+                BoundaryIndicators.SetActive(true);
 
-                    GestureAnimation.SetActive(true);
-
-                    BoundaryIndicators.SetActive(true);
-                }
-
+                GestureAnimation.SetActive(false);
+                HandPlaceBox.gameObject.SetActive(false);
                 return;
             }
-
-            if (InstrucionAmount == 1)
-            {
-                instructionCounter += Time.deltaTime;
-                //Check if the hannd is visible
-                if (CurrentHandState == HandStates.NotVisible)
-                {
-                    TutorialFeedbackText.text = "Hold your index finger in the box";
-                    HandPlaceBox.gameObject.SetActive(true);
-                    GestureAnimation.SetActive(false);
-                    InstrucionAmount = 0;
-                    instructionCounter = 0;
-                    //Show visualBox
-                    BoundaryIndicators.SetActive(false);
-                }
-                else
-                {
-                    TutorialFeedbackText.text = "Great! Try it again!";
-                    HandPlaceBox.gameObject.SetActive(true);
-                    GestureAnimation.SetActive(true);
-
-                    BoundaryIndicators.SetActive(false);
-
-                    if (instructionCounter > instructionTimer)
-                    {
-                        instructionCounter = 0;
-                        InstrucionAmount = 0;
-                        BoundaryIndicators.SetActive(true);
-                    }
-                }
-
-                return;
-            }
-
+            
             //start the game from the gesture manager
-            if (InstrucionAmount >= 2)
+            if (InstrucionAmount >= 1)
             {
                 TutorialFeedbackText.text = "";
                 SendTextMessage("Try to shoot as many birds as possible!", 12, Vector2.zero);
@@ -254,6 +177,7 @@ namespace VrFox
                 StartGame();
                 return;
             }
+            InstrucionAmount = 0;
         }
 
         public void ResetGame()
@@ -311,6 +235,7 @@ namespace VrFox
             CanContinueNextGame = false;
             GameOver = false;
             EndScoreText.text = "";
+            TutorialFeedbackText.text = "";
             GameStarted = true;
             TimePlayed = 180;
             GameOverTimer = 0;
@@ -327,6 +252,8 @@ namespace VrFox
 
             //remove all instructions
             gameState = GameStates.Playing;
+
+            Player.SyncCarWashWithPlayer(0);
         }
 
         /// <summary>
@@ -405,11 +332,7 @@ namespace VrFox
         {
             hoverObject = _hoverObject;
         }
-
-        public void SetHandState(HandStates _state)
-        {
-            CurrentHandState = _state;
-        }
+        
 
         /// <summary>
         /// Get a random quote 

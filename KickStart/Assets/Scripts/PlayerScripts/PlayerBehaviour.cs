@@ -55,7 +55,7 @@ namespace VrFox
             }
             posIndex = 0;
 
-            SyncCarWashWithPlayer(0);
+           // SyncCarWashWithPlayer(0);
         }
 
         //Player Shoots a bullet
@@ -139,7 +139,7 @@ namespace VrFox
 
             if (Input.GetKeyDown(KeyCode.T))
             {
-                SyncCarWashWithPlayer(3);
+                SyncCarWashWithPlayer(0);
             }
         }
 
@@ -196,19 +196,22 @@ namespace VrFox
             Quaternion _newWorldRot = Quaternion.AngleAxis(_angle, CarWashWorld.Instance.transform.up);
 
             //Rotate the carwash
-            CarWashWorld.Instance.transform.rotation = _newWorldRot;
+           // CarWashWorld.Instance.transform.rotation = _newWorldRot;
+            CarWashWorld.Instance.SetGoalRotation(_newWorldRot);
 
             //Place player in the right position
             //Chaeck later for eventual more becons
             
             if (_checkpointCount >= CarWashWorld.Instance.Checkpoint.Length)
             {
-                CarWashWorld.Instance.transform.position = transform.position - CarWashWorld.Instance.Checkpoint[0].transform.localPosition;
+                //CarWashWorld.Instance.transform.position = transform.position - CarWashWorld.Instance.Checkpoint[0].transform.localPosition;
+                CarWashWorld.Instance.SetGoalPosition(transform.position - CarWashWorld.Instance.Checkpoint[_checkpointCount].transform.localPosition);
                 Debug.LogError("Unable to find this checkpoint");
             }
             else
             {
-                CarWashWorld.Instance.transform.position = transform.position - CarWashWorld.Instance.Checkpoint[_checkpointCount].transform.localPosition;
+                //CarWashWorld.Instance.transform.position = transform.position - CarWashWorld.Instance.Checkpoint[_checkpointCount].transform.localPosition;
+                CarWashWorld.Instance.SetGoalPosition(transform.position - CarWashWorld.Instance.Checkpoint[_checkpointCount].transform.localPosition);
             }
         }
     }

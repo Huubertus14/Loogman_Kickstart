@@ -55,37 +55,6 @@ namespace HoloToolkit.Unity.InputModule
 
             if (state != CursorStateEnum.Contextual)
             {
-
-                //Set here the current cursor state
-                switch (state)
-                {
-                    case CursorStateEnum.None:
-                        GameManager.Instance.SetHandState(HandStates.NotVisible);
-                        break;
-                    case CursorStateEnum.Observe:
-                        GameManager.Instance.SetHandState(HandStates.NotVisible);
-                        break;
-                    case CursorStateEnum.ObserveHover:
-                        break;
-                    case CursorStateEnum.Interact:
-                        GameManager.Instance.SetHandState(HandStates.Visible);
-                        break;
-                    case CursorStateEnum.InteractHover:
-                        break;
-                    case CursorStateEnum.Select:
-                        GameManager.Instance.SetHandState(HandStates.Select);
-                        break;
-                    case CursorStateEnum.Release:
-                        GameManager.Instance.SetHandState(HandStates.Release);
-                        break;
-                    case CursorStateEnum.Contextual:
-                        GameManager.Instance.SetHandState(HandStates.NotVisible);
-                        break;
-                    default:
-                        GameManager.Instance.SetHandState(HandStates.NotVisible);
-                        break;
-                }
-
                 // Hide all children first
                 for (int i = 0; i < ParentTransform.childCount; i++)
                 {
