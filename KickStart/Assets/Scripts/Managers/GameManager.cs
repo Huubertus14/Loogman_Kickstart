@@ -104,7 +104,7 @@ namespace VrFox
         public float BulletForce;
 
         [HideInInspector]
-        public bool CanContinueToNExtGame;
+        public bool CanContinueNextGame;
 
 
         //Test
@@ -167,7 +167,7 @@ namespace VrFox
                 GameOverTimer += Time.deltaTime;
                 if (GameOverTimer > 2)
                 {
-                    CanContinueToNExtGame = true;
+                    CanContinueNextGame = true;
                     TutorialThing.IsVisible = true;
                     InstrucionAmount = 0;
                 }
@@ -308,7 +308,7 @@ namespace VrFox
             }
 
             Player.ResetPlayerValues();
-            CanContinueToNExtGame = false;
+            CanContinueNextGame = false;
             GameOver = false;
             EndScoreText.text = "";
             GameStarted = true;

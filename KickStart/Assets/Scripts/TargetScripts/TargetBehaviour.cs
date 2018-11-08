@@ -201,10 +201,4 @@ public class TargetBehaviour : MonoBehaviour
         BirdSoundTimer = Random.Range(3f, 6f);
     }
 
-    public void ThrowGarbage()
-    {
-        // Instantiate(GarbagePrefab,transform.position, Quaternion.identity);
-        // Debug.Log("Trow Garbage");
-
-    }
 }
