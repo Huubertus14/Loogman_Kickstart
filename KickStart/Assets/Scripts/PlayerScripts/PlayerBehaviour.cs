@@ -55,7 +55,7 @@ namespace VrFox
             }
             posIndex = 0;
 
-            SyncCarWashWithPlayer();
+            SyncCarWashWithPlayer(0);
         }
 
         //Player Shoots a bullet
@@ -139,7 +139,7 @@ namespace VrFox
 
             if (Input.GetKeyDown(KeyCode.T))
             {
-                SyncCarWashWithPlayer();
+                SyncCarWashWithPlayer(3);
             }
         }
 
@@ -169,9 +169,8 @@ namespace VrFox
             }
         }
 
-        public void SyncCarWashWithPlayer()
+        public void SyncCarWashWithPlayer(int _checkpointCount)
         {
-            
             IsSynced = true;
 
             //Fix the right rotation
@@ -193,17 +192,24 @@ namespace VrFox
             //Calculate the Y angle
             float _angle = Mathf.Atan2(_direction.x, _direction.z) * Mathf.Rad2Deg;
 
+            //Set new rotation using angle
             Quaternion _newWorldRot = Quaternion.AngleAxis(_angle, CarWashWorld.Instance.transform.up);
 
+            //Rotate the carwash
             CarWashWorld.Instance.transform.rotation = _newWorldRot;
-            
+
             //Place player in the right position
-
             //Chaeck later for eventual more becons
-
-            CarWashWorld.Instance.transform.position = transform.position;
             
-
+            if (_checkpointCount >= CarWashWorld.Instance.Checkpoint.Length)
+            {
+                CarWashWorld.Instance.transform.position = transform.position - CarWashWorld.Instance.Checkpoint[0].transform.localPosition;
+                Debug.LogError("Unable to find this checkpoint");
+            }
+            else
+            {
+                CarWashWorld.Instance.transform.position = transform.position - CarWashWorld.Instance.Checkpoint[_checkpointCount].transform.localPosition;
+            }
         }
     }
 }

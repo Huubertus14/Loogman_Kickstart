@@ -27,7 +27,7 @@ namespace MK.XRay
         public float distanceMin = .5f;
         public float distanceMax = 15f;
 
-        private Rigidbody rigidbody;
+        private Rigidbody RB;
 
         float x = 0.0f;
         float y = 0.0f;
@@ -44,12 +44,12 @@ namespace MK.XRay
             x = angles.y;
             y = angles.x;
 
-            rigidbody = GetComponent<Rigidbody>();
+            RB = GetComponent<Rigidbody>();
 
             // Make the rigid body not change rotation
-            if (rigidbody != null)
+            if (RB != null)
             {
-                rigidbody.freezeRotation = true;
+                RB.freezeRotation = true;
             }
         }
 

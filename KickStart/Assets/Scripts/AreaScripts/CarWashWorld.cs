@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using VrFox;
 
-public class CarWashWorld : MonoBehaviour {
+public class CarWashWorld : MonoBehaviour
+{
 
     public static CarWashWorld Instance;
     private void Awake()
@@ -16,13 +17,16 @@ public class CarWashWorld : MonoBehaviour {
 
     [Header("Prefabs:")]
     public Material XRayMaterial;
-    
+
+    [Header("CheckPoints:")]
+    public GameObject[] Checkpoint;
+
     private List<xRayObjectScript> allXRayObjects = new List<xRayObjectScript>();
     private Color[] cols = new Color[] { Color.red, Color.blue, Color.green, Color.cyan };
 
     private void Start()
     {
-        //CreateXRayWorld();
+        CreateXRayWorld();
     }
 
     private void CreateXRayWorld()
