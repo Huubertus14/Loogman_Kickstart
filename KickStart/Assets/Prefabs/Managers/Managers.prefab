@@ -225,6 +225,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1915433950920646
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4744552299942258}
+  - component: {fileID: 114969654599957296}
+  m_Layer: 0
+  m_Name: ScoreManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1931459747223382
 GameObject:
   m_ObjectHideFlags: 0
@@ -398,6 +414,7 @@ Transform:
   - {fileID: 4240907626247346}
   - {fileID: 4344326096096244}
   - {fileID: 4241661355379730}
+  - {fileID: 4744552299942258}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -439,6 +456,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4344326096096244}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4744552299942258
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1915433950920646}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4431195185167114}
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4922369209706164
 Transform:
@@ -900,6 +930,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b160d197a8ca1894796ae263bafec0ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114969654599957296
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1915433950920646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36a109e9df47b40409408da87f3016a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ScoreTemplate: {fileID: 1802387424464472, guid: 4ddedd4a14a8268498403dd6d7057d2c,
+    type: 2}
+  AllScores: 
 --- !u!114 &114989238720569496
 MonoBehaviour:
   m_ObjectHideFlags: 1

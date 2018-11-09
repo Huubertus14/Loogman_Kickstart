@@ -39,6 +39,7 @@ GameObject:
   - component: {fileID: 224938003725991024}
   - component: {fileID: 222269492291044590}
   - component: {fileID: 114796008383843038}
+  - component: {fileID: 114432603847038802}
   m_Layer: 5
   m_Name: CrossHair
   m_TagString: Untagged
@@ -387,6 +388,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1835246722778036
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 224743202672438000}
+  - component: {fileID: 114992857176254544}
+  m_Layer: 5
+  m_Name: HighScoreObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1872096841355866
 GameObject:
   m_ObjectHideFlags: 1
@@ -573,8 +590,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bec6c4a5f1fd8774f994aed296ee6e7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ActivePosition: {x: 0, y: 0, z: 0}
-  InactivePosition: {x: 0, y: 0, z: 0}
+  ActiveCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 2.365938
+      outSlope: 2.365938
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.15548152
+      value: 1.2676846
+      inSlope: 10.044491
+      outSlope: 10.044491
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.45960402
+      value: 0.6889441
+      inSlope: -4.9861703
+      outSlope: -4.9861703
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.69171613
+      value: 1.3630779
+      inSlope: 3.1920514
+      outSlope: 3.1920514
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
   isActive: 0
   Speed: 5
 --- !u!114 &114049957939691764
@@ -628,8 +679,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bec6c4a5f1fd8774f994aed296ee6e7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ActivePosition: {x: 0, y: 0, z: 0}
-  InactivePosition: {x: 0, y: 0, z: 0}
+  ActiveCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 2.365938
+      outSlope: 2.365938
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.15548152
+      value: 1.2676846
+      inSlope: 10.044491
+      outSlope: 10.044491
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.45960402
+      value: 0.6889441
+      inSlope: -4.9861703
+      outSlope: -4.9861703
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.69171613
+      value: 1.3630779
+      inSlope: 3.1920514
+      outSlope: 3.1920514
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
   isActive: 0
   Speed: 5
 --- !u!114 &114141273396278368
@@ -694,6 +779,7 @@ MonoBehaviour:
   GarbageTextFlash: {fileID: 114199783464211834}
   WaterAmounfSlider: {fileID: 114095377435816178}
   WaterUIWiggle: {fileID: 114727750443575202}
+  HighScoreObject: {fileID: 1835246722778036}
   PlayerName: 
   Score: 0
   HitByGarbage: 0
@@ -723,7 +809,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: b1f29eb52b0227f4484cee87dd365b62, type: 3}
     m_FontSize: 300
     m_FontStyle: 0
     m_BestFit: 1
@@ -896,7 +982,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: b1f29eb52b0227f4484cee87dd365b62, type: 3}
     m_FontSize: 143
     m_FontStyle: 0
     m_BestFit: 1
@@ -920,6 +1006,87 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 019988abaa9aba7488b2facfda1eec07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114432603847038802
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1049271205957818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1df75a56789665b498a641025615217d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ActiveScale: {x: 0, y: 0, z: 0}
+  InactiveScale: {x: 0, y: 0, z: 0}
+  ActiveCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  InactiveCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: -3.0354867
+      outSlope: -3.0354867
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  JiggleAnimation:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0.0010986328
+      value: 1.0014114
+      inSlope: -2.468902
+      outSlope: -2.468902
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.20450729
+      value: 0.50141144
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.65603185
+      value: 1.5
+      inSlope: -0.0288571
+      outSlope: -0.0288571
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1.0014114
+      inSlope: -1.1452656
+      outSlope: -1.1452656
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  isActive: 0
+  Speed: 0
 --- !u!114 &114440033861858422
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -940,7 +1107,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: b1f29eb52b0227f4484cee87dd365b62, type: 3}
     m_FontSize: 300
     m_FontStyle: 0
     m_BestFit: 1
@@ -1035,8 +1202,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bec6c4a5f1fd8774f994aed296ee6e7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ActivePosition: {x: 0, y: 0, z: 0}
-  InactivePosition: {x: 0, y: 0, z: 0}
+  ActiveCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 2.365938
+      outSlope: 2.365938
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.15548152
+      value: 1.2676846
+      inSlope: 10.044491
+      outSlope: 10.044491
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.45960402
+      value: 0.6889441
+      inSlope: -4.9861703
+      outSlope: -4.9861703
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.69171613
+      value: 1.3630779
+      inSlope: 3.1920514
+      outSlope: 3.1920514
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
   isActive: 0
   Speed: 5
 --- !u!114 &114518446138237072
@@ -1059,7 +1260,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: b1f29eb52b0227f4484cee87dd365b62, type: 3}
     m_FontSize: 139
     m_FontStyle: 0
     m_BestFit: 1
@@ -1083,8 +1284,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bec6c4a5f1fd8774f994aed296ee6e7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ActivePosition: {x: 0, y: 0, z: 0}
-  InactivePosition: {x: 0, y: 0, z: 0}
+  ActiveCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 2.365938
+      outSlope: 2.365938
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.15548152
+      value: 1.2676846
+      inSlope: 10.044491
+      outSlope: 10.044491
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.45960402
+      value: 0.6889441
+      inSlope: -4.9861703
+      outSlope: -4.9861703
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.69171613
+      value: 1.3630779
+      inSlope: 3.1920514
+      outSlope: 3.1920514
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
   isActive: 0
   Speed: 5
 --- !u!114 &114560457514252092
@@ -1168,8 +1403,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bec6c4a5f1fd8774f994aed296ee6e7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ActivePosition: {x: 0, y: 0, z: 0}
-  InactivePosition: {x: 0, y: 0, z: 0}
+  ActiveCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 2.365938
+      outSlope: 2.365938
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.15548152
+      value: 1.2676846
+      inSlope: 10.044491
+      outSlope: 10.044491
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.45960402
+      value: 0.6889441
+      inSlope: -4.9861703
+      outSlope: -4.9861703
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.69171613
+      value: 1.3630779
+      inSlope: 3.1920514
+      outSlope: 3.1920514
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
   isActive: 0
   Speed: 5
 --- !u!114 &114685645170891510
@@ -1210,8 +1479,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bec6c4a5f1fd8774f994aed296ee6e7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ActivePosition: {x: 0, y: 0, z: 0}
-  InactivePosition: {x: 0, y: 0, z: 0}
+  ActiveCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 2.365938
+      outSlope: 2.365938
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.15548152
+      value: 1.2676846
+      inSlope: 10.044491
+      outSlope: 10.044491
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.45960402
+      value: 0.6889441
+      inSlope: -4.9861703
+      outSlope: -4.9861703
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.69171613
+      value: 1.3630779
+      inSlope: 3.1920514
+      outSlope: 3.1920514
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
   isActive: 0
   Speed: 5
 --- !u!114 &114727750443575202
@@ -1342,7 +1645,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: b1f29eb52b0227f4484cee87dd365b62, type: 3}
     m_FontSize: 189
     m_FontStyle: 0
     m_BestFit: 1
@@ -1366,8 +1669,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bec6c4a5f1fd8774f994aed296ee6e7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ActivePosition: {x: 0, y: 0, z: 0}
-  InactivePosition: {x: 0, y: 0, z: 0}
+  ActiveCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 2.365938
+      outSlope: 2.365938
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.15548152
+      value: 1.2676846
+      inSlope: 10.044491
+      outSlope: 10.044491
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.45960402
+      value: 0.6889441
+      inSlope: -4.9861703
+      outSlope: -4.9861703
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.69171613
+      value: 1.3630779
+      inSlope: 3.1920514
+      outSlope: 3.1920514
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
   isActive: 0
   Speed: 5
 --- !u!114 &114796008383843038
@@ -1407,8 +1744,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bec6c4a5f1fd8774f994aed296ee6e7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ActivePosition: {x: 0, y: 0, z: 0}
-  InactivePosition: {x: 0, y: 0, z: 0}
+  ActiveCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 2.365938
+      outSlope: 2.365938
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.15548152
+      value: 1.2676846
+      inSlope: 10.044491
+      outSlope: 10.044491
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.45960402
+      value: 0.6889441
+      inSlope: -4.9861703
+      outSlope: -4.9861703
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.69171613
+      value: 1.3630779
+      inSlope: 3.1920514
+      outSlope: 3.1920514
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
   isActive: 0
   Speed: 5
 --- !u!114 &114869065679216948
@@ -1565,6 +1936,29 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114992857176254544
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1835246722778036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -2095666955, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 0
+  m_StartCorner: 0
+  m_StartAxis: 0
+  m_CellSize: {x: 100, y: 44}
+  m_Spacing: {x: 0, y: 0}
+  m_Constraint: 0
+  m_ConstraintCount: 2
 --- !u!124 &124220340723711116
 Behaviour:
   m_ObjectHideFlags: 1
@@ -2013,6 +2407,24 @@ RectTransform:
   m_AnchoredPosition: {x: 1590, y: 500}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!224 &224743202672438000
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1835246722778036}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 224881335002507032}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224749280900909296
 RectTransform:
   m_ObjectHideFlags: 1
@@ -2110,6 +2522,7 @@ RectTransform:
   - {fileID: 224953894910050276}
   - {fileID: 224170487884771030}
   - {fileID: 224938003725991024}
+  - {fileID: 224743202672438000}
   m_Father: {fileID: 4491471514911760}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
