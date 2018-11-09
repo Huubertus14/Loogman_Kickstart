@@ -33,7 +33,6 @@ public class EventBehaviour : MonoBehaviour
 
     private void FillIntervalArray()
     {
-
         Debug.Log("Start filling array");
         for (int i = 0; i < spawnInterval.Length; i++)
         {

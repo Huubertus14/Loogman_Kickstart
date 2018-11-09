@@ -139,7 +139,7 @@ namespace VrFox
 
             if (Input.GetKeyDown(KeyCode.T))
             {
-                SyncCarWashWithPlayer(0);
+                SyncCarWashWithPlayer(1);
             }
         }
 
@@ -205,8 +205,8 @@ namespace VrFox
             if (_checkpointCount >= CarWashWorld.Instance.Checkpoint.Length)
             {
                 //CarWashWorld.Instance.transform.position = transform.position - CarWashWorld.Instance.Checkpoint[0].transform.localPosition;
-                CarWashWorld.Instance.SetGoalPosition(transform.position - CarWashWorld.Instance.Checkpoint[_checkpointCount].transform.localPosition);
-                Debug.LogError("Unable to find this checkpoint");
+                CarWashWorld.Instance.SetGoalPosition(transform.position - CarWashWorld.Instance.Checkpoint[0].transform.localPosition);
+                Debug.LogError("Unable to find this checkpoint - " + "Index: " + _checkpointCount + "\nMax Index = " + (CarWashWorld.Instance.Checkpoint.Length - 1));
             }
             else
             {

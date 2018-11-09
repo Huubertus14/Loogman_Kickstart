@@ -83,10 +83,12 @@ namespace VrFox
 
         [Header("Tutorial values")]
         public Text TutorialFeedbackText;
-        public Image HandPlaceBox;
-        public GameObject GestureAnimation;
         public GameObject BoundaryIndicators;
-        
+
+        [Space]
+        public ActivationLerp[] InstructionLerps;
+        private float BeginTimer = 0;
+
         [HideInInspector]
         public float BulletForce;
 
@@ -102,13 +104,22 @@ namespace VrFox
         {
             BulletForce = 240 * 3;
             ResetGame();
+            BoundaryIndicators.SetActive(true);
         }
 
         private void Update()
         {
             if (gameState == GameStates.Instructions) // do this when youare in the instructions
             {
-                Instructions();
+                BeginTimer += Time.deltaTime;
+                TutorialFeedbackText.text = "";
+                if (BeginTimer > 3)
+                {
+                    SetAllInstructionsActive(true);
+                    Instructions();
+                }
+
+               // Instructions();
             }
             if (gameState == GameStates.Playing)
             {
@@ -155,9 +166,7 @@ namespace VrFox
             {
                 TutorialFeedbackText.text = "Click with the clicker!";
                 BoundaryIndicators.SetActive(true);
-
-                GestureAnimation.SetActive(false);
-                HandPlaceBox.gameObject.SetActive(false);
+                
                 return;
             }
             
@@ -166,9 +175,6 @@ namespace VrFox
             {
                 TutorialFeedbackText.text = "";
                 SendTextMessage("Try to shoot as many birds as possible!", 12, Vector2.zero);
-                //remove boxes
-                GestureAnimation.SetActive(false);
-                HandPlaceBox.gameObject.SetActive(false);
 
                 //rempve arrows
                 BoundaryIndicators.SetActive(false);
@@ -188,15 +194,20 @@ namespace VrFox
             ScoreText.text = "";
             InstrucionAmount = 0;
             GameStarted = false;
-
-            //remove boxes
-            GestureAnimation.SetActive(false);
-            HandPlaceBox.gameObject.SetActive(false);
-
+            
             //rempve arrows
             BoundaryIndicators.SetActive(false);
 
             gameState = GameStates.Instructions;
+        }
+
+        public void SetAllInstructionsActive(bool _value)
+        {
+            for (int i = 0; i < InstructionLerps.Length; i++)
+            {
+                InstructionLerps[i].SetActive(_value, 3.5f);
+            }
+            Debug.Log("Show instructions");
         }
 
         /// <summary>
@@ -215,12 +226,7 @@ namespace VrFox
 
             ShowEndScore();
         }
-
-        private void SetGestureActive()
-        {
-            GestureAnimation.SetActive(true);
-        }
-
+        
         /// <summary>
         /// Called when the game is about to start
         /// </summary>
@@ -243,16 +249,13 @@ namespace VrFox
 
             SpawnManager.Instance.spawnStatic = true;
             
-            //remove boxes
-            GestureAnimation.SetActive(false);
-            HandPlaceBox.gameObject.SetActive(false);
-
             //rempve arrows
-            BoundaryIndicators.SetActive(false);
+            //BoundaryIndicators.SetActive(false);
 
             //remove all instructions
             gameState = GameStates.Playing;
 
+            SetAllInstructionsActive(false);
             Player.SyncCarWashWithPlayer(1);
         }
 

@@ -819,9 +819,16 @@ MonoBehaviour:
   DurationToImpusle: 210
   DurationFromImpulse: 120
   TutorialFeedbackText: {fileID: 0}
-  HandPlaceBox: {fileID: 0}
-  GestureAnimation: {fileID: 0}
   BoundaryIndicators: {fileID: 0}
+  InstructionLerps:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   BulletForce: 240
   CanContinueNextGame: 0
 --- !u!114 &114771691676672076
