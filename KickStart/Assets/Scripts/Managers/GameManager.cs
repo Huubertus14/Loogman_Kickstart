@@ -57,6 +57,7 @@ namespace VrFox
         public GestureImage TutorialThing;
         public OffScreenIndicator Indicator;
         public MessageTextBehaviour messageText;
+        public CrossHairTween CrossHairEffect;
         
         [Header("UI Elements:")]
         public Text ScoreText;
@@ -140,6 +141,11 @@ namespace VrFox
                         SetTimeText();
                     }
                 }
+
+                if (Input.GetKeyDown(KeyCode.O))
+                {
+                    CrossHairEffect.StartJiggle(0.5f);
+                }
             }
             if (gameState == GameStates.Waiting)
             {
@@ -220,9 +226,7 @@ namespace VrFox
             GameOver = true;
             gameState = GameStates.GameEnd;
 
-            Invoke("SetGestureActive", 3f);
-
-            //Destroy all birds
+            CrossHairEffect.SetActive(false, 2.2f);
 
             ShowEndScore();
         }
@@ -249,12 +253,11 @@ namespace VrFox
 
             SpawnManager.Instance.spawnStatic = true;
             
-            //rempve arrows
-            //BoundaryIndicators.SetActive(false);
 
             //remove all instructions
             gameState = GameStates.Playing;
 
+            CrossHairEffect.SetActive(true, 1.4f);
             SetAllInstructionsActive(false);
             Player.SyncCarWashWithPlayer(1);
         }

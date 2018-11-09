@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class ActivationLerp : MonoBehaviour
 {
-    public Vector3 ActiveScale;
-    public Vector3 InactiveScale;
+    private Vector3 ActiveScale;
+    private Vector3 InactiveScale;
 
     public AnimationCurve ActiveCurve;
 
-    public float timeTweenKey, tweenValue;
-    public float duration;
+    private float timeTweenKey, tweenValue;
+    private float duration;
 
     public bool isActive;
 
@@ -65,9 +65,7 @@ public class ActivationLerp : MonoBehaviour
         {
             tweenStarted = false;
         }
-
-
-        Debug.Log("Yeet");
+        
     }
 
 }
