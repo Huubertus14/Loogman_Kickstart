@@ -205,7 +205,7 @@ namespace VrFox
         {
             for (int i = 0; i < InstructionLerps.Length; i++)
             {
-                InstructionLerps[i].SetActive(_value, 3.5f);
+                InstructionLerps[i].SetActive(_value, 1.8f);
             }
             Debug.Log("Show instructions");
         }
