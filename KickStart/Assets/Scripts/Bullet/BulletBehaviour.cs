@@ -20,9 +20,15 @@ public class BulletBehaviour : MonoBehaviour {
         }
         rb.AddForce(Camera.main.transform.forward * GameManager.Instance.BulletForce);
     }
-
+    
     private void OnCollisionEnter(Collision collision)
     {
+        if (collision.gameObject.tag == "xRayObject")
+        {
+            CarWashWorld.Instance.ShowImpulse(transform.position);
+            Destroy(gameObject);
+        }
+
         if (collision.gameObject.tag.Contains("Target"))
         {
             //Target HIT!
@@ -36,11 +42,7 @@ public class BulletBehaviour : MonoBehaviour {
             }
 
             GameManager.Instance.SetScoreText();
-
-            //SpawnManager.Instance.CreateParticleEffect(true,transform.position);
-
-            //Debug.Log("Create Smoke effect");
-
+            
             Destroy(gameObject);
         }
     }

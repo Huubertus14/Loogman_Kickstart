@@ -2,137 +2,177 @@
 using System.Collections.Generic;
 using UnityEngine;
 using VrFox;
+using EnumStates;
 
-public class SpawnManager : MonoBehaviour {
-
-    public static SpawnManager Instance;
-    private void Awake()
+namespace VrFox
+{
+    public class SpawnManager : MonoBehaviour
     {
-        Instance = this;
-    }
-
-    [Header("Prefabs")]
-    public GameObject BirdPrefab;
-    public GameObject StaticBirdPrefab;
-    
-    [Header("Values")]
-    public float SpawnInterval;
-    private float spawnTimer;
-    public int MaxBirdCount;
-    public int CurrentBirdCount;
-    [Space]
-    public GameObject DeathParticle;
-    public GameObject SmokeParticles;
-    public GameObject BirdHitEffect;
-
-    private GameObject lastBird;
-
-    private void Update()
-    {
-        if (!GameManager.Instance.GameStarted)
+        public static SpawnManager Instance;
+        private void Awake()
         {
-            return;
+            Instance = this;
         }
-        spawnTimer += Time.deltaTime;
-        if (spawnTimer > SpawnInterval)
+
+        [Header("Prefabs")]
+        public GameObject BirdPrefab;
+        public GameObject StaticBirdPrefab;
+
+        [Header("Refs:")]
+        public List<GameObject> Spawns = new List<GameObject>();
+
+
+        [Header("Values")]
+        public float SpawnInterval;
+        private float spawnTimer;
+        public int MaxBirdCount;
+        public int CurrentBirdCount;
+        [Space]
+        public GameObject DeathParticle;
+        public GameObject SmokeParticles;
+        public GameObject BirdHitEffect;
+
+        public GameObject OrientationHolder;
+
+        public bool spawnStatic;
+
+        private GameObject lastBird;
+
+        private void Start()
         {
-            spawnTimer = 0;
-            if (GameManager.Instance.Player.Score > 3)
+            spawnStatic = true;
+        }
+
+        private void Update()
+        {
+            if (!GameManager.Instance.GameStarted)
             {
-                //spawn normal bird
-                SpawnBird();
+                return;
             }
-            else
+            spawnTimer += Time.deltaTime;
+            if (spawnTimer > SpawnInterval)
             {
-                //spawn Static bird
-                SpawnBirdInFrontOfPlayer();
+                spawnTimer = 0;
+                if (GameManager.Instance.Player.Score < 4)
+                {
+                    if (spawnStatic)
+                    {
+                        SpawnBirdInFrontOfPlayer();
+                    }
+                    else
+                    {
+                        spawnStatic = false;
+                        SpawnBird();
+                    }
+                }
+                else
+                {
+                    //spawn normal bird
+                    SpawnBird();
+                }
             }
         }
-    }
 
-
-    public void SpawnBird()
-    {
-        if (CurrentBirdCount <= MaxBirdCount)
+        public void SpawnBird()
         {
+            if (CurrentBirdCount <= MaxBirdCount)
+            {
+                CurrentBirdCount++;
+
+                //Spawn bird
+                GameObject _bird = Instantiate(BirdPrefab, transform.position, Quaternion.identity);
+                GameManager.Instance.Targets.Add(_bird.GetComponentInChildren<Renderer>());
+
+                float _spawnY = Camera.main.transform.position.y + Random.Range(-0.2f, 0.2f);
+
+                //Set right spawn point 
+                Vector3 _direction = new Vector3(Random.Range(-0.8f, 0.8f), Random.Range(-1, 1), 1);
+                float _distance = Random.Range(-22, -7);
+
+                // Debug.Log(_direction * _distance);
+                if (_distance < 5)
+                {
+                    _distance = 5;
+                }
+                else if (_distance > -5)
+                {
+                    _distance = -5;
+                }
+
+                _bird.transform.position = _direction * _distance;
+                _bird.transform.position = new Vector3(_bird.transform.position.x, _spawnY, _bird.transform.position.z);
+
+                lastBird = _bird;
+            }
+
+            //Set new spawn interval
+            switch (GameManager.Instance.GetDiffictuly)
+            {
+                case Difficulty.Noob:
+                    SpawnInterval = Random.Range(3.5f, 5.5f);
+                    break;
+                case Difficulty.Beginner:
+                    SpawnInterval = Random.Range(2.9f, 4.5f);
+                    break;
+                case Difficulty.Normal:
+                    SpawnInterval = Random.Range(1.7f, 3.8f);
+                    break;
+                case Difficulty.Hard:
+                    SpawnInterval = Random.Range(0.8f, 2.6f);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        public void SpawnBirdInFrontOfPlayer()
+        {
+            if (CurrentBirdCount > 0)
+            {
+                return;
+            }
             CurrentBirdCount++;
 
             //Spawn bird
-            GameObject _bird = Instantiate(BirdPrefab, transform.position, Quaternion.identity);
+            GameObject _bird = Instantiate(StaticBirdPrefab, transform.position, Quaternion.identity);
             GameManager.Instance.Targets.Add(_bird.GetComponentInChildren<Renderer>());
 
-            float _spawnY = Camera.main.transform.position.y + Random.Range(-0.2f,0.2f);
-
             //Set right spawn point 
-            Vector3 _direction =  new Vector3(Random.Range(-0.7f,0.7f), Random.Range(-1, 1), 1);
-            float _distance = Random.Range(-22, 22);
-           
-            // Debug.Log(_direction * _distance);
-            if (_distance < 5)
-            {
-                _distance = 5;
-            }
-            else if (_distance > -5)
-            {
-                _distance = -5;
-            }
+            Vector3 _direction = Camera.main.transform.forward;
+            float _distance = Random.Range(2, 5);
 
             _bird.transform.position = _direction * _distance;
-            _bird.transform.position = new Vector3(_bird.transform.position.x, _spawnY, _bird.transform.position.z);
+            _bird.transform.position = new Vector3(_bird.transform.position.x, Random.Range(-0.5f, 1.2f), _bird.transform.position.z);
 
             lastBird = _bird;
-            
         }
-    }
 
-    public void SpawnBirdInFrontOfPlayer()
-    {
-        if (CurrentBirdCount > 0)
+        public void CreateParticleEffect(bool _IsHit, Vector3 _birdPosition)
         {
-            return;
-        }
-        CurrentBirdCount++;
+            //Check if killed or missed!
+            //Depending on type of death add effect
 
-        //Spawn bird
-        GameObject _bird = Instantiate(StaticBirdPrefab, transform.position, Quaternion.identity);
-        GameManager.Instance.Targets.Add(_bird.GetComponentInChildren<Renderer>());
-
-        //Set right spawn point 
-        Vector3 _direction = Camera.main.transform.forward;
-        float _distance = Random.Range(2, 5);
-        
-        _bird.transform.position = _direction * _distance;
-        _bird.transform.position = new Vector3(_bird.transform.position.x, Random.Range(-0.5f, 1.2f), _bird.transform.position.z);
-
-        lastBird = _bird;
-    }
-
-    public void CreateParticleEffect(bool _IsHit, Vector3 _birdPosition)
-    {
-        //Check if killed or missed!
-        //Depending on type of death add effect
-
-        CurrentBirdCount--;
-        if (_IsHit)
-        {
-            if (DeathParticle)
+            CurrentBirdCount--;
+            if (_IsHit)
             {
-                Instantiate(DeathParticle, _birdPosition, Quaternion.identity);
+                if (DeathParticle)
+                {
+                    Instantiate(DeathParticle, _birdPosition, Quaternion.identity);
+                }
+            }
+            else
+            {
+                if (SmokeParticles)
+                {
+                    Instantiate(SmokeParticles, _birdPosition, Quaternion.identity);
+                }
             }
         }
-        else
+
+        public GameObject GetLastBird
         {
-            if (SmokeParticles)
-            {
-                Instantiate(SmokeParticles, _birdPosition, Quaternion.identity);
-            }
+            get { return lastBird; }
         }
-    }
 
-
-    public GameObject GetLastBird
-    {
-        get { return lastBird; }
     }
-     
 }

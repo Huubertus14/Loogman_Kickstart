@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using VrFox;
+using EnumStates;
 
 public class TargetBehaviour : MonoBehaviour
 {
@@ -17,54 +18,89 @@ public class TargetBehaviour : MonoBehaviour
     private Vector3 endPoint;
     private AudioSource audioSource;
 
+    private Vector3 newEndPoint;
+
     //[Header("Refs:")]
     private GameObject Diaper;
-
-    public bool OnScreen;
-    Vector3 screenPoint;// = playerHead.leftCamera.WorldToViewportPoint(targetPoint.position);
-
+    
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        
+
         //plays spawn sound of bird
         BirdSoundTimer = Random.Range(3f, 6f);
         BirdSoundCounter = 0;
         AudioManager.Instance.PlayAudio(AudioSampleManager.Instance.getBirdSpawnSounds(), 1, gameObject);
-
-        GameManager.Instance.Indicator.AddIndicator(transform, 0);
-        Speed = Random.Range(0.01f, 0.015f);
+        
         if (!Diaper)
         {
             Diaper = GetComponentInChildren<DiaperBehaviour>().gameObject;
         }
-        if (GameManager.Instance.Player.Score > 9)
+        
+        Speed = Random.Range(0.01f, 0.015f);
+
+        switch (GameManager.Instance.GetDiffictuly)
         {
-            IsHit = (Random.Range(1, 10) % 2 == 0);
-        }
-        else
-        {
-            IsHit = false;
+            case Difficulty.Noob:
+                Speed *= 0.8f;
+                break;
+            case Difficulty.Beginner:
+                break;
+            case Difficulty.Normal:
+                Speed *= 1.1f;
+                IsHit = ((int)Random.Range(0, 8) == 2);
+                break;
+            case Difficulty.Hard:
+                Speed *= 1.3f;
+                IsHit = ((int)Random.Range(0, 6) == 2);
+                break;
+            default:
+                break;
         }
 
         Diaper.SetActive(IsHit);
+        if (!IsHit)
+        {
+            GameManager.Instance.Indicator.AddIndicator(transform, 0);
+        }
         GetEndPoint();
     }
 
     private void GetEndPoint()
     {
-        //Get direction to player
-        Vector3 _dirToPlayer = GameManager.Instance.CurrentPlayer.transform.position - transform.position;
-        _dirToPlayer.Normalize();
+        if ((int)Random.Range(0, 4) == 1)
+        {
+            //Get direction to player
+            Vector3 _dirToPlayer = GameManager.Instance.CurrentPlayer.transform.position - transform.position;
+            _dirToPlayer.Normalize();
 
-        //get Distance to player
-        float _disToPlayer = Vector3.Distance(transform.position, GameManager.Instance.CurrentPlayer.transform.position) * 2;
+            //get Distance to player
+            float _disToPlayer = Vector3.Distance(transform.position, GameManager.Instance.CurrentPlayer.transform.position) * 2;
 
-        //get opposite position of player
-        endPoint = transform.position + (_dirToPlayer * _disToPlayer);
-        endPoint.y = Camera.main.transform.position.y + Random.Range(-0.2f, 0.2f);
+            //get opposite position of player
+            endPoint = transform.position + (_disToPlayer * _dirToPlayer);
+            endPoint.y = Camera.main.transform.position.y + Random.Range(-0.2f, 0.2f);
 
-        transform.LookAt(endPoint);
+            transform.LookAt(endPoint);
+        }
+        else
+        {
+            //Get direction to player
+            Vector3 _dirToPlayer = GameManager.Instance.CurrentPlayer.transform.position - transform.position;
+
+            //Randomize _dirToPlayer
+            _dirToPlayer.x = Random.Range(-5, 5);
+            _dirToPlayer.z = Random.Range(-10, -5);
+            _dirToPlayer.Normalize();
+            //Debug
+            //Debug.Log(_dirToPlayer);
+
+            //Create endpoint in front of player
+            endPoint = transform.position + (Random.Range(5, 10) * _dirToPlayer);
+            endPoint.y = Camera.main.transform.position.y + Random.Range(-0.2f, 0.2f);
+
+            transform.LookAt(endPoint);
+        }
     }
 
     private void OnDestroy()
@@ -87,24 +123,26 @@ public class TargetBehaviour : MonoBehaviour
         {
             Diaper.SetActive(true);
             GameManager.Instance.Player.Score++;
+            GameManager.Instance.Indicator.RemoveIndicator(transform);
         }
         else
         {
             Diaper.SetActive(false);
             GameManager.Instance.Player.Score -= 2;
             GameManager.Instance.SendTextMessage("Don't Shoot those whom already have a diaper on!", 2.5f, Vector2.zero);
+            GameManager.Instance.Indicator.AddIndicator(transform, 0);
         }
 
         if (GameManager.Instance.Player.Score < 5)
         {
             //Check if first thing
-            gameObject.AddComponent<CleanUp>();
+            //gameObject.AddComponent<CleanUp>();
             GetComponent<CleanUp>().LifeTime = 3;
         }
     }
 
     private void Update()
-    {        
+    {
         if (!GameManager.Instance.GameStarted)
         {
             Destroy(gameObject);
@@ -118,12 +156,41 @@ public class TargetBehaviour : MonoBehaviour
             {
                 SpawnManager.Instance.CreateParticleEffect(IsHit, transform.position);
                 Destroy(gameObject);
+
+            }
+            else if (CheckIfBirdBehindPlayer())
+            {
+                SpawnManager.Instance.CreateParticleEffect(IsHit, transform.position);
+                Destroy(gameObject);
             }
         }
 
         // plays flying/flapping sound of bird
         BirdFlapSound();
-       
+
+    }
+
+    private bool CheckIfBirdBehindPlayer()
+    {
+        if (transform.position.z < (Camera.main.transform.position.z - 0.5))
+        {
+            return true;
+        }
+        if (transform.position.x < (Camera.main.transform.position.x) - 3.8)
+        {
+            if (transform.position.z < Camera.main.transform.position.z - 0.5)
+            {
+                return true;
+            }
+        }
+        if (transform.position.x > (Camera.main.transform.position.x) + 3.8)
+        {
+            if (transform.position.z < (Camera.main.transform.position.z) - 0.5)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void BirdFlapSound()
@@ -138,10 +205,4 @@ public class TargetBehaviour : MonoBehaviour
         BirdSoundTimer = Random.Range(3f, 6f);
     }
 
-    public void ThrowGarbage()
-    {
-        // Instantiate(GarbagePrefab,transform.position, Quaternion.identity);
-        // Debug.Log("Trow Garbage");
-
-    }
 }

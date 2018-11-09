@@ -16,21 +16,20 @@ namespace EnumStates
         GameEnd,
         Waiting
     }
-
-    public enum HandStates
-    {
-        Visible,
-        NotVisible,
-        Select,
-        Observing,
-        Release
-    }
-
+    
     public enum DustyStates
     {
         Idle,
         Pointing,
         Talking
+    }
+
+    public enum Difficulty
+    {
+        Noob,
+        Beginner,
+        Normal,
+        Hard
     }
 }
 
@@ -38,13 +37,17 @@ namespace VrFox
 {
     public class GameManager : MonoBehaviour
     {
-
         public static GameManager Instance;
         private void Awake()
         {
             Instance = this;
 
         }
+
+        
+        //Key and URL used for the photo recognition
+        private readonly string predictionEndPoint = "https://southcentralus.api.cognitive.microsoft.com/customvision/v2.0/Prediction/92a36c67-658a-4ac6-85c4-3cde6f501d22/image";
+        private readonly string predictionKey = "88559f30c5c44cbb986359fcd7126920";
 
         [Header("References:s")]
         public PlayerBehaviour Player;
@@ -69,28 +72,29 @@ namespace VrFox
 
         [Header("Values")]
         public GameStates gameState;
-        public HandStates CurrentHandState;
         public bool GameStarted;
         public bool GameOver;
         [Space]
         public float TimePlayed;
         public int InstrucionAmount;
+        [Space]
+        public float DurationToImpusle;
+        public float DurationFromImpulse;
 
         [Header("Tutorial values")]
         public Text TutorialFeedbackText;
-        public Image HandPlaceBox;
-        public GameObject GestureAnimation;
         public GameObject BoundaryIndicators;
 
-        private float instructionTimer;
-        private float instructionCounter;
+        [Space]
+        public ActivationLerp[] InstructionLerps;
+        private float BeginTimer = 0;
 
         [HideInInspector]
         public float BulletForce;
 
         [HideInInspector]
-        public bool CanContinueToNExtGame;
-        
+        public bool CanContinueNextGame;
+
 
         //Test
         //Timer to run when the game is over and will reset
@@ -98,19 +102,24 @@ namespace VrFox
 
         private void Start()
         {
-            instructionTimer = 5.5f;
-            
-            CurrentHandState = HandStates.NotVisible;
-            BulletForce = 240*3;
+            BulletForce = 240 * 3;
             ResetGame();
+            BoundaryIndicators.SetActive(true);
         }
 
         private void Update()
         {
-            
             if (gameState == GameStates.Instructions) // do this when youare in the instructions
             {
-                Instructions();
+                BeginTimer += Time.deltaTime;
+                TutorialFeedbackText.text = "";
+                if (BeginTimer > 3)
+                {
+                    SetAllInstructionsActive(true);
+                    Instructions();
+                }
+
+               // Instructions();
             }
             if (gameState == GameStates.Playing)
             {
@@ -134,7 +143,7 @@ namespace VrFox
             }
             if (gameState == GameStates.Waiting)
             {
-                //Wait for something
+                //Wait for picture to find
             }
             if (gameState == GameStates.GameEnd)
             {
@@ -142,7 +151,7 @@ namespace VrFox
                 GameOverTimer += Time.deltaTime;
                 if (GameOverTimer > 2)
                 {
-                    CanContinueToNExtGame = true;
+                    CanContinueNextGame = true;
                     TutorialThing.IsVisible = true;
                     InstrucionAmount = 0;
                 }
@@ -152,74 +161,20 @@ namespace VrFox
         private void Instructions()
         {
             EndScoreText.text = "";
-            if (CurrentHandState == HandStates.NotVisible)
-            {
-                TutorialFeedbackText.text = "Hold your hand in front of you";
-            }
+          
             if (InstrucionAmount == 0)
             {
-                //Check if the hannd is visible
-                if (CurrentHandState == HandStates.NotVisible)
-                {
-                    TutorialFeedbackText.text = "Hold your index finger in the box";
-                    HandPlaceBox.gameObject.SetActive(true);
-                    GestureAnimation.SetActive(false);
-                    //Show visualBox
-                    BoundaryIndicators.SetActive(true);
-                }
-                else
-                {
-                    TutorialFeedbackText.text = "Try to mimic the gesture";
-                    HandPlaceBox.gameObject.SetActive(true);
-
-                    GestureAnimation.SetActive(true);
-
-                    BoundaryIndicators.SetActive(true);
-                }
-
+                TutorialFeedbackText.text = "Click with the clicker!";
+                BoundaryIndicators.SetActive(true);
+                
                 return;
             }
-
-            if (InstrucionAmount == 1)
-            {
-                instructionCounter += Time.deltaTime;
-                //Check if the hannd is visible
-                if (CurrentHandState == HandStates.NotVisible)
-                {
-                    TutorialFeedbackText.text = "Hold your index finger in the box";
-                    HandPlaceBox.gameObject.SetActive(true);
-                    GestureAnimation.SetActive(false);
-                    InstrucionAmount = 0;
-                    instructionCounter = 0;
-                    //Show visualBox
-                    BoundaryIndicators.SetActive(false);
-                }
-                else
-                {
-                    TutorialFeedbackText.text = "Great! Try it again!";
-                    HandPlaceBox.gameObject.SetActive(true);
-                    GestureAnimation.SetActive(true);
-
-                    BoundaryIndicators.SetActive(false);
-
-                    if (instructionCounter > instructionTimer)
-                    {
-                        instructionCounter = 0;
-                        InstrucionAmount = 0;
-                        BoundaryIndicators.SetActive(true);
-                    }
-                }
-
-                return;
-            }
-
+            
             //start the game from the gesture manager
-            if (InstrucionAmount >= 2)
+            if (InstrucionAmount >= 1)
             {
-                TutorialFeedbackText.text = "Try to shoot as many Birds as possible!";
-                //remove boxes
-                GestureAnimation.SetActive(false);
-                HandPlaceBox.gameObject.SetActive(false);
+                TutorialFeedbackText.text = "";
+                SendTextMessage("Try to shoot as many birds as possible!", 12, Vector2.zero);
 
                 //rempve arrows
                 BoundaryIndicators.SetActive(false);
@@ -228,6 +183,7 @@ namespace VrFox
                 StartGame();
                 return;
             }
+            InstrucionAmount = 0;
         }
 
         public void ResetGame()
@@ -238,7 +194,20 @@ namespace VrFox
             ScoreText.text = "";
             InstrucionAmount = 0;
             GameStarted = false;
+            
+            //rempve arrows
+            BoundaryIndicators.SetActive(false);
+
             gameState = GameStates.Instructions;
+        }
+
+        public void SetAllInstructionsActive(bool _value)
+        {
+            for (int i = 0; i < InstructionLerps.Length; i++)
+            {
+                InstructionLerps[i].SetActive(_value, 3.5f);
+            }
+            Debug.Log("Show instructions");
         }
 
         /// <summary>
@@ -257,28 +226,37 @@ namespace VrFox
 
             ShowEndScore();
         }
-
-        private void SetGestureActive()
-        {
-            GestureAnimation.SetActive(true);
-        }
-
+        
         /// <summary>
         /// Called when the game is about to start
         /// </summary>
         public void StartGame()
         {
+            if (GameStarted)
+            {
+                return;
+            }
+
             Player.ResetPlayerValues();
-            CanContinueToNExtGame = false;
+            CanContinueNextGame = false;
             GameOver = false;
             EndScoreText.text = "";
+            TutorialFeedbackText.text = "";
             GameStarted = true;
             TimePlayed = 180;
             GameOverTimer = 0;
             SetScoreText();
 
+            SpawnManager.Instance.spawnStatic = true;
+            
+            //rempve arrows
+            //BoundaryIndicators.SetActive(false);
+
             //remove all instructions
             gameState = GameStates.Playing;
+
+            SetAllInstructionsActive(false);
+            Player.SyncCarWashWithPlayer(1);
         }
 
         /// <summary>
@@ -313,6 +291,8 @@ namespace VrFox
             {
                 TimeText.text = _min + ":" + _sec;
             }
+
+            TimeText.text = (1f / Time.deltaTime).ToString();
         }
 
         /// <summary>
@@ -323,9 +303,9 @@ namespace VrFox
             EndScoreText.text = "You Got " + Player.Score.ToString() + " Points!";
         }
 
-        public void SendTextMessage(string _mes,float _dur, Vector2 _offset)
+        public void SendTextMessage(string _mes, float _dur, Vector2 _offset)
         {
-            messageText.Message(_mes,_dur, _offset);
+            messageText.Message(_mes, _dur, _offset);
         }
 
         #region Property's
@@ -355,10 +335,60 @@ namespace VrFox
         {
             hoverObject = _hoverObject;
         }
+        
 
-        public void SetHandState(HandStates _state)
+        /// <summary>
+        /// Get a random quote 
+        /// </summary>
+        public string GetDustyQuote
         {
-            CurrentHandState = _state;
+            get
+            {
+                string[] _quote = new string[] {
+                    "Biem!",
+                    "Loogman best Man",
+                    "Kobe",
+                    "Yeet",
+                    "WOW",
+                    "Merci for Waluigi",
+                    "Ik wist niet dat je Loog Man",
+                    "TOTO - Africa",
+                    "Bless the rains down in Africa",
+                    "Ik wil Kaas",
+                    "WAAAAAAAAAA",
+                    "REEEEEEEEEEEEEEEEEEEEEEEE",
+                    "@@@@@@@@@@@@@@@@@@@@@@@@@@",
+                    "Alexa, play Despacito",
+                    "( ._. )-/",
+                    "ಠ_ಠ",
+                    "(╯°□°）╯︵ ┻━┻"
+                };
+
+                int _x = Random.Range(0, _quote.Length);
+                return _quote[_x];
+            }
+
+        }
+
+        public string GetPredictionKey
+        {
+            get
+            {
+                return predictionKey;
+            }
+        }
+
+        public string GetPredictionURL
+        {
+            get
+            {
+                return predictionEndPoint;
+            }
+        }
+
+        public Difficulty GetDiffictuly
+        {
+            get { return Player.PlayerLevel; }
         }
         #endregion
     }

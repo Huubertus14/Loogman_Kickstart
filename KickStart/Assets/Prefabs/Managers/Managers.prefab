@@ -590,8 +590,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BirdPrefab: {fileID: 100000, guid: d418c88afd808cf448602106c7ead664, type: 2}
   StaticBirdPrefab: {fileID: 100000, guid: 7816352bcfafc054f80acbd80b76718e, type: 2}
+  Spawns: []
   SpawnInterval: 3
-  MaxBirdCount: 3
+  MaxBirdCount: 12
   CurrentBirdCount: 0
   DeathParticle: {fileID: 1222976583829746, guid: d166581bdd55b1e43ab19118f1ce3ecf,
     type: 2}
@@ -599,6 +600,8 @@ MonoBehaviour:
     type: 2}
   BirdHitEffect: {fileID: 1270126634788680, guid: efa467f120f58fe43931dd8e35c2d187,
     type: 2}
+  OrientationHolder: {fileID: 0}
+  spawnStatic: 0
 --- !u!114 &114264856961313424
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -651,8 +654,10 @@ MonoBehaviour:
   BirdSpawnSounds:
   - {fileID: 8300000, guid: 711efcdc7e1dc2f47815e34f455e621b, type: 3}
   - {fileID: 8300000, guid: d447a9aefecb5fa438e68e073eaa8680, type: 3}
-  - {fileID: 8300000, guid: af92273eb57b90a4b829bc08cdedb530, type: 3}
+  - {fileID: 8300000, guid: 7aa5c5aa546063445adbf86200aa9d37, type: 3}
   - {fileID: 8300000, guid: b71e7f59587f3704a8aed67cf82f2eb9, type: 3}
+  - {fileID: 8300000, guid: 30ad5e660c7e880438de551bdc7a6fe0, type: 3}
+  - {fileID: 8300000, guid: a54b5e1ca715ff94d8700894507efabd, type: 3}
   BirdFlapSounds:
   - {fileID: 8300000, guid: 8e26156e7ac0d83448b69ce04991d737, type: 3}
   - {fileID: 8300000, guid: e78dea8f3a5fed54999307c7d482255a, type: 3}
@@ -664,6 +669,12 @@ MonoBehaviour:
   ExplosionSounds:
   - {fileID: 8300000, guid: 7bef0064f8567430cac22499c6b93d4f, type: 3}
   - {fileID: 8300000, guid: cd5817e224b2b4d579cf0d0d8bfce316, type: 3}
+  DustyTalkSound:
+  - {fileID: 8300000, guid: fcd5d098c38604817b2230c81c3464c9, type: 3}
+  - {fileID: 8300000, guid: 82c301eb8421a45e8bfefeb8dfc2ec04, type: 3}
+  - {fileID: 8300000, guid: 9f1c0cfd29144487897c70634618f6c5, type: 3}
+  - {fileID: 8300000, guid: fe54d5b62bb934310b134320b1d7532d, type: 3}
+  - {fileID: 8300000, guid: 19b86d8abf6bb401fa08e795c07e45c7, type: 3}
   TestVoice: {fileID: 8300000, guid: df43d4e33c6963a4f87b3330b4134fb5, type: 3}
 --- !u!114 &114323474305805848
 MonoBehaviour:
@@ -801,17 +812,25 @@ MonoBehaviour:
   EndScoreText: {fileID: 0}
   Targets: []
   gameState: 0
-  CurrentHandState: 0
   GameStarted: 0
   GameOver: 0
   TimePlayed: 0
   InstrucionAmount: 0
+  DurationToImpusle: 210
+  DurationFromImpulse: 120
   TutorialFeedbackText: {fileID: 0}
-  HandPlaceBox: {fileID: 0}
-  GestureAnimation: {fileID: 0}
   BoundaryIndicators: {fileID: 0}
+  InstructionLerps:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   BulletForce: 240
-  CanContinueToNExtGame: 0
+  CanContinueNextGame: 0
 --- !u!114 &114771691676672076
 MonoBehaviour:
   m_ObjectHideFlags: 1
