@@ -74,7 +74,7 @@ public class ScoreManager : MonoBehaviour
                 break;
             }
         }
-        Debug.Log(_scoreIndex);
+        //Debug.Log(_scoreIndex);
         //need to find 5 siblings
 
         //first check maximum 3 above the current score

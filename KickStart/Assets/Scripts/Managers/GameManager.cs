@@ -85,6 +85,7 @@ namespace VrFox
         private bool scoreTextFadedAway;
         private bool playerScoreOnRightPosition;
         private bool otherScoresShown;
+        private bool otherScoreLerpIn;
         private GameObject playerEndScoreObject;
 
         [Header("Tutorial values")]
@@ -164,12 +165,12 @@ namespace VrFox
                 {
                     scoreTextFadedAway = true;
                     EndScoreText.text = "";
-                    Debug.Log("let it Fade away");
+                   // Debug.Log("let it Fade away");
 
                     ScoreManager.Instance.CreateAllScores(Player.Score);
 
                     //Calculate the position of the player
-                    Debug.Log(ScoreManager.Instance.GetPositionInTable(Player.Score));
+                   // Debug.Log(ScoreManager.Instance.GetPositionInTable(Player.Score));
                     if (ScoreManager.Instance.GetPositionInTable(Player.Score) == 0)
                     {
                         Debug.Log("Player is First");
@@ -181,7 +182,7 @@ namespace VrFox
                     playerScoreOnRightPosition = true;
 
                     //Set Score thing on y pos
-                    Debug.Log("Set right Y pos");
+                    //   Debug.Log("Set right Y pos");
                     playerEndScoreObject.transform.SetParent(Player.HighScoreObject.transform);
 
                 }
@@ -314,12 +315,48 @@ namespace VrFox
 
                             break;
                     }
+
+                    foreach (var _score in OtherScores)
+                    {
+                        _score.GetComponentInChildren<Text>().color = new Color(.9f,.9f,.9f,.8f);
+                    }
+
+                    Vector3 _xPosOffset = new Vector3(800, 0, 0);
+
+                    //Get array of all children of score
+                    PositionLerp[] _allScores = Player.HighScoreObject.GetComponentsInChildren<PositionLerp>();
+                    for (int i = 0; i < _allScores.Length; i++)
+                    {
+                        _allScores[i].SetActivePosition(new Vector3(0, 55 - (44*i), 0));
+
+                        if (Random.Range(0,10) % 2 == 0) 
+                        {
+                            _xPosOffset = -_xPosOffset;
+                        }
+
+                        _allScores[i].SetInactivePosition(new Vector3(0, 55 - (44 * i), 0) + _xPosOffset);
+                        if (_allScores[i] != playerEndScoreObject.GetComponent<PositionLerp>())
+                        {
+                            _allScores[i].GetRectTransform.localPosition = new Vector3(0, 55 - (44 * i), 0) + _xPosOffset;
+                            _allScores[i].SetActive(false);
+                        }
+                    }
+
+                    playerEndScoreObject.GetComponent<PositionLerp>().SetActive(true);
+                }
+                if (GameOverTimer > 6.5f && !otherScoreLerpIn)
+                {
+                    otherScoreLerpIn = true;
+                    PositionLerp[] _allScores = Player.HighScoreObject.GetComponentsInChildren<PositionLerp>();
+                    for (int i = 0; i < _allScores.Length; i++)
+                    {
+                        _allScores[i].SetActive(true, Random.Range(0.8f, 2.5f));
+                    }
+
                 }
             }
         }
-
-
-
+        
         private void Instructions()
         {
             EndScoreText.text = "";
@@ -359,6 +396,7 @@ namespace VrFox
 
             scoreTextFadedAway = false;
             otherScoresShown = false;
+            otherScoreLerpIn = false;
             playerScoreOnRightPosition = false;
 
             //rempve arrows
@@ -373,7 +411,7 @@ namespace VrFox
             {
                 InstructionLerps[i].SetActive(_value, 1.8f);
             }
-            Debug.Log("Show instructions");
+            //Debug.Log("Show instructions");
         }
 
         /// <summary>
@@ -469,13 +507,15 @@ namespace VrFox
         /// </summary>
         public void ShowEndScore()
         {
-            Debug.Log("Let Fade in");
+            //Debug.Log("Let Fade in");
             EndScoreText.text = "Your Score is:";
 
             playerEndScoreObject = Instantiate(ScoreManager.Instance.CreateScoreBox(Player.Score), Vector3.zero, Quaternion.identity);
             playerEndScoreObject.transform.SetParent(PlayerCanvas.transform);
             playerEndScoreObject.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
             playerEndScoreObject.transform.localPosition = new Vector3(EndScoreText.transform.localPosition.x, EndScoreText.transform.localPosition.y - 100, EndScoreText.transform.localPosition.z);
+            playerEndScoreObject.GetComponent<PositionLerp>().SetActivePosition(new Vector3(EndScoreText.transform.localPosition.x, EndScoreText.transform.localPosition.y - 100, EndScoreText.transform.localPosition.z));
+            playerEndScoreObject.GetComponent<PositionLerp>().SetActive(true);
         }
 
         public void SendTextMessage(string _mes, float _dur, Vector2 _offset)
