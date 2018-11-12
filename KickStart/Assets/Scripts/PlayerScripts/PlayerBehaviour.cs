@@ -19,6 +19,7 @@ namespace VrFox
         public TextFlashing GarbageTextFlash;
         public SliderLerp WaterAmounfSlider;
         public UIWiggle WaterUIWiggle;
+        public GameObject HighScoreObject;
 
         [Header("Values:")]
         public string PlayerName;

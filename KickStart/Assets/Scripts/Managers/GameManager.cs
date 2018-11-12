@@ -16,7 +16,7 @@ namespace EnumStates
         GameEnd,
         Waiting
     }
-    
+
     public enum DustyStates
     {
         Idle,
@@ -44,7 +44,7 @@ namespace VrFox
 
         }
 
-        
+
         //Key and URL used for the photo recognition
         private readonly string predictionEndPoint = "https://southcentralus.api.cognitive.microsoft.com/customvision/v2.0/Prediction/92a36c67-658a-4ac6-85c4-3cde6f501d22/image";
         private readonly string predictionKey = "88559f30c5c44cbb986359fcd7126920";
@@ -57,12 +57,14 @@ namespace VrFox
         public GestureImage TutorialThing;
         public OffScreenIndicator Indicator;
         public MessageTextBehaviour messageText;
-        
+        public CrossHairTween CrossHairEffect;
+
         [Header("UI Elements:")]
         public Text ScoreText;
         public Text GarbageText;
         public Text TimeText;
         public Text EndScoreText;
+        public UIFadeScript HighScoreFade;
 
         [HideInInspector] //Bah
         public List<Renderer> Targets = new List<Renderer>();
@@ -80,6 +82,12 @@ namespace VrFox
         [Space]
         public float DurationToImpusle;
         public float DurationFromImpulse;
+
+        private bool scoreTextFadedAway;
+        private bool playerScoreOnRightPosition;
+        private bool otherScoresShown;
+        private bool otherScoreLerpIn;
+        private GameObject playerEndScoreObject;
 
         [Header("Tutorial values")]
         public Text TutorialFeedbackText;
@@ -119,27 +127,11 @@ namespace VrFox
                     Instructions();
                 }
 
-               // Instructions();
+                // Instructions();
             }
             if (gameState == GameStates.Playing)
             {
-                //Game is started
-                if (TimePlayed <= 0)
-                {
-                    SetGameOver();
-                }
-                else
-                {
-                    if (TimePlayed < 170)
-                    {
-                        TutorialFeedbackText.text = "";
-                    }
-                    if (Player.Score > 3)
-                    {
-                        TimePlayed -= Time.deltaTime;
-                        SetTimeText();
-                    }
-                }
+                Playing();
             }
             if (gameState == GameStates.Waiting)
             {
@@ -147,29 +139,22 @@ namespace VrFox
             }
             if (gameState == GameStates.GameEnd)
             {
-                //Game has end
-                GameOverTimer += Time.deltaTime;
-                if (GameOverTimer > 2)
-                {
-                    CanContinueNextGame = true;
-                    TutorialThing.IsVisible = true;
-                    InstrucionAmount = 0;
-                }
+                EndGame();
             }
         }
-
+        
         private void Instructions()
         {
             EndScoreText.text = "";
-          
+
             if (InstrucionAmount == 0)
             {
                 TutorialFeedbackText.text = "Click with the clicker!";
                 BoundaryIndicators.SetActive(true);
-                
+
                 return;
             }
-            
+
             //start the game from the gesture manager
             if (InstrucionAmount >= 1)
             {
@@ -186,6 +171,233 @@ namespace VrFox
             InstrucionAmount = 0;
         }
 
+        private void Playing()
+        {
+            //Game is started
+            if (TimePlayed <= 0)
+            {
+                SetGameOver();
+            }
+            else
+            {
+                if (TimePlayed < 170)
+                {
+                    TutorialFeedbackText.text = "";
+                }
+                if (Player.Score > 3)
+                {
+                    TimePlayed -= Time.deltaTime;
+                    SetTimeText();
+                }
+            }
+
+            if (Input.GetKeyDown(KeyCode.O))
+            {
+                SetGameOver();
+            }
+        }
+
+        private  void EndGame()
+        {
+            //Game has end
+            GameOverTimer += Time.deltaTime;
+            if (GameOverTimer > 3 && !scoreTextFadedAway)
+            {
+                scoreTextFadedAway = true;
+                EndScoreText.text = "";
+                // Debug.Log("let it Fade away");
+
+                ScoreManager.Instance.CreateAllScores(Player.Score);
+                CrossHairEffect.SetActive(false, 0.9f);
+                //Calculate the position of the player
+                // Debug.Log(ScoreManager.Instance.GetPositionInTable(Player.Score));
+                if (ScoreManager.Instance.GetPositionInTable(Player.Score) == 0)
+                {
+                    Debug.Log("Player is First");
+                    playerEndScoreObject.GetComponentInChildren<Image>().color = Color.white;
+                }
+            }
+            if (GameOverTimer > 4.5f && !playerScoreOnRightPosition)
+            {
+                playerScoreOnRightPosition = true;
+
+                //Set Score thing on y pos
+                //   Debug.Log("Set right Y pos");
+                playerEndScoreObject.transform.SetParent(Player.HighScoreObject.transform);
+
+            }
+            if (GameOverTimer > 5 && !otherScoresShown)
+            {
+                otherScoresShown = true;
+
+                //Create other scores around
+                GameObject[] OtherScores = new GameObject[5];
+
+                switch (ScoreManager.Instance.GetPositionInTable(Player.Score))
+                {
+                    case 0:
+                        //first place
+
+                        //Get the 5 beneath the player
+                        for (int i = 0; i < OtherScores.Length; i++)
+                        {
+                            OtherScores[i] = ScoreManager.Instance.CreateScoreBox(ScoreManager.Instance.AllScores[ScoreManager.Instance.GetPositionInAllScores(Player.Score) + i + 1]);
+
+                            OtherScores[i].transform.SetParent(Player.HighScoreObject.transform);
+                            OtherScores[i].transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+                            OtherScores[i].transform.localPosition = Vector3.zero;
+                        }
+                        break;
+                    case 1:
+                        //second place
+                        OtherScores[0] = ScoreManager.Instance.CreateScoreBox(ScoreManager.Instance.AllScores[ScoreManager.Instance.GetPositionInAllScores(Player.Score) - 1]);
+                        OtherScores[0].transform.SetParent(Player.HighScoreObject.transform);
+                        OtherScores[0].transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+                        OtherScores[0].transform.localPosition = Vector3.zero;
+
+                        playerEndScoreObject.transform.SetAsLastSibling();
+                        //Get 1 above the player 4 beneath
+                        for (int i = 1; i < OtherScores.Length; i++)
+                        {
+                            OtherScores[i] = ScoreManager.Instance.CreateScoreBox(ScoreManager.Instance.AllScores[ScoreManager.Instance.GetPositionInAllScores(Player.Score) + i + 1]);
+
+                            OtherScores[i].transform.SetParent(Player.HighScoreObject.transform);
+                            OtherScores[i].transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+                            OtherScores[i].transform.localPosition = Vector3.zero;
+                        }
+                        break;
+                    case 2:
+                        //third place
+                        //get 2 above 3 beneath
+                        for (int i = OtherScores.Length - 4; i >= 0; i--)
+                        {
+                            OtherScores[i] = ScoreManager.Instance.CreateScoreBox(ScoreManager.Instance.AllScores[ScoreManager.Instance.GetPositionInAllScores(Player.Score) - i - 1]);
+
+                            OtherScores[i].transform.SetParent(Player.HighScoreObject.transform);
+                            OtherScores[i].transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+                            OtherScores[i].transform.localPosition = Vector3.zero;
+                        }
+
+                        playerEndScoreObject.transform.SetAsLastSibling();
+
+                        for (int i = 2; i < OtherScores.Length; i++)
+                        {
+                            OtherScores[i] = ScoreManager.Instance.CreateScoreBox(ScoreManager.Instance.AllScores[ScoreManager.Instance.GetPositionInAllScores(Player.Score) + i]);
+
+                            OtherScores[i].transform.SetParent(Player.HighScoreObject.transform);
+                            OtherScores[i].transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+                            OtherScores[i].transform.localPosition = Vector3.zero;
+                        }
+                        break;
+                    case 3:
+                        //third place
+
+                        //3 above 2 beneath
+
+                        for (int i = OtherScores.Length - 3; i >= 0; i--)
+                        {
+                            OtherScores[i] = ScoreManager.Instance.CreateScoreBox(ScoreManager.Instance.AllScores[ScoreManager.Instance.GetPositionInAllScores(Player.Score) - i - 1]);
+
+                            OtherScores[i].transform.SetParent(Player.HighScoreObject.transform);
+                            OtherScores[i].transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+                            OtherScores[i].transform.localPosition = Vector3.zero;
+                        }
+
+                        playerEndScoreObject.transform.SetAsLastSibling();
+
+                        for (int i = 3; i < OtherScores.Length; i++)
+                        {
+                            OtherScores[i] = ScoreManager.Instance.CreateScoreBox(ScoreManager.Instance.AllScores[ScoreManager.Instance.GetPositionInAllScores(Player.Score) + i]);
+
+                            OtherScores[i].transform.SetParent(Player.HighScoreObject.transform);
+                            OtherScores[i].transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+                            OtherScores[i].transform.localPosition = Vector3.zero;
+                        }
+                        break;
+                    case 4:
+                        //second last place
+                        //1 beneath 4 above
+                        for (int i = OtherScores.Length - 2; i >= 0; i--)
+                        {
+                            OtherScores[i] = ScoreManager.Instance.CreateScoreBox(ScoreManager.Instance.AllScores[ScoreManager.Instance.GetPositionInAllScores(Player.Score) - i - 1]);
+
+                            OtherScores[i].transform.SetParent(Player.HighScoreObject.transform);
+                            OtherScores[i].transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+                            OtherScores[i].transform.localPosition = Vector3.zero;
+                        }
+
+                        //Set self
+                        playerEndScoreObject.transform.SetAsLastSibling();
+
+                        //find one below
+                        OtherScores[4] = ScoreManager.Instance.CreateScoreBox(ScoreManager.Instance.AllScores[ScoreManager.Instance.GetPositionInAllScores(Player.Score) - 1]);
+                        OtherScores[4].transform.SetParent(Player.HighScoreObject.transform);
+                        OtherScores[4].transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+                        OtherScores[4].transform.localPosition = Vector3.zero;
+                        break;
+                    case 5:
+                        //last place 
+                        //5 above player
+
+                        for (int i = OtherScores.Length - 1; i >= 0; i--)
+                        {
+                            OtherScores[i] = ScoreManager.Instance.CreateScoreBox(ScoreManager.Instance.AllScores[ScoreManager.Instance.GetPositionInAllScores(Player.Score) - i - 1]);
+
+                            OtherScores[i].transform.SetParent(Player.HighScoreObject.transform);
+                            OtherScores[i].transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+                            OtherScores[i].transform.localPosition = Vector3.zero;
+                            playerEndScoreObject.transform.SetAsLastSibling();
+                        }
+                        break;
+                    default:
+                        //Middle pos
+                        Debug.LogError("Not in range player position");
+
+                        break;
+                }
+
+                foreach (var _score in OtherScores)
+                {
+                    _score.GetComponentInChildren<Text>().color = new Color(.9f, .9f, .9f, .8f);
+                }
+
+                Vector3 _xPosOffset = new Vector3(800, 0, 0);
+
+                //Get array of all children of score
+                PositionLerp[] _allScores = Player.HighScoreObject.GetComponentsInChildren<PositionLerp>();
+                for (int i = 0; i < _allScores.Length; i++)
+                {
+                    _allScores[i].SetActivePosition(new Vector3(0, 55 - (44 * i), 0));
+
+                    if (Random.Range(0, 10) % 2 == 0)
+                    {
+                        _xPosOffset = -_xPosOffset;
+                    }
+
+                    _allScores[i].SetInactivePosition(new Vector3(0, 55 - (44 * i), 0) + _xPosOffset);
+                    if (_allScores[i] != playerEndScoreObject.GetComponent<PositionLerp>())
+                    {
+                        _allScores[i].GetRectTransform.localPosition = new Vector3(0, 55 - (44 * i), 0) + _xPosOffset;
+                        _allScores[i].SetActive(false);
+                    }
+                }
+
+                playerEndScoreObject.GetComponent<PositionLerp>().SetActive(true);
+                //Fade in HighScoreText
+                HighScoreFade.Active(true);
+            }
+            if (GameOverTimer > 6.5f && !otherScoreLerpIn)
+            {
+                otherScoreLerpIn = true;
+                PositionLerp[] _allScores = Player.HighScoreObject.GetComponentsInChildren<PositionLerp>();
+                for (int i = 0; i < _allScores.Length; i++)
+                {
+                    _allScores[i].SetActive(true, Random.Range(0.8f, 2.5f));
+                }
+
+            }
+        }
+
         public void ResetGame()
         {
             TutorialFeedbackText.text = "";
@@ -194,7 +406,12 @@ namespace VrFox
             ScoreText.text = "";
             InstrucionAmount = 0;
             GameStarted = false;
-            
+
+            scoreTextFadedAway = false;
+            otherScoresShown = false;
+            otherScoreLerpIn = false;
+            playerScoreOnRightPosition = false;
+
             //rempve arrows
             BoundaryIndicators.SetActive(false);
 
@@ -205,9 +422,9 @@ namespace VrFox
         {
             for (int i = 0; i < InstructionLerps.Length; i++)
             {
-                InstructionLerps[i].SetActive(_value, 3.5f);
+                InstructionLerps[i].SetActive(_value, 1.8f);
             }
-            Debug.Log("Show instructions");
+            //Debug.Log("Show instructions");
         }
 
         /// <summary>
@@ -215,18 +432,22 @@ namespace VrFox
         /// </summary>
         public void SetGameOver()
         {
+            if (!GameStarted)
+            {
+                return;
+            }
             GameStarted = false;
             TimeText.text = "";
             GameOver = true;
             gameState = GameStates.GameEnd;
 
-            Invoke("SetGestureActive", 3f);
-
-            //Destroy all birds
+            CrossHairEffect.SetActive(false, 2.2f);
 
             ShowEndScore();
+
+            //Debug.Log("SetGameOver");
         }
-        
+
         /// <summary>
         /// Called when the game is about to start
         /// </summary>
@@ -248,13 +469,12 @@ namespace VrFox
             SetScoreText();
 
             SpawnManager.Instance.spawnStatic = true;
-            
-            //rempve arrows
-            //BoundaryIndicators.SetActive(false);
+
 
             //remove all instructions
             gameState = GameStates.Playing;
 
+            CrossHairEffect.SetActive(true, 1.4f);
             SetAllInstructionsActive(false);
             Player.SyncCarWashWithPlayer(1);
         }
@@ -300,9 +520,23 @@ namespace VrFox
         /// </summary>
         public void ShowEndScore()
         {
-            EndScoreText.text = "You Got " + Player.Score.ToString() + " Points!";
+            //Debug.Log("Let Fade in");
+            EndScoreText.text = "Your Score is:";
+
+            playerEndScoreObject = Instantiate(ScoreManager.Instance.CreateScoreBox(Player.Score), Vector3.zero, Quaternion.identity);
+            playerEndScoreObject.transform.SetParent(PlayerCanvas.transform);
+            playerEndScoreObject.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+            playerEndScoreObject.transform.localPosition = new Vector3(EndScoreText.transform.localPosition.x, EndScoreText.transform.localPosition.y - 100, EndScoreText.transform.localPosition.z);
+            playerEndScoreObject.GetComponent<PositionLerp>().SetActivePosition(new Vector3(EndScoreText.transform.localPosition.x, EndScoreText.transform.localPosition.y - 100, EndScoreText.transform.localPosition.z));
+            playerEndScoreObject.GetComponent<PositionLerp>().SetActive(true);
         }
 
+        /// <summary>
+        /// Call this to show a message to the player
+        /// </summary>
+        /// <param string of the message="_mes"></param>
+        /// <param how long th message is in view="_dur"></param>
+        /// <param any 2d offset="_offset"></param>
         public void SendTextMessage(string _mes, float _dur, Vector2 _offset)
         {
             messageText.Message(_mes, _dur, _offset);
@@ -335,7 +569,7 @@ namespace VrFox
         {
             hoverObject = _hoverObject;
         }
-        
+
 
         /// <summary>
         /// Get a random quote 
