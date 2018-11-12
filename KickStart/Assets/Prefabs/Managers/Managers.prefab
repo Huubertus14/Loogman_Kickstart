@@ -841,6 +841,7 @@ MonoBehaviour:
   GarbageText: {fileID: 0}
   TimeText: {fileID: 0}
   EndScoreText: {fileID: 0}
+  HighScoreFade: {fileID: 0}
   Targets: []
   gameState: 0
   GameStarted: 0

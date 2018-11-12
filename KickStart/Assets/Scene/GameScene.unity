@@ -137,6 +137,12 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 779477217}
   m_Script: {fileID: 11500000, guid: bec6c4a5f1fd8774f994aed296ee6e7f, type: 3}
+--- !u!114 &323267196 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114049112706939596, guid: 98b022620337e7545b5838b8492866a0,
+    type: 2}
+  m_PrefabInternal: {fileID: 779477217}
+  m_Script: {fileID: 11500000, guid: 61cd28764666f90479f80eb550d92799, type: 3}
 --- !u!114 &345691404 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114159479943759654, guid: 98b022620337e7545b5838b8492866a0,
@@ -210,11 +216,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114256099600199432, guid: 20c13879b59ae4a4f85b04cacea06003,
+    - target: {fileID: 114722359190857508, guid: 20c13879b59ae4a4f85b04cacea06003,
         type: 2}
-      propertyPath: OrientationHolder
+      propertyPath: canvas
       value: 
-      objectReference: {fileID: 1265798817}
+      objectReference: {fileID: 890563022}
     - target: {fileID: 114755208706617680, guid: 20c13879b59ae4a4f85b04cacea06003,
         type: 2}
       propertyPath: Player
@@ -255,6 +261,11 @@ Prefab:
       propertyPath: EndScoreText
       value: 
       objectReference: {fileID: 860630016}
+    - target: {fileID: 114755208706617680, guid: 20c13879b59ae4a4f85b04cacea06003,
+        type: 2}
+      propertyPath: HighScoreFade
+      value: 
+      objectReference: {fileID: 323267196}
     - target: {fileID: 114755208706617680, guid: 20c13879b59ae4a4f85b04cacea06003,
         type: 2}
       propertyPath: TutorialFeedbackText
@@ -305,11 +316,11 @@ Prefab:
       propertyPath: InstructionLerps.Array.data[7]
       value: 
       objectReference: {fileID: 487865831}
-    - target: {fileID: 114722359190857508, guid: 20c13879b59ae4a4f85b04cacea06003,
+    - target: {fileID: 114256099600199432, guid: 20c13879b59ae4a4f85b04cacea06003,
         type: 2}
-      propertyPath: canvas
+      propertyPath: OrientationHolder
       value: 
-      objectReference: {fileID: 890563022}
+      objectReference: {fileID: 1265798817}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 20c13879b59ae4a4f85b04cacea06003, type: 2}
   m_IsPrefabParent: 0
@@ -461,11 +472,6 @@ Prefab:
     - target: {fileID: 224434537309928642, guid: 98b022620337e7545b5838b8492866a0,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114992857176254544, guid: 98b022620337e7545b5838b8492866a0,
-        type: 2}
-      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

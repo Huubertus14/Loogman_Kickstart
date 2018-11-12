@@ -30,6 +30,7 @@ public class CrossHairTween : MonoBehaviour
         timeTweenKey = 2;
 
         transform.localScale = Vector3.zero;
+        Speed = 1;
     }
 
     // Update is called once per frame
@@ -84,9 +85,7 @@ public class CrossHairTween : MonoBehaviour
         isActive = _active;
         duration = _duration;
 
-        if (isActive)
-        {
-            timeTweenKey = 0;
-        }
+        timeTweenKey = 0;
     }
 }
+
