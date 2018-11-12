@@ -9,6 +9,7 @@ public class EndAreaBehaviour : MonoBehaviour {
     {
         if (other.gameObject.GetComponent<PlayerBehaviour>())
         {
+            GameManager.Instance.SetGameOver();
             Debug.Log("End Reached!");
         }
     }

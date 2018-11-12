@@ -531,6 +531,12 @@ namespace VrFox
             playerEndScoreObject.GetComponent<PositionLerp>().SetActive(true);
         }
 
+        /// <summary>
+        /// Call this to show a message to the player
+        /// </summary>
+        /// <param string of the message="_mes"></param>
+        /// <param how long th message is in view="_dur"></param>
+        /// <param any 2d offset="_offset"></param>
         public void SendTextMessage(string _mes, float _dur, Vector2 _offset)
         {
             messageText.Message(_mes, _dur, _offset);
