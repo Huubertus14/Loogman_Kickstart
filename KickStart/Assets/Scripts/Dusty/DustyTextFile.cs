@@ -9,8 +9,17 @@ public class DustyTextFile {
     private readonly float duration, fadeSpeed;
     [SerializeField]
     private readonly string message;
+    [SerializeField]
+    private readonly AudioClip audio;
 
-	public DustyTextFile(string _message, float _duration, float _fadeSpeed)
+    public DustyTextFile(string _message, float _fadeSpeed, AudioClip _audio)
+    {
+        audio = _audio;
+        duration = audio.length;
+        fadeSpeed = _fadeSpeed;
+        message = _message;
+    }
+    public DustyTextFile(string _message, float _duration, float _fadeSpeed)
     {
         duration = _duration;
         fadeSpeed = _fadeSpeed;
@@ -28,5 +37,17 @@ public class DustyTextFile {
     public string GetMessage
     {
         get { return message; }
+    }
+
+    public AudioClip GetAudioClip
+    {
+        get {
+            if (!audio)
+            {
+                Debug.LogError("No audio clip Attached!");
+                return null;
+            }
+
+            return audio; }
     }
 }

@@ -21,6 +21,8 @@ public class DustyManager : MonoBehaviour
 
     private Animation ani;
     private DustyText dustyTextMessage;
+    [HideInInspector]
+    public AudioSource sourceAudio;
 
     float headSpinTimer;
 
@@ -48,7 +50,8 @@ public class DustyManager : MonoBehaviour
 
         ani = Head.GetComponent<Animation>();
         dustyTextMessage = GetComponentInChildren<DustyText>();
-
+        sourceAudio = GetComponentInChildren<AudioSource>();
+       
         goalPos = Vector3.zero;
         DustyState = DustyStates.Idle;
         yPosTimer = 0;
@@ -58,33 +61,31 @@ public class DustyManager : MonoBehaviour
         goalPos = Camera.main.transform.position + PositionAwayFromPlayer;
 
         //Add massages
-        Messages.Add(new DustyTextFile("Hallo daar", 3, 5));
-        Messages.Add(new DustyTextFile("Ik ben Dusty", 4, 5));
-        Messages.Add(new DustyTextFile("En jij moet mij vandaag helpen", 5, 5));
-        Messages.Add(new DustyTextFile("Loogman heeft een probleem", 4, 5));
-        Messages.Add(new DustyTextFile("Er zijn allemaal vogels binnen de wasstraat", 5, 5));
-        Messages.Add(new DustyTextFile("En zij maken alle schone auto's weer vies!", 4, 5));
-        Messages.Add(new DustyTextFile("Nu is het aan jou om dat te voorkomen!", 6, 5));
-        Messages.Add(new DustyTextFile("Anders word jouw auto straks ook weer vies", 3, 5));
-        Messages.Add(new DustyTextFile("Je moet proberen om bij zo veel mogelijk\n vogels een luier om te schieten", 6, 5));
-        Messages.Add(new DustyTextFile("Hoe doe je dat?", 2, 5));
-        Messages.Add(new DustyTextFile("Simpel!", 1, 5));
-        Messages.Add(new DustyTextFile("Volg de instructies die recht voor je staan", 3, 5));
-        Messages.Add(new DustyTextFile("Of gebruik de clicker die is mee gegeven!", 4, 5));
-        Messages.Add(new DustyTextFile("Voor elke vogel die je raakt krijg je een punt", 4, 5));
-        Messages.Add(new DustyTextFile("En als je er een raakt die al een luier aan heeft...", 4, 5));
-        Messages.Add(new DustyTextFile("Dan zal zijn luier afvallen en krijg je twee straf punten", 5, 5));
-        Messages.Add(new DustyTextFile("Succes", 2, 5));
+        Messages.Add(new DustyTextFile("Hoi ik ben Dusty",4f, AudioSampleManager.Instance.DustyText[0]));
+        Messages.Add(new DustyTextFile("Wat leuk dat je in de carwash bent", 4f, AudioSampleManager.Instance.DustyText[1]));
+        Messages.Add(new DustyTextFile("Hopelijk zit je comfortabel", 4f, AudioSampleManager.Instance.DustyText[2]));
+        Messages.Add(new DustyTextFile("Ik ben hier omdat ik je hulp nodig heb", 4f, AudioSampleManager.Instance.DustyText[3]));
+        Messages.Add(new DustyTextFile("Er vliegen allemaal vogels in de wasstraat", 4f, AudioSampleManager.Instance.DustyText[4]));
+        Messages.Add(new DustyTextFile("En dat willen wij niet", 4f, AudioSampleManager.Instance.DustyText[5]));
+        Messages.Add(new DustyTextFile("Wij gaan ervoor zorgen dat de vogels niks meer vies maken", 4f, AudioSampleManager.Instance.DustyText[6]));
+        Messages.Add(new DustyTextFile("Laten we eerst even trainen", 4f, AudioSampleManager.Instance.DustyText[7]));
+        Messages.Add(new DustyTextFile("Voor je zie je een vogel", 4f, AudioSampleManager.Instance.DustyText[8]));
+        Messages.Add(new DustyTextFile("Richt met je ogen op de vogel", 4f, AudioSampleManager.Instance.DustyText[9]));
+        Messages.Add(new DustyTextFile("Goedzo! nu heeft vogel een luier om", 4f, AudioSampleManager.Instance.DustyText[10]));
+        Messages.Add(new DustyTextFile("PATS", 4f, AudioSampleManager.Instance.DustyText[11]));
+        Messages.Add(new DustyTextFile("Ju hebt nu een punt", 4f, AudioSampleManager.Instance.DustyText[12]));
+        Messages.Add(new DustyTextFile("Probeer nu de andere vogels te raken", 4f, AudioSampleManager.Instance.DustyText[13]));
+        Messages.Add(new DustyTextFile("Maar let op! er zijn ook al vogels die ene luier om hebben", 4f, AudioSampleManager.Instance.DustyText[14]));
+        Messages.Add(new DustyTextFile("Als je deze raakt valt zijn luier af en krijg je straf punten!", 4f, AudioSampleManager.Instance.DustyText[15]));
+        Messages.Add(new DustyTextFile("Doe goed je best!", 4f, AudioSampleManager.Instance.DustyText[16]));
+        Messages.Add(new DustyTextFile("Je bent er helemaal klaar voor", 4f, AudioSampleManager.Instance.DustyText[17]));
+        Messages.Add(new DustyTextFile("Wij rijden zo naar rechts", 4f, AudioSampleManager.Instance.DustyText[18]));
+        Messages.Add(new DustyTextFile("Veel Succes!", 4f, AudioSampleManager.Instance.DustyText[19]));
+       
     }
 
     private void Update()
     {
-        //Set initial goal pos for this frame
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            Messages.Add(new DustyTextFile("Yeet " + Random.Range(10, 100), Random.Range(2, 4), Random.Range(1, 90)));
-        }
-
         switch (DustyState)
         {
             case DustyStates.Idle:
@@ -148,7 +149,6 @@ public class DustyManager : MonoBehaviour
                 Messages.Add(new DustyTextFile(GameManager.Instance.GetDustyQuote, Random.Range(3, 6), Random.Range(1, 10)));
             }
         }
-
     }
 
     private void Talking()

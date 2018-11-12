@@ -46,6 +46,6 @@ public class AudioSampleManager : MonoBehaviour
         return DustyTalkSound[x];
     }
 
-    [Space]
-    public AudioClip TestVoice;
+    [Header("DustyText")]
+    public AudioClip[] DustyText;
 }

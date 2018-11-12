@@ -45,11 +45,18 @@ public class DustyText : MonoBehaviour
 
     public void SayMessage(DustyTextFile _file)
     {
+        if (_file.GetAudioClip)
+        {
+            //This message got an audioclip
+
+            DustyManager.Instance.sourceAudio.clip = _file.GetAudioClip;
+            DustyManager.Instance.sourceAudio.Play();
+        }
+
         text.text = _file.GetMessage;
         duration = _file.GetDuration;
         goalColor = fadeInColor;
         lerpSpeed = _file.GetFadeSpeed;
-
         //AudioManager.Instance.PlayAudio(AudioSampleManager.Instance.GetDustyTalkSound(), 1, gameObject);
 
         lifeTime = 0;

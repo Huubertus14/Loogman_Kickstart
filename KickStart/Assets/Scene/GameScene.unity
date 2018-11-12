@@ -321,6 +321,11 @@ Prefab:
       propertyPath: OrientationHolder
       value: 
       objectReference: {fileID: 1265798817}
+    - target: {fileID: 114322428844149892, guid: 20c13879b59ae4a4f85b04cacea06003,
+        type: 2}
+      propertyPath: Dusty01
+      value: 
+      objectReference: {fileID: 8300000, guid: fe172b7d73fd11141b4d57e6dfbec333, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 20c13879b59ae4a4f85b04cacea06003, type: 2}
   m_IsPrefabParent: 0
@@ -806,10 +811,6 @@ Prefab:
     - target: {fileID: 4403223191107180, guid: c6503e495b8bf8048bb5684a5bb6e4df, type: 2}
       propertyPath: m_RootOrder
       value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1897241166778766, guid: c6503e495b8bf8048bb5684a5bb6e4df, type: 2}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c6503e495b8bf8048bb5684a5bb6e4df, type: 2}

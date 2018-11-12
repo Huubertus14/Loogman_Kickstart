@@ -536,7 +536,7 @@ namespace VrFox
         /// </summary>
         /// <param string of the message="_mes"></param>
         /// <param how long th message is in view="_dur"></param>
-        /// <param any 2d offset="_offset"></param>
+        /// <param any 2d offset  ="_offset"></param>
         public void SendTextMessage(string _mes, float _dur, Vector2 _offset)
         {
             messageText.Message(_mes, _dur, _offset);
