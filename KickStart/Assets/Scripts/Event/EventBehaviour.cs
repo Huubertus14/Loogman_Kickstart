@@ -33,7 +33,7 @@ public class EventBehaviour : MonoBehaviour
 
     private void FillIntervalArray()
     {
-        Debug.Log("Start filling array");
+       // Debug.Log("Start filling array");
         for (int i = 0; i < spawnInterval.Length; i++)
         {
             spawnInterval[i] = 0;
@@ -68,13 +68,13 @@ public class EventBehaviour : MonoBehaviour
             {
                 intervalIndex++;
                 spawnTimer = 0;
-                Debug.Log("Spawn");
+               // Debug.Log("Spawn");
             }
         }
         //End of the event object
         if (duration > eventData.Duration + 0.1f)
         {
-            Debug.Log("destroy");
+           // Debug.Log("destroy");
             Destroy(gameObject);
         }
     }

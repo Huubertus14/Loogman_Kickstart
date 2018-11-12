@@ -4,21 +4,24 @@ using UnityEngine;
 
 public class ActivationLerp : MonoBehaviour
 {
-    public Vector3 ActiveScale;
-    public Vector3 InactiveScale;
+    private Vector3 ActiveScale;
+    private Vector3 InactiveScale;
 
-    public AnimationCurve ScaleCurve;
+    public AnimationCurve ActiveCurve;
 
-    public float timeTweenKey, tweenValue;
-    public float duration;
+    private float timeTweenKey, tweenValue;
+    private float duration;
 
     public bool isActive;
 
     public float Speed;
 
+    private bool tweenStarted;
+
     // Use this for initialization
     void Start()
     {
+        tweenStarted = false;
         ActiveScale = transform.localScale;
         InactiveScale = Vector3.zero;
        // isActive = false;
@@ -35,8 +38,8 @@ public class ActivationLerp : MonoBehaviour
             if (timeTweenKey < 1)
             {
                 timeTweenKey += Time.deltaTime / duration;
-                tweenValue = ScaleCurve.Evaluate(timeTweenKey);
-                transform.localScale = Vector3.Lerp(transform.localScale, ActiveScale * tweenValue, Time.deltaTime * 10);
+                tweenValue = ActiveCurve.Evaluate(timeTweenKey);
+                transform.localScale = ActiveScale * tweenValue;
             }
         }
         else
@@ -49,10 +52,20 @@ public class ActivationLerp : MonoBehaviour
     {
         isActive = _active;
         duration = _duration;
+
         if (isActive)
         {
-            timeTweenKey = 0;
+            if (!tweenStarted)
+            {
+                timeTweenKey = 0;
+                tweenStarted = true;
+            }
         }
+        else
+        {
+            tweenStarted = false;
+        }
+        
     }
 
 }
