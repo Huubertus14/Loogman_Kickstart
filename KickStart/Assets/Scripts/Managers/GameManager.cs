@@ -476,7 +476,7 @@ namespace VrFox
 
             CrossHairEffect.SetActive(true, 1.4f);
             SetAllInstructionsActive(false);
-            Player.SyncCarWashWithPlayer(1);
+            Player.SyncCarWashWithPlayer(0);
         }
 
         /// <summary>

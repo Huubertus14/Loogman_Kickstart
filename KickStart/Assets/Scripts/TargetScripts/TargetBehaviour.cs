@@ -19,6 +19,7 @@ public class TargetBehaviour : MonoBehaviour
     private AudioSource audioSource;
 
     private Vector3 newEndPoint;
+    private Vector3 playerOffset;
 
     //[Header("Refs:")]
     private GameObject Diaper;
@@ -56,6 +57,11 @@ public class TargetBehaviour : MonoBehaviour
                 break;
             default:
                 break;
+        }
+
+        if (!MovingBird)
+        {
+            playerOffset = transform.position + GameManager.Instance.Player.transform.position;
         }
 
         Diaper.SetActive(IsHit);
@@ -163,6 +169,11 @@ public class TargetBehaviour : MonoBehaviour
                 SpawnManager.Instance.CreateParticleEffect(IsHit, transform.position);
                 Destroy(gameObject);
             }
+        }
+        else
+        {
+            //Stay in fornt of playertr
+            transform.position = GameManager.Instance.Player.transform.position + (playerOffset / 1.5f);
         }
 
         // plays flying/flapping sound of bird
