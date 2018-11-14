@@ -48,7 +48,6 @@ public class DustyText : MonoBehaviour
         if (_file.GetAudioClip)
         {
             //This message got an audioclip
-
             DustyManager.Instance.sourceAudio.clip = _file.GetAudioClip;
             DustyManager.Instance.sourceAudio.Play();
         }
@@ -59,6 +58,13 @@ public class DustyText : MonoBehaviour
         lerpSpeed = _file.GetFadeSpeed;
         //AudioManager.Instance.PlayAudio(AudioSampleManager.Instance.GetDustyTalkSound(), 1, gameObject);
 
+        lifeTime = 0;
+    }
+
+    public void StopMessage()
+    {
+        DustyManager.Instance.sourceAudio.Stop();
+        text.text = "";
         lifeTime = 0;
     }
 

@@ -61,28 +61,17 @@ public class DustyManager : MonoBehaviour
         goalPos = Camera.main.transform.position + PositionAwayFromPlayer;
 
         //Add massages
-        Messages.Add(new DustyTextFile("Hoi ik ben Dusty",4f, AudioSampleManager.Instance.DustyText[0]));
-        Messages.Add(new DustyTextFile("Wat leuk dat je in de carwash bent", 4f, AudioSampleManager.Instance.DustyText[1]));
-        Messages.Add(new DustyTextFile("Hopelijk zit je comfortabel", 4f, AudioSampleManager.Instance.DustyText[2]));
-        Messages.Add(new DustyTextFile("Ik ben hier omdat ik je hulp nodig heb", 4f, AudioSampleManager.Instance.DustyText[3]));
-        Messages.Add(new DustyTextFile("Er vliegen allemaal vogels in de wasstraat", 4f, AudioSampleManager.Instance.DustyText[4]));
-        Messages.Add(new DustyTextFile("En dat willen wij niet", 4f, AudioSampleManager.Instance.DustyText[5]));
-        Messages.Add(new DustyTextFile("Wij gaan ervoor zorgen dat de vogels niks meer vies maken", 4f, AudioSampleManager.Instance.DustyText[6]));
-        Messages.Add(new DustyTextFile("Laten we eerst even trainen", 4f, AudioSampleManager.Instance.DustyText[7]));
-        Messages.Add(new DustyTextFile("Voor je zie je een vogel", 4f, AudioSampleManager.Instance.DustyText[8]));
-        Messages.Add(new DustyTextFile("Richt met je ogen op de vogel", 4f, AudioSampleManager.Instance.DustyText[9]));
-        Messages.Add(new DustyTextFile("Goedzo! nu heeft vogel een luier om", 4f, AudioSampleManager.Instance.DustyText[10]));
-        Messages.Add(new DustyTextFile("PATS", 4f, AudioSampleManager.Instance.DustyText[11]));
-        Messages.Add(new DustyTextFile("Ju hebt nu een punt", 4f, AudioSampleManager.Instance.DustyText[12]));
-        Messages.Add(new DustyTextFile("Probeer nu de andere vogels te raken", 4f, AudioSampleManager.Instance.DustyText[13]));
-        Messages.Add(new DustyTextFile("Maar let op! er zijn ook al vogels die ene luier om hebben", 4f, AudioSampleManager.Instance.DustyText[14]));
-        Messages.Add(new DustyTextFile("Als je deze raakt valt zijn luier af en krijg je straf punten!", 4f, AudioSampleManager.Instance.DustyText[15]));
-        Messages.Add(new DustyTextFile("Doe goed je best!", 4f, AudioSampleManager.Instance.DustyText[16]));
-        Messages.Add(new DustyTextFile("Je bent er helemaal klaar voor", 4f, AudioSampleManager.Instance.DustyText[17]));
-        Messages.Add(new DustyTextFile("Wij rijden zo naar rechts", 4f, AudioSampleManager.Instance.DustyText[18]));
-        Messages.Add(new DustyTextFile("Veel Succes!", 4f, AudioSampleManager.Instance.DustyText[19]));
-       
+        Messages.Add(new DustyTextFile("Hoi ik ben Dusty, de schoonmaak robot", 5f, AudioSampleManager.Instance.DustyText[0]));
+        Messages.Add(new DustyTextFile("Wat leuk dat je bij Loogman in de carwash komt", 5f, AudioSampleManager.Instance.DustyText[1]));
+        Messages.Add(new DustyTextFile("Hopelijk zit je comfortabel in de auto", 5f, AudioSampleManager.Instance.DustyText[2]));
+        Messages.Add(new DustyTextFile("Maar ik ben hier omdat ik je hulp nodig heb, Loogman heeft een probleempje", 5f, AudioSampleManager.Instance.DustyText[4]));
+        Messages.Add(new DustyTextFile("Er vliegen allemaal vogels in de wasstraat en ze maken alle auto's vies!", 5f, AudioSampleManager.Instance.DustyText[5]));
+        Messages.Add(new DustyTextFile("Dat willen wij natuurlijk niet, want anders wordt jouw auto ook weer vies", 5f, AudioSampleManager.Instance.DustyText[6]));
+        Messages.Add(new DustyTextFile("Wij gaan ervoor zorgen dat de vogels niet meer op de auto kunnen poepen door ze een luier om te doen", 5f, AudioSampleManager.Instance.DustyText[7]));
+        Messages.Add(new DustyTextFile("Laten we eerst even trainen", 5f, AudioSampleManager.Instance.DustyText[8]));
     }
+
+    
 
     private void Update()
     {
@@ -191,10 +180,16 @@ public class DustyManager : MonoBehaviour
             Messages.Insert(_index, _file);
             dustyTextMessage.SayMessage(Messages[0]);
             Messages.Remove(Messages[0]);
+            
         }
         else
         {
             Messages.Add(_file);
         }
+    }
+
+    public DustyText GetDustyText
+    {
+        get { return dustyTextMessage; }
     }
 }

@@ -34,9 +34,13 @@ namespace VrFox
 
         public GameObject OrientationHolder;
 
-        public bool SpawnStatic;
+        #region TutorialValues
+        public bool TutorialActive;
+        public int TutorialBirdsShot;
 
-        private GameObject lastBird;
+        private TargetBehaviour lastBird;
+        private bool setDustyFirstText;
+        #endregion
 
         private void Update()
         {
@@ -44,63 +48,90 @@ namespace VrFox
             {
                 return;
             }
-            spawnTimer += Time.deltaTime;
-            if (spawnTimer > SpawnInterval)
+            if (!TutorialActive)
             {
-                spawnTimer = 0;
-                if (GameManager.Instance.Player.Score < 4)
+                GamePlay();
+            }
+            else
+            {
+                TutorialGamePlay();
+            }
+        }
+
+        private void TutorialGamePlay()
+        {
+            if (TutorialBirdsShot > 2)
+            {
+                TutorialActive = false;
+
+                //Spawn one with a diaper on
+                SpawnBird();
+                //Find the one bird
+                lastBird.SetAlwaysDiaperOn();
+                SpawnInterval = 7;
+            }
+            else
+            {
+                SpawnBirdInFrontOfPlayer();
+                MaxBirdCount = 1;
+                if (!setDustyFirstText)
                 {
-                    if (SpawnStatic)
-                    {
-                        SpawnBirdInFrontOfPlayer();
-                    }
-                    else
-                    {
-                        SpawnStatic = false;
-                        if (CurrentBirdCount <= MaxBirdCount)
-                            SpawnBird();
-                    }
-                }
-                else
-                {
-                    //spawn normal bird
-                    if (CurrentBirdCount <= MaxBirdCount)
-                        SpawnBird();
+                    setDustyFirstText = true;
+                   // DustyManager.Instance.GetDustyText.StopMessage();
+                    DustyManager.Instance.Messages.Clear();
+                    DustyManager.Instance.Messages.Add(new DustyTextFile("Voor je zie je nu een vogel, en daar gaan wij een luier omheen doen", 5,AudioSampleManager.Instance.DustyText[9]));
+                    DustyManager.Instance.Messages.Add(new DustyTextFile("Richt met je ogen op de vogel, en klik met clicker in je handen", 5, AudioSampleManager.Instance.DustyText[10]));
                 }
             }
         }
 
+        private void GamePlay()
+        {
+            spawnTimer += Time.deltaTime;
+            if (spawnTimer > SpawnInterval)
+            {
+                spawnTimer = 0;
+
+                if (CurrentBirdCount <= MaxBirdCount)
+                    SpawnBird();
+            }
+        }
+
+        public void ResetTutorial()
+        {
+            TutorialActive = true;
+            setDustyFirstText = false;
+        }
+
         public void SpawnBird()
         {
-           //if (CurrentBirdCount <= MaxBirdCount)
+            CurrentBirdCount++;
+
+            //Spawn bird
+            GameObject _bird = Instantiate(BirdPrefab, transform.position, Quaternion.identity);
+            GameManager.Instance.Targets.Add(_bird.GetComponentInChildren<Renderer>());
+
+            float _spawnY = Camera.main.transform.position.y + Random.Range(-0.2f, 0.2f);
+
+            //Set right spawn point 
+            Vector3 _direction = new Vector3(Random.Range(-0.8f, 0.8f), Random.Range(-1, 1), 1);
+            float _distance = Random.Range(-22, -7);
+
+            // Debug.Log(_direction * _distance);
+            if (_distance < 5)
             {
-                CurrentBirdCount++;
-
-                //Spawn bird
-                GameObject _bird = Instantiate(BirdPrefab, transform.position, Quaternion.identity);
-                GameManager.Instance.Targets.Add(_bird.GetComponentInChildren<Renderer>());
-
-                float _spawnY = Camera.main.transform.position.y + Random.Range(-0.2f, 0.2f);
-
-                //Set right spawn point 
-                Vector3 _direction = new Vector3(Random.Range(-0.8f, 0.8f), Random.Range(-1, 1), 1);
-                float _distance = Random.Range(-22, -7);
-
-                // Debug.Log(_direction * _distance);
-                if (_distance < 5)
-                {
-                    _distance = 5;
-                }
-                else if (_distance > -5)
-                {
-                    _distance = -5;
-                }
-
-                _bird.transform.position = _direction * _distance;
-                _bird.transform.position = new Vector3(_bird.transform.position.x, _spawnY, _bird.transform.position.z);
-
-                lastBird = _bird;
+                _distance = 5;
             }
+            else if (_distance > -5)
+            {
+                _distance = -5;
+            }
+
+            _bird.transform.position = _direction * _distance;
+            _bird.transform.position = new Vector3(_bird.transform.position.x, _spawnY, _bird.transform.position.z);
+
+            lastBird = _bird.GetComponent<TargetBehaviour>();
+
 
             //Set new spawn interval
             switch (GameManager.Instance.GetDiffictuly)
@@ -136,12 +167,12 @@ namespace VrFox
 
             //Set right spawn point 
             Vector3 _direction = Camera.main.transform.forward;
-            float _distance = Random.Range(2, 5);
+            float _distance = Random.Range(4, 9);
 
             _bird.transform.position = _direction * _distance;
             _bird.transform.position = new Vector3(_bird.transform.position.x, Random.Range(-0.5f, 1.2f), _bird.transform.position.z);
 
-            lastBird = _bird;
+            lastBird = _bird.GetComponent<TargetBehaviour>();
         }
 
         public void CreateParticleEffect(bool _IsHit, Vector3 _birdPosition)
@@ -165,11 +196,7 @@ namespace VrFox
                 }
             }
         }
-
-        public GameObject GetLastBird
-        {
-            get { return lastBird; }
-        }
+        
 
     }
 }

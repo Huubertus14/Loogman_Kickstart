@@ -205,12 +205,11 @@ namespace VrFox
             {
                 scoreTextFadedAway = true;
                 EndScoreText.text = "";
-                // Debug.Log("let it Fade away");
 
                 ScoreManager.Instance.CreateAllScores(Player.Score);
                 CrossHairEffect.SetActive(false, 0.9f);
+
                 //Calculate the position of the player
-                // Debug.Log(ScoreManager.Instance.GetPositionInTable(Player.Score));
                 if (ScoreManager.Instance.GetPositionInTable(Player.Score) == 0)
                 {
                     Debug.Log("Player is First");
@@ -222,9 +221,7 @@ namespace VrFox
                 playerScoreOnRightPosition = true;
 
                 //Set Score thing on y pos
-                //   Debug.Log("Set right Y pos");
                 playerEndScoreObject.transform.SetParent(Player.HighScoreObject.transform);
-
             }
             if (GameOverTimer > 5 && !otherScoresShown)
             {
@@ -386,6 +383,7 @@ namespace VrFox
                 //Fade in HighScoreText
                 HighScoreFade.Active(true);
             }
+
             if (GameOverTimer > 6.5f && !otherScoreLerpIn)
             {
                 otherScoreLerpIn = true;
@@ -468,9 +466,8 @@ namespace VrFox
             GameOverTimer = 0;
             SetScoreText();
 
-            SpawnManager.Instance.SpawnStatic = true;
-
-
+            SpawnManager.Instance.TutorialActive = true;
+            
             //remove all instructions
             gameState = GameStates.Playing;
 

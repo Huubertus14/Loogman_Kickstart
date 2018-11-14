@@ -44,7 +44,7 @@ public class DustyTextFile {
         get {
             if (!audio)
             {
-                Debug.LogError("No audio clip Attached!");
+              //  Debug.LogError("No audio clip Attached!");
                 return null;
             }
 

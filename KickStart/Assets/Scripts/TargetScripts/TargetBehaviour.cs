@@ -23,11 +23,13 @@ public class TargetBehaviour : MonoBehaviour
 
     //[Header("Refs:")]
     private GameObject Diaper;
+    private bool alwaysDiaperOn;
+    
     
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
-
+        
         //plays spawn sound of bird
         BirdSoundTimer = Random.Range(3f, 6f);
         BirdSoundCounter = 0;
@@ -70,6 +72,7 @@ public class TargetBehaviour : MonoBehaviour
             GameManager.Instance.Indicator.AddIndicator(transform, 0);
         }
         GetEndPoint();
+        transform.Rotate(new Vector3(0, 90, 0));
     }
 
     private void GetEndPoint()
@@ -111,7 +114,10 @@ public class TargetBehaviour : MonoBehaviour
 
     private void OnDestroy()
     {
-        audioSource.Stop();
+        if (audioSource)
+        {
+            audioSource.Stop();
+        }
         SpawnManager.Instance.CurrentBirdCount--;
         GameManager.Instance.Indicator.RemoveIndicator(transform);
     }
@@ -121,6 +127,11 @@ public class TargetBehaviour : MonoBehaviour
         if (!Diaper)
         {
             Diaper = GetComponentInChildren<DiaperBehaviour>().gameObject;
+        }
+
+        if (alwaysDiaperOn)
+        {
+            return;
         }
 
         IsHit = !IsHit;
@@ -135,16 +146,20 @@ public class TargetBehaviour : MonoBehaviour
         {
             Diaper.SetActive(false);
             GameManager.Instance.Player.Score -= 2;
-            GameManager.Instance.SendTextMessage("Don't Shoot those whom already have a diaper on!", 2.5f, Vector2.zero);
+            GameManager.Instance.SendTextMessage("Schiet niet op de vogels die al een luier om hebben!" , 2.5f, Vector2.zero);
             GameManager.Instance.Indicator.AddIndicator(transform, 0);
         }
 
-        if (GameManager.Instance.Player.Score < 5)
+        //Do something different when in a tutorial
+        if (SpawnManager.Instance.TutorialActive)
         {
-            //Check if first thing
-            //gameObject.AddComponent<CleanUp>();
-            GetComponent<CleanUp>().LifeTime = 3;
+            DustyManager.Instance.Messages.Add(new DustyTextFile("Pats!", 6, AudioSampleManager.Instance.DustyText[11]));
+
+            SpawnManager.Instance.TutorialBirdsShot++;
+
+            Destroy(gameObject, 5);
         }
+        
     }
 
     private void Update()
@@ -214,6 +229,19 @@ public class TargetBehaviour : MonoBehaviour
         }
 
         BirdSoundTimer = Random.Range(3f, 6f);
+    }
+
+    public void SetAlwaysDiaperOn()
+    {
+        if (!Diaper)
+        {
+            Diaper = GetComponentInChildren<DiaperBehaviour>().gameObject;
+        }
+
+        Diaper.SetActive(true);
+        GameManager.Instance.Player.Score++;
+        GameManager.Instance.Indicator.RemoveIndicator(transform);
+        alwaysDiaperOn = true;
     }
 
 }
