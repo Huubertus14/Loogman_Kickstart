@@ -34,14 +34,9 @@ namespace VrFox
 
         public GameObject OrientationHolder;
 
-        public bool spawnStatic;
+        public bool SpawnStatic;
 
         private GameObject lastBird;
-
-        private void Start()
-        {
-            spawnStatic = true;
-        }
 
         private void Update()
         {
@@ -55,13 +50,13 @@ namespace VrFox
                 spawnTimer = 0;
                 if (GameManager.Instance.Player.Score < 4)
                 {
-                    if (spawnStatic)
+                    if (SpawnStatic)
                     {
                         SpawnBirdInFrontOfPlayer();
                     }
                     else
                     {
-                        spawnStatic = false;
+                        SpawnStatic = false;
                         if (CurrentBirdCount <= MaxBirdCount)
                             SpawnBird();
                     }

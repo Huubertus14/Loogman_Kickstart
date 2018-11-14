@@ -62,20 +62,8 @@ public class ScoreManager : MonoBehaviour
         //Always the first found index if for the player
         int _scoreIndex = 0;
         int _positionInTable = 0;
-
-        int _siblingFound = 0;
-
-        for (int i = 0; i < AllScores.Count; i++)
-        {
-            if (AllScores[i] == _score)
-            {
-                //i is the index of my score
-                _scoreIndex = i;
-                break;
-            }
-        }
-        //Debug.Log(_scoreIndex);
-        //need to find 5 siblings
+        
+        _scoreIndex = GetPositionInAllScores(_score);
 
         //first check maximum 3 above the current score
         if (_scoreIndex < 3)

@@ -468,7 +468,7 @@ namespace VrFox
             GameOverTimer = 0;
             SetScoreText();
 
-            SpawnManager.Instance.spawnStatic = true;
+            SpawnManager.Instance.SpawnStatic = true;
 
 
             //remove all instructions
