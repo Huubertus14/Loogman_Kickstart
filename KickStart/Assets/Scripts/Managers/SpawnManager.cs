@@ -62,20 +62,22 @@ namespace VrFox
                     else
                     {
                         spawnStatic = false;
-                        SpawnBird();
+                        if (CurrentBirdCount <= MaxBirdCount)
+                            SpawnBird();
                     }
                 }
                 else
                 {
                     //spawn normal bird
-                    SpawnBird();
+                    if (CurrentBirdCount <= MaxBirdCount)
+                        SpawnBird();
                 }
             }
         }
 
         public void SpawnBird()
         {
-            if (CurrentBirdCount <= MaxBirdCount)
+           //if (CurrentBirdCount <= MaxBirdCount)
             {
                 CurrentBirdCount++;
 
