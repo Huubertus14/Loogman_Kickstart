@@ -52,37 +52,37 @@ namespace VrFox
             {
                 GamePlay();
             }
-            else
-            {
-                TutorialGamePlay();
-            }
         }
 
-        private void TutorialGamePlay()
-        {
-            if (TutorialBirdsShot > 2)
-            {
-                TutorialActive = false;
 
-                //Spawn one with a diaper on
-                SpawnBird();
-                //Find the one bird
-                lastBird.SetAlwaysDiaperOn();
-                SpawnInterval = 7;
-            }
-            else
-            {
-                SpawnBirdInFrontOfPlayer();
-                MaxBirdCount = 1;
-                if (!setDustyFirstText)
-                {
-                    setDustyFirstText = true;
-                   // DustyManager.Instance.GetDustyText.StopMessage();
-                    DustyManager.Instance.Messages.Clear();
-                    DustyManager.Instance.Messages.Add(new DustyTextFile("Voor je zie je nu een vogel, en daar gaan wij een luier omheen doen", 5,AudioSampleManager.Instance.DustyText[9]));
-                    DustyManager.Instance.Messages.Add(new DustyTextFile("Richt met je ogen op de vogel, en klik met clicker in je handen", 5, AudioSampleManager.Instance.DustyText[10]));
-                }
-            }
+        IEnumerator Tutorial()
+        {
+            DustyManager.Instance.Messages.Clear();
+            DustyManager.Instance.Messages.Add(new DustyTextFile("Voor je zie je nu een vogel, en daar gaan wij een luier omheen doen", 5, AudioSampleManager.Instance.DustyText[9]));
+            DustyManager.Instance.Messages.Add(new DustyTextFile("Richt met je ogen op de vogel, en klik met clicker in je handen", 5, AudioSampleManager.Instance.DustyText[10]));
+
+            yield return new WaitForSeconds(1.5f);
+
+            //clikck met de clicker omt e schieten
+
+            SpawnBirdInFrontOfPlayer();
+            yield return new WaitUntil( ()=> TutorialBirdsShot > 0);
+
+            //Text vogel geraakt
+
+            yield return new WaitForSeconds(4.1f);
+
+            SpawnBirdInFrontOfPlayer();
+            yield return new WaitUntil(() => TutorialBirdsShot > 1);
+
+            //uitleg vogel met en zonder luier
+
+            yield return new WaitForSeconds(4.1f);
+
+            TutorialActive = false;
+
+            yield return null;
+
         }
 
         private void GamePlay()
@@ -101,6 +101,9 @@ namespace VrFox
         {
             TutorialActive = true;
             setDustyFirstText = false;
+            TutorialBirdsShot = 0;
+
+            StartCoroutine(Tutorial());
         }
 
         public void SpawnBird()
@@ -196,7 +199,7 @@ namespace VrFox
                 }
             }
         }
-        
+
 
     }
 }

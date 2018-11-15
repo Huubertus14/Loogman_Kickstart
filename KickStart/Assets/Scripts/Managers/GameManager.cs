@@ -43,8 +43,7 @@ namespace VrFox
             Instance = this;
 
         }
-
-
+        
         //Key and URL used for the photo recognition
         private readonly string predictionEndPoint = "https://southcentralus.api.cognitive.microsoft.com/customvision/v2.0/Prediction/92a36c67-658a-4ac6-85c4-3cde6f501d22/image";
         private readonly string predictionKey = "88559f30c5c44cbb986359fcd7126920";
@@ -66,7 +65,7 @@ namespace VrFox
         public Text EndScoreText;
         public UIFadeScript HighScoreFade;
 
-        [HideInInspector] //Bah
+        [HideInInspector]
         public List<Renderer> Targets = new List<Renderer>();
 
         [Tooltip("The Object the player is currently looking at")]
@@ -466,7 +465,7 @@ namespace VrFox
             GameOverTimer = 0;
             SetScoreText();
 
-            SpawnManager.Instance.TutorialActive = true;
+            SpawnManager.Instance.ResetTutorial();
             
             //remove all instructions
             gameState = GameStates.Playing;

@@ -71,7 +71,10 @@ public class TargetBehaviour : MonoBehaviour
         {
             GameManager.Instance.Indicator.AddIndicator(transform, 0);
         }
+
         GetEndPoint();
+
+        //fix model rotation
         transform.Rotate(new Vector3(0, 90, 0));
     }
 
@@ -153,13 +156,13 @@ public class TargetBehaviour : MonoBehaviour
         //Do something different when in a tutorial
         if (SpawnManager.Instance.TutorialActive)
         {
+            Debug.Log("Tut bord hit");
             DustyManager.Instance.Messages.Add(new DustyTextFile("Pats!", 6, AudioSampleManager.Instance.DustyText[11]));
 
             SpawnManager.Instance.TutorialBirdsShot++;
 
-            Destroy(gameObject, 5);
+            Destroy(gameObject, 4);
         }
-        
     }
 
     private void Update()
