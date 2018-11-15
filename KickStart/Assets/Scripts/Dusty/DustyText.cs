@@ -61,6 +61,32 @@ public class DustyText : MonoBehaviour
         lifeTime = 0;
     }
 
+    public void SayMessage(DustyTextFile _file, float _delay)
+    {
+        StartCoroutine(SayWithDelay(_file, _delay));
+    }
+
+    private IEnumerator SayWithDelay(DustyTextFile _file, float _delay)
+    {
+        
+        if (_file.GetAudioClip)
+        {
+            //This message got an audioclip
+            DustyManager.Instance.sourceAudio.clip = _file.GetAudioClip;
+            DustyManager.Instance.sourceAudio.Play();
+        }
+
+        text.text = _file.GetMessage;
+        duration = _file.GetDuration + _delay;
+        goalColor = fadeInColor;
+        lerpSpeed = _file.GetFadeSpeed;
+        yield return new WaitForSeconds(_delay);
+        //AudioManager.Instance.PlayAudio(AudioSampleManager.Instance.GetDustyTalkSound(), 1, gameObject);
+
+        lifeTime = 0;
+        yield return null;
+    }
+
     public void StopMessage()
     {
         DustyManager.Instance.sourceAudio.Stop();

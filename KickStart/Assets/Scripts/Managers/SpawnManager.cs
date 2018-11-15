@@ -34,12 +34,15 @@ namespace VrFox
 
         public GameObject OrientationHolder;
 
+        [Space]
+        public BirdMaterialPreset[] BirdMaterials;
         #region TutorialValues
+        [HideInInspector]
         public bool TutorialActive;
+        [HideInInspector]
         public int TutorialBirdsShot;
 
         private TargetBehaviour lastBird;
-        private bool setDustyFirstText;
         #endregion
 
         private void Update()
@@ -53,8 +56,7 @@ namespace VrFox
                 GamePlay();
             }
         }
-
-
+        
         IEnumerator Tutorial()
         {
             DustyManager.Instance.Messages.Clear();
@@ -66,21 +68,49 @@ namespace VrFox
             //clikck met de clicker omt e schieten
 
             SpawnBirdInFrontOfPlayer();
-            yield return new WaitUntil( ()=> TutorialBirdsShot > 0);
+
+            while (TutorialBirdsShot < 1)
+            {
+                yield return new WaitForSeconds(2.5f);
+                Debug.Log("Remind how to shoot!");
+            }
+
+            yield return new WaitUntil(() => TutorialBirdsShot > 0);
 
             //Text vogel geraakt
+
+            DustyManager.Instance.Messages.Add(new DustyTextFile("Goedzo! nu heeft de vogel een luier om!", 5, AudioSampleManager.Instance.DustyText[12]));
+            DustyManager.Instance.Messages.Add(new DustyTextFile("Je hebt nu 1 punt", 5, AudioSampleManager.Instance.DustyText[13]));
 
             yield return new WaitForSeconds(4.1f);
 
             SpawnBirdInFrontOfPlayer();
+            DustyManager.Instance.Messages.Add(new DustyTextFile("Probeer de andere vogel nu ook te raken", 5, AudioSampleManager.Instance.DustyText[14]));
             yield return new WaitUntil(() => TutorialBirdsShot > 1);
 
             //uitleg vogel met en zonder luier
 
             yield return new WaitForSeconds(4.1f);
 
-            TutorialActive = false;
+            //hier zie je ene vogel met luier
+            SpawnBirdInFrontOfPlayer();
+            lastBird.SetAlwaysDiaperOn();
 
+            Destroy(lastBird.gameObject, 3f);
+
+            DustyManager.Instance.Messages.Add(new DustyTextFile("Maar let op! er zijn ook vogels die al een luien om hebben!", 5, AudioSampleManager.Instance.DustyText[15]));
+            DustyManager.Instance.Messages.Add(new DustyTextFile("ls je deze raakt valt zijn luier af en krijg je straf punten", 5, AudioSampleManager.Instance.DustyText[16]));
+
+            yield return new WaitForSeconds(1.5f);
+
+
+            DustyManager.Instance.Messages.Add(new DustyTextFile("Doe goed je best!", 5, AudioSampleManager.Instance.DustyText[17]));
+            DustyManager.Instance.Messages.Add(new DustyTextFile("Je bent er helemaal klaar voor", 5, AudioSampleManager.Instance.DustyText[18]));
+            DustyManager.Instance.Messages.Add(new DustyTextFile("Heel veel succes!", 5, AudioSampleManager.Instance.DustyText[20]));
+
+            yield return new WaitForSeconds(0.8f);
+
+            TutorialActive = false;
             yield return null;
 
         }
@@ -93,14 +123,16 @@ namespace VrFox
                 spawnTimer = 0;
 
                 if (CurrentBirdCount <= MaxBirdCount)
+                {
                     SpawnBird();
+                }
             }
         }
 
         public void ResetTutorial()
         {
             TutorialActive = true;
-            setDustyFirstText = false;
+
             TutorialBirdsShot = 0;
 
             StartCoroutine(Tutorial());
@@ -170,7 +202,7 @@ namespace VrFox
 
             //Set right spawn point 
             Vector3 _direction = Camera.main.transform.forward;
-            float _distance = Random.Range(4, 9);
+            float _distance = Random.Range(6, 15);
 
             _bird.transform.position = _direction * _distance;
             _bird.transform.position = new Vector3(_bird.transform.position.x, Random.Range(-0.5f, 1.2f), _bird.transform.position.z);
@@ -200,6 +232,15 @@ namespace VrFox
             }
         }
 
+
+        public BirdMaterialPreset GetPreset
+        {
+            get
+            {
+                int _x = Random.Range(0,BirdMaterials.Length);
+                return BirdMaterials[_x];
+            }
+        }
 
     }
 }

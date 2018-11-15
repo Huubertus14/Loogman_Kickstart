@@ -565,8 +565,7 @@ namespace VrFox
         {
             hoverObject = _hoverObject;
         }
-
-
+        
         /// <summary>
         /// Get a random quote 
         /// </summary>
@@ -620,6 +619,7 @@ namespace VrFox
         {
             get { return Player.PlayerLevel; }
         }
+        
         #endregion
     }
 }

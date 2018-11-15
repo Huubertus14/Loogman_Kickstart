@@ -11,6 +11,11 @@ public class TargetBehaviour : MonoBehaviour
     public float BirdSoundCounter;
     public float BirdSoundTimer;// = Random.Range(2f, 6f);
     public bool MovingBird;
+
+    public GameObject Body;
+
+    public GameObject[] Beek;
+
     [Space]
     [HideInInspector]
     private bool IsHit;
@@ -24,7 +29,9 @@ public class TargetBehaviour : MonoBehaviour
     //[Header("Refs:")]
     private GameObject Diaper;
     private bool alwaysDiaperOn;
-    
+
+    private float birdScale;
+
     
     private void Start()
     {
@@ -73,6 +80,15 @@ public class TargetBehaviour : MonoBehaviour
         }
 
         GetEndPoint();
+
+        //give bird random scale
+        birdScale = Random.Range(0.05f,0.11f);
+        transform.localScale = new Vector3(birdScale,birdScale,birdScale);
+
+        //get random colors 
+        BirdMaterialPreset _preset = SpawnManager.Instance.GetPreset;
+        SetBeekMaterial(_preset.GetBeek);
+        SetBodyMaterial(_preset.GetBody);
 
         //fix model rotation
         transform.Rotate(new Vector3(0, 90, 0));
@@ -125,6 +141,9 @@ public class TargetBehaviour : MonoBehaviour
         GameManager.Instance.Indicator.RemoveIndicator(transform);
     }
 
+    /// <summary>
+    /// Called when the target is hit
+    /// </summary>
     public void Hit()
     {
         if (!Diaper)
@@ -175,7 +194,7 @@ public class TargetBehaviour : MonoBehaviour
         {
             transform.position = Vector3.MoveTowards(transform.position, endPoint, Speed);
 
-            //Id end point is reached...
+            //If end point is reached...
             if (Vector3.Distance(transform.position, endPoint) < 1)
             {
                 SpawnManager.Instance.CreateParticleEffect(IsHit, transform.position);
@@ -245,6 +264,27 @@ public class TargetBehaviour : MonoBehaviour
         GameManager.Instance.Player.Score++;
         GameManager.Instance.Indicator.RemoveIndicator(transform);
         alwaysDiaperOn = true;
+    }
+
+    /// <summary>
+    /// Set the beek of the bird to a certain metrial
+    /// </summary>
+    /// <param material of the bird="_mat"></param>
+    private void SetBeekMaterial(Material _mat)
+    {
+        foreach (var item in Beek)
+        {
+            item.GetComponent<Renderer>().material = _mat;
+        }
+    }
+
+    /// <summary>
+    /// Set the body of the bird to a certain material
+    /// </summary>
+    /// <param given material="_mat"></param>
+    private void SetBodyMaterial(Material _mat)
+    {
+        Body.GetComponent<Renderer>().material = _mat;
     }
 
 }

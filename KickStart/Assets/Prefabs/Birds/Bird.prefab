@@ -1395,7 +1395,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1663201944029908}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -163.9643, y: 60.161324, z: -58.94124}
+  m_LocalPosition: {x: 0, y: -0.69, z: 2.032}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_Children:
   - {fileID: 4719752750312664}
@@ -2156,6 +2156,10 @@ MonoBehaviour:
   BirdSoundCounter: 0
   BirdSoundTimer: 0
   MovingBird: 1
+  Body: {fileID: 1516265841003576}
+  Beek:
+  - {fileID: 1652141346627376}
+  - {fileID: 1283690848027530}
   GarbagePrefab: {fileID: 1707182630852220, guid: 1e46d6e988cfbda4a9207b7a1512db44,
     type: 2}
 --- !u!114 &114879931387408084
@@ -2676,8 +2680,8 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 5482bf0c7319341a4b5330e45d157d9f, type: 3}
-  - {fileID: 2100002, guid: 5482bf0c7319341a4b5330e45d157d9f, type: 3}
+  - {fileID: 2100000, guid: 726022aa4e92617449c3beaa066b623c, type: 2}
+  - {fileID: 2100000, guid: 726022aa4e92617449c3beaa066b623c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
