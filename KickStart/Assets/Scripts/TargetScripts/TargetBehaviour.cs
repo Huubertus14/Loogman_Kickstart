@@ -31,7 +31,6 @@ public class TargetBehaviour : MonoBehaviour
     private bool alwaysDiaperOn;
 
     private float birdScale;
-
     
     private void Start()
     {
