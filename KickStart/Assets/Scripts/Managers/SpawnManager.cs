@@ -34,14 +34,16 @@ namespace VrFox
 
         public GameObject OrientationHolder;
 
-        public bool spawnStatic;
+        [Space]
+        public BirdMaterialPreset[] BirdMaterials;
+        #region TutorialValues
+        [HideInInspector]
+        public bool TutorialActive;
+        [HideInInspector]
+        public int TutorialBirdsShot;
 
-        private GameObject lastBird;
-
-        private void Start()
-        {
-            spawnStatic = true;
-        }
+        private TargetBehaviour lastBird;
+        #endregion
 
         private void Update()
         {
@@ -49,61 +51,122 @@ namespace VrFox
             {
                 return;
             }
+            if (!TutorialActive)
+            {
+                GamePlay();
+            }
+        }
+        
+        IEnumerator Tutorial()
+        {
+            DustyManager.Instance.Messages.Clear();
+            DustyManager.Instance.Messages.Add(new DustyTextFile("Voor je zie je nu een vogel, en daar gaan wij een luier omheen doen", 5, AudioSampleManager.Instance.DustyText[9]));
+            DustyManager.Instance.Messages.Add(new DustyTextFile("Richt met je ogen op de vogel, en klik met clicker in je handen", 5, AudioSampleManager.Instance.DustyText[10]));
+
+            yield return new WaitForSeconds(1.5f);
+
+            //clikck met de clicker omt e schieten
+
+            SpawnBirdInFrontOfPlayer();
+
+            while (TutorialBirdsShot < 1)
+            {
+                yield return new WaitForSeconds(2.5f);
+                Debug.Log("Remind how to shoot!");
+            }
+
+            yield return new WaitUntil(() => TutorialBirdsShot > 0);
+
+            //Text vogel geraakt
+
+            DustyManager.Instance.Messages.Add(new DustyTextFile("Goedzo! nu heeft de vogel een luier om!", 5, AudioSampleManager.Instance.DustyText[12]));
+            DustyManager.Instance.Messages.Add(new DustyTextFile("Je hebt nu 1 punt", 5, AudioSampleManager.Instance.DustyText[13]));
+
+            yield return new WaitForSeconds(4.1f);
+
+            SpawnBirdInFrontOfPlayer();
+            DustyManager.Instance.Messages.Add(new DustyTextFile("Probeer de andere vogel nu ook te raken", 5, AudioSampleManager.Instance.DustyText[14]));
+            yield return new WaitUntil(() => TutorialBirdsShot > 1);
+
+            //uitleg vogel met en zonder luier
+
+            yield return new WaitForSeconds(4.1f);
+
+            //hier zie je ene vogel met luier
+            SpawnBirdInFrontOfPlayer();
+            lastBird.SetAlwaysDiaperOn();
+
+            Destroy(lastBird.gameObject, 3f);
+
+            DustyManager.Instance.Messages.Add(new DustyTextFile("Maar let op! er zijn ook vogels die al een luien om hebben!", 5, AudioSampleManager.Instance.DustyText[15]));
+            DustyManager.Instance.Messages.Add(new DustyTextFile("ls je deze raakt valt zijn luier af en krijg je straf punten", 5, AudioSampleManager.Instance.DustyText[16]));
+
+            yield return new WaitForSeconds(1.5f);
+
+
+            DustyManager.Instance.Messages.Add(new DustyTextFile("Doe goed je best!", 5, AudioSampleManager.Instance.DustyText[17]));
+            DustyManager.Instance.Messages.Add(new DustyTextFile("Je bent er helemaal klaar voor", 5, AudioSampleManager.Instance.DustyText[18]));
+            DustyManager.Instance.Messages.Add(new DustyTextFile("Heel veel succes!", 5, AudioSampleManager.Instance.DustyText[20]));
+
+            yield return new WaitForSeconds(0.8f);
+
+            TutorialActive = false;
+            yield return null;
+
+        }
+
+        private void GamePlay()
+        {
             spawnTimer += Time.deltaTime;
             if (spawnTimer > SpawnInterval)
             {
                 spawnTimer = 0;
-                if (GameManager.Instance.Player.Score < 4)
+
+                if (CurrentBirdCount <= MaxBirdCount)
                 {
-                    if (spawnStatic)
-                    {
-                        SpawnBirdInFrontOfPlayer();
-                    }
-                    else
-                    {
-                        spawnStatic = false;
-                        SpawnBird();
-                    }
-                }
-                else
-                {
-                    //spawn normal bird
                     SpawnBird();
                 }
             }
         }
 
+        public void ResetTutorial()
+        {
+            TutorialActive = true;
+
+            TutorialBirdsShot = 0;
+
+            StartCoroutine(Tutorial());
+        }
+
         public void SpawnBird()
         {
-            if (CurrentBirdCount <= MaxBirdCount)
+            CurrentBirdCount++;
+
+            //Spawn bird
+            GameObject _bird = Instantiate(BirdPrefab, transform.position, Quaternion.identity);
+            GameManager.Instance.Targets.Add(_bird.GetComponentInChildren<Renderer>());
+
+            float _spawnY = Camera.main.transform.position.y + Random.Range(-0.2f, 0.2f);
+
+            //Set right spawn point 
+            Vector3 _direction = new Vector3(Random.Range(-0.8f, 0.8f), Random.Range(-1, 1), 1);
+            float _distance = Random.Range(-22, -7);
+
+            // Debug.Log(_direction * _distance);
+            if (_distance < 5)
             {
-                CurrentBirdCount++;
-
-                //Spawn bird
-                GameObject _bird = Instantiate(BirdPrefab, transform.position, Quaternion.identity);
-                GameManager.Instance.Targets.Add(_bird.GetComponentInChildren<Renderer>());
-
-                float _spawnY = Camera.main.transform.position.y + Random.Range(-0.2f, 0.2f);
-
-                //Set right spawn point 
-                Vector3 _direction = new Vector3(Random.Range(-0.8f, 0.8f), Random.Range(-1, 1), 1);
-                float _distance = Random.Range(-22, -7);
-
-                // Debug.Log(_direction * _distance);
-                if (_distance < 5)
-                {
-                    _distance = 5;
-                }
-                else if (_distance > -5)
-                {
-                    _distance = -5;
-                }
-
-                _bird.transform.position = _direction * _distance;
-                _bird.transform.position = new Vector3(_bird.transform.position.x, _spawnY, _bird.transform.position.z);
-
-                lastBird = _bird;
+                _distance = 5;
             }
+            else if (_distance > -5)
+            {
+                _distance = -5;
+            }
+
+            _bird.transform.position = _direction * _distance;
+            _bird.transform.position = new Vector3(_bird.transform.position.x, _spawnY, _bird.transform.position.z);
+
+            lastBird = _bird.GetComponent<TargetBehaviour>();
+
 
             //Set new spawn interval
             switch (GameManager.Instance.GetDiffictuly)
@@ -139,12 +202,12 @@ namespace VrFox
 
             //Set right spawn point 
             Vector3 _direction = Camera.main.transform.forward;
-            float _distance = Random.Range(2, 5);
+            float _distance = Random.Range(6, 15);
 
             _bird.transform.position = _direction * _distance;
             _bird.transform.position = new Vector3(_bird.transform.position.x, Random.Range(-0.5f, 1.2f), _bird.transform.position.z);
 
-            lastBird = _bird;
+            lastBird = _bird.GetComponent<TargetBehaviour>();
         }
 
         public void CreateParticleEffect(bool _IsHit, Vector3 _birdPosition)
@@ -169,9 +232,14 @@ namespace VrFox
             }
         }
 
-        public GameObject GetLastBird
+
+        public BirdMaterialPreset GetPreset
         {
-            get { return lastBird; }
+            get
+            {
+                int _x = Random.Range(0,BirdMaterials.Length);
+                return BirdMaterials[_x];
+            }
         }
 
     }

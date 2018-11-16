@@ -16,7 +16,7 @@ public class EventBehaviour : MonoBehaviour
 
     private void Start()
     {
-        StartEvent(new EventData(10, 5, true));
+       // StartEvent(new EventData(10, 5, true));
     }
 
     public void StartEvent(EventData _data)
@@ -68,13 +68,13 @@ public class EventBehaviour : MonoBehaviour
             {
                 intervalIndex++;
                 spawnTimer = 0;
-               // Debug.Log("Spawn");
+                SpawnManager.Instance.SpawnBird();
+                Debug.Log("Spawn");
             }
         }
         //End of the event object
         if (duration > eventData.Duration + 0.1f)
         {
-           // Debug.Log("destroy");
             Destroy(gameObject);
         }
     }

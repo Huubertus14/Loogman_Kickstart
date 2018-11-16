@@ -81,6 +81,7 @@ namespace VrFox
                 if (PlayerLevel != Difficulty.Noob)
                 {
                     DustyManager.Instance.Messages.Add(new DustyTextFile("Try your best!", 2f, 1f));
+                    SpawnManager.Instance.MaxBirdCount = 2;
                 }
                 PlayerLevel = Difficulty.Noob;
             }
@@ -89,6 +90,7 @@ namespace VrFox
                 if (PlayerLevel != Difficulty.Beginner)
                 {
                     DustyManager.Instance.Messages.Add(new DustyTextFile("More are coming!", 2f, 1f));
+                    SpawnManager.Instance.MaxBirdCount = 5;
                 }
                 PlayerLevel = Difficulty.Beginner;
             }
@@ -97,6 +99,7 @@ namespace VrFox
                 if (PlayerLevel != Difficulty.Normal)
                 {
                     DustyManager.Instance.Messages.Add(new DustyTextFile("Let's make it a bit more difficult!", 2f, 1f));
+                    SpawnManager.Instance.MaxBirdCount = 8;
                 }
                 PlayerLevel = Difficulty.Normal;
             }
@@ -105,6 +108,7 @@ namespace VrFox
                 if (PlayerLevel != Difficulty.Hard)
                 {
                     DustyManager.Instance.Messages.Add(new DustyTextFile("There is no going back now! Keep Shooting!", 2f, 1f));
+                    SpawnManager.Instance.MaxBirdCount = 12;
                 }
                 PlayerLevel = Difficulty.Hard;
             }
@@ -121,7 +125,7 @@ namespace VrFox
             if (!InCarWash)
             {
                 //+ (Time.deltaTime / 46) * 110)
-                transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + (Time.deltaTime / 46) * 110);
+                transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + (Time.deltaTime / 46) * 75);
             }
 
             AmountOfWater += Time.deltaTime / TimeToRecharge;

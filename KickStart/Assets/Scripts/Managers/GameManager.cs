@@ -43,8 +43,7 @@ namespace VrFox
             Instance = this;
 
         }
-
-
+        
         //Key and URL used for the photo recognition
         private readonly string predictionEndPoint = "https://southcentralus.api.cognitive.microsoft.com/customvision/v2.0/Prediction/92a36c67-658a-4ac6-85c4-3cde6f501d22/image";
         private readonly string predictionKey = "88559f30c5c44cbb986359fcd7126920";
@@ -66,7 +65,7 @@ namespace VrFox
         public Text EndScoreText;
         public UIFadeScript HighScoreFade;
 
-        [HideInInspector] //Bah
+        [HideInInspector]
         public List<Renderer> Targets = new List<Renderer>();
 
         [Tooltip("The Object the player is currently looking at")]
@@ -205,12 +204,11 @@ namespace VrFox
             {
                 scoreTextFadedAway = true;
                 EndScoreText.text = "";
-                // Debug.Log("let it Fade away");
 
                 ScoreManager.Instance.CreateAllScores(Player.Score);
                 CrossHairEffect.SetActive(false, 0.9f);
+
                 //Calculate the position of the player
-                // Debug.Log(ScoreManager.Instance.GetPositionInTable(Player.Score));
                 if (ScoreManager.Instance.GetPositionInTable(Player.Score) == 0)
                 {
                     Debug.Log("Player is First");
@@ -222,9 +220,7 @@ namespace VrFox
                 playerScoreOnRightPosition = true;
 
                 //Set Score thing on y pos
-                //   Debug.Log("Set right Y pos");
                 playerEndScoreObject.transform.SetParent(Player.HighScoreObject.transform);
-
             }
             if (GameOverTimer > 5 && !otherScoresShown)
             {
@@ -386,6 +382,7 @@ namespace VrFox
                 //Fade in HighScoreText
                 HighScoreFade.Active(true);
             }
+
             if (GameOverTimer > 6.5f && !otherScoreLerpIn)
             {
                 otherScoreLerpIn = true;
@@ -468,15 +465,14 @@ namespace VrFox
             GameOverTimer = 0;
             SetScoreText();
 
-            SpawnManager.Instance.spawnStatic = true;
-
-
+            SpawnManager.Instance.ResetTutorial();
+            
             //remove all instructions
             gameState = GameStates.Playing;
 
             CrossHairEffect.SetActive(true, 1.4f);
             SetAllInstructionsActive(false);
-            Player.SyncCarWashWithPlayer(1);
+            Player.SyncCarWashWithPlayer(0);
         }
 
         /// <summary>
@@ -536,7 +532,7 @@ namespace VrFox
         /// </summary>
         /// <param string of the message="_mes"></param>
         /// <param how long th message is in view="_dur"></param>
-        /// <param any 2d offset="_offset"></param>
+        /// <param any 2d offset  ="_offset"></param>
         public void SendTextMessage(string _mes, float _dur, Vector2 _offset)
         {
             messageText.Message(_mes, _dur, _offset);
@@ -569,8 +565,7 @@ namespace VrFox
         {
             hoverObject = _hoverObject;
         }
-
-
+        
         /// <summary>
         /// Get a random quote 
         /// </summary>
@@ -624,6 +619,7 @@ namespace VrFox
         {
             get { return Player.PlayerLevel; }
         }
+        
         #endregion
     }
 }

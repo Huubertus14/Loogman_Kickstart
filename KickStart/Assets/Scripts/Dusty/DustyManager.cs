@@ -21,6 +21,8 @@ public class DustyManager : MonoBehaviour
 
     private Animation ani;
     private DustyText dustyTextMessage;
+    [HideInInspector]
+    public AudioSource sourceAudio;
 
     float headSpinTimer;
 
@@ -48,7 +50,8 @@ public class DustyManager : MonoBehaviour
 
         ani = Head.GetComponent<Animation>();
         dustyTextMessage = GetComponentInChildren<DustyText>();
-
+        sourceAudio = GetComponentInChildren<AudioSource>();
+       
         goalPos = Vector3.zero;
         DustyState = DustyStates.Idle;
         yPosTimer = 0;
@@ -58,33 +61,20 @@ public class DustyManager : MonoBehaviour
         goalPos = Camera.main.transform.position + PositionAwayFromPlayer;
 
         //Add massages
-        Messages.Add(new DustyTextFile("Hallo daar", 3, 5));
-        Messages.Add(new DustyTextFile("Ik ben Dusty", 4, 5));
-        Messages.Add(new DustyTextFile("En jij moet mij vandaag helpen", 5, 5));
-        Messages.Add(new DustyTextFile("Loogman heeft een probleem", 4, 5));
-        Messages.Add(new DustyTextFile("Er zijn allemaal vogels binnen de wasstraat", 5, 5));
-        Messages.Add(new DustyTextFile("En zij maken alle schone auto's weer vies!", 4, 5));
-        Messages.Add(new DustyTextFile("Nu is het aan jou om dat te voorkomen!", 6, 5));
-        Messages.Add(new DustyTextFile("Anders word jouw auto straks ook weer vies", 3, 5));
-        Messages.Add(new DustyTextFile("Je moet proberen om bij zo veel mogelijk\n vogels een luier om te schieten", 6, 5));
-        Messages.Add(new DustyTextFile("Hoe doe je dat?", 2, 5));
-        Messages.Add(new DustyTextFile("Simpel!", 1, 5));
-        Messages.Add(new DustyTextFile("Volg de instructies die recht voor je staan", 3, 5));
-        Messages.Add(new DustyTextFile("Of gebruik de clicker die is mee gegeven!", 4, 5));
-        Messages.Add(new DustyTextFile("Voor elke vogel die je raakt krijg je een punt", 4, 5));
-        Messages.Add(new DustyTextFile("En als je er een raakt die al een luier aan heeft...", 4, 5));
-        Messages.Add(new DustyTextFile("Dan zal zijn luier afvallen en krijg je twee straf punten", 5, 5));
-        Messages.Add(new DustyTextFile("Succes", 2, 5));
+        Messages.Add(new DustyTextFile("Hoi ik ben Dusty, de schoonmaak robot", 5f, AudioSampleManager.Instance.DustyText[0]));
+        Messages.Add(new DustyTextFile("Wat leuk dat je bij Loogman in de carwash komt", 5f, AudioSampleManager.Instance.DustyText[1]));
+        Messages.Add(new DustyTextFile("Hopelijk zit je comfortabel in de auto", 5f, AudioSampleManager.Instance.DustyText[2]));
+        Messages.Add(new DustyTextFile("Maar ik ben hier omdat ik je hulp nodig heb, Loogman heeft een probleempje", 5f, AudioSampleManager.Instance.DustyText[4]));
+        Messages.Add(new DustyTextFile("Er vliegen allemaal vogels in de wasstraat en ze maken alle auto's vies!", 5f, AudioSampleManager.Instance.DustyText[5]));
+        Messages.Add(new DustyTextFile("Dat willen wij natuurlijk niet, want anders wordt jouw auto ook weer vies", 5f, AudioSampleManager.Instance.DustyText[6]));
+        Messages.Add(new DustyTextFile("Wij gaan ervoor zorgen dat de vogels niet meer op de auto kunnen poepen door ze een luier om te doen", 5f, AudioSampleManager.Instance.DustyText[7]));
+        Messages.Add(new DustyTextFile("Laten we eerst even trainen", 5f, AudioSampleManager.Instance.DustyText[8]));
     }
+
+    
 
     private void Update()
     {
-        //Set initial goal pos for this frame
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            Messages.Add(new DustyTextFile("Yeet " + Random.Range(10, 100), Random.Range(2, 4), Random.Range(1, 90)));
-        }
-
         switch (DustyState)
         {
             case DustyStates.Idle:
@@ -148,7 +138,6 @@ public class DustyManager : MonoBehaviour
                 Messages.Add(new DustyTextFile(GameManager.Instance.GetDustyQuote, Random.Range(3, 6), Random.Range(1, 10)));
             }
         }
-
     }
 
     private void Talking()
@@ -191,10 +180,16 @@ public class DustyManager : MonoBehaviour
             Messages.Insert(_index, _file);
             dustyTextMessage.SayMessage(Messages[0]);
             Messages.Remove(Messages[0]);
+            
         }
         else
         {
             Messages.Add(_file);
         }
+    }
+
+    public DustyText GetDustyText
+    {
+        get { return dustyTextMessage; }
     }
 }

@@ -11,6 +11,11 @@ public class TargetBehaviour : MonoBehaviour
     public float BirdSoundCounter;
     public float BirdSoundTimer;// = Random.Range(2f, 6f);
     public bool MovingBird;
+
+    public GameObject Body;
+
+    public GameObject[] Beek;
+
     [Space]
     [HideInInspector]
     private bool IsHit;
@@ -19,14 +24,18 @@ public class TargetBehaviour : MonoBehaviour
     private AudioSource audioSource;
 
     private Vector3 newEndPoint;
+    private Vector3 playerOffset;
 
     //[Header("Refs:")]
     private GameObject Diaper;
+    private bool alwaysDiaperOn;
+
+    private float birdScale;
     
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
-
+        
         //plays spawn sound of bird
         BirdSoundTimer = Random.Range(3f, 6f);
         BirdSoundCounter = 0;
@@ -58,12 +67,30 @@ public class TargetBehaviour : MonoBehaviour
                 break;
         }
 
+        if (!MovingBird)
+        {
+            playerOffset = transform.position + GameManager.Instance.Player.transform.position;
+        }
+
         Diaper.SetActive(IsHit);
         if (!IsHit)
         {
             GameManager.Instance.Indicator.AddIndicator(transform, 0);
         }
+
         GetEndPoint();
+
+        //give bird random scale
+        birdScale = Random.Range(0.05f,0.11f);
+        transform.localScale = new Vector3(birdScale,birdScale,birdScale);
+
+        //get random colors 
+        BirdMaterialPreset _preset = SpawnManager.Instance.GetPreset;
+        SetBeekMaterial(_preset.GetBeek);
+        SetBodyMaterial(_preset.GetBody);
+
+        //fix model rotation
+        transform.Rotate(new Vector3(0, 90, 0));
     }
 
     private void GetEndPoint()
@@ -105,16 +132,27 @@ public class TargetBehaviour : MonoBehaviour
 
     private void OnDestroy()
     {
-        audioSource.Stop();
+        if (audioSource)
+        {
+            audioSource.Stop();
+        }
         SpawnManager.Instance.CurrentBirdCount--;
         GameManager.Instance.Indicator.RemoveIndicator(transform);
     }
 
+    /// <summary>
+    /// Called when the target is hit
+    /// </summary>
     public void Hit()
     {
         if (!Diaper)
         {
             Diaper = GetComponentInChildren<DiaperBehaviour>().gameObject;
+        }
+
+        if (alwaysDiaperOn)
+        {
+            return;
         }
 
         IsHit = !IsHit;
@@ -129,15 +167,19 @@ public class TargetBehaviour : MonoBehaviour
         {
             Diaper.SetActive(false);
             GameManager.Instance.Player.Score -= 2;
-            GameManager.Instance.SendTextMessage("Don't Shoot those whom already have a diaper on!", 2.5f, Vector2.zero);
+            GameManager.Instance.SendTextMessage("Schiet niet op de vogels die al een luier om hebben!" , 2.5f, Vector2.zero);
             GameManager.Instance.Indicator.AddIndicator(transform, 0);
         }
 
-        if (GameManager.Instance.Player.Score < 5)
+        //Do something different when in a tutorial
+        if (SpawnManager.Instance.TutorialActive)
         {
-            //Check if first thing
-            //gameObject.AddComponent<CleanUp>();
-            GetComponent<CleanUp>().LifeTime = 3;
+            Debug.Log("Tut bord hit");
+            DustyManager.Instance.Messages.Add(new DustyTextFile("Pats!", 6, AudioSampleManager.Instance.DustyText[11]));
+
+            SpawnManager.Instance.TutorialBirdsShot++;
+
+            Destroy(gameObject, 4);
         }
     }
 
@@ -151,7 +193,7 @@ public class TargetBehaviour : MonoBehaviour
         {
             transform.position = Vector3.MoveTowards(transform.position, endPoint, Speed);
 
-            //Id end point is reached...
+            //If end point is reached...
             if (Vector3.Distance(transform.position, endPoint) < 1)
             {
                 SpawnManager.Instance.CreateParticleEffect(IsHit, transform.position);
@@ -163,6 +205,11 @@ public class TargetBehaviour : MonoBehaviour
                 SpawnManager.Instance.CreateParticleEffect(IsHit, transform.position);
                 Destroy(gameObject);
             }
+        }
+        else
+        {
+            //Stay in fornt of playertr
+            transform.position = GameManager.Instance.Player.transform.position + (playerOffset / 1.5f);
         }
 
         // plays flying/flapping sound of bird
@@ -203,6 +250,40 @@ public class TargetBehaviour : MonoBehaviour
         }
 
         BirdSoundTimer = Random.Range(3f, 6f);
+    }
+
+    public void SetAlwaysDiaperOn()
+    {
+        if (!Diaper)
+        {
+            Diaper = GetComponentInChildren<DiaperBehaviour>().gameObject;
+        }
+
+        Diaper.SetActive(true);
+        GameManager.Instance.Player.Score++;
+        GameManager.Instance.Indicator.RemoveIndicator(transform);
+        alwaysDiaperOn = true;
+    }
+
+    /// <summary>
+    /// Set the beek of the bird to a certain metrial
+    /// </summary>
+    /// <param material of the bird="_mat"></param>
+    private void SetBeekMaterial(Material _mat)
+    {
+        foreach (var item in Beek)
+        {
+            item.GetComponent<Renderer>().material = _mat;
+        }
+    }
+
+    /// <summary>
+    /// Set the body of the bird to a certain material
+    /// </summary>
+    /// <param given material="_mat"></param>
+    private void SetBodyMaterial(Material _mat)
+    {
+        Body.GetComponent<Renderer>().material = _mat;
     }
 
 }

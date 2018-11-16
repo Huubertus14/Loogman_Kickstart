@@ -1,0 +1,293 @@
+fileFormatVersion: 2
+guid: 0240042798e364c4884038586e005ef5
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: body
+    100002: bottom
+    100004: eye_l
+    100006: eye_r
+    100008: FOOT_L
+    100010: FOOT_R
+    100012: hair
+    100014: hair1
+    100016: hair2
+    100018: joint1
+    100020: joint10
+    100022: joint11
+    100024: joint12
+    100026: joint13
+    100028: joint14
+    100030: joint15
+    100032: joint16
+    100034: joint17
+    100036: joint18
+    100038: joint19
+    100040: joint2
+    100042: joint20
+    100044: joint21
+    100046: joint22
+    100048: joint23
+    100050: joint24
+    100052: joint25
+    100054: joint26
+    100056: joint27
+    100058: joint28
+    100060: joint29
+    100062: joint3
+    100064: joint30
+    100066: joint31
+    100068: joint31 1
+    100070: joint32
+    100072: joint33
+    100074: joint34
+    100076: joint35
+    100078: joint36
+    100080: joint37
+    100082: joint38
+    100084: joint39
+    100086: joint4
+    100088: joint40
+    100090: joint5
+    100092: joint6
+    100094: joint7
+    100096: joint8
+    100098: joint9
+    100100: mouth_low
+    100102: mouth_up
+    100104: NAILS
+    100106: NAILS 1
+    100108: pCone1
+    100110: pCone1 1
+    100112: pCone2
+    100114: pCone2 1
+    100116: pCone3
+    100118: pCone3 1
+    100120: pCube1
+    100122: pCube1 1
+    100124: seagull
+    100126: //RootNode
+    100128: Seagull1
+    100130: tonque
+    100132: transform1
+    400000: body
+    400002: bottom
+    400004: eye_l
+    400006: eye_r
+    400008: FOOT_L
+    400010: FOOT_R
+    400012: hair
+    400014: hair1
+    400016: hair2
+    400018: joint1
+    400020: joint10
+    400022: joint11
+    400024: joint12
+    400026: joint13
+    400028: joint14
+    400030: joint15
+    400032: joint16
+    400034: joint17
+    400036: joint18
+    400038: joint19
+    400040: joint2
+    400042: joint20
+    400044: joint21
+    400046: joint22
+    400048: joint23
+    400050: joint24
+    400052: joint25
+    400054: joint26
+    400056: joint27
+    400058: joint28
+    400060: joint29
+    400062: joint3
+    400064: joint30
+    400066: joint31
+    400068: joint31 1
+    400070: joint32
+    400072: joint33
+    400074: joint34
+    400076: joint35
+    400078: joint36
+    400080: joint37
+    400082: joint38
+    400084: joint39
+    400086: joint4
+    400088: joint40
+    400090: joint5
+    400092: joint6
+    400094: joint7
+    400096: joint8
+    400098: joint9
+    400100: mouth_low
+    400102: mouth_up
+    400104: NAILS
+    400106: NAILS 1
+    400108: pCone1
+    400110: pCone1 1
+    400112: pCone2
+    400114: pCone2 1
+    400116: pCone3
+    400118: pCone3 1
+    400120: pCube1
+    400122: pCube1 1
+    400124: seagull
+    400126: //RootNode
+    400128: Seagull1
+    400130: tonque
+    400132: transform1
+    2000000: bottom
+    2100000: white
+    2100002: grey
+    2100004: black
+    2100006: yellow
+    2100008: lambert6
+    4300000: body
+    4300002: eye_l
+    4300004: eye_r
+    4300006: mouth_up
+    4300008: mouth_low
+    4300010: pCone1
+    4300012: pCone3
+    4300014: pCone2
+    4300016: pCube1
+    4300018: pCone1
+    4300020: pCone3
+    4300022: pCone2
+    4300024: pCube1
+    4300026: hair
+    4300028: hair1
+    4300030: hair2
+    4300032: tonque
+    7400000: vleugels
+    9500000: //RootNode
+    13700000: body
+    13700002: eye_l
+    13700004: eye_r
+    13700006: hair
+    13700008: hair1
+    13700010: hair2
+    13700012: mouth_low
+    13700014: mouth_up
+    13700016: pCone1
+    13700018: pCone1 1
+    13700020: pCone2
+    13700022: pCone2 1
+    13700024: pCone3
+    13700026: pCone3 1
+    13700028: pCube1
+    13700030: pCube1 1
+    13700032: tonque
+    2186277476908879412: ImportLogs
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: vleugels
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 85
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 100
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

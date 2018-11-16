@@ -11,6 +11,8 @@ public class RecognizerManager : MonoBehaviour {
     
     public float HintTimer;
     
+    private float dubbeltap;
+    
     private void Awake()
     {
         Instance = this;
@@ -47,6 +49,13 @@ public class RecognizerManager : MonoBehaviour {
         //Only shoot in the gaming stage
         if (GameManager.Instance.gameState == GameStates.Playing)
         {
+            
+            if (dubbeltap < 0.7f && dubbeltap > 0.1f)
+            {
+                GameManager.Instance.Player.SyncCarWashWithPlayer(0);
+            }
+            dubbeltap = 0;
+
             GameManager.Instance.Player.Shoot();
             return;
         }
@@ -72,5 +81,7 @@ public class RecognizerManager : MonoBehaviour {
                 }
             }
         }
+
+        dubbeltap += Time.deltaTime;
     }
 }
