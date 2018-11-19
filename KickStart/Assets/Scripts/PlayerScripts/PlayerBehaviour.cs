@@ -186,7 +186,8 @@ namespace VrFox
                 _lastIndex = 0;
             }
 
-            Vector3 _direction = lastPositions[_lastIndex] - lastPositions[_currentIndex];
+            //  Vector3 _direction = lastPositions[_lastIndex] - lastPositions[_currentIndex];
+            Vector3 _direction = Camera.main.transform.forward;
 
             //Normalize the values
             _direction.Normalize();

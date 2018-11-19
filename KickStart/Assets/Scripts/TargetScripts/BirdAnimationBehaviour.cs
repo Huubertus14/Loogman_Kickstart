@@ -12,8 +12,4 @@ public class BirdAnimationBehaviour : MonoBehaviour {
         animator.Play("Fly");
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 }

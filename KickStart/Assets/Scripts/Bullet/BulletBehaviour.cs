@@ -5,7 +5,6 @@ using VrFox;
 
 public class BulletBehaviour : MonoBehaviour
 {
-
     private Rigidbody rb;
 
     // Use this for initialization

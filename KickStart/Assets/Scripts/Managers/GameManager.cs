@@ -71,6 +71,10 @@ namespace VrFox
         [Tooltip("The Object the player is currently looking at")]
         private GameObject hoverObject;
 
+        [Space]
+        public BeaconDetector Detector;
+        [Space]
+
         [Header("Values")]
         public GameStates gameState;
         public bool GameStarted;
@@ -81,7 +85,7 @@ namespace VrFox
         [Space]
         public float DurationToImpusle;
         public float DurationFromImpulse;
-
+        
         private bool scoreTextFadedAway;
         private bool playerScoreOnRightPosition;
         private bool otherScoresShown;
@@ -112,6 +116,7 @@ namespace VrFox
             BulletForce = 240 * 3;
             ResetGame();
             BoundaryIndicators.SetActive(true);
+            Detector.StartDetecting();
         }
 
         private void Update()

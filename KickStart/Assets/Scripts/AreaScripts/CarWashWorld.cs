@@ -21,7 +21,7 @@ public class CarWashWorld : MonoBehaviour
     [Header("CheckPoints:")]
     public GameObject[] Checkpoint;
 
-    private List<xRayObjectScript> allXRayObjects = new List<xRayObjectScript>();
+    private readonly List<xRayObjectScript> allXRayObjects = new List<xRayObjectScript>();
     private Color[] cols = new Color[] { Color.red, Color.blue, Color.green, Color.cyan };
 
     private Vector3 goalPos;

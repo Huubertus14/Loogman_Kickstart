@@ -17,9 +17,7 @@ public class TargetBehaviour : MonoBehaviour
     public GameObject[] Beek;
 
     [Space]
-    [HideInInspector]
     private bool IsHit;
-    public GameObject GarbagePrefab;
     private Vector3 endPoint;
     private AudioSource audioSource;
 
@@ -31,21 +29,21 @@ public class TargetBehaviour : MonoBehaviour
     private bool alwaysDiaperOn;
 
     private float birdScale;
-    
+
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        
+
         //plays spawn sound of bird
         BirdSoundTimer = Random.Range(3f, 6f);
         BirdSoundCounter = 0;
         AudioManager.Instance.PlayAudio(AudioSampleManager.Instance.getBirdSpawnSounds(), 1, gameObject);
-        
+
         if (!Diaper)
         {
             Diaper = GetComponentInChildren<DiaperBehaviour>().gameObject;
         }
-        
+
         Speed = Random.Range(0.01f, 0.015f);
 
         switch (GameManager.Instance.GetDiffictuly)
@@ -81,8 +79,8 @@ public class TargetBehaviour : MonoBehaviour
         GetEndPoint();
 
         //give bird random scale
-        birdScale = Random.Range(0.05f,0.11f);
-        transform.localScale = new Vector3(birdScale,birdScale,birdScale);
+        birdScale = Random.Range(0.9f, 1.1f);
+        transform.localScale = new Vector3(birdScale, birdScale, birdScale);
 
         //get random colors 
         BirdMaterialPreset _preset = SpawnManager.Instance.GetPreset;
@@ -167,7 +165,7 @@ public class TargetBehaviour : MonoBehaviour
         {
             Diaper.SetActive(false);
             GameManager.Instance.Player.Score -= 2;
-            GameManager.Instance.SendTextMessage("Schiet niet op de vogels die al een luier om hebben!" , 2.5f, Vector2.zero);
+            GameManager.Instance.SendTextMessage("Schiet niet op de vogels die al een luier om hebben!", 2.5f, Vector2.zero);
             GameManager.Instance.Indicator.AddIndicator(transform, 0);
         }
 

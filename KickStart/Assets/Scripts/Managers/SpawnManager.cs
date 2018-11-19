@@ -21,7 +21,6 @@ namespace VrFox
         [Header("Refs:")]
         public List<GameObject> Spawns = new List<GameObject>();
 
-
         [Header("Values")]
         public float SpawnInterval;
         private float spawnTimer;
@@ -36,6 +35,7 @@ namespace VrFox
 
         [Space]
         public BirdMaterialPreset[] BirdMaterials;
+
         #region TutorialValues
         [HideInInspector]
         public bool TutorialActive;
@@ -56,7 +56,7 @@ namespace VrFox
                 GamePlay();
             }
         }
-        
+
         IEnumerator Tutorial()
         {
             DustyManager.Instance.Messages.Clear();
@@ -65,14 +65,14 @@ namespace VrFox
 
             yield return new WaitForSeconds(1.5f);
 
-            //clikck met de clicker omt e schieten
-
+            //click met de clicker om te schieten
             SpawnBirdInFrontOfPlayer();
 
             while (TutorialBirdsShot < 1)
             {
-                yield return new WaitForSeconds(2.5f);
-                Debug.Log("Remind how to shoot!");
+                yield return new WaitForSeconds(5f);
+                DustyManager.Instance.ImportantMessage(new DustyTextFile("Richt met je ogen op de vogel, en klik met clicker in je handen", 5, AudioSampleManager.Instance.DustyText[10]), 0);
+                //Debug.Log("Remind how to shoot!");
             }
 
             yield return new WaitUntil(() => TutorialBirdsShot > 0);
@@ -112,7 +112,6 @@ namespace VrFox
 
             TutorialActive = false;
             yield return null;
-
         }
 
         private void GamePlay()
@@ -132,7 +131,6 @@ namespace VrFox
         public void ResetTutorial()
         {
             TutorialActive = true;
-
             TutorialBirdsShot = 0;
 
             StartCoroutine(Tutorial());
@@ -232,15 +230,13 @@ namespace VrFox
             }
         }
 
-
         public BirdMaterialPreset GetPreset
         {
             get
             {
-                int _x = Random.Range(0,BirdMaterials.Length);
+                int _x = Random.Range(0, BirdMaterials.Length);
                 return BirdMaterials[_x];
             }
         }
-
     }
 }

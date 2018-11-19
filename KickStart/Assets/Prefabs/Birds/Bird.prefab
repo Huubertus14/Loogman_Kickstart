@@ -2160,8 +2160,6 @@ MonoBehaviour:
   Beek:
   - {fileID: 1652141346627376}
   - {fileID: 1283690848027530}
-  GarbagePrefab: {fileID: 1707182630852220, guid: 1e46d6e988cfbda4a9207b7a1512db44,
-    type: 2}
 --- !u!114 &114879931387408084
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2253,7 +2251,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100006, guid: 5482bf0c7319341a4b5330e45d157d9f, type: 3}
+  - {fileID: 2100000, guid: 5bcd606b7e7dd304f8438a07b0013273, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2680,7 +2678,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 726022aa4e92617449c3beaa066b623c, type: 2}
+  - {fileID: 2100000, guid: d66cecaf701dc164282d78ad006997f4, type: 2}
   - {fileID: 2100000, guid: 726022aa4e92617449c3beaa066b623c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -2813,7 +2811,7 @@ SkinnedMeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100006, guid: 5482bf0c7319341a4b5330e45d157d9f, type: 3}
+  - {fileID: 2100000, guid: 5bcd606b7e7dd304f8438a07b0013273, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
