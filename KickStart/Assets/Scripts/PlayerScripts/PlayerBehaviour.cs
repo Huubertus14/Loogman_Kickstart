@@ -146,6 +146,10 @@ namespace VrFox
             {
                 SyncCarWashWithPlayer(1);
             }
+            if (Input.GetKeyDown(KeyCode.Y))
+            {
+                Shoot();
+            }
         }
 
         public void ScoreFlash()
@@ -179,12 +183,12 @@ namespace VrFox
             IsSynced = true;
 
             //Fix the right rotation
-            int _currentIndex = posIndex;
-            int _lastIndex = posIndex + 1;
-            if (_lastIndex > 4)
-            {
-                _lastIndex = 0;
-            }
+            //int _currentIndex = posIndex;
+            //int _lastIndex = posIndex + 1;
+            //if (_lastIndex > 4)
+            //{
+            //    _lastIndex = 0;
+            //}
 
             //  Vector3 _direction = lastPositions[_lastIndex] - lastPositions[_currentIndex];
             Vector3 _direction = Camera.main.transform.forward;

@@ -26,6 +26,7 @@ public class TargetBehaviour : MonoBehaviour
 
     //[Header("Refs:")]
     private GameObject Diaper;
+    private MeshRenderer[] logoOnDiaper;
     private bool alwaysDiaperOn;
 
     private float birdScale;
@@ -43,6 +44,13 @@ public class TargetBehaviour : MonoBehaviour
         {
             Diaper = GetComponentInChildren<DiaperBehaviour>().gameObject;
         }
+
+        logoOnDiaper = GetComponentsInChildren<MeshRenderer>();
+        for (int i = 1; i < logoOnDiaper.Length; i++)
+        {
+            logoOnDiaper[i].material = GameManager.Instance.Blue;
+        }
+        logoOnDiaper[0].material = GameManager.Instance.White;
 
         Speed = Random.Range(0.01f, 0.015f);
 

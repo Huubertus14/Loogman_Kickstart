@@ -60,30 +60,6 @@ namespace HoloToolkit.Unity.InputModule
                 {
                     ParentTransform.GetChild(i).gameObject.SetActive(false);
                 }
-
-                //Pnly show these things when you are in instructions
-                if (GameManager.Instance.gameState == GameStates.Instructions)
-                {
-                    // Set active any that match the current state
-                    for (int i = 0; i < CursorStateData.Length; i++)
-                    {
-                        if (CursorStateData[i].CursorState == state)
-                        {
-                            CursorStateData[i].CursorObject.SetActive(true);
-                        }
-                    }
-                }
-                else if (GameManager.Instance.gameState == GameStates.Playing)
-                {
-                    // Set active any that match the current state
-                    for (int i = 0; i < CursorStateData.Length; i++)
-                    {
-                        if (CursorStateData[i].CursorState == state)
-                        {
-                            CursorStateData[i].CursorObject.SetActive(true);
-                        }
-                    }
-                }
             }
         }
     }

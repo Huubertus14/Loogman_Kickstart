@@ -73,7 +73,10 @@ namespace VrFox
 
         [Space]
         public BeaconDetector Detector;
-        [Space]
+
+        [Header("Material Colors:")]
+        public Material Blue;
+        public Material White;
 
         [Header("Values")]
         public GameStates gameState;

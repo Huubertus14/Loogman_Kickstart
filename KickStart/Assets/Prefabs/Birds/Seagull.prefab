@@ -5225,7 +5225,7 @@ MonoBehaviour:
   BirdSoundCounter: 0
   BirdSoundTimer: 0
   MovingBird: 1
-  Body: {fileID: 1939210138039788}
+  Body: {fileID: 1943836031018648}
   Beek:
   - {fileID: 1641048815902090}
   - {fileID: 1391268945481086}
