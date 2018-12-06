@@ -1,6 +1,6 @@
-﻿using UnityEngine;
+﻿using EnumStates;
+using UnityEngine;
 using VrFox;
-using EnumStates;
 
 public class TargetBehaviour : MonoBehaviour
 {
@@ -13,7 +13,6 @@ public class TargetBehaviour : MonoBehaviour
     public bool MovingBird;
 
     public GameObject Body;
-
     public GameObject[] Beek;
 
     [Space]
@@ -63,13 +62,14 @@ public class TargetBehaviour : MonoBehaviour
                 break;
             case Difficulty.Normal:
                 Speed *= 1.1f;
-                IsHit = ((int)Random.Range(0, 8) == 2);
+                IsHit = (Random.Range(0, 8) == 2);
                 break;
             case Difficulty.Hard:
                 Speed *= 1.3f;
-                IsHit = ((int)Random.Range(0, 6) == 2);
+                IsHit = (Random.Range(0, 6) == 2);
                 break;
             default:
+                Debug.LogError("Code should not be reached!");
                 break;
         }
 
@@ -101,7 +101,7 @@ public class TargetBehaviour : MonoBehaviour
 
     private void GetEndPoint()
     {
-        if ((int)Random.Range(0, 4) == 1)
+        if (Random.Range(0, 4) == 1)
         {
             //Get direction to player
             Vector3 _dirToPlayer = GameManager.Instance.CurrentPlayer.transform.position - transform.position;

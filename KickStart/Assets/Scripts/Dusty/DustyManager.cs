@@ -60,6 +60,7 @@ public class DustyManager : MonoBehaviour
 
         goalPos = Camera.main.transform.position + PositionAwayFromPlayer;
 
+        /*
         //Add massages
         Messages.Add(new DustyTextFile("Hoi ik ben Dusty, de schoonmaak robot", 5f, AudioSampleManager.Instance.DustyText[0]));
         Messages.Add(new DustyTextFile("Wat leuk dat je bij Loogman in de carwash komt", 5f, AudioSampleManager.Instance.DustyText[1]));
@@ -69,6 +70,7 @@ public class DustyManager : MonoBehaviour
         Messages.Add(new DustyTextFile("Dat willen wij natuurlijk niet, want anders wordt jouw auto ook weer vies", 5f, AudioSampleManager.Instance.DustyText[6]));
         Messages.Add(new DustyTextFile("Wij gaan ervoor zorgen dat de vogels niet meer op de auto kunnen poepen door ze een luier om te doen", 5f, AudioSampleManager.Instance.DustyText[7]));
         Messages.Add(new DustyTextFile("Laten we eerst even trainen", 5f, AudioSampleManager.Instance.DustyText[8]));
+  */
     }
 
     
@@ -135,7 +137,7 @@ public class DustyManager : MonoBehaviour
                 idleTextTimer = 0;
 
                 //add random thing
-                Messages.Add(new DustyTextFile(GameManager.Instance.GetDustyQuote, Random.Range(3, 6), Random.Range(1, 10)));
+                //Messages.Add(new DustyTextFile(GameManager.Instance.GetDustyQuote, Random.Range(3, 6), Random.Range(1, 10)));
             }
         }
     }

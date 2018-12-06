@@ -44,8 +44,6 @@ public class CustomVisionAnalyser : MonoBehaviour {
         {
             Debug.LogError("GameManager Not Found!");
         }
-        predictionKey = GameManager.Instance.GetPredictionKey;
-        predictionEndpoint = GameManager.Instance.GetPredictionURL;
     }
     /// <summary>
     /// Call the Computer Vision Service to submit the image.

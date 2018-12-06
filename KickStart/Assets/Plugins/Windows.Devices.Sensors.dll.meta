@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f6f56ea4fd1e3124a872e1fe0f27af16
+guid: 9d775d165dc62fd44a76a8ca37b1a05d
 PluginImporter:
   externalObjects: {}
   serializedVersion: 2
@@ -13,21 +13,14 @@ PluginImporter:
     second:
       enabled: 0
       settings:
-        Exclude Android: 1
-        Exclude Editor: 1
+        Exclude Editor: 0
         Exclude Linux: 1
         Exclude Linux64: 1
         Exclude LinuxUniversal: 1
         Exclude OSXUniversal: 1
         Exclude Win: 1
         Exclude Win64: 1
-        Exclude WindowsStoreApps: 0
-  - first:
-      Android: Android
-    second:
-      enabled: 0
-      settings:
-        CPU: ARMv7
+        Exclude WindowsStoreApps: 1
   - first:
       Any: 
     second:
@@ -36,7 +29,7 @@ PluginImporter:
   - first:
       Editor: Editor
     second:
-      enabled: 0
+      enabled: 1
       settings:
         CPU: AnyCPU
         DefaultValueInitialized: true
@@ -86,13 +79,13 @@ PluginImporter:
   - first:
       Windows Store Apps: WindowsStoreApps
     second:
-      enabled: 1
+      enabled: 0
       settings:
-        CPU: AnyCPU
+        CPU: X86
         DontProcess: False
         PlaceholderPath: 
         SDK: UWP
-        ScriptingBackend: DotNet
+        ScriptingBackend: AnyScriptingBackend
   userData: 
   assetBundleName: 
   assetBundleVariant: 
