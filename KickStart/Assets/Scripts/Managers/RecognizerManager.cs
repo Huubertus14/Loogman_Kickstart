@@ -4,7 +4,7 @@ using EnumStates;
 using VrFox;
 
 public class RecognizerManager : MonoBehaviour {
-
+    
     public static RecognizerManager Instance;
 
     private GestureRecognizer recognizer;

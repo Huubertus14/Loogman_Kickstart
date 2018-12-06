@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using HoloToolkit.Unity.InputModule;
 using EnumStates;
 using Greyman;
-using VrFox;
+using Microsoft;
 
 namespace EnumStates
 {
@@ -44,10 +43,6 @@ namespace VrFox
 
         }
         
-        //Key and URL used for the photo recognition
-        private readonly string predictionEndPoint = "https://southcentralus.api.cognitive.microsoft.com/customvision/v2.0/Prediction/92a36c67-658a-4ac6-85c4-3cde6f501d22/image";
-        private readonly string predictionKey = "88559f30c5c44cbb986359fcd7126920";
-
         [Header("References:s")]
         public PlayerBehaviour Player;
         public GameObject Cursor;
@@ -70,10 +65,10 @@ namespace VrFox
 
         [Tooltip("The Object the player is currently looking at")]
         private GameObject hoverObject;
-
-        [Space]
-        public BeaconDetector Detector;
-        [Space]
+        
+        [Header("Material Colors:")]
+        public Material Blue;
+        public Material White;
 
         [Header("Values")]
         public GameStates gameState;
@@ -105,18 +100,16 @@ namespace VrFox
 
         [HideInInspector]
         public bool CanContinueNextGame;
-
-
+        
         //Test
         //Timer to run when the game is over and will reset
         private float GameOverTimer;
 
         private void Start()
         {
-            BulletForce = 240 * 3;
+            BulletForce = 720;
             ResetGame();
             BoundaryIndicators.SetActive(true);
-            Detector.StartDetecting();
         }
 
         private void Update()
@@ -574,52 +567,7 @@ namespace VrFox
         /// <summary>
         /// Get a random quote 
         /// </summary>
-        public string GetDustyQuote
-        {
-            get
-            {
-                string[] _quote = new string[] {
-                    "Biem!",
-                    "Loogman best Man",
-                    "Kobe",
-                    "Yeet",
-                    "WOW",
-                    "Merci for Waluigi",
-                    "Ik wist niet dat je Loog Man",
-                    "TOTO - Africa",
-                    "Bless the rains down in Africa",
-                    "Ik wil Kaas",
-                    "WAAAAAAAAAA",
-                    "REEEEEEEEEEEEEEEEEEEEEEEE",
-                    "@@@@@@@@@@@@@@@@@@@@@@@@@@",
-                    "Alexa, play Despacito",
-                    "( ._. )-/",
-                    "ಠ_ಠ",
-                    "(╯°□°）╯︵ ┻━┻"
-                };
-
-                int _x = Random.Range(0, _quote.Length);
-                return _quote[_x];
-            }
-
-        }
-
-        public string GetPredictionKey
-        {
-            get
-            {
-                return predictionKey;
-            }
-        }
-
-        public string GetPredictionURL
-        {
-            get
-            {
-                return predictionEndPoint;
-            }
-        }
-
+        
         public Difficulty GetDiffictuly
         {
             get { return Player.PlayerLevel; }
