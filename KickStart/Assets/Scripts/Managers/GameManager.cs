@@ -45,7 +45,7 @@ namespace VrFox
         
         [Header("References:s")]
         public PlayerBehaviour Player;
-        public GameObject Cursor;
+        public GameObject Reticle;
 
         public GameObject PlayerCanvas;
         public GestureImage TutorialThing;
@@ -470,7 +470,7 @@ namespace VrFox
 
             CrossHairEffect.SetActive(true, 1.4f);
             SetAllInstructionsActive(false);
-            Player.SyncCarWashWithPlayer(0);
+            //Player.SyncCarWashWithPlayer(0);
         }
 
         /// <summary>

@@ -5229,6 +5229,14 @@ MonoBehaviour:
   Beek:
   - {fileID: 1641048815902090}
   - {fileID: 1391268945481086}
+  DeathParticle: {fileID: 1222976583829746, guid: d166581bdd55b1e43ab19118f1ce3ecf,
+    type: 2}
+  SmokeParticles: {fileID: 1774362150817566, guid: ac14dba2f78a0214090c60ac3d1c45e4,
+    type: 2}
+  BirdHitEffect: {fileID: 1270126634788680, guid: efa467f120f58fe43931dd8e35c2d187,
+    type: 2}
+  DiaperDestroy: {fileID: 1222976583829746, guid: 524ac8dcb73d81d43a637e30203cbf74,
+    type: 2}
 --- !u!114 &114735873475987468
 MonoBehaviour:
   m_ObjectHideFlags: 1
