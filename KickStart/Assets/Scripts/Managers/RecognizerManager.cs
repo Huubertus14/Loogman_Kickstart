@@ -9,8 +9,6 @@ public class RecognizerManager : MonoBehaviour {
 
     private GestureRecognizer recognizer;
     
-    public float HintTimer;
-    
     private float dubbeltap;
     
     private void Awake()
@@ -50,9 +48,9 @@ public class RecognizerManager : MonoBehaviour {
         if (GameManager.Instance.gameState == GameStates.Playing)
         {
             
-            if (dubbeltap < 0.7f && dubbeltap > 0.1f)
+            if (dubbeltap < 0.4f && dubbeltap > 0.1f)
             {
-                GameManager.Instance.Player.SyncCarWashWithPlayer(0);
+                Debug.Log("Dubbel Tap");
             }
             dubbeltap = 0;
 
@@ -60,7 +58,6 @@ public class RecognizerManager : MonoBehaviour {
             return;
         }
     }
-
     
     private void Update()
     {

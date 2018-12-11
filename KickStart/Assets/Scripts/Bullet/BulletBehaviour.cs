@@ -19,17 +19,11 @@ public class BulletBehaviour : MonoBehaviour
         {
             rb = GetComponent<Rigidbody>();
         }
-        rb.AddForce(Camera.main.transform.forward * GameManager.Instance.BulletForce);
+        rb.AddForce(Camera.main.transform.forward * GameManager.Instance.GetBulletForce);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "xRayObject")
-        {
-            CarWashWorld.Instance.ShowImpulse(transform.position);
-            Destroy(gameObject);
-        }
-
         if (collision.gameObject.tag.Contains("Target"))
         {
             //Target HIT!
