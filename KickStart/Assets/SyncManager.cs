@@ -1,10 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using VrFox;
 
 
-public class SyncManager : MonoBehaviour {
-
+public class SyncManager : MonoBehaviour
+{
     public static SyncManager Instance;
     private void Awake()
     {
@@ -14,10 +13,11 @@ public class SyncManager : MonoBehaviour {
         }
     }
 
-    public void OnSignalInput()
+
+    private void Start()
     {
         
     }
 
-
 }
+

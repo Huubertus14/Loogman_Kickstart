@@ -46,8 +46,10 @@ namespace VrFox
         [Header("References:s")]
         public PlayerBehaviour Player;
         public GameObject Cursor;
-
+        [Space]
         public GameObject PlayerCanvas;
+        public GameObject GroundCanvas;
+        [Space]
         public GestureImage TutorialThing;
         public OffScreenIndicator Indicator;
         public MessageTextBehaviour messageText;
@@ -62,9 +64,6 @@ namespace VrFox
 
         [HideInInspector]
         public List<Renderer> Targets = new List<Renderer>();
-
-        [Tooltip("The Object the player is currently looking at")]
-        private GameObject hoverObject;
         
         [Header("Material Colors:")]
         public Material Blue;
@@ -94,9 +93,8 @@ namespace VrFox
         [Space]
         public ActivationLerp[] InstructionLerps;
         private float BeginTimer = 0;
-
-        [HideInInspector]
-        public float BulletForce;
+        
+        private float bulletForce;
 
         [HideInInspector]
         public bool CanContinueNextGame;
@@ -107,7 +105,7 @@ namespace VrFox
 
         private void Start()
         {
-            BulletForce = 720;
+            bulletForce = 720;
             ResetGame();
             BoundaryIndicators.SetActive(true);
         }
@@ -470,7 +468,6 @@ namespace VrFox
 
             CrossHairEffect.SetActive(true, 1.4f);
             SetAllInstructionsActive(false);
-            Player.SyncCarWashWithPlayer(0);
         }
 
         /// <summary>
@@ -542,31 +539,11 @@ namespace VrFox
         {
             get { return Player.gameObject; }
         }
-
-        public GameObject GetHoverObject
-        {
-            get
-            {
-                if (hoverObject)
-                {
-                    return hoverObject;
-                }
-                else
-                {
-                    Debug.LogError("No Current Hovering Object!");
-                    return null;
-                }
-            }
-        }
-
-        public void SetHoverObject(GameObject _hoverObject)
-        {
-            hoverObject = _hoverObject;
-        }
         
-        /// <summary>
-        /// Get a random quote 
-        /// </summary>
+       public float GetBulletForce
+        {
+            get { return bulletForce; }
+        }
         
         public Difficulty GetDiffictuly
         {
