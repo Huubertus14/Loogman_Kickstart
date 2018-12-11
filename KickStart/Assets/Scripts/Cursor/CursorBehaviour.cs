@@ -8,10 +8,12 @@ using VrFox;
 public class CursorBehaviour : MonoBehaviour
 {
     /// <summary>
-    /// The cursor (this object) mesh renderer
+    /// The reticle (this object) mesh renderer
     /// </summary>
-    private RectTransform rect;
-    private Image img;
+    public RectTransform reticle;
+    public RawImage img;
+    public Camera cam;
+    public float maxDistance = 46f;
 
     private float rectDistance;
 
@@ -21,12 +23,12 @@ public class CursorBehaviour : MonoBehaviour
     void Start()
     {
         // Take the objects
-        rect = GetComponent<RectTransform>();
-        img = GetComponent<Image>();
-        img.color = Color.white;
+        reticle = GetComponent<RectTransform>();
+        img = GetComponent<RawImage>();
+        img.color = Color.red;
 
         // Set the cursor reference
-        GameManager.Instance.Cursor = gameObject;
+        GameManager.Instance.Reticle = gameObject;
 
     }
 
@@ -35,40 +37,37 @@ public class CursorBehaviour : MonoBehaviour
     /// </summary>
     void Update()
     {
+        float distance = maxDistance;
         if (!GameManager.Instance.GameStarted)
         {
-
             img.enabled = false;
             return;
         }
-
         img.enabled = true;
+        
         // Do a raycast into the world based on the user's head position and orientation.
-        Vector3 headPosition = Camera.main.transform.position;
-        Vector3 gazeDirection = Camera.main.transform.forward;
+        Vector3 headPosition = cam.transform.position;
+        Vector3 gazeDirection = cam.transform.forward;
 
-        RaycastHit gazeHitInfo;
-        if (Physics.Raycast(headPosition, gazeDirection, out gazeHitInfo, Mathf.Infinity))
+        RaycastHit hit;
+        if (Physics.Raycast(headPosition, gazeDirection, out hit))
         {
             // If the raycast hit a hologram, display the cursor mesh.
 
             // Move the cursor to the point where the raycast hit.
             //  transform.position = gazeHitInfo.point;
-            if (!gazeHitInfo.transform.gameObject.tag.Contains("Bullet"))
+
+            if (hit.collider)
             {
-                rectDistance = Vector3.Distance(gazeHitInfo.transform.position, headPosition);
-            }
-            else
-            {
-                rectDistance = 150;
+                reticle.transform.position = cam.WorldToScreenPoint(hit.point);
             }
         }
         else
         {
             // If the raycast did not hit a hologram, hide the cursor mesh.
-            rectDistance = 150;
+            rectDistance = 20f;
         }
 
-        rect.localPosition = new Vector3(0, 0, rectDistance);
+        //reticle.localPosition = new Vector3(0, 0, rectDistance);
     }
 }

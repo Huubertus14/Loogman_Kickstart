@@ -28,6 +28,13 @@ public class TargetBehaviour : MonoBehaviour
     private MeshRenderer[] logoOnDiaper;
     private bool alwaysDiaperOn;
 
+    [Space]
+    [Space]
+    public GameObject DeathParticle;
+    public GameObject SmokeParticles;
+    public GameObject BirdHitEffect;
+    public GameObject DiaperDestroy;
+
     private float birdScale;
 
     private void Start()
@@ -168,6 +175,9 @@ public class TargetBehaviour : MonoBehaviour
             Diaper.SetActive(true);
             GameManager.Instance.Player.Score++;
             GameManager.Instance.Indicator.RemoveIndicator(transform);
+
+            //hit effect
+            Instantiate(SmokeParticles, transform.position, Quaternion.identity);
         }
         else
         {
@@ -175,6 +185,11 @@ public class TargetBehaviour : MonoBehaviour
             GameManager.Instance.Player.Score -= 2;
             GameManager.Instance.SendTextMessage("Schiet niet op de vogels die al een luier om hebben!", 2.5f, Vector2.zero);
             GameManager.Instance.Indicator.AddIndicator(transform, 0);
+
+            //no hit effect
+            Instantiate(DiaperDestroy, transform.position, Quaternion.identity);
+
+
         }
 
         //Do something different when in a tutorial
@@ -214,7 +229,7 @@ public class TargetBehaviour : MonoBehaviour
         }
         else
         {
-            //Stay in fornt of playertr
+            //Stay in front of player
             transform.position = GameManager.Instance.Player.transform.position + (playerOffset / 1.5f);
         }
 

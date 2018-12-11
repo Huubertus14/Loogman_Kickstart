@@ -45,8 +45,8 @@ namespace VrFox
         
         [Header("References:s")]
         public PlayerBehaviour Player;
-        public GameObject Cursor;
-        [Space]
+        public GameObject Reticle;
+
         public GameObject PlayerCanvas;
         public GameObject GroundCanvas;
         [Space]
