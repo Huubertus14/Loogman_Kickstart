@@ -134,6 +134,7 @@ namespace VrFox
             TutorialBirdsShot = 0;
 
             //StartCoroutine(Tutorial());
+            TutorialActive = false;
         }
 
         public void SpawnBird()
