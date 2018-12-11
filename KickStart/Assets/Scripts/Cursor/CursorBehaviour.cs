@@ -12,8 +12,6 @@ public class CursorBehaviour : MonoBehaviour
     /// </summary>
     public RectTransform reticle;
     public RawImage img;
-    public Camera cam;
-    public float maxDistance = 46f;
 
     private float rectDistance;
 
@@ -37,7 +35,6 @@ public class CursorBehaviour : MonoBehaviour
     /// </summary>
     void Update()
     {
-        float distance = maxDistance;
         if (!GameManager.Instance.GameStarted)
         {
             img.enabled = false;
@@ -46,20 +43,19 @@ public class CursorBehaviour : MonoBehaviour
         img.enabled = true;
         
         // Do a raycast into the world based on the user's head position and orientation.
-        Vector3 headPosition = cam.transform.position;
-        Vector3 gazeDirection = cam.transform.forward;
+        Vector3 headPosition = Camera.main.transform.position;
+        Vector3 gazeDirection = Camera.main.transform.forward;
 
         RaycastHit hit;
         if (Physics.Raycast(headPosition, gazeDirection, out hit))
         {
             // If the raycast hit a hologram, display the cursor mesh.
-
             // Move the cursor to the point where the raycast hit.
             //  transform.position = gazeHitInfo.point;
 
             if (hit.collider)
             {
-                reticle.transform.position = cam.WorldToScreenPoint(hit.point);
+                reticle.transform.position = Camera.main.WorldToScreenPoint(hit.point);
             }
         }
         else

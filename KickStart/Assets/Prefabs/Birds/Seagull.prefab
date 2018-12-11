@@ -2342,7 +2342,7 @@ Transform:
   m_GameObject: {fileID: 1314704429571224}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.009, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children:
   - {fileID: 4737034689671544}
   - {fileID: 4000447524482170}
@@ -5235,8 +5235,7 @@ MonoBehaviour:
     type: 2}
   BirdHitEffect: {fileID: 1270126634788680, guid: efa467f120f58fe43931dd8e35c2d187,
     type: 2}
-  DiaperDestroy: {fileID: 1222976583829746, guid: 524ac8dcb73d81d43a637e30203cbf74,
-    type: 2}
+  DiaperDestroy: {fileID: 0}
 --- !u!114 &114735873475987468
 MonoBehaviour:
   m_ObjectHideFlags: 1

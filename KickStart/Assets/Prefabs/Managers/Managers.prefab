@@ -405,9 +405,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
-  Cursor: {fileID: 0}
+  Reticle: {fileID: 0}
   PlayerCanvas: {fileID: 0}
   GroundCanvas: {fileID: 0}
+  StartButton: {fileID: 0}
   TutorialThing: {fileID: 0}
   Indicator: {fileID: 114722359190857508}
   messageText: {fileID: 0}
@@ -438,7 +439,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  BulletForce: 240
   CanContinueNextGame: 0
 --- !u!114 &114969654599957296
 MonoBehaviour:

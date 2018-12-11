@@ -46,9 +46,13 @@ namespace VrFox
         [Header("References:s")]
         public PlayerBehaviour Player;
         public GameObject Reticle;
+        [Space]
 
         public GameObject PlayerCanvas;
         public GameObject GroundCanvas;
+
+        public StartButtonBehaviour StartButton;
+
         [Space]
         public GestureImage TutorialThing;
         public OffScreenIndicator Indicator;
@@ -506,6 +510,19 @@ namespace VrFox
             TimeText.text = (1f / Time.deltaTime).ToString();
         }
 
+        public void HandleGaze(GameObject _gazeObject)
+        {
+            if (_gazeObject.GetComponent<StartButtonBehaviour>())
+            {
+                StartButton.HoverEnter();
+            }
+            else
+            {
+                StartButton.HoverExit();
+            }
+            Debug.Log("HandleGaze");
+        }
+
         /// <summary>
         /// Show the total end score
         /// </summary>
@@ -532,6 +549,8 @@ namespace VrFox
         {
             messageText.Message(_mes, _dur, _offset);
         }
+
+
 
         #region Property's
 

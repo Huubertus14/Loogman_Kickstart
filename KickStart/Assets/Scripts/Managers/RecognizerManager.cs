@@ -81,4 +81,7 @@ public class RecognizerManager : MonoBehaviour {
 
         dubbeltap += Time.deltaTime;
     }
+
+    
+
 }
