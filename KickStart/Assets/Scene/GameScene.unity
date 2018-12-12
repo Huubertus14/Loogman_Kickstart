@@ -848,6 +848,11 @@ Prefab:
       propertyPath: Reticle
       value: 
       objectReference: {fileID: 950029569}
+    - target: {fileID: 114755208706617680, guid: 20c13879b59ae4a4f85b04cacea06003,
+        type: 2}
+      propertyPath: ScoreFloorText
+      value: 
+      objectReference: {fileID: 950029571}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 20c13879b59ae4a4f85b04cacea06003, type: 2}
   m_IsPrefabParent: 0

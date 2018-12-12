@@ -67,7 +67,7 @@ public class RecognizerManager : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (GameManager.Instance.GameState == GameStates.Instructions)
+            if (GameManager.Instance.GameState == GameStates.Waiting)
             {
                 GameManager.Instance.StartGame();
                 return;
