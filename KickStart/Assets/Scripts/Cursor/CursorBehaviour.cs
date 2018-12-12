@@ -61,7 +61,7 @@ public class CursorBehaviour : MonoBehaviour
         else
         {
             // If the raycast did not hit a hologram, hide the cursor mesh.
-            rectDistance = 20f;
+            //rectDistance = 20f;
         }
 
         //reticle.localPosition = new Vector3(0, 0, rectDistance);

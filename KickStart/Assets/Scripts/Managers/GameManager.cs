@@ -1,10 +1,8 @@
-﻿using System.Collections;
+﻿using EnumStates;
+using Greyman;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using EnumStates;
-using Greyman;
-using Microsoft;
 
 namespace EnumStates
 {
@@ -42,7 +40,7 @@ namespace VrFox
             Instance = this;
 
         }
-        
+
         [Header("References:s")]
         public PlayerBehaviour Player;
         public GameObject Reticle;
@@ -68,13 +66,13 @@ namespace VrFox
 
         [HideInInspector]
         public List<Renderer> Targets = new List<Renderer>();
-        
+
         [Header("Material Colors:")]
         public Material Blue;
         public Material White;
 
         [Header("Values")]
-        public GameStates gameState;
+        public GameStates GameState;
         public bool GameStarted;
         public bool GameOver;
         [Space]
@@ -83,12 +81,13 @@ namespace VrFox
         [Space]
         public float DurationToImpusle;
         public float DurationFromImpulse;
-        
+
         private bool scoreTextFadedAway;
         private bool playerScoreOnRightPosition;
         private bool otherScoresShown;
         private bool otherScoreLerpIn;
         private GameObject playerEndScoreObject;
+        private GameObject hoverObject;
 
         [Header("Tutorial values")]
         public Text TutorialFeedbackText;
@@ -97,12 +96,12 @@ namespace VrFox
         [Space]
         public ActivationLerp[] InstructionLerps;
         private float BeginTimer = 0;
-        
+
         private float bulletForce;
 
         [HideInInspector]
         public bool CanContinueNextGame;
-        
+
         //Test
         //Timer to run when the game is over and will reset
         private float GameOverTimer;
@@ -116,7 +115,7 @@ namespace VrFox
 
         private void Update()
         {
-            if (gameState == GameStates.Instructions) // do this when youare in the instructions
+            if (GameState == GameStates.Instructions) // do this when youare in the instructions
             {
                 BeginTimer += Time.deltaTime;
                 TutorialFeedbackText.text = "";
@@ -128,20 +127,20 @@ namespace VrFox
 
                 // Instructions();
             }
-            if (gameState == GameStates.Playing)
+            if (GameState == GameStates.Playing)
             {
                 Playing();
             }
-            if (gameState == GameStates.Waiting)
+            if (GameState == GameStates.Waiting)
             {
                 //Wait for picture to find
             }
-            if (gameState == GameStates.GameEnd)
+            if (GameState == GameStates.GameEnd)
             {
                 EndGame();
             }
         }
-        
+
         private void Instructions()
         {
             EndScoreText.text = "";
@@ -196,7 +195,7 @@ namespace VrFox
             }
         }
 
-        private  void EndGame()
+        private void EndGame()
         {
             //Game has end
             GameOverTimer += Time.deltaTime;
@@ -411,8 +410,8 @@ namespace VrFox
 
             //rempve arrows
             BoundaryIndicators.SetActive(false);
-
-            gameState = GameStates.Instructions;
+            StartButton.gameObject.SetActive(true);
+            GameState = GameStates.Waiting;
         }
 
         public void SetAllInstructionsActive(bool _value)
@@ -436,7 +435,7 @@ namespace VrFox
             GameStarted = false;
             TimeText.text = "";
             GameOver = true;
-            gameState = GameStates.GameEnd;
+            GameState = GameStates.GameEnd;
 
             CrossHairEffect.SetActive(false, 2.2f);
 
@@ -465,10 +464,12 @@ namespace VrFox
             GameOverTimer = 0;
             SetScoreText();
 
+
+            StartButton.gameObject.SetActive(false);
             SpawnManager.Instance.ResetTutorial();
-            
+
             //remove all instructions
-            gameState = GameStates.Playing;
+            GameState = GameStates.Playing;
 
             CrossHairEffect.SetActive(true, 1.4f);
             SetAllInstructionsActive(false);
@@ -512,15 +513,17 @@ namespace VrFox
 
         public void HandleGaze(GameObject _gazeObject)
         {
+            hoverObject = _gazeObject;
             if (_gazeObject.GetComponent<StartButtonBehaviour>())
             {
                 StartButton.HoverEnter();
+                Debug.Log("Enter");
             }
             else
             {
                 StartButton.HoverExit();
+                Debug.Log("Exit");
             }
-            Debug.Log("HandleGaze");
         }
 
         /// <summary>
@@ -550,25 +553,19 @@ namespace VrFox
             messageText.Message(_mes, _dur, _offset);
         }
 
-
-
         #region Property's
 
-        public GameObject CurrentPlayer
+        public GameObject CurrentPlayer => Player.gameObject;
+
+        public float GetBulletForce => bulletForce;
+
+        public Difficulty GetDiffictuly => Player.PlayerLevel;
+
+        public GameObject GetHoverObject
         {
-            get { return Player.gameObject; }
+            get { return hoverObject; }
         }
-        
-       public float GetBulletForce
-        {
-            get { return bulletForce; }
-        }
-        
-        public Difficulty GetDiffictuly
-        {
-            get { return Player.PlayerLevel; }
-        }
-        
+
         #endregion
     }
 }

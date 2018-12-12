@@ -60,7 +60,7 @@ public class SceneOrganiser : MonoBehaviour {
                 // lastLabelPlaced.transform.localPosition = CalculateBoundingBoxPosition(quadBounds, bestPrediction.boundingBox);
 
                 GameManager.Instance.SendTextMessage("Image found, Game is about to start", 5, Vector2.zero);
-                GameManager.Instance.gameState = EnumStates.GameStates.Instructions;
+                GameManager.Instance.GameState = EnumStates.GameStates.Instructions;
                 // Set the tag text
 
                 // Cast a ray from the user's head to the currently placed label, it should hit the object detected by the Service.

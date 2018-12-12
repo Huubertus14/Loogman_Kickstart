@@ -29,33 +29,37 @@ public class RecognizerManager : MonoBehaviour {
     /// </summary>
     private void TapHandler(TappedEventArgs obj)
     {
-        if (GameManager.Instance.gameState == GameStates.GameEnd)
+        //Switch to determine which game state there is eand to do someting with the hand
+        switch (GameManager.Instance.GameState)
         {
-            if (GameManager.Instance.CanContinueNextGame)
-            {
-                GameManager.Instance.ResetGame();
-                return;
-            }
-        }
+            case GameStates.Playing:
+                if (dubbeltap < 0.4f && dubbeltap > 0.1f)
+                {
+                    Debug.Log("Dubbel Tap");
+                }
+                dubbeltap = 0;
 
-        if (GameManager.Instance.gameState == GameStates.Instructions)
-        {
-            GameManager.Instance.InstrucionAmount++;
-            return;
-        }
+                GameManager.Instance.Player.Shoot();
+                break;
+            case GameStates.Instructions:
+                GameManager.Instance.InstrucionAmount++;
+                break;
+            case GameStates.GameEnd:
+                if (GameManager.Instance.CanContinueNextGame)
+                {
+                    GameManager.Instance.ResetGame();
+                    return;
+                }
+                break;
+            case GameStates.Waiting:
+                if (GameManager.Instance.GetHoverObject.GetComponent<StartButtonBehaviour>())
+                {
+                    GameManager.Instance.StartGame();
+                }
 
-        //Only shoot in the gaming stage
-        if (GameManager.Instance.gameState == GameStates.Playing)
-        {
-            
-            if (dubbeltap < 0.4f && dubbeltap > 0.1f)
-            {
-                Debug.Log("Dubbel Tap");
-            }
-            dubbeltap = 0;
-
-            GameManager.Instance.Player.Shoot();
-            return;
+                break;
+            default:
+                break;
         }
     }
     
@@ -63,13 +67,13 @@ public class RecognizerManager : MonoBehaviour {
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (GameManager.Instance.gameState == GameStates.Instructions)
+            if (GameManager.Instance.GameState == GameStates.Instructions)
             {
                 GameManager.Instance.StartGame();
                 return;
             }
 
-            if (GameManager.Instance.gameState == GameStates.GameEnd)
+            if (GameManager.Instance.GameState == GameStates.GameEnd)
             {
                 if (GameManager.Instance.CanContinueNextGame)
                 {

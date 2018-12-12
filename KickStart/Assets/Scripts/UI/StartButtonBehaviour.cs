@@ -22,6 +22,7 @@ public class StartButtonBehaviour : MonoBehaviour
     {
         imgGoalColor = new Color(.2f, 1, .7f, 1);
         textGoalColor = Color.cyan;
+        Debug.Log("Hover Over Start");
     }
 
     public void HoverExit()
@@ -33,10 +34,6 @@ public class StartButtonBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        HoverExit();
-
-
         HandleColor();
     }
 
