@@ -62,6 +62,7 @@ namespace VrFox
         public Text GarbageText;
         public Text TimeText;
         public Text EndScoreText;
+        public Text ScoreFloorText;
         public UIFadeScript HighScoreFade;
         
         [Header("Material Colors:")]
@@ -426,9 +427,8 @@ namespace VrFox
             StartButton.gameObject.SetActive(false);
             SpawnManager.Instance.ResetTutorial();
 
-            //remove all instructions
             GameState = GameStates.Playing;
-
+            //remove all instructions
             CrossHairEffect.SetActive(true, 1.4f);
             SetAllInstructionsActive(false);
         }
@@ -439,6 +439,7 @@ namespace VrFox
         public void SetScoreText()
         {
             ScoreText.text = "Score: " + Player.Score.ToString();
+            ScoreFloorText.text = "Score: " + Player.Score.ToString();
         }
 
         /// <summary>

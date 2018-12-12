@@ -41,8 +41,7 @@ namespace VrFox
         public bool TutorialActive;
         [HideInInspector]
         public int TutorialBirdsShot;
-
-        private TargetBehaviour lastBird;
+        
         #endregion
 
         private void Update()
@@ -59,57 +58,6 @@ namespace VrFox
 
         IEnumerator Tutorial()
         {
-            DustyManager.Instance.Messages.Clear();
-            DustyManager.Instance.Messages.Add(new DustyTextFile("Voor je zie je nu een vogel, en daar gaan wij een luier omheen doen", 5, AudioSampleManager.Instance.DustyText[9]));
-            DustyManager.Instance.Messages.Add(new DustyTextFile("Richt met je ogen op de vogel, en klik met clicker in je handen", 5, AudioSampleManager.Instance.DustyText[10]));
-
-            yield return new WaitForSeconds(1.5f);
-
-            //click met de clicker om te schieten
-            SpawnBirdInFrontOfPlayer();
-
-            while (TutorialBirdsShot < 1)
-            {
-                yield return new WaitForSeconds(5f);
-                DustyManager.Instance.ImportantMessage(new DustyTextFile("Richt met je ogen op de vogel, en klik met clicker in je handen", 5, AudioSampleManager.Instance.DustyText[10]), 0);
-                //Debug.Log("Remind how to shoot!");
-            }
-
-            yield return new WaitUntil(() => TutorialBirdsShot > 0);
-
-            //Text vogel geraakt
-
-            DustyManager.Instance.Messages.Add(new DustyTextFile("Goedzo! nu heeft de vogel een luier om!", 5, AudioSampleManager.Instance.DustyText[12]));
-            DustyManager.Instance.Messages.Add(new DustyTextFile("Je hebt nu 1 punt", 5, AudioSampleManager.Instance.DustyText[13]));
-
-            yield return new WaitForSeconds(4.1f);
-
-            SpawnBirdInFrontOfPlayer();
-            DustyManager.Instance.Messages.Add(new DustyTextFile("Probeer de andere vogel nu ook te raken", 5, AudioSampleManager.Instance.DustyText[14]));
-            yield return new WaitUntil(() => TutorialBirdsShot > 1);
-
-            //uitleg vogel met en zonder luier
-
-            yield return new WaitForSeconds(4.1f);
-
-            //hier zie je ene vogel met luier
-            SpawnBirdInFrontOfPlayer();
-            lastBird.SetAlwaysDiaperOn();
-
-            Destroy(lastBird.gameObject, 3f);
-
-            DustyManager.Instance.Messages.Add(new DustyTextFile("Maar let op! er zijn ook vogels die al een luien om hebben!", 5, AudioSampleManager.Instance.DustyText[15]));
-            DustyManager.Instance.Messages.Add(new DustyTextFile("ls je deze raakt valt zijn luier af en krijg je straf punten", 5, AudioSampleManager.Instance.DustyText[16]));
-
-            yield return new WaitForSeconds(1.5f);
-
-
-            DustyManager.Instance.Messages.Add(new DustyTextFile("Doe goed je best!", 5, AudioSampleManager.Instance.DustyText[17]));
-            DustyManager.Instance.Messages.Add(new DustyTextFile("Je bent er helemaal klaar voor", 5, AudioSampleManager.Instance.DustyText[18]));
-            DustyManager.Instance.Messages.Add(new DustyTextFile("Heel veel succes!", 5, AudioSampleManager.Instance.DustyText[20]));
-
-            yield return new WaitForSeconds(0.8f);
-
             TutorialActive = false;
             yield return null;
         }
@@ -133,8 +81,7 @@ namespace VrFox
             TutorialActive = true;
             TutorialBirdsShot = 0;
 
-            //StartCoroutine(Tutorial());
-            TutorialActive = false;
+            StartCoroutine(Tutorial());
         }
 
         public void SpawnBird()
@@ -162,8 +109,7 @@ namespace VrFox
 
             _bird.transform.position = _direction * _distance;
             _bird.transform.position = new Vector3(_bird.transform.position.x, _spawnY, _bird.transform.position.z);
-
-            lastBird = _bird.GetComponent<TargetBehaviour>();
+            
 
 
             //Set new spawn interval
@@ -203,8 +149,7 @@ namespace VrFox
 
             _bird.transform.position = _direction * _distance;
             _bird.transform.position = new Vector3(_bird.transform.position.x, Random.Range(-0.5f, 1.2f), _bird.transform.position.z);
-
-            lastBird = _bird.GetComponent<TargetBehaviour>();
+            
         }
 
         public void CreateParticleEffect(bool _IsHit, Vector3 _birdPosition)
