@@ -5237,6 +5237,29 @@ MonoBehaviour:
     type: 2}
   DiaperDestroy: {fileID: 1222976583829746, guid: e6273a73d15c09545aa55b4dd01cb60a,
     type: 2}
+  BirdX:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  BirdY:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  BirdZ:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  CurveValueX: 0
+  CurveValueY: 0
+  CurveValueZ: 0
+  TimeTweenKey: 0
+  Duration: 0
 --- !u!114 &114735873475987468
 MonoBehaviour:
   m_ObjectHideFlags: 1

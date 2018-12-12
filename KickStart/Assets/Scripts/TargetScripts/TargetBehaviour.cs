@@ -34,6 +34,17 @@ public class TargetBehaviour : MonoBehaviour
     public GameObject SmokeParticles;
     public GameObject BirdHitEffect;
     public GameObject DiaperDestroy;
+    [Space]
+    public AnimationCurve BirdX;
+    public AnimationCurve BirdY;
+    public AnimationCurve BirdZ;
+    [Space]
+    public float CurveValueX = 0;
+    public float CurveValueY = 0;
+    public float CurveValueZ = 0;
+
+    public float TimeTweenKey = 0;
+    public float Duration;
 
     private float birdScale;
 
@@ -154,6 +165,25 @@ public class TargetBehaviour : MonoBehaviour
     }
 
     /// <summary>
+    /// 
+    /// </summary>
+    private void HandleTween()
+    {
+        if (TimeTweenKey < 1)
+        {
+            TimeTweenKey += Time.deltaTime / Duration;
+
+            CurveValueX = BirdX.Evaluate(TimeTweenKey);
+            CurveValueY = BirdY.Evaluate(TimeTweenKey);
+            CurveValueZ = BirdZ.Evaluate(TimeTweenKey);
+        }
+        else
+        {
+            TimeTweenKey = 0;
+        }
+    }
+
+    /// <summary>
     /// Called when the target is hit
     /// </summary>
     public void Hit()
@@ -179,18 +209,18 @@ public class TargetBehaviour : MonoBehaviour
             //hit effect
             Instantiate(SmokeParticles, transform.position, Quaternion.identity);
         }
-        else
-        {
-            Diaper.SetActive(false);
-            GameManager.Instance.Player.Score -= 2;
-            GameManager.Instance.SendTextMessage("Schiet niet op de vogels die al een luier om hebben!", 2.5f, Vector2.zero);
-            GameManager.Instance.Indicator.AddIndicator(transform, 0);
+        //else
+        //{
+        //    Diaper.SetActive(false);
+        //    GameManager.Instance.Player.Score -= 2;
+        //    GameManager.Instance.SendTextMessage("Schiet niet op de vogels die al een luier om hebben!", 2.5f, Vector2.zero);
+        //    GameManager.Instance.Indicator.AddIndicator(transform, 0);
 
-            //no hit effect
-            Instantiate(DiaperDestroy, transform.position, Quaternion.identity);
+        //    //no hit effect
+        //    Instantiate(DiaperDestroy, transform.position, Quaternion.identity);
 
 
-        }
+        //}
 
         //Do something different when in a tutorial
         if (SpawnManager.Instance.TutorialActive)
@@ -212,19 +242,32 @@ public class TargetBehaviour : MonoBehaviour
         }
         if (MovingBird)
         {
-            transform.position = Vector3.MoveTowards(transform.position, endPoint, Speed);
+            HandleTween();
+
+            //transform.position = Vector3.MoveTowards(transform.position, endPoint, Speed);
+            transform.position += transform.right * CurveValueX;
 
             //If end point is reached...
             if (Vector3.Distance(transform.position, endPoint) < 1)
             {
                 SpawnManager.Instance.CreateParticleEffect(IsHit, transform.position);
+                if (!IsHit)
+                {
+                    GameManager.Instance.Player.Score -= 1;
+                }
                 Destroy(gameObject);
 
             }
             else if (CheckIfBirdBehindPlayer())
             {
                 SpawnManager.Instance.CreateParticleEffect(IsHit, transform.position);
+                if (!IsHit)
+                {
+                    GameManager.Instance.Player.Score -= 1;
+                }
+
                 Destroy(gameObject);
+
             }
         }
         else

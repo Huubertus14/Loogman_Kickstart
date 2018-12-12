@@ -13,8 +13,6 @@ public class CursorBehaviour : MonoBehaviour
     public RectTransform reticle;
     public RawImage img;
 
-    private float rectDistance;
-
     /// <summary>
     /// Runs at initialization right after the Awake method
     /// </summary>
@@ -61,9 +59,13 @@ public class CursorBehaviour : MonoBehaviour
         else
         {
             // If the raycast did not hit a hologram, hide the cursor mesh.
+<<<<<<< HEAD
             //rectDistance = 20f;
+=======
+            distance = 20f;
+>>>>>>> NewCursorBranch
         }
 
-        //reticle.localPosition = new Vector3(0, 0, rectDistance);
+        reticle.localPosition = new Vector3(0, 0, distance);
     }
 }
