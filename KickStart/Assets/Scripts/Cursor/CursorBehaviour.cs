@@ -13,8 +13,6 @@ public class CursorBehaviour : MonoBehaviour
     public RectTransform reticle;
     public RawImage img;
 
-    private float rectDistance;
-
     /// <summary>
     /// Runs at initialization right after the Awake method
     /// </summary>
@@ -64,6 +62,6 @@ public class CursorBehaviour : MonoBehaviour
             //rectDistance = 20f;
         }
 
-        //reticle.localPosition = new Vector3(0, 0, rectDistance);
+        reticle.localPosition = new Vector3(0, 0, distance);
     }
 }
