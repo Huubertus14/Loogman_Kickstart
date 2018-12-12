@@ -72,7 +72,7 @@ public class ImageCapture : MonoBehaviour {
     private void Update()
     {
         //Only do this when waiting
-        if (GameManager.Instance.gameState == GameStates.Waiting)
+        if (GameManager.Instance.GameState == GameStates.Waiting)
         {
             TakePhoto(captureIsActive);
         }

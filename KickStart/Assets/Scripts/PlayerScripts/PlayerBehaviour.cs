@@ -110,6 +110,7 @@ namespace VrFox
 
         private void Update()
         {
+            PlayerDebug();
             //Increase Water Value
             if (!GameManager.Instance.GameStarted)
             {
@@ -161,6 +162,12 @@ namespace VrFox
             {
                 PlayerLevel = Difficulty.Hard;
             }
+        }
+
+        private void PlayerDebug()
+        {
+            //Draw line in look direction
+            Debug.DrawLine(transform.position, Camera.main.transform.forward * 15, Color.red);
         }
     }
 }

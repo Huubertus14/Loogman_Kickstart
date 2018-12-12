@@ -1,10 +1,9 @@
-﻿using System.Collections;
+﻿using EnumStates;
+using Greyman;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using EnumStates;
-using Greyman;
-using Microsoft;
 
 namespace EnumStates
 {
@@ -42,15 +41,18 @@ namespace VrFox
             Instance = this;
 
         }
-        
+
         [Header("References:s")]
         public PlayerBehaviour Player;
         public GameObject Reticle;
+        [Space]
 
         public GameObject PlayerCanvas;
         public GameObject GroundCanvas;
+
+        public StartButtonBehaviour StartButton;
+
         [Space]
-        public GestureImage TutorialThing;
         public OffScreenIndicator Indicator;
         public MessageTextBehaviour messageText;
         public CrossHairTween CrossHairEffect;
@@ -60,31 +62,23 @@ namespace VrFox
         public Text GarbageText;
         public Text TimeText;
         public Text EndScoreText;
+        public Text ScoreFloorText;
         public UIFadeScript HighScoreFade;
-
-        [HideInInspector]
-        public List<Renderer> Targets = new List<Renderer>();
         
         [Header("Material Colors:")]
         public Material Blue;
         public Material White;
 
         [Header("Values")]
-        public GameStates gameState;
+        public GameStates GameState;
         public bool GameStarted;
         public bool GameOver;
         [Space]
         public float TimePlayed;
         public int InstrucionAmount;
-        [Space]
-        public float DurationToImpusle;
-        public float DurationFromImpulse;
         
-        private bool scoreTextFadedAway;
-        private bool playerScoreOnRightPosition;
-        private bool otherScoresShown;
-        private bool otherScoreLerpIn;
         private GameObject playerEndScoreObject;
+        private GameObject hoverObject;
 
         [Header("Tutorial values")]
         public Text TutorialFeedbackText;
@@ -93,16 +87,12 @@ namespace VrFox
         [Space]
         public ActivationLerp[] InstructionLerps;
         private float BeginTimer = 0;
-        
+
         private float bulletForce;
 
         [HideInInspector]
         public bool CanContinueNextGame;
         
-        //Test
-        //Timer to run when the game is over and will reset
-        private float GameOverTimer;
-
         private void Start()
         {
             bulletForce = 720;
@@ -112,32 +102,29 @@ namespace VrFox
 
         private void Update()
         {
-            if (gameState == GameStates.Instructions) // do this when youare in the instructions
+            switch (GameState)
             {
-                BeginTimer += Time.deltaTime;
-                TutorialFeedbackText.text = "";
-                if (BeginTimer > 3)
-                {
-                    SetAllInstructionsActive(true);
-                    Instructions();
-                }
-
-                // Instructions();
-            }
-            if (gameState == GameStates.Playing)
-            {
-                Playing();
-            }
-            if (gameState == GameStates.Waiting)
-            {
-                //Wait for picture to find
-            }
-            if (gameState == GameStates.GameEnd)
-            {
-                EndGame();
+                case GameStates.Playing:
+                    Playing();
+                    break;
+                case GameStates.Instructions:
+                    BeginTimer += Time.deltaTime;
+                    TutorialFeedbackText.text = "";
+                    if (BeginTimer > 3)
+                    {
+                        SetAllInstructionsActive(true);
+                        Instructions();
+                    }
+                    break;
+                case GameStates.GameEnd:
+                    break;
+                case GameStates.Waiting:
+                    break;
+                default:
+                    break;
             }
         }
-        
+
         private void Instructions()
         {
             EndScoreText.text = "";
@@ -192,205 +179,187 @@ namespace VrFox
             }
         }
 
-        private  void EndGame()
+        private IEnumerator EndGame()
         {
-            //Game has end
-            GameOverTimer += Time.deltaTime;
-            if (GameOverTimer > 3 && !scoreTextFadedAway)
+            yield return new WaitForSeconds(3);
+            EndScoreText.text = "";
+
+            ScoreManager.Instance.CreateAllScores(Player.Score);
+            CrossHairEffect.SetActive(false, 0.9f);
+
+            //Calculate the position of the player
+            if (ScoreManager.Instance.GetPositionInTable(Player.Score) == 0)
             {
-                scoreTextFadedAway = true;
-                EndScoreText.text = "";
-
-                ScoreManager.Instance.CreateAllScores(Player.Score);
-                CrossHairEffect.SetActive(false, 0.9f);
-
-                //Calculate the position of the player
-                if (ScoreManager.Instance.GetPositionInTable(Player.Score) == 0)
-                {
-                    Debug.Log("Player is First");
-                    playerEndScoreObject.GetComponentInChildren<Image>().color = Color.white;
-                }
+                Debug.Log("Player is First");
+                playerEndScoreObject.GetComponentInChildren<Image>().color = Color.white;
             }
-            if (GameOverTimer > 4.5f && !playerScoreOnRightPosition)
+            yield return new WaitForSeconds(1.5f);
+
+            //Set Score thing on y pos
+            playerEndScoreObject.transform.SetParent(Player.HighScoreObject.transform);
+            yield return new WaitForSeconds(0.5f);
+
+            //Create other scores around
+            GameObject[] OtherScores = new GameObject[5];
+            switch (ScoreManager.Instance.GetPositionInTable(Player.Score))
             {
-                playerScoreOnRightPosition = true;
+                case 0:
+                    //first place
 
-                //Set Score thing on y pos
-                playerEndScoreObject.transform.SetParent(Player.HighScoreObject.transform);
-            }
-            if (GameOverTimer > 5 && !otherScoresShown)
-            {
-                otherScoresShown = true;
-
-                //Create other scores around
-                GameObject[] OtherScores = new GameObject[5];
-
-                switch (ScoreManager.Instance.GetPositionInTable(Player.Score))
-                {
-                    case 0:
-                        //first place
-
-                        //Get the 5 beneath the player
-                        for (int i = 0; i < OtherScores.Length; i++)
-                        {
-                            OtherScores[i] = ScoreManager.Instance.CreateScoreBox(ScoreManager.Instance.AllScores[ScoreManager.Instance.GetPositionInAllScores(Player.Score) + i + 1]);
-
-                            OtherScores[i].transform.SetParent(Player.HighScoreObject.transform);
-                            OtherScores[i].transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
-                            OtherScores[i].transform.localPosition = Vector3.zero;
-                        }
-                        break;
-                    case 1:
-                        //second place
-                        OtherScores[0] = ScoreManager.Instance.CreateScoreBox(ScoreManager.Instance.AllScores[ScoreManager.Instance.GetPositionInAllScores(Player.Score) - 1]);
-                        OtherScores[0].transform.SetParent(Player.HighScoreObject.transform);
-                        OtherScores[0].transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
-                        OtherScores[0].transform.localPosition = Vector3.zero;
-
-                        playerEndScoreObject.transform.SetAsLastSibling();
-                        //Get 1 above the player 4 beneath
-                        for (int i = 1; i < OtherScores.Length; i++)
-                        {
-                            OtherScores[i] = ScoreManager.Instance.CreateScoreBox(ScoreManager.Instance.AllScores[ScoreManager.Instance.GetPositionInAllScores(Player.Score) + i + 1]);
-
-                            OtherScores[i].transform.SetParent(Player.HighScoreObject.transform);
-                            OtherScores[i].transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
-                            OtherScores[i].transform.localPosition = Vector3.zero;
-                        }
-                        break;
-                    case 2:
-                        //third place
-                        //get 2 above 3 beneath
-                        for (int i = OtherScores.Length - 4; i >= 0; i--)
-                        {
-                            OtherScores[i] = ScoreManager.Instance.CreateScoreBox(ScoreManager.Instance.AllScores[ScoreManager.Instance.GetPositionInAllScores(Player.Score) - i - 1]);
-
-                            OtherScores[i].transform.SetParent(Player.HighScoreObject.transform);
-                            OtherScores[i].transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
-                            OtherScores[i].transform.localPosition = Vector3.zero;
-                        }
-
-                        playerEndScoreObject.transform.SetAsLastSibling();
-
-                        for (int i = 2; i < OtherScores.Length; i++)
-                        {
-                            OtherScores[i] = ScoreManager.Instance.CreateScoreBox(ScoreManager.Instance.AllScores[ScoreManager.Instance.GetPositionInAllScores(Player.Score) + i]);
-
-                            OtherScores[i].transform.SetParent(Player.HighScoreObject.transform);
-                            OtherScores[i].transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
-                            OtherScores[i].transform.localPosition = Vector3.zero;
-                        }
-                        break;
-                    case 3:
-                        //third place
-
-                        //3 above 2 beneath
-
-                        for (int i = OtherScores.Length - 3; i >= 0; i--)
-                        {
-                            OtherScores[i] = ScoreManager.Instance.CreateScoreBox(ScoreManager.Instance.AllScores[ScoreManager.Instance.GetPositionInAllScores(Player.Score) - i - 1]);
-
-                            OtherScores[i].transform.SetParent(Player.HighScoreObject.transform);
-                            OtherScores[i].transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
-                            OtherScores[i].transform.localPosition = Vector3.zero;
-                        }
-
-                        playerEndScoreObject.transform.SetAsLastSibling();
-
-                        for (int i = 3; i < OtherScores.Length; i++)
-                        {
-                            OtherScores[i] = ScoreManager.Instance.CreateScoreBox(ScoreManager.Instance.AllScores[ScoreManager.Instance.GetPositionInAllScores(Player.Score) + i]);
-
-                            OtherScores[i].transform.SetParent(Player.HighScoreObject.transform);
-                            OtherScores[i].transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
-                            OtherScores[i].transform.localPosition = Vector3.zero;
-                        }
-                        break;
-                    case 4:
-                        //second last place
-                        //1 beneath 4 above
-                        for (int i = OtherScores.Length - 2; i >= 0; i--)
-                        {
-                            OtherScores[i] = ScoreManager.Instance.CreateScoreBox(ScoreManager.Instance.AllScores[ScoreManager.Instance.GetPositionInAllScores(Player.Score) - i - 1]);
-
-                            OtherScores[i].transform.SetParent(Player.HighScoreObject.transform);
-                            OtherScores[i].transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
-                            OtherScores[i].transform.localPosition = Vector3.zero;
-                        }
-
-                        //Set self
-                        playerEndScoreObject.transform.SetAsLastSibling();
-
-                        //find one below
-                        OtherScores[4] = ScoreManager.Instance.CreateScoreBox(ScoreManager.Instance.AllScores[ScoreManager.Instance.GetPositionInAllScores(Player.Score) - 1]);
-                        OtherScores[4].transform.SetParent(Player.HighScoreObject.transform);
-                        OtherScores[4].transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
-                        OtherScores[4].transform.localPosition = Vector3.zero;
-                        break;
-                    case 5:
-                        //last place 
-                        //5 above player
-
-                        for (int i = OtherScores.Length - 1; i >= 0; i--)
-                        {
-                            OtherScores[i] = ScoreManager.Instance.CreateScoreBox(ScoreManager.Instance.AllScores[ScoreManager.Instance.GetPositionInAllScores(Player.Score) - i - 1]);
-
-                            OtherScores[i].transform.SetParent(Player.HighScoreObject.transform);
-                            OtherScores[i].transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
-                            OtherScores[i].transform.localPosition = Vector3.zero;
-                            playerEndScoreObject.transform.SetAsLastSibling();
-                        }
-                        break;
-                    default:
-                        //Middle pos
-                        Debug.LogError("Not in range player position");
-
-                        break;
-                }
-
-                foreach (var _score in OtherScores)
-                {
-                    _score.GetComponentInChildren<Text>().color = new Color(.9f, .9f, .9f, .8f);
-                }
-
-                Vector3 _xPosOffset = new Vector3(800, 0, 0);
-
-                //Get array of all children of score
-                PositionLerp[] _allScores = Player.HighScoreObject.GetComponentsInChildren<PositionLerp>();
-                for (int i = 0; i < _allScores.Length; i++)
-                {
-                    _allScores[i].SetActivePosition(new Vector3(0, 55 - (44 * i), 0));
-
-                    if (Random.Range(0, 10) % 2 == 0)
+                    //Get the 5 beneath the player
+                    for (int i = 0; i < OtherScores.Length; i++)
                     {
-                        _xPosOffset = -_xPosOffset;
+                        OtherScores[i] = ScoreManager.Instance.CreateScoreBox(ScoreManager.Instance.AllScores[ScoreManager.Instance.GetPositionInAllScores(Player.Score) + i + 1]);
+
+                        OtherScores[i].transform.SetParent(Player.HighScoreObject.transform);
+                        OtherScores[i].transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+                        OtherScores[i].transform.localPosition = Vector3.zero;
+                    }
+                    break;
+                case 1:
+                    //second place
+                    OtherScores[0] = ScoreManager.Instance.CreateScoreBox(ScoreManager.Instance.AllScores[ScoreManager.Instance.GetPositionInAllScores(Player.Score) - 1]);
+                    OtherScores[0].transform.SetParent(Player.HighScoreObject.transform);
+                    OtherScores[0].transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+                    OtherScores[0].transform.localPosition = Vector3.zero;
+
+                    playerEndScoreObject.transform.SetAsLastSibling();
+                    //Get 1 above the player 4 beneath
+                    for (int i = 1; i < OtherScores.Length; i++)
+                    {
+                        OtherScores[i] = ScoreManager.Instance.CreateScoreBox(ScoreManager.Instance.AllScores[ScoreManager.Instance.GetPositionInAllScores(Player.Score) + i + 1]);
+
+                        OtherScores[i].transform.SetParent(Player.HighScoreObject.transform);
+                        OtherScores[i].transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+                        OtherScores[i].transform.localPosition = Vector3.zero;
+                    }
+                    break;
+                case 2:
+                    //third place
+                    //get 2 above 3 beneath
+                    for (int i = OtherScores.Length - 4; i >= 0; i--)
+                    {
+                        OtherScores[i] = ScoreManager.Instance.CreateScoreBox(ScoreManager.Instance.AllScores[ScoreManager.Instance.GetPositionInAllScores(Player.Score) - i - 1]);
+
+                        OtherScores[i].transform.SetParent(Player.HighScoreObject.transform);
+                        OtherScores[i].transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+                        OtherScores[i].transform.localPosition = Vector3.zero;
                     }
 
-                    _allScores[i].SetInactivePosition(new Vector3(0, 55 - (44 * i), 0) + _xPosOffset);
-                    if (_allScores[i] != playerEndScoreObject.GetComponent<PositionLerp>())
+                    playerEndScoreObject.transform.SetAsLastSibling();
+
+                    for (int i = 2; i < OtherScores.Length; i++)
                     {
-                        _allScores[i].GetRectTransform.localPosition = new Vector3(0, 55 - (44 * i), 0) + _xPosOffset;
-                        _allScores[i].SetActive(false);
+                        OtherScores[i] = ScoreManager.Instance.CreateScoreBox(ScoreManager.Instance.AllScores[ScoreManager.Instance.GetPositionInAllScores(Player.Score) + i]);
+
+                        OtherScores[i].transform.SetParent(Player.HighScoreObject.transform);
+                        OtherScores[i].transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+                        OtherScores[i].transform.localPosition = Vector3.zero;
                     }
-                }
+                    break;
+                case 3:
+                    //third place
 
-                playerEndScoreObject.GetComponent<PositionLerp>().SetActive(true);
-                //Fade in HighScoreText
-                HighScoreFade.Active(true);
+                    //3 above 2 beneath
+
+                    for (int i = OtherScores.Length - 3; i >= 0; i--)
+                    {
+                        OtherScores[i] = ScoreManager.Instance.CreateScoreBox(ScoreManager.Instance.AllScores[ScoreManager.Instance.GetPositionInAllScores(Player.Score) - i - 1]);
+
+                        OtherScores[i].transform.SetParent(Player.HighScoreObject.transform);
+                        OtherScores[i].transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+                        OtherScores[i].transform.localPosition = Vector3.zero;
+                    }
+
+                    playerEndScoreObject.transform.SetAsLastSibling();
+
+                    for (int i = 3; i < OtherScores.Length; i++)
+                    {
+                        OtherScores[i] = ScoreManager.Instance.CreateScoreBox(ScoreManager.Instance.AllScores[ScoreManager.Instance.GetPositionInAllScores(Player.Score) + i]);
+
+                        OtherScores[i].transform.SetParent(Player.HighScoreObject.transform);
+                        OtherScores[i].transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+                        OtherScores[i].transform.localPosition = Vector3.zero;
+                    }
+                    break;
+                case 4:
+                    //second last place
+                    //1 beneath 4 above
+                    for (int i = OtherScores.Length - 2; i >= 0; i--)
+                    {
+                        OtherScores[i] = ScoreManager.Instance.CreateScoreBox(ScoreManager.Instance.AllScores[ScoreManager.Instance.GetPositionInAllScores(Player.Score) - i - 1]);
+
+                        OtherScores[i].transform.SetParent(Player.HighScoreObject.transform);
+                        OtherScores[i].transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+                        OtherScores[i].transform.localPosition = Vector3.zero;
+                    }
+
+                    //Set self
+                    playerEndScoreObject.transform.SetAsLastSibling();
+
+                    //find one below
+                    OtherScores[4] = ScoreManager.Instance.CreateScoreBox(ScoreManager.Instance.AllScores[ScoreManager.Instance.GetPositionInAllScores(Player.Score) - 1]);
+                    OtherScores[4].transform.SetParent(Player.HighScoreObject.transform);
+                    OtherScores[4].transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+                    OtherScores[4].transform.localPosition = Vector3.zero;
+                    break;
+                case 5:
+                    //last place 
+                    //5 above player
+
+                    for (int i = OtherScores.Length - 1; i >= 0; i--)
+                    {
+                        OtherScores[i] = ScoreManager.Instance.CreateScoreBox(ScoreManager.Instance.AllScores[ScoreManager.Instance.GetPositionInAllScores(Player.Score) - i - 1]);
+
+                        OtherScores[i].transform.SetParent(Player.HighScoreObject.transform);
+                        OtherScores[i].transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+                        OtherScores[i].transform.localPosition = Vector3.zero;
+                        playerEndScoreObject.transform.SetAsLastSibling();
+                    }
+                    break;
+                default:
+                    //Middle pos
+                    Debug.LogError("Not in range player position");
+
+                    break;
             }
-
-            if (GameOverTimer > 6.5f && !otherScoreLerpIn)
+            foreach (var _score in OtherScores)
             {
-                otherScoreLerpIn = true;
-                PositionLerp[] _allScores = Player.HighScoreObject.GetComponentsInChildren<PositionLerp>();
-                for (int i = 0; i < _allScores.Length; i++)
+                _score.GetComponentInChildren<Text>().color = new Color(.9f, .9f, .9f, .8f);
+            }
+
+            Vector3 _xPosOffset = new Vector3(800, 0, 0);
+            //Get array of all children of score
+            PositionLerp[] _allScores = Player.HighScoreObject.GetComponentsInChildren<PositionLerp>();
+            for (int i = 0; i < _allScores.Length; i++)
+            {
+                _allScores[i].SetActivePosition(new Vector3(0, 55 - (44 * i), 0));
+
+                if (Random.Range(0, 10) % 2 == 0)
                 {
-                    _allScores[i].SetActive(true, Random.Range(0.8f, 2.5f));
+                    _xPosOffset = -_xPosOffset;
                 }
 
+                _allScores[i].SetInactivePosition(new Vector3(0, 55 - (44 * i), 0) + _xPosOffset);
+                if (_allScores[i] != playerEndScoreObject.GetComponent<PositionLerp>())
+                {
+                    _allScores[i].GetRectTransform.localPosition = new Vector3(0, 55 - (44 * i), 0) + _xPosOffset;
+                    _allScores[i].SetActive(false);
+                }
             }
+            playerEndScoreObject.GetComponent<PositionLerp>().SetActive(true);
+            //Fade in HighScoreText
+            HighScoreFade.Active(true);
+            yield return new WaitForSeconds(1.5f);
+
+            _allScores = Player.HighScoreObject.GetComponentsInChildren<PositionLerp>();
+            for (int i = 0; i < _allScores.Length; i++)
+            {
+                _allScores[i].SetActive(true, Random.Range(0.8f, 2.5f));
+            }
+            yield return null;
         }
-
+        
         public void ResetGame()
         {
             TutorialFeedbackText.text = "";
@@ -399,16 +368,11 @@ namespace VrFox
             ScoreText.text = "";
             InstrucionAmount = 0;
             GameStarted = false;
-
-            scoreTextFadedAway = false;
-            otherScoresShown = false;
-            otherScoreLerpIn = false;
-            playerScoreOnRightPosition = false;
-
+            
             //rempve arrows
             BoundaryIndicators.SetActive(false);
-
-            gameState = GameStates.Instructions;
+            StartButton.gameObject.SetActive(true);
+            GameState = GameStates.Waiting;
         }
 
         public void SetAllInstructionsActive(bool _value)
@@ -432,8 +396,8 @@ namespace VrFox
             GameStarted = false;
             TimeText.text = "";
             GameOver = true;
-            gameState = GameStates.GameEnd;
-
+            GameState = GameStates.GameEnd;
+            StartCoroutine(EndGame());
             CrossHairEffect.SetActive(false, 2.2f);
 
             ShowEndScore();
@@ -458,14 +422,13 @@ namespace VrFox
             TutorialFeedbackText.text = "";
             GameStarted = true;
             TimePlayed = 180;
-            GameOverTimer = 0;
             SetScoreText();
-
-            SpawnManager.Instance.ResetTutorial();
             
-            //remove all instructions
-            gameState = GameStates.Playing;
+            StartButton.gameObject.SetActive(false);
+            SpawnManager.Instance.ResetTutorial();
 
+            GameState = GameStates.Playing;
+            //remove all instructions
             CrossHairEffect.SetActive(true, 1.4f);
             SetAllInstructionsActive(false);
         }
@@ -476,6 +439,7 @@ namespace VrFox
         public void SetScoreText()
         {
             ScoreText.text = "Score: " + Player.Score.ToString();
+            ScoreFloorText.text = "Score: " + Player.Score.ToString();
         }
 
         /// <summary>
@@ -504,6 +468,19 @@ namespace VrFox
             }
 
             TimeText.text = (1f / Time.deltaTime).ToString();
+        }
+
+        public void HandleGaze(GameObject _gazeObject)
+        {
+            hoverObject = _gazeObject;
+            if (_gazeObject.GetComponent<StartButtonBehaviour>())
+            {
+                StartButton.HoverEnter();
+            }
+            else
+            {
+                StartButton.HoverExit();
+            }
         }
 
         /// <summary>
@@ -535,21 +512,17 @@ namespace VrFox
 
         #region Property's
 
-        public GameObject CurrentPlayer
+        public GameObject CurrentPlayer => Player.gameObject;
+
+        public float GetBulletForce => bulletForce;
+
+        public Difficulty GetDiffictuly => Player.PlayerLevel;
+
+        public GameObject GetHoverObject
         {
-            get { return Player.gameObject; }
+            get { return hoverObject; }
         }
-        
-       public float GetBulletForce
-        {
-            get { return bulletForce; }
-        }
-        
-        public Difficulty GetDiffictuly
-        {
-            get { return Player.PlayerLevel; }
-        }
-        
+
         #endregion
     }
 }
