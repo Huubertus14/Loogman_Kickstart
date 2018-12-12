@@ -409,7 +409,6 @@ MonoBehaviour:
   PlayerCanvas: {fileID: 0}
   GroundCanvas: {fileID: 0}
   StartButton: {fileID: 0}
-  TutorialThing: {fileID: 0}
   Indicator: {fileID: 114722359190857508}
   messageText: {fileID: 0}
   CrossHairEffect: {fileID: 0}
@@ -421,13 +420,11 @@ MonoBehaviour:
   Targets: []
   Blue: {fileID: 2100000, guid: 726022aa4e92617449c3beaa066b623c, type: 2}
   White: {fileID: 2100000, guid: 7fec446aa0041d4489c5236084374df9, type: 2}
-  gameState: 0
+  GameState: 0
   GameStarted: 0
   GameOver: 0
   TimePlayed: 0
   InstrucionAmount: 0
-  DurationToImpusle: 210
-  DurationFromImpulse: 120
   TutorialFeedbackText: {fileID: 0}
   BoundaryIndicators: {fileID: 0}
   InstructionLerps:

@@ -143,7 +143,6 @@ namespace VrFox
 
             //Spawn bird
             GameObject _bird = Instantiate(BirdPrefab, transform.position, Quaternion.identity);
-            GameManager.Instance.Targets.Add(_bird.GetComponentInChildren<Renderer>());
 
             float _spawnY = Camera.main.transform.position.y + Random.Range(-0.2f, 0.2f);
 
@@ -197,7 +196,6 @@ namespace VrFox
 
             //Spawn bird
             GameObject _bird = Instantiate(StaticBirdPrefab, transform.position, Quaternion.identity);
-            GameManager.Instance.Targets.Add(_bird.GetComponentInChildren<Renderer>());
 
             //Set right spawn point 
             Vector3 _direction = Camera.main.transform.forward;

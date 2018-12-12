@@ -5235,7 +5235,8 @@ MonoBehaviour:
     type: 2}
   BirdHitEffect: {fileID: 1270126634788680, guid: efa467f120f58fe43931dd8e35c2d187,
     type: 2}
-  DiaperDestroy: {fileID: 0}
+  DiaperDestroy: {fileID: 1222976583829746, guid: e6273a73d15c09545aa55b4dd01cb60a,
+    type: 2}
 --- !u!114 &114735873475987468
 MonoBehaviour:
   m_ObjectHideFlags: 1
