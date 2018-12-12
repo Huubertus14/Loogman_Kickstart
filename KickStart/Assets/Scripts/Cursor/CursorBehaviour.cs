@@ -15,8 +15,6 @@ public class CursorBehaviour : MonoBehaviour
     public Camera cam;
     public float maxDistance = 46f;
 
-    private float rectDistance;
-
     /// <summary>
     /// Runs at initialization right after the Awake method
     /// </summary>
@@ -65,9 +63,9 @@ public class CursorBehaviour : MonoBehaviour
         else
         {
             // If the raycast did not hit a hologram, hide the cursor mesh.
-            rectDistance = 20f;
+            distance = 20f;
         }
 
-        //reticle.localPosition = new Vector3(0, 0, rectDistance);
+        reticle.localPosition = new Vector3(0, 0, distance);
     }
 }

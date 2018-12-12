@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114741492998502458}
   - component: {fileID: 114099276431080118}
   m_Layer: 0
-  m_Name: Bird_FireWorks
+  m_Name: Bird_DiaperGone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
