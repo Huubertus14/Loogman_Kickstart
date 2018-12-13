@@ -1,4 +1,5 @@
 ﻿using EnumStates;
+using System.Collections.Generic;
 using UnityEngine;
 using VrFox;
 
@@ -34,18 +35,11 @@ public class TargetBehaviour : MonoBehaviour
     public GameObject SmokeParticles;
     public GameObject BirdHitEffect;
     public GameObject DiaperDestroy;
-    [Space]
-    public AnimationCurve BirdX;
-    public AnimationCurve BirdY;
-    public AnimationCurve BirdZ;
-    [Space]
-    public float CurveValueX = 0;
-    public float CurveValueY = 0;
-    public float CurveValueZ = 0;
 
-    public float TimeTweenKey = 0;
-    public float Duration;
-
+    public List<PathNode> PathNodes = new List<PathNode>();
+    private Vector3 startPoint;
+    public int goalNode;
+ 
     private float birdScale;
 
     private void Start()
@@ -56,7 +50,7 @@ public class TargetBehaviour : MonoBehaviour
         BirdSoundTimer = Random.Range(3f, 6f);
         BirdSoundCounter = 0;
         AudioManager.Instance.PlayAudio(AudioSampleManager.Instance.getBirdSpawnSounds(), 1, gameObject);
-
+        goalNode = 1;
         if (!Diaper)
         {
             Diaper = GetComponentInChildren<DiaperBehaviour>().gameObject;
@@ -103,6 +97,7 @@ public class TargetBehaviour : MonoBehaviour
         }
 
         GetEndPoint();
+        SetNodes();
 
         //give bird random scale
         birdScale = Random.Range(0.9f, 1.1f);
@@ -115,6 +110,24 @@ public class TargetBehaviour : MonoBehaviour
 
         //fix model rotation
         transform.Rotate(new Vector3(0, 90, 0));
+    }
+
+    public void SetNodes()
+    {
+        float _dis = Vector3.Distance(transform.position, endPoint);
+        int nodeLength = (int)(_dis / 0.5f);
+
+        Vector3 _dir = endPoint - transform.position;
+        _dir.Normalize();
+
+        Vector3 _increase = (_dir * _dis) / nodeLength;
+
+        for (int i = 0; i < nodeLength; i++)
+        {
+            PathNodes.Add(new PathNode(transform.position + (_increase * i) ));
+        }
+
+
     }
 
     private void GetEndPoint()
@@ -164,24 +177,6 @@ public class TargetBehaviour : MonoBehaviour
         GameManager.Instance.Indicator.RemoveIndicator(transform);
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    private void HandleTween()
-    {
-        if (TimeTweenKey < 1)
-        {
-            TimeTweenKey += Time.deltaTime / Duration;
-
-            CurveValueX = BirdX.Evaluate(TimeTweenKey);
-            CurveValueY = BirdY.Evaluate(TimeTweenKey);
-            CurveValueZ = BirdZ.Evaluate(TimeTweenKey);
-        }
-        else
-        {
-            TimeTweenKey = 0;
-        }
-    }
 
     /// <summary>
     /// Called when the target is hit
@@ -242,10 +237,20 @@ public class TargetBehaviour : MonoBehaviour
         }
         if (MovingBird)
         {
-            HandleTween();
 
-            //transform.position = Vector3.MoveTowards(transform.position, endPoint, Speed);
-            transform.position += transform.right * CurveValueX;
+            if (transform.position == PathNodes[goalNode].position)
+            {
+                   
+                if (goalNode < PathNodes.Count - 1)
+                {
+                    goalNode++;
+                    Debug.Log("INCREASE value");
+                }
+            }
+            else
+            {
+                transform.position = Vector3.MoveTowards(transform.position, PathNodes[goalNode].position, Speed);
+            }
 
             //If end point is reached...
             if (Vector3.Distance(transform.position, endPoint) < 1)

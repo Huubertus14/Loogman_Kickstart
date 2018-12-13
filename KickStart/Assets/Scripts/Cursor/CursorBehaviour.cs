@@ -12,6 +12,7 @@ public class CursorBehaviour : MonoBehaviour
     /// </summary>
     public RectTransform reticle;
     public RawImage img;
+    public float distance = 0;
 
     /// <summary>
     /// Runs at initialization right after the Awake method
