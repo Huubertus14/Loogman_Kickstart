@@ -14,11 +14,11 @@ public class TargetBehaviour : MonoBehaviour
 
     public GameObject Body;
     public GameObject[] Beek;
-
-    [Space]
+    
     private bool IsHit;
     private Vector3 endPoint;
     private AudioSource audioSource;
+    private BulletEvadeScript evadeScript;
 
     private Vector3 newEndPoint;
     private Vector3 playerOffset;
@@ -27,8 +27,7 @@ public class TargetBehaviour : MonoBehaviour
     private GameObject Diaper;
     private MeshRenderer[] logoOnDiaper;
     private bool alwaysDiaperOn;
-
-    [Space]
+    
     [Space]
     public GameObject DeathParticle;
     public GameObject SmokeParticles;
@@ -40,6 +39,8 @@ public class TargetBehaviour : MonoBehaviour
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        evadeScript = GetComponentInChildren<BulletEvadeScript>();
+        evadeScript.SetBird(this);
 
         //plays spawn sound of bird
         BirdSoundTimer = Random.Range(3f, 6f);

@@ -2018,6 +2018,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1871252936877136
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4895952035711590}
+  - component: {fileID: 135614942522543574}
+  - component: {fileID: 114962933194063286}
+  m_Layer: 0
+  m_Name: SightCircle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1876076587934720
 GameObject:
   m_ObjectHideFlags: 1
@@ -2346,6 +2363,7 @@ Transform:
   m_Children:
   - {fileID: 4737034689671544}
   - {fileID: 4000447524482170}
+  - {fileID: 4895952035711590}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4134,6 +4152,19 @@ Transform:
   m_Father: {fileID: 4914849405398550}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4895952035711590
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1871252936877136}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4003727042350818}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4898505675721526
 Transform:
   m_ObjectHideFlags: 1
@@ -5235,31 +5266,7 @@ MonoBehaviour:
     type: 2}
   BirdHitEffect: {fileID: 1270126634788680, guid: efa467f120f58fe43931dd8e35c2d187,
     type: 2}
-  DiaperDestroy: {fileID: 1222976583829746, guid: e6273a73d15c09545aa55b4dd01cb60a,
-    type: 2}
-  BirdX:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  BirdY:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  BirdZ:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  CurveValueX: 0
-  CurveValueY: 0
-  CurveValueZ: 0
-  TimeTweenKey: 0
-  Duration: 0
+  DiaperDestroy: {fileID: 0}
 --- !u!114 &114735873475987468
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5273,6 +5280,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LifeTime: 60
   DestroyDelay: 0
+--- !u!114 &114962933194063286
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1871252936877136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66bcad7cff3066b42b44bd996ac16dbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EvadeIncrease: 0.005
+--- !u!135 &135614942522543574
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1871252936877136}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.71
+  m_Center: {x: 0, y: 0.54, z: 0}
 --- !u!136 &136776551157158674
 CapsuleCollider:
   m_ObjectHideFlags: 1
