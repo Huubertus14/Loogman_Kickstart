@@ -1,4 +1,5 @@
 ﻿using EnumStates;
+using System.Collections.Generic;
 using UnityEngine;
 using VrFox;
 
@@ -34,6 +35,10 @@ public class TargetBehaviour : MonoBehaviour
     public GameObject BirdHitEffect;
     public GameObject DiaperDestroy;
 
+    public List<PathNode> PathNodes = new List<PathNode>();
+    private Vector3 startPoint;
+    public int goalNode;
+ 
     private float birdScale;
 
     private void Start()
@@ -46,7 +51,7 @@ public class TargetBehaviour : MonoBehaviour
         BirdSoundTimer = Random.Range(3f, 6f);
         BirdSoundCounter = 0;
         AudioManager.Instance.PlayAudio(AudioSampleManager.Instance.getBirdSpawnSounds(), 1, gameObject);
-
+        goalNode = 1;
         if (!Diaper)
         {
             Diaper = GetComponentInChildren<DiaperBehaviour>().gameObject;
@@ -93,6 +98,7 @@ public class TargetBehaviour : MonoBehaviour
         }
 
         GetEndPoint();
+        SetNodes();
 
         //give bird random scale
         birdScale = Random.Range(0.2f, .3f);
@@ -105,6 +111,24 @@ public class TargetBehaviour : MonoBehaviour
 
         //fix model rotation
         transform.Rotate(new Vector3(0, 90, 0));
+    }
+
+    public void SetNodes()
+    {
+        float _dis = Vector3.Distance(transform.position, endPoint);
+        int nodeLength = (int)(_dis / 0.5f);
+
+        Vector3 _dir = endPoint - transform.position;
+        _dir.Normalize();
+
+        Vector3 _increase = (_dir * _dis) / nodeLength;
+
+        for (int i = 0; i < nodeLength; i++)
+        {
+            PathNodes.Add(new PathNode(transform.position + (_increase * i) ));
+        }
+
+
     }
 
     private void GetEndPoint()
@@ -153,7 +177,8 @@ public class TargetBehaviour : MonoBehaviour
         SpawnManager.Instance.CurrentBirdCount--;
         GameManager.Instance.Indicator.RemoveIndicator(transform);
     }
-    
+
+
     /// <summary>
     /// Called when the target is hit
     /// </summary>
@@ -206,7 +231,20 @@ public class TargetBehaviour : MonoBehaviour
         }
         if (MovingBird)
         {
-            transform.position = Vector3.MoveTowards(transform.position, endPoint, Speed);
+
+            if (transform.position == PathNodes[goalNode].position)
+            {
+                   
+                if (goalNode < PathNodes.Count - 1)
+                {
+                    goalNode++;
+                    Debug.Log("INCREASE value");
+                }
+            }
+            else
+            {
+                transform.position = Vector3.MoveTowards(transform.position, PathNodes[goalNode].position, Speed);
+            }
 
             //If end point is reached...
             if (Vector3.Distance(transform.position, endPoint) < 1)
