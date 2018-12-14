@@ -274,6 +274,8 @@ MonoBehaviour:
   BirdPrefab: {fileID: 1314704429571224, guid: d418c88afd808cf448602106c7ead664, type: 2}
   StaticBirdPrefab: {fileID: 1314704429571224, guid: 056b6f160400f634ea46c2c1ea0cef4a,
     type: 2}
+  FatBirdPrefab: {fileID: 0}
+  SpeedBird: {fileID: 0}
   Spawns: []
   SpawnInterval: 3
   MaxBirdCount: 12
@@ -416,8 +418,8 @@ MonoBehaviour:
   GarbageText: {fileID: 0}
   TimeText: {fileID: 0}
   EndScoreText: {fileID: 0}
+  ScoreFloorText: {fileID: 0}
   HighScoreFade: {fileID: 0}
-  Targets: []
   Blue: {fileID: 2100000, guid: 726022aa4e92617449c3beaa066b623c, type: 2}
   White: {fileID: 2100000, guid: 7fec446aa0041d4489c5236084374df9, type: 2}
   GameState: 0

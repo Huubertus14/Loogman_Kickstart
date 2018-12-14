@@ -5252,9 +5252,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59c5327fd2e763d4186f12a5fb546558, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 1.72
-  BirdSoundCounter: 0
-  BirdSoundTimer: 0
+  TypeOfBird: 0
+  Speed: 1
+  birdScale: 0
+  BigBirdLives: 0
   MovingBird: 1
   Body: {fileID: 1943836031018648}
   Beek:
@@ -5267,6 +5268,7 @@ MonoBehaviour:
   BirdHitEffect: {fileID: 1270126634788680, guid: efa467f120f58fe43931dd8e35c2d187,
     type: 2}
   DiaperDestroy: {fileID: 0}
+  goalNode: 0
 --- !u!114 &114735873475987468
 MonoBehaviour:
   m_ObjectHideFlags: 1

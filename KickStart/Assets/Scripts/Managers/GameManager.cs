@@ -29,6 +29,21 @@ namespace EnumStates
         Normal,
         Hard
     }
+
+    public enum BirdType
+    {
+        Normal,
+        Fat,
+        Fast
+    }
+
+    public enum Round{
+        Intro,
+        Round_1,
+        Round_2,
+        Round_3,
+        Score
+    }
 }
 
 namespace VrFox
@@ -71,6 +86,7 @@ namespace VrFox
 
         [Header("Values")]
         public GameStates GameState;
+        public Round CurrentRound;
         public bool GameStarted;
         public bool GameOver;
         [Space]
@@ -131,7 +147,7 @@ namespace VrFox
 
             if (InstrucionAmount == 0)
             {
-                TutorialFeedbackText.text = "Click with the clicker!";
+                TutorialFeedbackText.text = "Zorg dat je alle witte boxen aan de zijkanten ziet@";
                 BoundaryIndicators.SetActive(true);
 
                 return;
@@ -141,12 +157,11 @@ namespace VrFox
             if (InstrucionAmount >= 1)
             {
                 TutorialFeedbackText.text = "";
-                SendTextMessage("Try to shoot as many birds as possible!", 12, Vector2.zero);
+                SendTextMessage("Probeer zoveel mogelijk vogels te raken!", 12, Vector2.zero);
 
                 //rempve arrows
                 BoundaryIndicators.SetActive(false);
-
-
+                
                 StartGame();
                 return;
             }
@@ -366,6 +381,7 @@ namespace VrFox
             EndScoreText.text = "";
             TimeText.text = "";
             ScoreText.text = "";
+            ScoreFloorText.text = "Score:";
             InstrucionAmount = 0;
             GameStarted = false;
             
@@ -373,6 +389,7 @@ namespace VrFox
             BoundaryIndicators.SetActive(false);
             StartButton.gameObject.SetActive(true);
             GameState = GameStates.Waiting;
+            CurrentRound = Round.Intro;
         }
 
         public void SetAllInstructionsActive(bool _value)
@@ -428,6 +445,7 @@ namespace VrFox
             SpawnManager.Instance.ResetTutorial();
 
             GameState = GameStates.Playing;
+
             //remove all instructions
             CrossHairEffect.SetActive(true, 1.4f);
             SetAllInstructionsActive(false);
@@ -440,14 +458,6 @@ namespace VrFox
         {
             ScoreText.text = "Score: " + Player.Score.ToString();
             ScoreFloorText.text = "Score: " + Player.Score.ToString();
-        }
-
-        /// <summary>
-        /// Set garbage text, Might be obsolete
-        /// </summary>
-        public void SetGarbageText()
-        {
-            GarbageText.text = "You've been hit by " + Player.HitByGarbage.ToString() + " Pieces of Garbage!";
         }
 
         /// <summary>
