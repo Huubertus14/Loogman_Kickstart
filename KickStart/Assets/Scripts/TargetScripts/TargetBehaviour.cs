@@ -7,7 +7,7 @@ public class TargetBehaviour : MonoBehaviour
 
     [Header("Bird Values:")]
     public BirdType TypeOfBird;
-    [Range(1, 15)]
+    [Range(0, 2)]
     public float Speed = 1;
     public float birdScale;
 
@@ -57,7 +57,6 @@ public class TargetBehaviour : MonoBehaviour
         {
             Diaper = GetComponentInChildren<DiaperBehaviour>().gameObject;
         }
-        BigBirdLives = 0;
 
         logoOnDiaper = GetComponentsInChildren<MeshRenderer>();
         for (int i = 1; i < logoOnDiaper.Length; i++)
@@ -114,7 +113,6 @@ public class TargetBehaviour : MonoBehaviour
                 break;
             case BirdType.Fat:
                 Path.Bouncing();
-                BigBirdLives = 3;
                 break;
             case BirdType.Fast:
 

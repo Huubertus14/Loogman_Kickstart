@@ -636,7 +636,7 @@ GameObject:
   - component: {fileID: 136776551157158674}
   - component: {fileID: 54539911542664530}
   m_Layer: 0
-  m_Name: Seagull
+  m_Name: BigBird
   m_TagString: Target
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5252,10 +5252,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59c5327fd2e763d4186f12a5fb546558, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TypeOfBird: 0
-  Speed: 1
-  birdScale: 0.2
-  BigBirdLives: 0
+  TypeOfBird: 1
+  Speed: 0.8
+  birdScale: 1
+  BigBirdLives: 6
   MovingBird: 1
   Body: {fileID: 1943836031018648}
   Beek:
