@@ -13,16 +13,12 @@ namespace VrFox
         [Header("Refs:")]
         public TextFlashing ScoreTextFlash;
         public TextFlashing GarbageTextFlash;
-        public SliderLerp WaterAmounfSlider;
         public UIWiggle WaterUIWiggle;
         public GameObject HighScoreObject;
 
         [Header("Values:")]
         public string PlayerName;
         public int Score;
-        public int HitByGarbage;
-        public float AmountOfWater;
-        public float MaxAmountOfWater;
         public float TimeToRecharge;
         public Difficulty PlayerLevel;
         public bool InPrewash;
@@ -34,13 +30,8 @@ namespace VrFox
 
         public void ResetPlayerValues()
         {
-            AmountOfWater = MaxAmountOfWater;
-            WaterAmounfSlider.SetMaxValue(MaxAmountOfWater);
-            WaterAmounfSlider.SetGoalValue(AmountOfWater);
-
             Score = 0;
             PlayerName = "Loogman Devop";
-            HitByGarbage = 0;
             PlayerLevel = Difficulty.Noob;
             InPrewash = true;
 
@@ -56,19 +47,9 @@ namespace VrFox
         //Player Shoots a bullet
         public void Shoot()
         {
-            if (AmountOfWater > 1)
-            {
-                AudioManager.Instance.PlayAudio(AudioSampleManager.Instance.GetShootSound(), 1);
-                GameObject _bullet = Instantiate(BulletPrefab, transform.position, Quaternion.identity);
-                _bullet.GetComponent<BulletBehaviour>().ShootBullet();
-
-                AmountOfWater--;
-                WaterAmounfSlider.SetGoalValue(AmountOfWater);
-            }
-            else
-            {
-                WaterUIWiggle.StartAnimation();
-            }
+            AudioManager.Instance.PlayAudio(AudioSampleManager.Instance.GetShootSound(), 1);
+            GameObject _bullet = Instantiate(BulletPrefab, transform.position, Quaternion.identity);
+            _bullet.GetComponent<BulletBehaviour>().ShootBullet();
 
             if (Score < 10)
             {
@@ -122,9 +103,6 @@ namespace VrFox
                 //+ (Time.deltaTime / 46) * 110)
                 transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + (Time.deltaTime / 46) * 75);
             }
-
-            AmountOfWater += Time.deltaTime / TimeToRecharge;
-            WaterAmounfSlider.SetGoalValue(AmountOfWater);
 
             if (!IsSynced)
             {

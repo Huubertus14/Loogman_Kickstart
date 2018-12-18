@@ -1,7 +1,6 @@
 ﻿using EnumStates;
 using Greyman;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -28,6 +27,22 @@ namespace EnumStates
         Beginner,
         Normal,
         Hard
+    }
+
+    public enum BirdType
+    {
+        Normal,
+        Fat,
+        Fast
+    }
+
+    public enum Round
+    {
+        Intro,
+        Round_1,
+        Round_2,
+        Round_3,
+        Score
     }
 }
 
@@ -64,19 +79,25 @@ namespace VrFox
         public Text EndScoreText;
         public Text ScoreFloorText;
         public UIFadeScript HighScoreFade;
-        
+
         [Header("Material Colors:")]
         public Material Blue;
         public Material White;
 
         [Header("Values")]
         public GameStates GameState;
+        public Round CurrentRound;
         public bool GameStarted;
         public bool GameOver;
         [Space]
-        public float TimePlayed;
-        public int InstrucionAmount;
-        
+        [Header("Time Values:")] // All the timing values in the carwash in seconds
+        public float PreWashDuration;
+        public float CarWashDuration;
+
+        public float Round_1Duration;
+        public float Round_2Duration;
+        public float Round_3Duration;
+
         private GameObject playerEndScoreObject;
         private GameObject hoverObject;
 
@@ -86,13 +107,12 @@ namespace VrFox
 
         [Space]
         public ActivationLerp[] InstructionLerps;
-        private float BeginTimer = 0;
 
         private float bulletForce;
 
         [HideInInspector]
         public bool CanContinueNextGame;
-        
+
         private void Start()
         {
             bulletForce = 720;
@@ -108,13 +128,13 @@ namespace VrFox
                     Playing();
                     break;
                 case GameStates.Instructions:
-                    BeginTimer += Time.deltaTime;
-                    TutorialFeedbackText.text = "";
-                    if (BeginTimer > 3)
-                    {
-                        SetAllInstructionsActive(true);
-                        Instructions();
-                    }
+                    //BeginTimer += Time.deltaTime;
+                    //TutorialFeedbackText.text = "";
+                    //if (BeginTimer > 3)
+                    //{
+                    //    SetAllInstructionsActive(true);
+                    //    Instructions();
+                    //}
                     break;
                 case GameStates.GameEnd:
                     break;
@@ -124,61 +144,41 @@ namespace VrFox
                     break;
             }
         }
+        
 
-        private void Instructions()
-        {
-            EndScoreText.text = "";
-
-            if (InstrucionAmount == 0)
-            {
-                TutorialFeedbackText.text = "Click with the clicker!";
-                BoundaryIndicators.SetActive(true);
-
-                return;
-            }
-
-            //start the game from the gesture manager
-            if (InstrucionAmount >= 1)
-            {
-                TutorialFeedbackText.text = "";
-                SendTextMessage("Try to shoot as many birds as possible!", 12, Vector2.zero);
-
-                //rempve arrows
-                BoundaryIndicators.SetActive(false);
-
-
-                StartGame();
-                return;
-            }
-            InstrucionAmount = 0;
-        }
-
+        /// <summary>
+        /// Logic done when the game is playing
+        /// </summary>
         private void Playing()
         {
             //Game is started
-            if (TimePlayed <= 0)
-            {
-                SetGameOver();
-            }
-            else
-            {
-                if (TimePlayed < 170)
-                {
-                    TutorialFeedbackText.text = "";
-                }
-                if (Player.Score > 3)
-                {
-                    TimePlayed -= Time.deltaTime;
-                    SetTimeText();
-                }
-            }
-
-            if (Input.GetKeyDown(KeyCode.O))
-            {
-                SetGameOver();
-            }
+           
         }
 
+        private IEnumerator StartTutorial()
+        {
+            Debug.Log("Starting the tutorial...");
+            yield return new WaitForSeconds(0.5f);
+            //Show UI to verify sight
+
+            yield return new WaitForSeconds(1.5f);
+
+            //let dusty say things
+
+
+
+            CrossHairEffect.SetActive(true, 1.4f);
+            yield return new WaitForSeconds(0.2f);
+
+            GameState = GameStates.Playing;
+            CurrentRound = Round.Round_1;
+            yield return null;
+        }
+
+        /// <summary>
+        /// Shows the score of the player and it's current rank in the high scores
+        /// </summary>
+        /// <returns></returns>
         private IEnumerator EndGame()
         {
             yield return new WaitForSeconds(3);
@@ -359,20 +359,29 @@ namespace VrFox
             }
             yield return null;
         }
-        
+
+        /// <summary>
+        /// Reset the game and all its values to the begin state of the game
+        /// </summary>
         public void ResetGame()
         {
             TutorialFeedbackText.text = "";
             EndScoreText.text = "";
             TimeText.text = "";
             ScoreText.text = "";
-            InstrucionAmount = 0;
+            ScoreFloorText.text = "Score:";
             GameStarted = false;
-            
+
+            //Set the duration of all the rounds
+            Round_1Duration = PreWashDuration * 0.4f;
+            Round_2Duration = CarWashDuration* 0.45f;
+            Round_3Duration = CarWashDuration * 0.45f;
+
             //rempve arrows
             BoundaryIndicators.SetActive(false);
             StartButton.gameObject.SetActive(true);
             GameState = GameStates.Waiting;
+            CurrentRound = Round.Intro;
         }
 
         public void SetAllInstructionsActive(bool _value)
@@ -421,15 +430,15 @@ namespace VrFox
             EndScoreText.text = "";
             TutorialFeedbackText.text = "";
             GameStarted = true;
-            TimePlayed = 180;
             SetScoreText();
-            
+
             StartButton.gameObject.SetActive(false);
             SpawnManager.Instance.ResetTutorial();
 
-            GameState = GameStates.Playing;
+            GameState = GameStates.Instructions;
+            CurrentRound = Round.Intro;
+
             //remove all instructions
-            CrossHairEffect.SetActive(true, 1.4f);
             SetAllInstructionsActive(false);
         }
 
@@ -443,31 +452,23 @@ namespace VrFox
         }
 
         /// <summary>
-        /// Set garbage text, Might be obsolete
-        /// </summary>
-        public void SetGarbageText()
-        {
-            GarbageText.text = "You've been hit by " + Player.HitByGarbage.ToString() + " Pieces of Garbage!";
-        }
-
-        /// <summary>
         /// Set the time text of the player
         /// </summary>
         public void SetTimeText()
         {
-            int _min = (int)TimePlayed / 60;
-            int _sec = (int)TimePlayed % 60;
+            Debug.Log("Commented");
 
-            if (_sec < 10)
-            {
-                TimeText.text = _min + ":0" + _sec;
-            }
-            else
-            {
-                TimeText.text = _min + ":" + _sec;
-            }
+            //int _min = (int)TimePlayed / 60;
+            //int _sec = (int)TimePlayed % 60;
 
-            TimeText.text = (1f / Time.deltaTime).ToString();
+            //if (_sec < 10)
+            //{
+            //    TimeText.text = _min + ":0" + _sec;
+            //}
+            //else
+            //{
+            //    TimeText.text = _min + ":" + _sec;
+            //}
         }
 
         public void HandleGaze(GameObject _gazeObject)
@@ -518,10 +519,7 @@ namespace VrFox
 
         public Difficulty GetDiffictuly => Player.PlayerLevel;
 
-        public GameObject GetHoverObject
-        {
-            get { return hoverObject; }
-        }
+        public GameObject GetHoverObject => hoverObject;
 
         #endregion
     }

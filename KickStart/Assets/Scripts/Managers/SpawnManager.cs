@@ -17,6 +17,8 @@ namespace VrFox
         [Header("Prefabs")]
         public GameObject BirdPrefab;
         public GameObject StaticBirdPrefab;
+        public GameObject FatBirdPrefab;
+        public GameObject SpeedBird;
 
         [Header("Refs:")]
         public List<GameObject> Spawns = new List<GameObject>();
@@ -91,26 +93,16 @@ namespace VrFox
             //Spawn bird
             GameObject _bird = Instantiate(BirdPrefab, transform.position, Quaternion.identity);
 
+            //Get the y value of the bird
             float _spawnY = Camera.main.transform.position.y + Random.Range(-0.2f, 0.2f);
 
             //Set right spawn point 
             Vector3 _direction = new Vector3(Random.Range(-0.8f, 0.8f), Random.Range(-1, 1), 1);
-            float _distance = Random.Range(-22, -7);
-
-            // Debug.Log(_direction * _distance);
-            if (_distance < 5)
-            {
-                _distance = 5;
-            }
-            else if (_distance > -5)
-            {
-                _distance = -5;
-            }
-
+            float _distance = Random.Range(7, 12);
+            
             _bird.transform.position = _direction * _distance;
             _bird.transform.position = new Vector3(_bird.transform.position.x, _spawnY, _bird.transform.position.z);
             
-
 
             //Set new spawn interval
             switch (GameManager.Instance.GetDiffictuly)
