@@ -37,7 +37,6 @@ public class TargetBehaviour : MonoBehaviour
     public GameObject DeathParticle;
     public GameObject SmokeParticles;
     public GameObject BirdHitEffect;
-    public GameObject DiaperDestroy;
 
     public BirdPath Path;
     public int goalNode;
