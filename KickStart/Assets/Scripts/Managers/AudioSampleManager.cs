@@ -47,5 +47,13 @@ public class AudioSampleManager : MonoBehaviour
     }
 
     [Header("DustyText")]
-    public AudioClip[] DustyText;
+    public AudioClip[] DustyVoorWas;
+    public AudioClip[] DustyRonde01;
+    public AudioClip[] DustyRonde02;
+    public AudioClip[] DustyRonde03;
+    public AudioClip[] DustyMisc;
+
+    [Space]
+    public AudioClip DustyHitSound;
+
 }

@@ -53,7 +53,7 @@ public class TargetBehaviour : MonoBehaviour
         BirdSoundCounter = 0;
         AudioManager.Instance.PlayAudio(AudioSampleManager.Instance.getBirdSpawnSounds(), 1, gameObject);
 
-        
+
         goalNode = 1;
 
         if (!Diaper)
@@ -96,25 +96,25 @@ public class TargetBehaviour : MonoBehaviour
                         //Fuck up path of bird?
                     }
                 }
-                    //Give birds speed multipliers
-                    switch (GameManager.Instance.GetDiffictuly)
-                    {
-                        case Difficulty.Noob:
-                            Speed *= 0.8f;
-                            break;
-                        case Difficulty.Beginner:
-                            break;
-                        case Difficulty.Normal:
-                            Speed *= 1.1f;
-                            break;
-                        case Difficulty.Hard:
-                            Speed *= 1.3f;
-                            break;
-                        default:
-                            Debug.LogError("Code should not be reached!");
-                            break;
-                    }
-                
+                //Give birds speed multipliers
+                switch (GameManager.Instance.GetDiffictuly)
+                {
+                    case Difficulty.Noob:
+                        Speed *= 0.8f;
+                        break;
+                    case Difficulty.Beginner:
+                        break;
+                    case Difficulty.Normal:
+                        Speed *= 1.1f;
+                        break;
+                    case Difficulty.Hard:
+                        Speed *= 1.3f;
+                        break;
+                    default:
+                        Debug.LogError("Code should not be reached!");
+                        break;
+                }
+
                 break;
             case BirdType.Fat:
                 Path.Bouncing(); //fat birds always are bouncing
@@ -213,10 +213,28 @@ public class TargetBehaviour : MonoBehaviour
 
         GameManager.Instance.Player.HitCount++;
 
+
+
+
         if (IsHit)
         {
             return;
         }
+
+        if (GameManager.Instance.CurrentRound == Round.Intro)
+        {
+            if (!GameManager.Instance.FirstBirdHit)
+            {
+                GameManager.Instance.FirstBirdHit = true;
+                Destroy(gameObject, 4);
+            }
+            else if (!GameManager.Instance.SecondBirdHit)
+            {
+                GameManager.Instance.SecondBirdHit = true;
+                Destroy(gameObject, 4);
+            }
+        }
+
         Instantiate(BigBirdHitEffect, _hitPosition, Quaternion.identity);
         switch (TypeOfBird)
         {
@@ -239,7 +257,7 @@ public class TargetBehaviour : MonoBehaviour
                     //Remove one life
                     BigBirdLives--;
                     //big bird first hit feedback
-                   
+
                 }
                 else //big bird has a diaper on
                 {
@@ -274,12 +292,11 @@ public class TargetBehaviour : MonoBehaviour
                 Debug.LogError("Enum error!");
                 break;
         }
-
     }
 
     private void SetGoalRotation(Vector3 _goal)
     {
-       // Vector3 _dir = _goal - transform.position;
+        // Vector3 _dir = _goal - transform.position;
         //float _angle = Mathf.Atan2(_dir.y, _dir.x) * Mathf.Rad2Deg;
 
         //goalRotation = Quaternion.AngleAxis(_angle - 45 + 180, Vector3.up);
@@ -326,7 +343,7 @@ public class TargetBehaviour : MonoBehaviour
                 if (!IsHit)
                 {
                     //Get minus points when a birds get trough
-                    GameManager.Instance.Player.Score -= 1;
+                    //GameManager.Instance.Player.Score -= 1;
                 }
                 Destroy(gameObject);
 
@@ -337,7 +354,7 @@ public class TargetBehaviour : MonoBehaviour
                 if (!IsHit)
                 {
                     //Get minus points when a birds get trough
-                    GameManager.Instance.Player.Score -= 1;
+                    //GameManager.Instance.Player.Score -= 1;
                 }
 
                 Destroy(gameObject);
@@ -405,17 +422,20 @@ public class TargetBehaviour : MonoBehaviour
     /// <param given material="_mat"></param>
     private void SetBodyMaterial(Material _mat)
     {
-        return; 
+        return;
         Body.GetComponent<Renderer>().material = _mat;
     }
 
     private void DrawDebug()
     {
-        for (int i = 0; i < Path.Nodes.Count; i++)
+        if (MovingBird)
         {
-            if (i < Path.Nodes.Count - 1)
+            for (int i = 0; i < Path.Nodes.Count; i++)
             {
-                Debug.DrawLine(Path.Nodes[i].GetPosition, Path.Nodes[i + 1].GetPosition, Color.cyan);
+                if (i < Path.Nodes.Count - 1)
+                {
+                    Debug.DrawLine(Path.Nodes[i].GetPosition, Path.Nodes[i + 1].GetPosition, Color.cyan);
+                }
             }
         }
     }

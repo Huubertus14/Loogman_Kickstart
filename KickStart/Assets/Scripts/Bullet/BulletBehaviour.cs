@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using VrFox;
+using EnumStates;
 
 public class BulletBehaviour : MonoBehaviour
 {
@@ -36,7 +37,9 @@ public class BulletBehaviour : MonoBehaviour
         }
         if (collision.gameObject.tag.Contains("Dusty"))
         {
-            //REEEEEEEEEEEEEEEEEEEEEEEEEE
+            if(GameManager.Instance.CurrentRound != Round.Intro)
+            DustyManager.Instance.Messages.Add(new DustyTextFile("Hey! Ik ben geen vogel!", 5f, AudioSampleManager.Instance.DustyHitSound));
+            Destroy(gameObject);
         }
     }
 }

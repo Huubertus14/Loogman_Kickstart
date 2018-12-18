@@ -16,8 +16,8 @@ public class DustyManager : MonoBehaviour
     public GameObject TextBillboard;
     
     private DustyText dustyTextMessage;
-    [HideInInspector]
     public AudioSource sourceAudio;
+    private Animator animator;
 
     float headSpinTimer;
 
@@ -29,34 +29,34 @@ public class DustyManager : MonoBehaviour
     [SerializeField]
     public List<DustyTextFile> Messages = new List<DustyTextFile>();
     
+    
     private void Start()
     {
         Messages.Clear();
         
         dustyTextMessage = GetComponentInChildren<DustyText>();
         sourceAudio = GetComponentInChildren<AudioSource>();
-       
-        goalPos = Vector3.zero;
+        animator = GetComponent<Animator>();
+
+        animator.Play("Idle");
 
         goalPos = Camera.main.transform.position + PositionAwayFromPlayer;
 
-        /*
-        //Add massages
-        Messages.Add(new DustyTextFile("Hoi ik ben Dusty, de schoonmaak robot", 5f, AudioSampleManager.Instance.DustyText[0]));
-        Messages.Add(new DustyTextFile("Wat leuk dat je bij Loogman in de carwash komt", 5f, AudioSampleManager.Instance.DustyText[1]));
-        Messages.Add(new DustyTextFile("Hopelijk zit je comfortabel in de auto", 5f, AudioSampleManager.Instance.DustyText[2]));
-        Messages.Add(new DustyTextFile("Maar ik ben hier omdat ik je hulp nodig heb, Loogman heeft een probleempje", 5f, AudioSampleManager.Instance.DustyText[4]));
-        Messages.Add(new DustyTextFile("Er vliegen allemaal vogels in de wasstraat en ze maken alle auto's vies!", 5f, AudioSampleManager.Instance.DustyText[5]));
-        Messages.Add(new DustyTextFile("Dat willen wij natuurlijk niet, want anders wordt jouw auto ook weer vies", 5f, AudioSampleManager.Instance.DustyText[6]));
-        Messages.Add(new DustyTextFile("Wij gaan ervoor zorgen dat de vogels niet meer op de auto kunnen poepen door ze een luier om te doen", 5f, AudioSampleManager.Instance.DustyText[7]));
-        Messages.Add(new DustyTextFile("Laten we eerst even trainen", 5f, AudioSampleManager.Instance.DustyText[8]));
-  */
+        Transform[] _childObjects = GetComponentsInChildren<Transform>();
+        foreach (var _child in _childObjects)
+        {
+            if (_child.GetComponent<MeshRenderer>())
+            {
+                _child.gameObject.AddComponent(typeof(MeshCollider));
+                _child.gameObject.tag = "Dusty";
+            }
+        }
     }
-
     
-
     private void Update()
     {
+        goalPos = Camera.main.transform.position + PositionAwayFromPlayer;
+
         //lerp to right position
         SetDustyPosition();
         HandleNarrative();
@@ -66,8 +66,7 @@ public class DustyManager : MonoBehaviour
     {
         transform.position = Vector3.Lerp(transform.position, goalPos, Time.deltaTime * 5);
     }
-
-
+    
     /// <summary>
     /// handles the text above Dusty, And says new thing when its done
     /// </summary>
@@ -110,4 +109,15 @@ public class DustyManager : MonoBehaviour
     {
         get { return dustyTextMessage; }
     }
+
+    public void Wave()
+    {
+        animator.Play("Wave");
+    }
+
+    public void DustyHit()
+    {
+
+    }
+
 }
