@@ -271,9 +271,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 882144032aefc0947b380d7e8b5d00dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BirdPrefab: {fileID: 1314704429571224, guid: d418c88afd808cf448602106c7ead664, type: 2}
+  BirdPrefab: {fileID: 1447957489476182, guid: e464dbdc8f8cb5b4e9b8b991c9cedeb9, type: 2}
   StaticBirdPrefab: {fileID: 1314704429571224, guid: 056b6f160400f634ea46c2c1ea0cef4a,
     type: 2}
+  FatBirdPrefab: {fileID: 1447957489476182, guid: e464dbdc8f8cb5b4e9b8b991c9cedeb9,
+    type: 2}
+  SpeedBird: {fileID: 0}
   Spawns: []
   SpawnInterval: 3
   MaxBirdCount: 12
@@ -290,8 +293,7 @@ MonoBehaviour:
     beek: {fileID: 2100000, guid: 726022aa4e92617449c3beaa066b623c, type: 2}
   - body: {fileID: 2100000, guid: d66cecaf701dc164282d78ad006997f4, type: 2}
     beek: {fileID: 2100000, guid: 5bcd606b7e7dd304f8438a07b0013273, type: 2}
-  TutorialActive: 0
-  TutorialBirdsShot: 0
+  Birds: []
 --- !u!114 &114322428844149892
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -416,15 +418,16 @@ MonoBehaviour:
   GarbageText: {fileID: 0}
   TimeText: {fileID: 0}
   EndScoreText: {fileID: 0}
+  ScoreFloorText: {fileID: 0}
   HighScoreFade: {fileID: 0}
-  Targets: []
   Blue: {fileID: 2100000, guid: 726022aa4e92617449c3beaa066b623c, type: 2}
   White: {fileID: 2100000, guid: 7fec446aa0041d4489c5236084374df9, type: 2}
   GameState: 0
+  CurrentRound: 0
   GameStarted: 0
   GameOver: 0
-  TimePlayed: 0
-  InstrucionAmount: 0
+  PreWashDuration: 155
+  CarWashDuration: 215
   TutorialFeedbackText: {fileID: 0}
   BoundaryIndicators: {fileID: 0}
   InstructionLerps:

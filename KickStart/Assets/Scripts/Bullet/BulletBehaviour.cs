@@ -29,15 +29,14 @@ public class BulletBehaviour : MonoBehaviour
             //Target HIT!
             AudioManager.Instance.PlayAudio(AudioSampleManager.Instance.GetExplosionSound(), 1);
             collision.gameObject.GetComponent<TargetBehaviour>().Hit();
-
-            if (GameManager.Instance.Player.Score > 4)
-            {
-                GameManager.Instance.Player.ScoreTextFlash.StartEffect();
-            }
-
+            
             GameManager.Instance.SetScoreText();
 
             Destroy(gameObject);
+        }
+        if (collision.gameObject.tag.Contains("Dusty"))
+        {
+            //REEEEEEEEEEEEEEEEEEEEEEEEEE
         }
     }
 }

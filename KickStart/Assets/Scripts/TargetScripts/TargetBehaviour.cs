@@ -1,5 +1,4 @@
 ﻿using EnumStates;
-using System.Collections.Generic;
 using UnityEngine;
 using VrFox;
 
@@ -7,19 +6,25 @@ public class TargetBehaviour : MonoBehaviour
 {
 
     [Header("Bird Values:")]
-    [Range(1, 15)]
+    public BirdType TypeOfBird;
+    [Range(0, 2)]
     public float Speed = 1;
-    public float BirdSoundCounter;
-    public float BirdSoundTimer;// = Random.Range(2f, 6f);
+    public float birdScale;
+
+    public int BigBirdLives;
+
     public bool MovingBird;
 
     public GameObject Body;
     public GameObject[] Beek;
 
-    [Space]
+    private float BirdSoundCounter;
+    private float BirdSoundTimer;// = Random.Range(2f, 6f);
+
     private bool IsHit;
     private Vector3 endPoint;
     private AudioSource audioSource;
+    private BulletEvadeScript evadeScript;
 
     private Vector3 newEndPoint;
     private Vector3 playerOffset;
@@ -27,30 +32,30 @@ public class TargetBehaviour : MonoBehaviour
     //[Header("Refs:")]
     private GameObject Diaper;
     private MeshRenderer[] logoOnDiaper;
-    private bool alwaysDiaperOn;
 
-    [Space]
     [Space]
     public GameObject DeathParticle;
     public GameObject SmokeParticles;
     public GameObject BirdHitEffect;
     public GameObject DiaperDestroy;
 
-    public List<PathNode> PathNodes = new List<PathNode>();
-    private Vector3 startPoint;
+    public BirdPath Path;
     public int goalNode;
- 
-    private float birdScale;
 
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        evadeScript = GetComponentInChildren<BulletEvadeScript>();
+        evadeScript.SetBird(this);
 
         //plays spawn sound of bird
         BirdSoundTimer = Random.Range(3f, 6f);
         BirdSoundCounter = 0;
         AudioManager.Instance.PlayAudio(AudioSampleManager.Instance.getBirdSpawnSounds(), 1, gameObject);
+
+        
         goalNode = 1;
+
         if (!Diaper)
         {
             Diaper = GetComponentInChildren<DiaperBehaviour>().gameObject;
@@ -59,32 +64,70 @@ public class TargetBehaviour : MonoBehaviour
         logoOnDiaper = GetComponentsInChildren<MeshRenderer>();
         for (int i = 1; i < logoOnDiaper.Length; i++)
         {
-            logoOnDiaper[i].material = GameManager.Instance.Blue;
+            logoOnDiaper[i].material = GameManager.Instance.White;
         }
-        logoOnDiaper[0].material = GameManager.Instance.White;
+        logoOnDiaper[0].material = GameManager.Instance.Blue;
 
-        Speed = Random.Range(0.01f, 0.015f);
+        //Set initial game values
+        GetEndPoint();
+        Path = new BirdPath(transform.position, endPoint);
 
-        switch (GameManager.Instance.GetDiffictuly)
+        //Set Values specific for this bird
+        switch (TypeOfBird)
         {
-            case Difficulty.Noob:
-                Speed *= 0.8f;
+            case BirdType.Normal:
+                Speed = Random.Range(Speed * 0.7f, Speed / 0.7f);
+                if (GameManager.Instance.CurrentRound != Round.Round_1) // first round the bird go in a streigt path
+                {
+                    //Give the birds a swirving or bouning effect
+                    if (Random.Range(0, 3) != 2)
+                    {
+                        if (Random.Range(0, 3) == 2)
+                        {
+                            Path.Bouncing();
+                        }
+                        else
+                        {
+                            Path.Swerving();
+                        }
+                    }
+                    else
+                    {
+                        //Fuck up path of bird?
+                    }
+                }
+                    //Give birds speed multipliers
+                    switch (GameManager.Instance.GetDiffictuly)
+                    {
+                        case Difficulty.Noob:
+                            Speed *= 0.8f;
+                            break;
+                        case Difficulty.Beginner:
+                            break;
+                        case Difficulty.Normal:
+                            Speed *= 1.1f;
+                            break;
+                        case Difficulty.Hard:
+                            Speed *= 1.3f;
+                            break;
+                        default:
+                            Debug.LogError("Code should not be reached!");
+                            break;
+                    }
+                
                 break;
-            case Difficulty.Beginner:
+            case BirdType.Fat:
+                Path.Bouncing(); //fat birds always are bouncing
                 break;
-            case Difficulty.Normal:
-                Speed *= 1.1f;
-                IsHit = (Random.Range(0, 8) == 2);
-                break;
-            case Difficulty.Hard:
-                Speed *= 1.3f;
-                IsHit = (Random.Range(0, 6) == 2);
+            case BirdType.Fast:
+
                 break;
             default:
-                Debug.LogError("Code should not be reached!");
+                Debug.LogError("Should not be reached");
                 break;
         }
 
+        //If bird is standing still set in front of player
         if (!MovingBird)
         {
             playerOffset = transform.position + GameManager.Instance.Player.transform.position;
@@ -96,11 +139,8 @@ public class TargetBehaviour : MonoBehaviour
             GameManager.Instance.Indicator.AddIndicator(transform, 0);
         }
 
-        GetEndPoint();
-        SetNodes();
-
         //give bird random scale
-        birdScale = Random.Range(0.9f, 1.1f);
+        birdScale = Random.Range(birdScale * 0.8f, birdScale / 0.8f);
         transform.localScale = new Vector3(birdScale, birdScale, birdScale);
 
         //get random colors 
@@ -110,24 +150,6 @@ public class TargetBehaviour : MonoBehaviour
 
         //fix model rotation
         transform.Rotate(new Vector3(0, 90, 0));
-    }
-
-    public void SetNodes()
-    {
-        float _dis = Vector3.Distance(transform.position, endPoint);
-        int nodeLength = (int)(_dis / 0.5f);
-
-        Vector3 _dir = endPoint - transform.position;
-        _dir.Normalize();
-
-        Vector3 _increase = (_dir * _dis) / nodeLength;
-
-        for (int i = 0; i < nodeLength; i++)
-        {
-            PathNodes.Add(new PathNode(transform.position + (_increase * i) ));
-        }
-
-
     }
 
     private void GetEndPoint()
@@ -146,6 +168,8 @@ public class TargetBehaviour : MonoBehaviour
             endPoint.y = Camera.main.transform.position.y + Random.Range(-0.2f, 0.2f);
 
             transform.LookAt(endPoint);
+            // goalRotation = Quaternion.LookRotation(_dirToPlayer, transform.right);
+
         }
         else
         {
@@ -162,7 +186,7 @@ public class TargetBehaviour : MonoBehaviour
             //Create endpoint in front of player
             endPoint = transform.position + (Random.Range(5, 10) * _dirToPlayer);
             endPoint.y = Camera.main.transform.position.y + Random.Range(-0.2f, 0.2f);
-
+            //goalRotation = Quaternion.LookRotation(_dirToPlayer, transform.right);
             transform.LookAt(endPoint);
         }
     }
@@ -177,7 +201,6 @@ public class TargetBehaviour : MonoBehaviour
         GameManager.Instance.Indicator.RemoveIndicator(transform);
     }
 
-
     /// <summary>
     /// Called when the target is hit
     /// </summary>
@@ -188,69 +211,106 @@ public class TargetBehaviour : MonoBehaviour
             Diaper = GetComponentInChildren<DiaperBehaviour>().gameObject;
         }
 
-        if (alwaysDiaperOn)
+        GameManager.Instance.Player.HitCount++;
+
+        if (IsHit)
         {
             return;
         }
 
-        IsHit = !IsHit;
-
-        if (IsHit)
+        switch (TypeOfBird)
         {
-            Diaper.SetActive(true);
-            GameManager.Instance.Player.Score++;
-            GameManager.Instance.Indicator.RemoveIndicator(transform);
+            case BirdType.Normal:
+                IsHit = true;
+                SpawnManager.Instance.CurrentBirdCount--;
+                Diaper.SetActive(true);
+                GameManager.Instance.Player.Score++;
+                GameManager.Instance.Indicator.RemoveIndicator(transform);
+                GameManager.Instance.Player.ScoreFlash();
+                //hit effect
+                Instantiate(SmokeParticles, transform.position, Quaternion.identity);
+                break;
+            case BirdType.Fat:
+                if (BigBirdLives > 0)
+                {
+                    //Remove one life
+                    BigBirdLives--;
+                }
+                else //big bird has a diaper on
+                {
+                    if (!IsHit)
+                    {
+                        IsHit = true;
+                        SpawnManager.Instance.CurrentBirdCount--;
+                        Diaper.SetActive(true);
+                        GameManager.Instance.Player.Score += 3;
+                        GameManager.Instance.Indicator.RemoveIndicator(transform); //incicator andere kleur!
 
-            //hit effect
-            Instantiate(SmokeParticles, transform.position, Quaternion.identity);
+                        GameManager.Instance.Player.ScoreFlash();
+
+                        //hit effect
+                        Instantiate(SmokeParticles, transform.position, Quaternion.identity); // ander particle effect!
+                    }
+                }
+                break;
+            case BirdType.Fast:
+                IsHit = true;
+
+                Diaper.SetActive(true);
+                GameManager.Instance.Player.Score += 10;
+                GameManager.Instance.Indicator.RemoveIndicator(transform); //incicator andere kleur!
+
+                //hit effect
+                Instantiate(SmokeParticles, transform.position, Quaternion.identity); // ander particle effect!
+                break;
+            default:
+                Debug.LogError("Enum error!");
+                break;
         }
-        //else
-        //{
-        //    Diaper.SetActive(false);
-        //    GameManager.Instance.Player.Score -= 2;
-        //    GameManager.Instance.SendTextMessage("Schiet niet op de vogels die al een luier om hebben!", 2.5f, Vector2.zero);
-        //    GameManager.Instance.Indicator.AddIndicator(transform, 0);
 
-        //    //no hit effect
-        //    Instantiate(DiaperDestroy, transform.position, Quaternion.identity);
+    }
 
+    private void SetGoalRotation(Vector3 _goal)
+    {
+       // Vector3 _dir = _goal - transform.position;
+        //float _angle = Mathf.Atan2(_dir.y, _dir.x) * Mathf.Rad2Deg;
 
-        //}
-
-        //Do something different when in a tutorial
-        if (SpawnManager.Instance.TutorialActive)
-        {
-            Debug.Log("Tut bord hit");
-            DustyManager.Instance.Messages.Add(new DustyTextFile("Pats!", 6, AudioSampleManager.Instance.DustyText[11]));
-
-            SpawnManager.Instance.TutorialBirdsShot++;
-
-            Destroy(gameObject, 4);
-        }
+        //goalRotation = Quaternion.AngleAxis(_angle - 45 + 180, Vector3.up);
     }
 
     private void Update()
     {
-        if (!GameManager.Instance.GameStarted)
+        if (!GameManager.Instance.GameStarted) //Needs rework!
         {
             Destroy(gameObject);
         }
+
+        BirdMovement();
+
+        // plays flying/flapping sound of bird
+        BirdFlapSound();
+        //Draw path lines
+        DrawDebug();
+    }
+
+    private void BirdMovement()
+    {
         if (MovingBird)
         {
-
-            if (transform.position == PathNodes[goalNode].position)
+            if (Vector3.Distance(transform.position, Path.Nodes[goalNode].GetPosition) < 0.1f)
             {
-                   
-                if (goalNode < PathNodes.Count - 1)
+                if (goalNode < Path.Nodes.Count - 1)
                 {
                     goalNode++;
-                    Debug.Log("INCREASE value");
                 }
             }
             else
             {
-                transform.position = Vector3.MoveTowards(transform.position, PathNodes[goalNode].position, Speed);
+                transform.position = Vector3.MoveTowards(transform.position, Path.Nodes[goalNode].GetPosition, Speed * Time.deltaTime);
+                //SetGoalRotation(Path.Nodes[goalNode].GetPosition);
             }
+
+            // transform.rotation = Quaternion.Slerp(transform.rotation, goalRotation, Time.deltaTime * 5);
 
             //If end point is reached...
             if (Vector3.Distance(transform.position, endPoint) < 1)
@@ -258,6 +318,7 @@ public class TargetBehaviour : MonoBehaviour
                 SpawnManager.Instance.CreateParticleEffect(IsHit, transform.position);
                 if (!IsHit)
                 {
+                    //Get minus points when a birds get trough
                     GameManager.Instance.Player.Score -= 1;
                 }
                 Destroy(gameObject);
@@ -268,6 +329,7 @@ public class TargetBehaviour : MonoBehaviour
                 SpawnManager.Instance.CreateParticleEffect(IsHit, transform.position);
                 if (!IsHit)
                 {
+                    //Get minus points when a birds get trough
                     GameManager.Instance.Player.Score -= 1;
                 }
 
@@ -280,10 +342,6 @@ public class TargetBehaviour : MonoBehaviour
             //Stay in front of player
             transform.position = GameManager.Instance.Player.transform.position + (playerOffset / 1.5f);
         }
-
-        // plays flying/flapping sound of bird
-        BirdFlapSound();
-
     }
 
     private bool CheckIfBirdBehindPlayer()
@@ -321,25 +379,13 @@ public class TargetBehaviour : MonoBehaviour
         BirdSoundTimer = Random.Range(3f, 6f);
     }
 
-    public void SetAlwaysDiaperOn()
-    {
-        if (!Diaper)
-        {
-            Diaper = GetComponentInChildren<DiaperBehaviour>().gameObject;
-        }
-
-        Diaper.SetActive(true);
-        GameManager.Instance.Player.Score++;
-        GameManager.Instance.Indicator.RemoveIndicator(transform);
-        alwaysDiaperOn = true;
-    }
-
     /// <summary>
     /// Set the beek of the bird to a certain metrial
     /// </summary>
     /// <param material of the bird="_mat"></param>
     private void SetBeekMaterial(Material _mat)
     {
+        return;
         foreach (var item in Beek)
         {
             item.GetComponent<Renderer>().material = _mat;
@@ -352,7 +398,19 @@ public class TargetBehaviour : MonoBehaviour
     /// <param given material="_mat"></param>
     private void SetBodyMaterial(Material _mat)
     {
+        return; 
         Body.GetComponent<Renderer>().material = _mat;
+    }
+
+    private void DrawDebug()
+    {
+        for (int i = 0; i < Path.Nodes.Count; i++)
+        {
+            if (i < Path.Nodes.Count - 1)
+            {
+                Debug.DrawLine(Path.Nodes[i].GetPosition, Path.Nodes[i + 1].GetPosition, Color.cyan);
+            }
+        }
     }
 
 }
