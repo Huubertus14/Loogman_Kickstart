@@ -62,14 +62,14 @@ namespace VrFox
                 {
                     if (GameManager.Instance.CurrentRound != Round.Round_1)
                     {
-                        if (Random.Range(0, 4) == 2)//dice roll which bird is to spawn
+                        if (Random.Range(0, 10) == 2)//dice roll which bird is to spawn
                         {
-                            SpawnBird(BirdPrefab);//spawn normal bird
+                            SpawnBird(FatBirdPrefab);//spawn normal bird
                             spawnTimer = 0;
                         }
                         else
                         {
-                            SpawnBird(FatBirdPrefab);//spawn fat bird
+                            SpawnBird(BirdPrefab);//spawn fat bird
                             spawnTimer = 0;
                         }
                     }

@@ -226,7 +226,7 @@ public class TargetBehaviour : MonoBehaviour
                 Diaper.SetActive(true);
                 GameManager.Instance.Player.Score++;
                 GameManager.Instance.Indicator.RemoveIndicator(transform);
-
+                GameManager.Instance.Player.ScoreFlash();
                 //hit effect
                 Instantiate(SmokeParticles, transform.position, Quaternion.identity);
                 break;
@@ -245,6 +245,8 @@ public class TargetBehaviour : MonoBehaviour
                         Diaper.SetActive(true);
                         GameManager.Instance.Player.Score += 3;
                         GameManager.Instance.Indicator.RemoveIndicator(transform); //incicator andere kleur!
+
+                        GameManager.Instance.Player.ScoreFlash();
 
                         //hit effect
                         Instantiate(SmokeParticles, transform.position, Quaternion.identity); // ander particle effect!

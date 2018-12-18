@@ -42,6 +42,9 @@ namespace VrFox
 
             AccuracyText.text = "100%";
 
+            ShootCount = 0;
+            HitCount = 0;
+
             IsSynced = false;
 
             for (int i = 0; i < lastPositions.Length; i++)
@@ -153,10 +156,6 @@ namespace VrFox
 
         private void SetAccuracyText()
         {
-            if (ShootCount < 1)
-            {
-                return;
-            }
             float _accuracy = (HitCount / ShootCount) * 100;
             AccuracyText.text = _accuracy.ToString() + "%" + " Accuracy";
         }        

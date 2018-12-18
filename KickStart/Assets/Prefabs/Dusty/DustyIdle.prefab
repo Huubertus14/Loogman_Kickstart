@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 114565260430614918}
   - component: {fileID: 114005822530733718}
   m_Layer: 0
-  m_Name: BillBoardText (1)
+  m_Name: BillBoardText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -876,7 +876,7 @@ GameObject:
   - component: {fileID: 114578555376701908}
   m_Layer: 0
   m_Name: DustyIdle
-  m_TagString: Untagged
+  m_TagString: Dusty
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1544,7 +1544,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1720868083636972}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.9727962, z: -0, w: -0.23166293}
   m_LocalPosition: {x: -1.4878151, y: 1.1480634, z: 5.6513195}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
@@ -1554,7 +1554,7 @@ Transform:
   - {fileID: 4407434409410856}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 206.79, z: 0}
 --- !u!4 &4506587982709644
 Transform:
   m_ObjectHideFlags: 1
@@ -2014,14 +2014,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1223988476121672}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.01, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: 0.20961937, z: -0, w: 0.9777831}
+  m_LocalPosition: {x: -0.017545879, y: 0, z: 0.0024337769}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4974929580012608}
   m_Father: {fileID: 4495747727781994}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -695.8, z: 0}
 --- !u!4 &4911503946307622
 Transform:
   m_ObjectHideFlags: 1
