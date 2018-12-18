@@ -13,14 +13,7 @@ namespace EnumStates
         GameEnd,
         Waiting
     }
-
-    public enum DustyStates
-    {
-        Idle,
-        Pointing,
-        Talking
-    }
-
+    
     public enum Difficulty
     {
         Noob,
@@ -94,9 +87,13 @@ namespace VrFox
         public float PreWashDuration;
         public float CarWashDuration;
 
-        public float Round_1Duration;
-        public float Round_2Duration;
-        public float Round_3Duration;
+        private float introDuration;
+        private float round_1Duration;
+        private float round_2Duration;
+        private float round_3Duration;
+
+        private float currentTimer;
+
 
         private GameObject playerEndScoreObject;
         private GameObject hoverObject;
@@ -128,13 +125,16 @@ namespace VrFox
                     Playing();
                     break;
                 case GameStates.Instructions:
-                    //BeginTimer += Time.deltaTime;
-                    //TutorialFeedbackText.text = "";
-                    //if (BeginTimer > 3)
-                    //{
-                    //    SetAllInstructionsActive(true);
-                    //    Instructions();
-                    //}
+                    currentTimer += Time.deltaTime;
+                    if (currentTimer > introDuration)
+                    {
+                        //Intro done, start round one
+                        currentTimer = 0;
+                        StartRound_1();
+
+                        //Stop the current running coroutine
+                        StopCoroutine(StartTutorial());
+                    }
                     break;
                 case GameStates.GameEnd:
                     break;
@@ -152,7 +152,46 @@ namespace VrFox
         private void Playing()
         {
             //Game is started
-           
+            switch (CurrentRound) //DO logic depending on current round
+            {
+                case Round.Intro:
+                    Debug.LogError("Game is in play state");
+                    break;
+                case Round.Round_1:
+                    if (currentTimer > round_1Duration)
+                    {
+                        SendTextMessage("Drive to the next carwash!", 4f, Vector2.zero);
+
+                        //Wait unitl the player start the game again
+                        SetCarWashPause();
+
+                        currentTimer = 0;
+                    }
+                    break;
+                case Round.Round_2:
+                    if (currentTimer > round_2Duration)
+                    {
+                        SendTextMessage("Starting Round 3", 4f, Vector2.zero);
+                        CurrentRound = Round.Round_3;
+                        currentTimer = 0;
+                    }
+                    break;
+                case Round.Round_3:
+                    if (currentTimer > round_3Duration)
+                    {
+                        SendTextMessage("Game Over", 4f, new Vector2(0, 40));
+                        CurrentRound = Round.Score;
+                        currentTimer = 0;
+                        SetGameOver();
+                    }
+                    break;
+                case Round.Score:
+                    Debug.LogError("Game is in play state");
+                    break;
+                default:
+                    break;
+            }
+            currentTimer += Time.deltaTime;
         }
 
         private IEnumerator StartTutorial()
@@ -167,11 +206,9 @@ namespace VrFox
 
 
 
-            CrossHairEffect.SetActive(true, 1.4f);
             yield return new WaitForSeconds(0.2f);
-
-            GameState = GameStates.Playing;
-            CurrentRound = Round.Round_1;
+            StartRound_1();
+            
             yield return null;
         }
 
@@ -373,9 +410,10 @@ namespace VrFox
             GameStarted = false;
 
             //Set the duration of all the rounds
-            Round_1Duration = PreWashDuration * 0.4f;
-            Round_2Duration = CarWashDuration* 0.45f;
-            Round_3Duration = CarWashDuration * 0.45f;
+            introDuration = PreWashDuration * 0.6f;
+            round_1Duration = PreWashDuration * 0.4f;
+            round_2Duration = CarWashDuration* 0.45f;
+            round_3Duration = CarWashDuration * 0.45f;
 
             //rempve arrows
             BoundaryIndicators.SetActive(false);
@@ -433,10 +471,11 @@ namespace VrFox
             SetScoreText();
 
             StartButton.gameObject.SetActive(false);
-            SpawnManager.Instance.ResetTutorial();
 
             GameState = GameStates.Instructions;
             CurrentRound = Round.Intro;
+
+            StartCoroutine(StartTutorial());
 
             //remove all instructions
             SetAllInstructionsActive(false);
@@ -449,6 +488,49 @@ namespace VrFox
         {
             ScoreText.text = "Score: " + Player.Score.ToString();
             ScoreFloorText.text = "Score: " + Player.Score.ToString();
+        }
+
+        /// <summary>
+        /// Called when the prewash is done and the player needs to drive to the second carwash
+        /// </summary>
+        private void SetCarWashPause()
+        {
+            GameState = GameStates.Waiting;
+
+            //enable start button
+            StartButton.gameObject.SetActive(true);
+
+            //Remove all birds
+            SpawnManager.Instance.ClearAllBirds();
+        }
+
+        /// <summary>
+        /// Called to start the first round afther the tutorial
+        /// </summary>
+        private void StartRound_1()
+        {
+
+            CrossHairEffect.SetActive(true, 1.4f);
+            GameState = GameStates.Playing;
+            CurrentRound = Round.Round_1;
+            SendTextMessage("Starting Round 1", 4f, Vector2.zero);
+            Debug.Log("Sart round 01");
+        }
+
+        /// <summary>
+        /// Called when the second round needs to start. The player must drive to the next carwash
+        /// </summary>
+        public void StartRound_2()
+        {
+            //dissable ground button
+            StartButton.gameObject.SetActive(false);
+
+            CurrentRound = Round.Round_2;
+            GameState = GameStates.Playing;
+
+            currentTimer = 0;
+
+            SendTextMessage("Starting Round 2", 4f, Vector2.zero);
         }
 
         /// <summary>

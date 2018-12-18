@@ -52,7 +52,10 @@ public class TargetBehaviour : MonoBehaviour
         BirdSoundTimer = Random.Range(3f, 6f);
         BirdSoundCounter = 0;
         AudioManager.Instance.PlayAudio(AudioSampleManager.Instance.getBirdSpawnSounds(), 1, gameObject);
+
+        
         goalNode = 1;
+
         if (!Diaper)
         {
             Diaper = GetComponentInChildren<DiaperBehaviour>().gameObject;
@@ -61,9 +64,9 @@ public class TargetBehaviour : MonoBehaviour
         logoOnDiaper = GetComponentsInChildren<MeshRenderer>();
         for (int i = 1; i < logoOnDiaper.Length; i++)
         {
-            logoOnDiaper[i].material = GameManager.Instance.Blue;
+            logoOnDiaper[i].material = GameManager.Instance.White;
         }
-        logoOnDiaper[0].material = GameManager.Instance.White;
+        logoOnDiaper[0].material = GameManager.Instance.Blue;
 
         //Set initial game values
         GetEndPoint();
@@ -74,45 +77,47 @@ public class TargetBehaviour : MonoBehaviour
         {
             case BirdType.Normal:
                 Speed = Random.Range(Speed * 0.7f, Speed / 0.7f);
-
-                //Give the birds a swirving or bouning effect
-                if (Random.Range(0, 3) != 2)
+                if (GameManager.Instance.CurrentRound != Round.Round_1) // first round the bird go in a streigt path
                 {
-                    if (Random.Range(0, 3) == 2)
+                    //Give the birds a swirving or bouning effect
+                    if (Random.Range(0, 3) != 2)
                     {
-                        Path.Bouncing();
+                        if (Random.Range(0, 3) == 2)
+                        {
+                            Path.Bouncing();
+                        }
+                        else
+                        {
+                            Path.Swerving();
+                        }
                     }
                     else
                     {
-                        Path.Swerving();
+                        //Fuck up path of bird?
                     }
                 }
-                else
-                {
-                    //Fuck up path of bird
-                }
-
-                //Give birds speed multipliers
-                switch (GameManager.Instance.GetDiffictuly)
-                {
-                    case Difficulty.Noob:
-                        Speed *= 0.8f;
-                        break;
-                    case Difficulty.Beginner:
-                        break;
-                    case Difficulty.Normal:
-                        Speed *= 1.1f;
-                        break;
-                    case Difficulty.Hard:
-                        Speed *= 1.3f;
-                        break;
-                    default:
-                        Debug.LogError("Code should not be reached!");
-                        break;
-                }
+                    //Give birds speed multipliers
+                    switch (GameManager.Instance.GetDiffictuly)
+                    {
+                        case Difficulty.Noob:
+                            Speed *= 0.8f;
+                            break;
+                        case Difficulty.Beginner:
+                            break;
+                        case Difficulty.Normal:
+                            Speed *= 1.1f;
+                            break;
+                        case Difficulty.Hard:
+                            Speed *= 1.3f;
+                            break;
+                        default:
+                            Debug.LogError("Code should not be reached!");
+                            break;
+                    }
+                
                 break;
             case BirdType.Fat:
-                Path.Bouncing();
+                Path.Bouncing(); //fat birds always are bouncing
                 break;
             case BirdType.Fast:
 
@@ -206,6 +211,8 @@ public class TargetBehaviour : MonoBehaviour
             Diaper = GetComponentInChildren<DiaperBehaviour>().gameObject;
         }
 
+        GameManager.Instance.Player.HitCount++;
+
         if (IsHit)
         {
             return;
@@ -215,7 +222,7 @@ public class TargetBehaviour : MonoBehaviour
         {
             case BirdType.Normal:
                 IsHit = true;
-
+                SpawnManager.Instance.CurrentBirdCount--;
                 Diaper.SetActive(true);
                 GameManager.Instance.Player.Score++;
                 GameManager.Instance.Indicator.RemoveIndicator(transform);
@@ -231,14 +238,17 @@ public class TargetBehaviour : MonoBehaviour
                 }
                 else //big bird has a diaper on
                 {
-                    IsHit = true;
+                    if (!IsHit)
+                    {
+                        IsHit = true;
+                        SpawnManager.Instance.CurrentBirdCount--;
+                        Diaper.SetActive(true);
+                        GameManager.Instance.Player.Score += 3;
+                        GameManager.Instance.Indicator.RemoveIndicator(transform); //incicator andere kleur!
 
-                    Diaper.SetActive(true);
-                    GameManager.Instance.Player.Score += 3;
-                    GameManager.Instance.Indicator.RemoveIndicator(transform); //incicator andere kleur!
-
-                    //hit effect
-                    Instantiate(SmokeParticles, transform.position, Quaternion.identity); // ander particle effect!
+                        //hit effect
+                        Instantiate(SmokeParticles, transform.position, Quaternion.identity); // ander particle effect!
+                    }
                 }
                 break;
             case BirdType.Fast:
@@ -373,6 +383,7 @@ public class TargetBehaviour : MonoBehaviour
     /// <param material of the bird="_mat"></param>
     private void SetBeekMaterial(Material _mat)
     {
+        return;
         foreach (var item in Beek)
         {
             item.GetComponent<Renderer>().material = _mat;
@@ -385,6 +396,7 @@ public class TargetBehaviour : MonoBehaviour
     /// <param given material="_mat"></param>
     private void SetBodyMaterial(Material _mat)
     {
+        return; 
         Body.GetComponent<Renderer>().material = _mat;
     }
 

@@ -1,16 +1,17 @@
-﻿using UnityEngine;
+﻿using EnumStates;
+using UnityEngine;
 using UnityEngine.XR.WSA.Input;
-using EnumStates;
 using VrFox;
 
-public class RecognizerManager : MonoBehaviour {
-    
+public class RecognizerManager : MonoBehaviour
+{
+
     public static RecognizerManager Instance;
 
     private GestureRecognizer recognizer;
-    
+
     private float dubbeltap;
-    
+
     private void Awake()
     {
         Instance = this;
@@ -54,7 +55,14 @@ public class RecognizerManager : MonoBehaviour {
             case GameStates.Waiting:
                 if (GameManager.Instance.GetHoverObject.GetComponent<StartButtonBehaviour>())
                 {
-                    GameManager.Instance.StartGame();
+                    if (GameManager.Instance.CurrentRound == Round.Intro)
+                    {
+                        GameManager.Instance.StartGame();
+                    }
+                    else if (GameManager.Instance.CurrentRound == Round.Round_1)
+                    {
+                        GameManager.Instance.StartRound_2();
+                    }
                 }
 
                 break;
@@ -62,7 +70,7 @@ public class RecognizerManager : MonoBehaviour {
                 break;
         }
     }
-    
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
@@ -86,6 +94,6 @@ public class RecognizerManager : MonoBehaviour {
         dubbeltap += Time.deltaTime;
     }
 
-    
+
 
 }

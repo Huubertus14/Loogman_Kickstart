@@ -38,13 +38,7 @@ namespace VrFox
         [Space]
         public BirdMaterialPreset[] BirdMaterials;
 
-        #region TutorialValues
-        [HideInInspector]
-        public bool TutorialActive;
-        [HideInInspector]
-        public int TutorialBirdsShot;
-        
-        #endregion
+        public List<GameObject> Birds = new List<GameObject>();
 
         private void Update()
         {
@@ -52,47 +46,85 @@ namespace VrFox
             {
                 return;
             }
-            if (!TutorialActive)
+            if (GameManager.Instance.GameState == GameStates.Playing)
             {
                 GamePlay();
             }
         }
-
-        IEnumerator Tutorial()
-        {
-            TutorialActive = false;
-            yield return null;
-        }
+        
 
         private void GamePlay()
         {
             spawnTimer += Time.deltaTime;
             if (spawnTimer > SpawnInterval)
             {
-                spawnTimer = 0;
-
                 if (CurrentBirdCount <= MaxBirdCount)
                 {
-                    SpawnBird();
+                    if (GameManager.Instance.CurrentRound != Round.Round_1)
+                    {
+                        if (Random.Range(0, 4) == 2)//dice roll which bird is to spawn
+                        {
+                            SpawnBird(BirdPrefab);//spawn normal bird
+                            spawnTimer = 0;
+                        }
+                        else
+                        {
+                            SpawnBird(FatBirdPrefab);//spawn fat bird
+                            spawnTimer = 0;
+                        }
+                    }
+                    else //if round 1 spawn normal birds
+                    {
+                        SpawnBird(BirdPrefab);//spawn normal bird
+                        spawnTimer = 0;
+                    }
                 }
+            }
+
+            if (GameManager.Instance.CurrentRound == Round.Round_3)
+            {
+                //Do the fast bird loop
+            }
+        }
+        
+        /// <summary>
+        /// Called to check the round and difficutly of the game
+        /// </summary>
+        private void DetermineDiffictuly()
+        {
+            switch (GameManager.Instance.CurrentRound)
+            {
+                case Round.Intro:
+                    //No difficutly
+                    break;
+                case Round.Round_1:
+                    SpawnInterval = Random.Range(3.5f, 5.5f);
+                    MaxBirdCount = 5;
+                    break;
+                case Round.Round_2:
+                    SpawnInterval = Random.Range(1.5f, 2.5f);
+                    MaxBirdCount = 9;
+                    break;
+                case Round.Round_3:
+                    SpawnInterval = Random.Range(0.6f, 1f);
+                    MaxBirdCount = 21;
+                    break;
+                case Round.Score:
+                    //No difficutly
+                    break;
+                default:
+                    //No difficutly
+                    break;
             }
         }
 
-        public void ResetTutorial()
-        {
-            TutorialActive = true;
-            TutorialBirdsShot = 0;
-
-            StartCoroutine(Tutorial());
-        }
-
-        public void SpawnBird()
+        public void SpawnBird(GameObject _prefab)
         {
             CurrentBirdCount++;
 
             //Spawn bird
-            GameObject _bird = Instantiate(BirdPrefab, transform.position, Quaternion.identity);
-
+            GameObject _bird = Instantiate(_prefab, transform.position, Quaternion.identity);
+            Birds.Add(_bird);
             //Get the y value of the bird
             float _spawnY = Camera.main.transform.position.y + Random.Range(-0.2f, 0.2f);
 
@@ -102,26 +134,8 @@ namespace VrFox
             
             _bird.transform.position = _direction * _distance;
             _bird.transform.position = new Vector3(_bird.transform.position.x, _spawnY, _bird.transform.position.z);
-            
 
-            //Set new spawn interval
-            switch (GameManager.Instance.GetDiffictuly)
-            {
-                case Difficulty.Noob:
-                    SpawnInterval = Random.Range(3.5f, 5.5f);
-                    break;
-                case Difficulty.Beginner:
-                    SpawnInterval = Random.Range(2.9f, 4.5f);
-                    break;
-                case Difficulty.Normal:
-                    SpawnInterval = Random.Range(1.7f, 3.8f);
-                    break;
-                case Difficulty.Hard:
-                    SpawnInterval = Random.Range(0.8f, 2.6f);
-                    break;
-                default:
-                    break;
-            }
+            DetermineDiffictuly();
         }
 
         public void SpawnBirdInFrontOfPlayer()
@@ -144,12 +158,29 @@ namespace VrFox
             
         }
 
+        public void ClearAllBirds()
+        {
+            foreach (var _bird in Birds)
+            {
+                if (_bird)
+                {
+                    Destroy(_bird);
+                }
+                else
+                {
+                    Debug.Log("Bird allready gone");
+                }
+            }
+            Birds.Clear();
+            Debug.Log("All birds gone");
+        }
+
         public void CreateParticleEffect(bool _IsHit, Vector3 _birdPosition)
         {
             //Check if killed or missed!
             //Depending on type of death add effect
 
-            CurrentBirdCount--;
+           // CurrentBirdCount--;
             if (_IsHit)
             {
                 if (DeathParticle)

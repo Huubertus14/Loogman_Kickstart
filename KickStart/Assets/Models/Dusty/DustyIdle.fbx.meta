@@ -1,0 +1,337 @@
+fileFormatVersion: 2
+guid: dbc8dc9f80bd443f79f15a006a95fea1
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: arm_L_C
+    100002: arm_L_J
+    100004: arm_R_C
+    100006: arm_R_J
+    100008: armJointL
+    100010: armJointR
+    100012: armL
+    100014: armProtection_L
+    100016: armProtection_R
+    100018: armR
+    100020: armTube_L
+    100022: armTube_R
+    100024: body
+    100026: body 1
+    100028: body_J
+    100030: bodyBend_C
+    100032: bottomNeck_J
+    100034: camera
+    100036: camera 1
+    100038: cameraCase
+    100040: Dusty
+    100042: Dusty_C
+    100044: //RootNode
+    100046: ear
+    100048: ear 1
+    100050: earCase
+    100052: eye_L
+    100054: eye_R
+    100056: eyes
+    100058: hand_L
+    100060: hand_L_J
+    100062: hand_R
+    100064: hand_R_J
+    100066: handEnd_L_J
+    100068: handEnd_R_J
+    100070: handJoint_L
+    100072: handJoint_R
+    100074: head
+    100076: head 1
+    100078: head_J
+    100080: headRotate_C
+    100082: headTop
+    100084: joint_R
+    100086: jointL
+    100088: lowerArm_L
+    100090: lowerArm_R
+    100092: motor
+    100094: motor_J
+    100096: motorTube
+    100098: neck
+    100100: neck_J
+    100102: neckBend_C
+    100104: neckBody
+    100106: neckHead
+    100108: neckTube
+    100110: neckTube_J
+    100112: shoulder_L_C
+    100114: shoulder_R_C
+    100116: shoulderProtectionL
+    100118: shoulderProtectionR
+    100120: shoulderX_L_J
+    100122: shoulderX_R_J
+    100124: shoulderZ_L_J
+    100126: shoulderZ_R_J
+    100128: skeleton_J
+    100130: topHead_J
+    100132: transform5
+    100134: tube_J
+    100136: wrist_L_C
+    100138: wrist_L_J
+    100140: wrist_R_C
+    100142: wrist_R_J
+    400000: arm_L_C
+    400002: arm_L_J
+    400004: arm_R_C
+    400006: arm_R_J
+    400008: armJointL
+    400010: armJointR
+    400012: armL
+    400014: armProtection_L
+    400016: armProtection_R
+    400018: armR
+    400020: armTube_L
+    400022: armTube_R
+    400024: body
+    400026: body 1
+    400028: body_J
+    400030: bodyBend_C
+    400032: bottomNeck_J
+    400034: camera
+    400036: camera 1
+    400038: cameraCase
+    400040: Dusty
+    400042: Dusty_C
+    400044: //RootNode
+    400046: ear
+    400048: ear 1
+    400050: earCase
+    400052: eye_L
+    400054: eye_R
+    400056: eyes
+    400058: hand_L
+    400060: hand_L_J
+    400062: hand_R
+    400064: hand_R_J
+    400066: handEnd_L_J
+    400068: handEnd_R_J
+    400070: handJoint_L
+    400072: handJoint_R
+    400074: head
+    400076: head 1
+    400078: head_J
+    400080: headRotate_C
+    400082: headTop
+    400084: joint_R
+    400086: jointL
+    400088: lowerArm_L
+    400090: lowerArm_R
+    400092: motor
+    400094: motor_J
+    400096: motorTube
+    400098: neck
+    400100: neck_J
+    400102: neckBend_C
+    400104: neckBody
+    400106: neckHead
+    400108: neckTube
+    400110: neckTube_J
+    400112: shoulder_L_C
+    400114: shoulder_R_C
+    400116: shoulderProtectionL
+    400118: shoulderProtectionR
+    400120: shoulderX_L_J
+    400122: shoulderX_R_J
+    400124: shoulderZ_L_J
+    400126: shoulderZ_R_J
+    400128: skeleton_J
+    400130: topHead_J
+    400132: transform5
+    400134: tube_J
+    400136: wrist_L_C
+    400138: wrist_L_J
+    400140: wrist_R_C
+    400142: wrist_R_J
+    2100000: lambert7
+    2100002: lambert23
+    2100004: lambert24
+    2100006: lambert19
+    2100008: lambert25
+    2100010: lambert20
+    2100012: DustyArms_lambert4
+    2100014: lambert27
+    2100016: lambert26
+    2100018: lambert32
+    2100020: lambert29
+    2100022: lambert28
+    2100024: lambert15
+    2100026: lambert1
+    2100028: lambert12
+    2100030: lambert17
+    2100032: lambert34
+    2300000: eye_L
+    2300002: eye_R
+    3300000: eye_L
+    3300002: eye_R
+    4300000: camera
+    4300002: cameraCase
+    4300004: earCase
+    4300006: ear
+    4300008: headTop
+    4300010: head
+    4300012: neckHead
+    4300014: neckTube
+    4300016: neckBody
+    4300018: shoulderProtectionL
+    4300020: armJointL
+    4300022: jointL
+    4300024: hand_L
+    4300026: handJoint_L
+    4300028: armProtection_L
+    4300030: armTube_L
+    4300032: shoulderProtectionR
+    4300034: armJointR
+    4300036: joint_R
+    4300038: handJoint_R
+    4300040: hand_R
+    4300042: armTube_R
+    4300044: armProtection_R
+    4300046: motorTube
+    4300048: body
+    4300050: motor
+    4300052: eye_R
+    4300054: eye_L
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: armJointL
+    13700002: armJointR
+    13700004: armProtection_L
+    13700006: armProtection_R
+    13700008: armTube_L
+    13700010: armTube_R
+    13700012: body 1
+    13700014: camera 1
+    13700016: cameraCase
+    13700018: ear 1
+    13700020: earCase
+    13700022: hand_L
+    13700024: hand_R
+    13700026: handJoint_L
+    13700028: handJoint_R
+    13700030: head 1
+    13700032: headTop
+    13700034: joint_R
+    13700036: jointL
+    13700038: motor
+    13700040: motorTube
+    13700042: neckBody
+    13700044: neckHead
+    13700046: neckTube
+    13700048: shoulderProtectionL
+    13700050: shoulderProtectionR
+    2186277476908879412: ImportLogs
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 60
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

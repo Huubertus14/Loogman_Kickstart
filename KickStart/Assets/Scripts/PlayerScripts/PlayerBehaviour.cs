@@ -1,5 +1,6 @@
 ﻿using EnumStates;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace VrFox
 {
@@ -15,6 +16,7 @@ namespace VrFox
         public TextFlashing GarbageTextFlash;
         public UIWiggle WaterUIWiggle;
         public GameObject HighScoreObject;
+        public Text AccuracyText;
 
         [Header("Values:")]
         public string PlayerName;
@@ -22,6 +24,9 @@ namespace VrFox
         public float TimeToRecharge;
         public Difficulty PlayerLevel;
         public bool InPrewash;
+
+        public int ShootCount;
+        public int HitCount;
 
         [Space]
         public bool IsSynced;
@@ -34,6 +39,8 @@ namespace VrFox
             PlayerName = "Loogman Devop";
             PlayerLevel = Difficulty.Noob;
             InPrewash = true;
+
+            AccuracyText.text = "100%";
 
             IsSynced = false;
 
@@ -50,6 +57,7 @@ namespace VrFox
             AudioManager.Instance.PlayAudio(AudioSampleManager.Instance.GetShootSound(), 1);
             GameObject _bullet = Instantiate(BulletPrefab, transform.position, Quaternion.identity);
             _bullet.GetComponent<BulletBehaviour>().ShootBullet();
+            ShootCount++;
 
             if (Score < 10)
             {
@@ -92,6 +100,7 @@ namespace VrFox
         private void Update()
         {
             PlayerDebug();
+            SetAccuracyText();
             //Increase Water Value
             if (!GameManager.Instance.GameStarted)
             {
@@ -141,6 +150,16 @@ namespace VrFox
                 PlayerLevel = Difficulty.Hard;
             }
         }
+
+        private void SetAccuracyText()
+        {
+            if (ShootCount < 1)
+            {
+                return;
+            }
+            float _accuracy = (HitCount / ShootCount) * 100;
+            AccuracyText.text = _accuracy.ToString() + "%" + " Accuracy";
+        }        
 
         private void PlayerDebug()
         {

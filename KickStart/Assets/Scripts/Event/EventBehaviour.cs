@@ -68,7 +68,6 @@ public class EventBehaviour : MonoBehaviour
             {
                 intervalIndex++;
                 spawnTimer = 0;
-                SpawnManager.Instance.SpawnBird();
                 Debug.Log("Spawn");
             }
         }

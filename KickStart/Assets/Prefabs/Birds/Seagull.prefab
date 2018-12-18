@@ -5253,8 +5253,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TypeOfBird: 0
-  Speed: 1
-  birdScale: 0.2
+  Speed: 0.9
+  birdScale: 0.4
   BigBirdLives: 0
   MovingBird: 1
   Body: {fileID: 1943836031018648}
