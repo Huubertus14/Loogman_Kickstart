@@ -37,6 +37,7 @@ public class TargetBehaviour : MonoBehaviour
     public GameObject DeathParticle;
     public GameObject SmokeParticles;
     public GameObject BirdHitEffect;
+    public GameObject BigBirdHitEffect;
 
     public BirdPath Path;
     public int goalNode;
@@ -78,7 +79,7 @@ public class TargetBehaviour : MonoBehaviour
                 Speed = Random.Range(Speed * 0.7f, Speed / 0.7f);
                 if (GameManager.Instance.CurrentRound != Round.Round_1) // first round the bird go in a streigt path
                 {
-                    //Give the birds a swirving or bouning effect
+                    //Give the birds a swirving or bouncing effect
                     if (Random.Range(0, 3) != 2)
                     {
                         if (Random.Range(0, 3) == 2)
@@ -203,7 +204,7 @@ public class TargetBehaviour : MonoBehaviour
     /// <summary>
     /// Called when the target is hit
     /// </summary>
-    public void Hit()
+    public void Hit(Vector3 _hitPosition)
     {
         if (!Diaper)
         {
@@ -216,7 +217,7 @@ public class TargetBehaviour : MonoBehaviour
         {
             return;
         }
-
+        Instantiate(BigBirdHitEffect, _hitPosition, Quaternion.identity);
         switch (TypeOfBird)
         {
             case BirdType.Normal:
@@ -226,14 +227,19 @@ public class TargetBehaviour : MonoBehaviour
                 GameManager.Instance.Player.Score++;
                 GameManager.Instance.Indicator.RemoveIndicator(transform);
                 GameManager.Instance.Player.ScoreFlash();
+
+                AudioManager.Instance.PlayAudio(AudioSampleManager.Instance.GetExplosionSound(), 1);
                 //hit effect
                 Instantiate(SmokeParticles, transform.position, Quaternion.identity);
                 break;
+
             case BirdType.Fat:
                 if (BigBirdLives > 0)
                 {
                     //Remove one life
                     BigBirdLives--;
+                    //big bird first hit feedback
+                   
                 }
                 else //big bird has a diaper on
                 {
@@ -245,6 +251,7 @@ public class TargetBehaviour : MonoBehaviour
                         GameManager.Instance.Player.Score += 3;
                         GameManager.Instance.Indicator.RemoveIndicator(transform); //incicator andere kleur!
 
+                        AudioManager.Instance.PlayAudio(AudioSampleManager.Instance.GetExplosionSound(), 1);
                         GameManager.Instance.Player.ScoreFlash();
 
                         //hit effect
@@ -259,6 +266,7 @@ public class TargetBehaviour : MonoBehaviour
                 GameManager.Instance.Player.Score += 10;
                 GameManager.Instance.Indicator.RemoveIndicator(transform); //incicator andere kleur!
 
+                AudioManager.Instance.PlayAudio(AudioSampleManager.Instance.GetExplosionSound(), 1);
                 //hit effect
                 Instantiate(SmokeParticles, transform.position, Quaternion.identity); // ander particle effect!
                 break;
