@@ -1096,38 +1096,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1042733095554976, guid: 7b25e2a10fc72224ba990d5b34efb0b6, type: 2}
-      propertyPath: m_Name
-      value: BillBoardText
-      objectReference: {fileID: 0}
-    - target: {fileID: 4495747727781994, guid: 7b25e2a10fc72224ba990d5b34efb0b6, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 206.79
-      objectReference: {fileID: 0}
-    - target: {fileID: 4895442855509744, guid: 7b25e2a10fc72224ba990d5b34efb0b6, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4895442855509744, guid: 7b25e2a10fc72224ba990d5b34efb0b6, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0.20961937
-      objectReference: {fileID: 0}
-    - target: {fileID: 4895442855509744, guid: 7b25e2a10fc72224ba990d5b34efb0b6, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 0.9777831
-      objectReference: {fileID: 0}
-    - target: {fileID: 4895442855509744, guid: 7b25e2a10fc72224ba990d5b34efb0b6, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -0.017545879
-      objectReference: {fileID: 0}
-    - target: {fileID: 4895442855509744, guid: 7b25e2a10fc72224ba990d5b34efb0b6, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0.0024337769
-      objectReference: {fileID: 0}
-    - target: {fileID: 4895442855509744, guid: 7b25e2a10fc72224ba990d5b34efb0b6, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -695.8
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7b25e2a10fc72224ba990d5b34efb0b6, type: 2}
   m_IsPrefabParent: 0

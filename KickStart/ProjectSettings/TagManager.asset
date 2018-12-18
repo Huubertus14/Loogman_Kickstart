@@ -9,6 +9,7 @@ TagManager:
   - Bullet
   - Garbage
   - xRayObject
+  - Dusty
   layers:
   - Default
   - TransparentFX
