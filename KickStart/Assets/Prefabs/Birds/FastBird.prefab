@@ -2358,7 +2358,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1314704429571224}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.009, y: 0, z: 0}
+  m_LocalPosition: {x: -6.525062, y: -1.2350793, z: 9.439876}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children:
   - {fileID: 4737034689671544}
@@ -5267,7 +5267,8 @@ MonoBehaviour:
     type: 2}
   BirdHitEffect: {fileID: 1270126634788680, guid: efa467f120f58fe43931dd8e35c2d187,
     type: 2}
-  DiaperDestroy: {fileID: 0}
+  BigBirdHitEffect: {fileID: 1774362150817566, guid: b2672e931d913dc47a75e18e986df364,
+    type: 2}
   goalNode: 0
 --- !u!114 &114735873475987468
 MonoBehaviour:

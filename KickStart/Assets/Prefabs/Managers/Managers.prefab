@@ -272,7 +272,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BirdPrefab: {fileID: 1314704429571224, guid: d418c88afd808cf448602106c7ead664, type: 2}
-  StaticBirdPrefab: {fileID: 1314704429571224, guid: fba484180115e434c8e26855362fc4d2,
+  StaticBirdPrefab: {fileID: 1314704429571224, guid: 056b6f160400f634ea46c2c1ea0cef4a,
     type: 2}
   FatBirdPrefab: {fileID: 1447957489476182, guid: e464dbdc8f8cb5b4e9b8b991c9cedeb9,
     type: 2}
@@ -317,20 +317,21 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 8e26156e7ac0d83448b69ce04991d737, type: 3}
   - {fileID: 8300000, guid: e78dea8f3a5fed54999307c7d482255a, type: 3}
   ShootSounds:
-  - {fileID: 8300000, guid: 94dbd4febab734210a43c84263f5e116, type: 3}
-  - {fileID: 8300000, guid: 3ff9fcf8763db443d8c48710cdf9ab60, type: 3}
-  - {fileID: 8300000, guid: a1382e4f297374edea614c369f31dcb2, type: 3}
   - {fileID: 8300000, guid: fa6cba83a4316904f9489e7d058b2c15, type: 3}
+  - {fileID: 8300000, guid: fce3bbcadd3344a499aaf97760d46055, type: 3}
   ExplosionSounds:
   - {fileID: 8300000, guid: 7bef0064f8567430cac22499c6b93d4f, type: 3}
   - {fileID: 8300000, guid: cd5817e224b2b4d579cf0d0d8bfce316, type: 3}
+  - {fileID: 8300000, guid: 26a45d6719639bf48ae9447f7d100a27, type: 3}
+  - {fileID: 8300000, guid: 1717f402a5b6fd0428051bf919682112, type: 3}
+  - {fileID: 8300000, guid: 823872ffee08f5845a78f01c594973cb, type: 3}
   DustyTalkSound:
   - {fileID: 8300000, guid: fcd5d098c38604817b2230c81c3464c9, type: 3}
   - {fileID: 8300000, guid: 82c301eb8421a45e8bfefeb8dfc2ec04, type: 3}
   - {fileID: 8300000, guid: 9f1c0cfd29144487897c70634618f6c5, type: 3}
   - {fileID: 8300000, guid: fe54d5b62bb934310b134320b1d7532d, type: 3}
   - {fileID: 8300000, guid: 19b86d8abf6bb401fa08e795c07e45c7, type: 3}
-  DustyVoorWas:
+  DustyText:
   - {fileID: 8300000, guid: b2f7b717d05286a42941d55f0f013fd0, type: 3}
   - {fileID: 8300000, guid: e0ce506a1a869884f81a7757ff737c5d, type: 3}
   - {fileID: 8300000, guid: 077ddcef32ac7ba4eb87b4b1f4290e25, type: 3}
@@ -341,7 +342,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 4453062ad63590548a2f6b4c78c6405b, type: 3}
   - {fileID: 8300000, guid: 79519e39cef9308498ab2cddda5f761a, type: 3}
   - {fileID: 8300000, guid: f78484031024f434cbd3bc256ea6c029, type: 3}
-  DustyRonde01:
   - {fileID: 8300000, guid: 90ae001937081d94b82cf3a46ef86161, type: 3}
   - {fileID: 8300000, guid: 9ed8af104f2991f42a081043e3e8d3fa, type: 3}
   - {fileID: 8300000, guid: eb4cf98b7f76dca43a82d31e2aa8c7b2, type: 3}
@@ -356,15 +356,11 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 56e85de0e910376498e3d25095c35a58, type: 3}
   - {fileID: 8300000, guid: 71d49ce2dc68a6e4da516dc797aebb42, type: 3}
   - {fileID: 8300000, guid: a6efdfa2af4f476458aaec4e1285ebce, type: 3}
-  DustyRonde02:
   - {fileID: 8300000, guid: 0197b8e517ddc514c812afab77594d58, type: 3}
   - {fileID: 8300000, guid: d3c020255af46e14580c88c210a2f2e7, type: 3}
   - {fileID: 8300000, guid: 14fb6cbfb5db83549a85e3bbb81a901c, type: 3}
-  DustyRonde03:
   - {fileID: 8300000, guid: 85784c7670a601f4682008a4074460bc, type: 3}
-  DustyMisc:
   - {fileID: 8300000, guid: 3fcc86520398a9b47ad44c66ae573984, type: 3}
-  DustyHitSound: {fileID: 8300000, guid: 72eef4b1214538a4b942ca8d2e0e89f6, type: 3}
 --- !u!114 &114709640188668538
 MonoBehaviour:
   m_ObjectHideFlags: 1

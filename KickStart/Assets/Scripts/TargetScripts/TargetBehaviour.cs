@@ -246,7 +246,8 @@ public class TargetBehaviour : MonoBehaviour
                 GameManager.Instance.Indicator.RemoveIndicator(transform);
                 GameManager.Instance.Player.ScoreFlash();
 
-                AudioManager.Instance.PlayAudio(AudioSampleManager.Instance.GetExplosionSound(), 1);
+                Instantiate(BigBirdHitEffect, _hitPosition, Quaternion.identity);
+                AudioManager.Instance.PlayAudio(AudioSampleManager.Instance.ExplosionSounds[0], 1);
                 //hit effect
                 Instantiate(SmokeParticles, transform.position, Quaternion.identity);
                 break;
@@ -269,6 +270,7 @@ public class TargetBehaviour : MonoBehaviour
                         GameManager.Instance.Player.Score += 3;
                         GameManager.Instance.Indicator.RemoveIndicator(transform); //incicator andere kleur!
 
+                        Instantiate(BigBirdHitEffect, _hitPosition, Quaternion.identity);
                         AudioManager.Instance.PlayAudio(AudioSampleManager.Instance.GetExplosionSound(), 1);
                         GameManager.Instance.Player.ScoreFlash();
 
@@ -284,6 +286,7 @@ public class TargetBehaviour : MonoBehaviour
                 GameManager.Instance.Player.Score += 10;
                 GameManager.Instance.Indicator.RemoveIndicator(transform); //incicator andere kleur!
 
+                Instantiate(BigBirdHitEffect, _hitPosition, Quaternion.identity);
                 AudioManager.Instance.PlayAudio(AudioSampleManager.Instance.GetExplosionSound(), 1);
                 //hit effect
                 Instantiate(SmokeParticles, transform.position, Quaternion.identity); // ander particle effect!

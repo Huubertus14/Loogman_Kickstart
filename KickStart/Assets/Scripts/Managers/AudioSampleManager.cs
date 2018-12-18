@@ -34,7 +34,7 @@ public class AudioSampleManager : MonoBehaviour
     public AudioClip[] ExplosionSounds;
     public AudioClip GetExplosionSound()
     {
-        int x = Random.Range(0, ExplosionSounds.Length);
+        int x = Random.Range(1, ExplosionSounds.Length);
         return ExplosionSounds[x];
     }
 
