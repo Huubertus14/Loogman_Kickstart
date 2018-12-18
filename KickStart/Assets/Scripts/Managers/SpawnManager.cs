@@ -40,6 +40,8 @@ namespace VrFox
 
         public List<GameObject> Birds = new List<GameObject>();
 
+        public bool FirstBirdFat;
+
         private void Update()
         {
             if (!GameManager.Instance.GameStarted)
@@ -62,7 +64,14 @@ namespace VrFox
                 {
                     if (GameManager.Instance.CurrentRound != Round.Round_1)
                     {
-                        if (Random.Range(0, 10) == 2)//dice roll which bird is to spawn
+                        if (FirstBirdFat)
+                        {
+                            FirstBirdFat = false;
+                            SpawnBird(FatBirdPrefab);//spawn normal bird
+                            spawnTimer = 0;
+                            return;
+                        }
+                        if (Random.Range(0, 5) == 2)//dice roll which bird is to spawn
                         {
                             SpawnBird(FatBirdPrefab);//spawn normal bird
                             spawnTimer = 0;
@@ -140,10 +149,6 @@ namespace VrFox
 
         public void SpawnBirdInFrontOfPlayer()
         {
-            if (CurrentBirdCount > 0)
-            {
-                return;
-            }
             CurrentBirdCount++;
 
             //Spawn bird
@@ -151,7 +156,7 @@ namespace VrFox
 
             //Set right spawn point 
             Vector3 _direction = Camera.main.transform.forward;
-            float _distance = Random.Range(6, 15);
+            float _distance = Random.Range(4, 6);
 
             _bird.transform.position = _direction * _distance;
             _bird.transform.position = new Vector3(_bird.transform.position.x, Random.Range(-0.5f, 1.2f), _bird.transform.position.z);

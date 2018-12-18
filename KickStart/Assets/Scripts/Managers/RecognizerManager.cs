@@ -43,7 +43,7 @@ public class RecognizerManager : MonoBehaviour
                 GameManager.Instance.Player.Shoot();
                 break;
             case GameStates.Instructions:
-
+                GameManager.Instance.Player.Shoot();
                 break;
             case GameStates.GameEnd:
                 if (GameManager.Instance.CanContinueNextGame)

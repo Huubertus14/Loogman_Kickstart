@@ -874,6 +874,7 @@ GameObject:
   - component: {fileID: 4495747727781994}
   - component: {fileID: 95947353456396484}
   - component: {fileID: 114578555376701908}
+  - component: {fileID: 82112942328279230}
   m_Layer: 0
   m_Name: DustyIdle
   m_TagString: Dusty
@@ -1505,13 +1506,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1042733095554976}
-  m_LocalRotation: {x: -0, y: 0.7097466, z: -0, w: 0.70445704}
-  m_LocalPosition: {x: -1.86, y: 9.2, z: 11.05}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.0274, y: 0.168, z: -0.0142}
+  m_LocalScale: {x: 0.005281709, y: 0.0052817087, z: 0.0052817087}
   m_Children: []
   m_Father: {fileID: 4495747727781994}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 90.429, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4446787816352524
 Transform:
   m_ObjectHideFlags: 1
@@ -2245,7 +2246,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: e3d8348b7d66bae4aa4b1f3ada3ef5fd, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2279,6 +2280,86 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1318940323094634}
   m_Mesh: {fileID: 4300052, guid: dbc8dc9f80bd443f79f15a006a95fea1, type: 3}
+--- !u!82 &82112942328279230
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1720868083636972}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!95 &95947353456396484
 Animator:
   serializedVersion: 3
@@ -2313,7 +2394,7 @@ TextMesh:
   m_FontSize: 0
   m_FontStyle: 0
   m_RichText: 1
-  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Font: {fileID: 12800000, guid: e3d8348b7d66bae4aa4b1f3ada3ef5fd, type: 3}
   m_Color:
     serializedVersion: 2
     rgba: 4294967295
@@ -2354,7 +2435,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TextBillboard: {fileID: 1042733095554976}
   sourceAudio: {fileID: 0}
-  PositionAwayFromPlayer: {x: 0, y: -0.2, z: 1.6}
+  PositionAwayFromPlayer: {x: 0.6, y: -0.2, z: 1.6}
   Messages: []
 --- !u!137 &137080262068012376
 SkinnedMeshRenderer:

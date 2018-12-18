@@ -5179,7 +5179,7 @@ MonoBehaviour:
   TypeOfBird: 1
   Speed: 0.685
   birdScale: 6
-  BigBirdLives: 2
+  BigBirdLives: 1
   MovingBird: 1
   Body: {fileID: 1943836031018648, guid: d39601c4c9f4d1143ba9592a54cc4779, type: 2}
   Beek:

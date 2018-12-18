@@ -674,12 +674,6 @@ Prefab:
       propertyPath: canvas
       value: 
       objectReference: {fileID: 890563022}
-    - target: {fileID: 114256099600199432, guid: 20c13879b59ae4a4f85b04cacea06003,
-        type: 2}
-      propertyPath: BirdPrefab
-      value: 
-      objectReference: {fileID: 1314704429571224, guid: d418c88afd808cf448602106c7ead664,
-        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 20c13879b59ae4a4f85b04cacea06003, type: 2}
   m_IsPrefabParent: 0

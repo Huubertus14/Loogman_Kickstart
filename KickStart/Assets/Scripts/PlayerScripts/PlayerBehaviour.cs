@@ -40,7 +40,7 @@ namespace VrFox
             PlayerLevel = Difficulty.Noob;
             InPrewash = true;
 
-            AccuracyText.text = "100%";
+            AccuracyText.text = "";
 
             ShootCount = 0;
             HitCount = 0;
@@ -156,9 +156,12 @@ namespace VrFox
 
         private void SetAccuracyText()
         {
-            float _accuracy = (HitCount / ShootCount) * 100;
-            AccuracyText.text = _accuracy.ToString() + "%" + " Accuracy";
-        }        
+            if (ShootCount > 0)
+            {
+                float _accuracy = (HitCount / ShootCount) * 100;
+                AccuracyText.text = "";
+            }
+        }
 
         private void PlayerDebug()
         {

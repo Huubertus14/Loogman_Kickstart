@@ -13,7 +13,7 @@ namespace EnumStates
         GameEnd,
         Waiting
     }
-    
+
     public enum Difficulty
     {
         Noob,
@@ -109,6 +109,8 @@ namespace VrFox
 
         [HideInInspector]
         public bool CanContinueNextGame;
+        public bool FirstBirdHit = false;
+        public bool SecondBirdHit = false;
 
         private void Start()
         {
@@ -116,6 +118,8 @@ namespace VrFox
             ResetGame();
             BoundaryIndicators.SetActive(true);
         }
+
+        private float startTimer;
 
         private void Update()
         {
@@ -139,12 +143,22 @@ namespace VrFox
                 case GameStates.GameEnd:
                     break;
                 case GameStates.Waiting:
+                    if (CurrentRound == Round.Intro)
+                    {
+                        startTimer += Time.deltaTime;
+                        if (startTimer > 9)
+                        {
+                            startTimer = 0;
+
+                            //Say Look down
+                            DustyManager.Instance.Messages.Add(new DustyTextFile("Kijk naar beneden", 5f, AudioSampleManager.Instance.DustyVoorWas[0]));
+                        }
+                    }
                     break;
                 default:
                     break;
             }
         }
-        
 
         /// <summary>
         /// Logic done when the game is playing
@@ -172,6 +186,7 @@ namespace VrFox
                     if (currentTimer > round_2Duration)
                     {
                         SendTextMessage("Starting Round 3", 4f, Vector2.zero);
+                        DustyManager.Instance.Messages.Add(new DustyTextFile("Je bent nu aan het einde van ronde 3", 5, AudioSampleManager.Instance.DustyRonde02[2]));
                         CurrentRound = Round.Round_3;
                         currentTimer = 0;
                     }
@@ -179,7 +194,8 @@ namespace VrFox
                 case Round.Round_3:
                     if (currentTimer > round_3Duration)
                     {
-                        SendTextMessage("Game Over", 4f, new Vector2(0, 40));
+                        DustyManager.Instance.Messages.Add(new DustyTextFile("Je bent nu bij het einde", 5, AudioSampleManager.Instance.DustyMisc[0]));
+                        SendTextMessage("Game Over", 4f, new Vector2(0, -40));
                         CurrentRound = Round.Score;
                         currentTimer = 0;
                         SetGameOver();
@@ -194,21 +210,57 @@ namespace VrFox
             currentTimer += Time.deltaTime;
         }
 
+
         private IEnumerator StartTutorial()
         {
             Debug.Log("Starting the tutorial...");
             yield return new WaitForSeconds(0.5f);
             //Show UI to verify sight
+            DustyManager.Instance.Messages.Add(new DustyTextFile("Hoi in ben Dusty", 5f, AudioSampleManager.Instance.DustyVoorWas[1]));
+            DustyManager.Instance.Messages.Add(new DustyTextFile("Wat leuk dat je bij Logman in de wasstraat komt", 5f, AudioSampleManager.Instance.DustyVoorWas[2]));
+            DustyManager.Instance.Messages.Add(new DustyTextFile("Hopelijk zit je comfortabel in de auto", 5f, AudioSampleManager.Instance.DustyVoorWas[3]));
+            SetAllInstructionsActive(true);
 
             yield return new WaitForSeconds(1.5f);
-
+            DustyManager.Instance.Wave();
             //let dusty say things
+            DustyManager.Instance.Messages.Add(new DustyTextFile("Ik heb je hulp nodig", 5f, AudioSampleManager.Instance.DustyVoorWas[5]));
+            DustyManager.Instance.Messages.Add(new DustyTextFile("Er zijn allemaal vogels in de wasstraat", 5f, AudioSampleManager.Instance.DustyVoorWas[6]));
+            DustyManager.Instance.Messages.Add(new DustyTextFile("En dat willen wij niet", 5f, AudioSampleManager.Instance.DustyVoorWas[7]));
+            DustyManager.Instance.Messages.Add(new DustyTextFile("We gaan een luier omdoen bij de vogels", 5f, AudioSampleManager.Instance.DustyVoorWas[8]));
+            DustyManager.Instance.Messages.Add(new DustyTextFile("Laten we eerst even trainen", 5f, AudioSampleManager.Instance.DustyVoorWas[9]));
+
+            yield return new WaitUntil(() => DustyManager.Instance.Messages.Count < 1);
+            GameState = GameStates.Instructions;
+            SpawnManager.Instance.SpawnBirdInFrontOfPlayer();
+            DustyManager.Instance.Messages.Add(new DustyTextFile("Voor je zie je nu een vogel", 5f, AudioSampleManager.Instance.DustyRonde01[1]));
+            DustyManager.Instance.Messages.Add(new DustyTextFile("Richt met je ogen op de vogel", 5f, AudioSampleManager.Instance.DustyRonde01[2]));
+
+            //Loop clikcer thing?
+
+            yield return new WaitUntil(() => FirstBirdHit);
+            DustyManager.Instance.Messages.Clear();
+            DustyManager.Instance.Messages.Add(new DustyTextFile("Pats", 5f, AudioSampleManager.Instance.DustyRonde01[3]));
+            DustyManager.Instance.Messages.Add(new DustyTextFile("Nu heeft de vogel een luier om!", 5f, AudioSampleManager.Instance.DustyRonde01[4]));
+            DustyManager.Instance.Messages.Add(new DustyTextFile("Je hebt nu een punt!", 5f, AudioSampleManager.Instance.DustyRonde01[5]));
+
+            yield return new WaitUntil(() => DustyManager.Instance.Messages.Count < 1);
+            SpawnManager.Instance.SpawnBirdInFrontOfPlayer();
+            DustyManager.Instance.Messages.Add(new DustyTextFile("Probeer nu de andere vogel ook te raken", 5f, AudioSampleManager.Instance.DustyRonde01[6]));
+
+            //Loop Clicker thing?
+
+            yield return new WaitUntil(() => SecondBirdHit);
+            DustyManager.Instance.Messages.Clear();
+            DustyManager.Instance.Messages.Add(new DustyTextFile("Pats", 5f, AudioSampleManager.Instance.DustyRonde01[3]));
+            DustyManager.Instance.Messages.Add(new DustyTextFile("Je bent er nu helemaal klaar voor!", 5f, AudioSampleManager.Instance.DustyRonde01[9]));
 
 
-
-            yield return new WaitForSeconds(0.2f);
+            yield return new WaitUntil(() => DustyManager.Instance.Messages.Count < 1);
+            SetAllInstructionsActive(false);
+            currentTimer = 0;
             StartRound_1();
-            
+
             yield return null;
         }
 
@@ -409,10 +461,13 @@ namespace VrFox
             ScoreFloorText.text = "Score:";
             GameStarted = false;
 
+            FirstBirdHit = false;
+            SecondBirdHit = false;
+
             //Set the duration of all the rounds
             introDuration = PreWashDuration * 0.6f;
             round_1Duration = PreWashDuration * 0.4f;
-            round_2Duration = CarWashDuration* 0.45f;
+            round_2Duration = CarWashDuration * 0.45f;
             round_3Duration = CarWashDuration * 0.45f;
 
             //rempve arrows
@@ -499,7 +554,9 @@ namespace VrFox
 
             //enable start button
             StartButton.gameObject.SetActive(true);
-
+            DustyManager.Instance.Messages.Add(new DustyTextFile("We zijn aan het eind van de deze wasstraat gekomen", 5, AudioSampleManager.Instance.DustyRonde01[8]));
+            DustyManager.Instance.Messages.Add(new DustyTextFile("Rij nu naar de rechts", 5, AudioSampleManager.Instance.DustyRonde01[12]));
+            DustyManager.Instance.Messages.Add(new DustyTextFile("Als je bij de wasstraat bent kijk dan weer naar beneden", 5, AudioSampleManager.Instance.DustyRonde01[13]));
             //Remove all birds
             SpawnManager.Instance.ClearAllBirds();
         }
@@ -509,12 +566,12 @@ namespace VrFox
         /// </summary>
         private void StartRound_1()
         {
-
+            DustyManager.Instance.Messages.Add(new DustyTextFile("De eerste ronde gaat beginnen", 5, AudioSampleManager.Instance.DustyRonde01[0]));
             CrossHairEffect.SetActive(true, 1.4f);
             GameState = GameStates.Playing;
             CurrentRound = Round.Round_1;
             SendTextMessage("Starting Round 1", 4f, Vector2.zero);
-            Debug.Log("Sart round 01");
+            Debug.Log("Start round 01");
         }
 
         /// <summary>
@@ -524,12 +581,12 @@ namespace VrFox
         {
             //dissable ground button
             StartButton.gameObject.SetActive(false);
-
+            DustyManager.Instance.Messages.Add(new DustyTextFile("Pas goed op de dikke vogels", 5, AudioSampleManager.Instance.DustyRonde02[0]));
             CurrentRound = Round.Round_2;
             GameState = GameStates.Playing;
 
+            SpawnManager.Instance.FirstBirdFat = true;
             currentTimer = 0;
-
             SendTextMessage("Starting Round 2", 4f, Vector2.zero);
         }
 
