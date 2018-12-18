@@ -27,8 +27,8 @@ public class BulletBehaviour : MonoBehaviour
         if (collision.gameObject.tag.Contains("Target"))
         {
             //Target HIT!
-            AudioManager.Instance.PlayAudio(AudioSampleManager.Instance.GetExplosionSound(), 1);
-            collision.gameObject.GetComponent<TargetBehaviour>().Hit();
+            //AudioManager.Instance.PlayAudio(AudioSampleManager.Instance.GetExplosionSound(), 1);
+            collision.gameObject.GetComponent<TargetBehaviour>().Hit(transform.position);
             
             GameManager.Instance.SetScoreText();
 
