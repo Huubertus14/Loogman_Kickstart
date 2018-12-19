@@ -780,6 +780,7 @@ GameObject:
   - component: {fileID: 1025774865}
   - component: {fileID: 1025774864}
   - component: {fileID: 1025774863}
+  - component: {fileID: 1025774867}
   m_Layer: 0
   m_Name: GroundCanvas
   m_TagString: Untagged
@@ -865,6 +866,17 @@ RectTransform:
   m_AnchoredPosition: {x: -0.8, y: -6.3}
   m_SizeDelta: {x: 105.9, y: 10.67}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1025774867
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1025774862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f2c78031109b2b49b1de826d16361cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1081800997 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114440033861858422, guid: 98b022620337e7545b5838b8492866a0,
