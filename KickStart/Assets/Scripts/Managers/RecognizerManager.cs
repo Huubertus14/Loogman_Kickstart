@@ -77,7 +77,14 @@ public class RecognizerManager : MonoBehaviour
         {
             if (GameManager.Instance.GameState == GameStates.Waiting)
             {
-                GameManager.Instance.StartGame();
+                if (GameManager.Instance.CurrentRound == Round.Round_1)
+                {
+                    GameManager.Instance.StartRound_2();
+                }
+                else
+                {
+                    GameManager.Instance.StartGame();
+                }
                 return;
             }
 

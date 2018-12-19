@@ -134,15 +134,23 @@ namespace VrFox
             //Spawn bird
             GameObject _bird = Instantiate(_prefab, transform.position, Quaternion.identity);
             Birds.Add(_bird);
+
             //Get the y value of the bird
             float _spawnY = Camera.main.transform.position.y + Random.Range(-0.2f, 0.2f);
 
             //Set right spawn point 
-            Vector3 _direction = new Vector3(Random.Range(-0.8f, 0.8f), Random.Range(-1, 1), 1);
+            //Vector3 _direction = new Vector3(Random.Range(-0.8f, 0.8f), Random.Range(-1, 1), 1);
+
+            Vector3 _direction = Camera.main.transform.forward;
+
             float _distance = Random.Range(7, 12);
             
-            _bird.transform.position = _direction * _distance;
-            _bird.transform.position = new Vector3(_bird.transform.position.x, _spawnY, _bird.transform.position.z);
+            Vector3 _spawnPos = _direction * _distance;
+           // _spawnPos.x *= Random.Range(-0.5f,0.5f);
+           // _spawnPos.z *= Random.Range(-0.5f,0.5f);
+            _spawnPos.y = _spawnY;
+
+            _bird.transform.position = _spawnPos;
 
             DetermineDiffictuly();
         }

@@ -44,6 +44,8 @@ public class TargetBehaviour : MonoBehaviour
 
     private void Start()
     {
+        transform.position += new Vector3(Random.Range(-4, 4), 0, Random.Range(-4, 4));
+
         audioSource = GetComponent<AudioSource>();
         evadeScript = GetComponentInChildren<BulletEvadeScript>();
         evadeScript.SetBird(this);
@@ -173,18 +175,20 @@ public class TargetBehaviour : MonoBehaviour
         }
         else
         {
-            //Get direction to player
             Vector3 _dirToPlayer = GameManager.Instance.CurrentPlayer.transform.position - transform.position;
 
+            //Get direction to player
+
+
             //Randomize _dirToPlayer
-            _dirToPlayer.x = Random.Range(-5, 5);
-            _dirToPlayer.z = Random.Range(-10, -5);
+            _dirToPlayer.x *= Random.Range(-5, 5);
+            _dirToPlayer.z *= Random.Range(-10, -5);
             _dirToPlayer.Normalize();
             //Debug
             //Debug.Log(_dirToPlayer);
 
             //Create endpoint in front of player
-            endPoint = transform.position + (Random.Range(5, 10) * _dirToPlayer);
+            endPoint = Camera.main.transform.position + new Vector3(Random.Range(-4,4), 0, Random.Range(-4,4));
             endPoint.y = Camera.main.transform.position.y + Random.Range(-0.2f, 0.2f);
             //goalRotation = Quaternion.LookRotation(_dirToPlayer, transform.right);
             transform.LookAt(endPoint);
@@ -370,6 +374,7 @@ public class TargetBehaviour : MonoBehaviour
 
     private bool CheckIfBirdBehindPlayer()
     {
+        return false;
         if (transform.position.z < (Camera.main.transform.position.z - 0.5))
         {
             return true;
