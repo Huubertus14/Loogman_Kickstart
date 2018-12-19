@@ -117,7 +117,6 @@ namespace VrFox
             bulletForce = 720;
             ResetGame();
             BoundaryIndicators.SetActive(true);
-            Time.timeScale = 3f;
         }
 
         private float startTimer;
@@ -582,9 +581,7 @@ namespace VrFox
         {
             //dissable ground button
             StartButton.gameObject.SetActive(false);
-
-            Player.transform.position = Vector3.zero;
-            Player.transform.rotation = Quaternion.identity;
+            
             DustyManager.Instance.Messages.Add(new DustyTextFile("Pas goed op de dikke vogels", 5, AudioSampleManager.Instance.DustyRonde02[0]));
             CurrentRound = Round.Round_2;
             GameState = GameStates.Playing;
