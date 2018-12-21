@@ -45,7 +45,7 @@ public class TargetBehaviour : MonoBehaviour
     private void Start()
     {
         transform.position += new Vector3(Random.Range(-4, 4), 0, Random.Range(-4, 4));
-
+        
         audioSource = GetComponent<AudioSource>();
         evadeScript = GetComponentInChildren<BulletEvadeScript>();
         evadeScript.SetBird(this);
@@ -55,7 +55,7 @@ public class TargetBehaviour : MonoBehaviour
         BirdSoundCounter = 0;
         AudioManager.Instance.PlayAudio(AudioSampleManager.Instance.getBirdSpawnSounds(), 1, gameObject);
 
-
+        //First next node
         goalNode = 1;
 
         if (!Diaper)
@@ -188,7 +188,7 @@ public class TargetBehaviour : MonoBehaviour
             //Debug.Log(_dirToPlayer);
 
             //Create endpoint in front of player
-            endPoint = Camera.main.transform.position + new Vector3(Random.Range(-4,4), 0, Random.Range(-4,4));
+            endPoint = Camera.main.transform.position + new Vector3(Random.Range(-4, 4), 0, Random.Range(-4, 4));
             endPoint.y = Camera.main.transform.position.y + Random.Range(-0.2f, 0.2f);
             //goalRotation = Quaternion.LookRotation(_dirToPlayer, transform.right);
             transform.LookAt(endPoint);

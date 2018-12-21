@@ -202,7 +202,6 @@ namespace HoloToolkit.Unity.SpatialMapping
         /// </summary>
         private void Update()
         {
-           
             if ((ObserverState == ObserverStates.Running) && (outstandingMeshRequest == null))
             {
                 if (surfaceWorkQueue.Count > 0)

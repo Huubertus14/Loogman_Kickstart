@@ -1,9 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [System.Serializable]
-public class DustyTextFile {
+public class DustyTextFile
+{
 
     [SerializeField]
     private readonly float duration, fadeSpeed;
@@ -11,6 +10,8 @@ public class DustyTextFile {
     private readonly string message;
     [SerializeField]
     private readonly AudioClip audio;
+    [SerializeField]
+    private readonly Texture[] mouthTextures;
 
     public DustyTextFile(string _message, float _fadeSpeed, AudioClip _audio)
     {
@@ -18,36 +19,34 @@ public class DustyTextFile {
         duration = audio.length;
         fadeSpeed = _fadeSpeed;
         message = _message;
-    }
-    public DustyTextFile(string _message, float _duration, float _fadeSpeed)
-    {
-        duration = _duration;
-        fadeSpeed = _fadeSpeed;
-        message = _message;
+        mouthTextures = new Texture[0];
     }
 
-    public float GetDuration
+    public DustyTextFile(string _message, float _fadeSpeed, AudioClip _audio, Texture[] _mouthSequence)
     {
-        get { return duration; }
+        audio = _audio;
+        duration = audio.length;
+        fadeSpeed = _fadeSpeed;
+        message = _message;
+        mouthTextures = _mouthSequence;
     }
-    public float GetFadeSpeed
-    {
-        get { return fadeSpeed; }
-    }
-    public string GetMessage
-    {
-        get { return message; }
-    }
+
+    public float GetDuration => duration;
+    public float GetFadeSpeed => fadeSpeed;
+    public string GetMessage => message;
+    public Texture[] GetMouthTextures => mouthTextures;
 
     public AudioClip GetAudioClip
     {
-        get {
+        get
+        {
             if (!audio)
             {
-              //  Debug.LogError("No audio clip Attached!");
+                //  Debug.LogError("No audio clip Attached!");
                 return null;
             }
 
-            return audio; }
+            return audio;
+        }
     }
 }

@@ -37,19 +37,19 @@ public class BirdPath
 
     public void Swerving()
     {
-        bool _swift = (Random.Range(0, 2) == 1);
+        bool _swerve = (Random.Range(0, 2) == 1);
         Vector3 _swirlValue = new Vector3(0.5f, 0, 0.5f);
 
         for (int i = 1; i < Nodes.Count - 1; i += 2)
         {
-            if (_swift)
+            if (_swerve)
             {
-                _swift = !_swift;
+                _swerve = !_swerve;
                 Nodes[i].Mutate(_swirlValue);
             }
             else
             {
-                _swift = !_swift;
+                _swerve = !_swerve;
                 Nodes[i].Mutate(-_swirlValue);
             }
         }
@@ -57,19 +57,19 @@ public class BirdPath
 
     public void Bouncing()
     {
-        bool _swift = (Random.Range(0, 2) == 1);
+        bool _up = (Random.Range(0, 2) == 1);
         Vector3 _swirlValue = new Vector3(0, 0.5f, 0);
 
         for (int i = 1; i < Nodes.Count - 1; i++)
         {
-            if (_swift)
+            if (_up)
             {
-                _swift = !_swift;
+                _up = !_up;
                 Nodes[i].Mutate(_swirlValue);
             }
             else
             {
-                _swift = !_swift;
+                _up = !_up;
                 Nodes[i].Mutate(-_swirlValue);
             }
         }
