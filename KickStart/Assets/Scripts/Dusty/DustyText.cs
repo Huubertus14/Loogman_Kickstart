@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class DustyText : MonoBehaviour
@@ -13,13 +12,12 @@ public class DustyText : MonoBehaviour
     private float duration;
     private float lerpSpeed;
     private float lifeTime;
-    
+
 
     // Use this for initialization
     void Start()
     {
         text = GetComponent<TextMesh>();
-
 
         goalColor = fadeOutColor;
         text.color = fadeOutColor;
@@ -32,7 +30,7 @@ public class DustyText : MonoBehaviour
     void Update()
     {
         text.color = Color.Lerp(text.color, goalColor, Time.deltaTime * lerpSpeed);
-        
+
         if (lifeTime > duration)
         {
             goalColor = fadeOutColor;
@@ -48,48 +46,38 @@ public class DustyText : MonoBehaviour
         if (_file.GetAudioClip)
         {
             //This message got an audioclip
-            DustyManager.Instance.sourceAudio.clip = _file.GetAudioClip;
-            DustyManager.Instance.sourceAudio.Play();
+            DustyManager.Instance.GetAudioSource.clip = _file.GetAudioClip;
+            DustyManager.Instance.GetAudioSource.Play();
+        }
+        if (_file.GetMouthTextures.Length > 0)
+        {
+            StartCoroutine(DustyMouth(_file.GetAudioClip.length, _file.GetMouthTextures));
         }
 
         text.text = _file.GetMessage;
         duration = _file.GetDuration;
         goalColor = fadeInColor;
         lerpSpeed = _file.GetFadeSpeed;
-        //AudioManager.Instance.PlayAudio(AudioSampleManager.Instance.GetDustyTalkSound(), 1, gameObject);
 
         lifeTime = 0;
     }
 
-    public void SayMessage(DustyTextFile _file, float _delay)
+    private IEnumerator DustyMouth(float _totalDuration, Texture[] _textures)
     {
-        StartCoroutine(SayWithDelay(_file, _delay));
-    }
+        float _imageInterval = _totalDuration / _textures.Length;
 
-    private IEnumerator SayWithDelay(DustyTextFile _file, float _delay)
-    {
-        
-        if (_file.GetAudioClip)
+        for (int i = 0; i < _textures.Length; i++)
         {
-            //This message got an audioclip
-            DustyManager.Instance.sourceAudio.clip = _file.GetAudioClip;
-            DustyManager.Instance.sourceAudio.Play();
+            DustyManager.Instance.SetDustyMouthTexture(_textures[i]);
+            yield return new WaitForSeconds(_imageInterval);
         }
 
-        text.text = _file.GetMessage;
-        duration = _file.GetDuration + _delay;
-        goalColor = fadeInColor;
-        lerpSpeed = _file.GetFadeSpeed;
-        yield return new WaitForSeconds(_delay);
-        //AudioManager.Instance.PlayAudio(AudioSampleManager.Instance.GetDustyTalkSound(), 1, gameObject);
-
-        lifeTime = 0;
         yield return null;
     }
 
     public void StopMessage()
     {
-        DustyManager.Instance.sourceAudio.Stop();
+        DustyManager.Instance.GetAudioSource.Stop();
         text.text = "";
         lifeTime = 0;
     }

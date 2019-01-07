@@ -14,9 +14,12 @@ public class DustyManager : MonoBehaviour
 
     [Header("Refs:")]
     public GameObject TextBillboard;
-    
+    public GameObject Mouth;
+    private Renderer dustyMouthRenderer;
+
     private DustyText dustyTextMessage;
-    public AudioSource sourceAudio;
+    public DustyMouthSequence MouthSequence;
+    private AudioSource sourceAudio;
     private Animator animator;
 
     float headSpinTimer;
@@ -24,6 +27,7 @@ public class DustyManager : MonoBehaviour
     [Header("Values")]
     public Vector3 PositionAwayFromPlayer;
     private Vector3 goalPos;
+    public Texture DefaultMouthTexture;
     
     [Header("Narrative:")]
     [SerializeField]
@@ -36,6 +40,13 @@ public class DustyManager : MonoBehaviour
         
         dustyTextMessage = GetComponentInChildren<DustyText>();
         sourceAudio = GetComponentInChildren<AudioSource>();
+        dustyMouthRenderer = Mouth.GetComponentInChildren<Renderer>();
+        MouthSequence = GetComponent<DustyMouthSequence>();
+
+        SetDustyMouthTexture(DefaultMouthTexture);
+
+        Debug.Log("Set mouth init sprite");
+
         animator = GetComponent<Animator>();
 
         animator.Play("Idle");
@@ -83,6 +94,11 @@ public class DustyManager : MonoBehaviour
         }
     }
 
+    public void SetDustyMouthTexture(Texture _texture)
+    {
+        dustyMouthRenderer.material.SetTexture("_MainTex", _texture);
+    }
+
     /// <summary>
     /// Call this to say an important message that needs to be shown first
     /// 
@@ -97,7 +113,6 @@ public class DustyManager : MonoBehaviour
             Messages.Insert(_index, _file);
             dustyTextMessage.SayMessage(Messages[0]);
             Messages.Remove(Messages[0]);
-            
         }
         else
         {
@@ -119,5 +134,7 @@ public class DustyManager : MonoBehaviour
     {
 
     }
+
+    public AudioSource GetAudioSource => sourceAudio; 
 
 }
