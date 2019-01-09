@@ -163,7 +163,7 @@ namespace VrFox
             GameObject _bird = Instantiate(StaticBirdPrefab, transform.position, Quaternion.identity);
 
             //Set right spawn point 
-            Vector3 _direction = Camera.main.transform.forward;
+            Vector3 _direction = new Vector3(0,0,1);
             float _distance = Random.Range(4, 6);
 
             _bird.transform.position = _direction * _distance;

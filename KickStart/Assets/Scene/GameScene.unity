@@ -549,11 +549,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114722359190857508, guid: 20c13879b59ae4a4f85b04cacea06003,
-        type: 2}
-      propertyPath: canvas
-      value: 
-      objectReference: {fileID: 890563022}
     - target: {fileID: 114256099600199432, guid: 20c13879b59ae4a4f85b04cacea06003,
         type: 2}
       propertyPath: OrientationHolder
@@ -674,6 +669,16 @@ Prefab:
       propertyPath: InstructionLerps.Array.data[7]
       value: 
       objectReference: {fileID: 487865831}
+    - target: {fileID: 114153073015213994, guid: 20c13879b59ae4a4f85b04cacea06003,
+        type: 2}
+      propertyPath: indicatorsParentObj
+      value: 
+      objectReference: {fileID: 890563022}
+    - target: {fileID: 114722359190857508, guid: 20c13879b59ae4a4f85b04cacea06003,
+        type: 2}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 890563022}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 20c13879b59ae4a4f85b04cacea06003, type: 2}
   m_IsPrefabParent: 0
@@ -1747,6 +1752,16 @@ Prefab:
       propertyPath: DustyHello.Array.data[127]
       value: 
       objectReference: {fileID: 2800000, guid: d95f33a80a9283c48a6f39980e3da562, type: 3}
+    - target: {fileID: 82112942328279230, guid: 7b25e2a10fc72224ba990d5b34efb0b6,
+        type: 2}
+      propertyPath: panLevelCustomCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 82112942328279230, guid: 7b25e2a10fc72224ba990d5b34efb0b6,
+        type: 2}
+      propertyPath: reverbZoneMixCustomCurve.m_RotationOrder
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7b25e2a10fc72224ba990d5b34efb0b6, type: 2}
   m_IsPrefabParent: 0
