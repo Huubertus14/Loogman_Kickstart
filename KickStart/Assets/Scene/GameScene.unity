@@ -517,6 +517,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114969654599957296, guid: 20c13879b59ae4a4f85b04cacea06003,
+        type: 2}
+      propertyPath: AllScores.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4431195185167114, guid: 20c13879b59ae4a4f85b04cacea06003, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -674,7 +679,73 @@ Prefab:
       propertyPath: InstructionLerps.Array.data[7]
       value: 
       objectReference: {fileID: 487865831}
-    m_RemovedComponents: []
+    - target: {fileID: 114153073015213994, guid: 20c13879b59ae4a4f85b04cacea06003,
+        type: 2}
+      propertyPath: indicatorsParentObj
+      value: 
+      objectReference: {fileID: 1312042404}
+    - target: {fileID: 114755208706617680, guid: 20c13879b59ae4a4f85b04cacea06003,
+        type: 2}
+      propertyPath: PreWashDuration
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114755208706617680, guid: 20c13879b59ae4a4f85b04cacea06003,
+        type: 2}
+      propertyPath: CarWashDuration
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 114969654599957296, guid: 20c13879b59ae4a4f85b04cacea06003,
+        type: 2}
+      propertyPath: AllScores.Array.data[0]
+      value: 31
+      objectReference: {fileID: 0}
+    - target: {fileID: 114969654599957296, guid: 20c13879b59ae4a4f85b04cacea06003,
+        type: 2}
+      propertyPath: AllScores.Array.data[1]
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 114969654599957296, guid: 20c13879b59ae4a4f85b04cacea06003,
+        type: 2}
+      propertyPath: AllScores.Array.data[2]
+      value: 28
+      objectReference: {fileID: 0}
+    - target: {fileID: 114969654599957296, guid: 20c13879b59ae4a4f85b04cacea06003,
+        type: 2}
+      propertyPath: AllScores.Array.data[3]
+      value: 23
+      objectReference: {fileID: 0}
+    - target: {fileID: 114969654599957296, guid: 20c13879b59ae4a4f85b04cacea06003,
+        type: 2}
+      propertyPath: AllScores.Array.data[4]
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 114969654599957296, guid: 20c13879b59ae4a4f85b04cacea06003,
+        type: 2}
+      propertyPath: AllScores.Array.data[5]
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 114969654599957296, guid: 20c13879b59ae4a4f85b04cacea06003,
+        type: 2}
+      propertyPath: AllScores.Array.data[6]
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 114969654599957296, guid: 20c13879b59ae4a4f85b04cacea06003,
+        type: 2}
+      propertyPath: AllScores.Array.data[7]
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 114969654599957296, guid: 20c13879b59ae4a4f85b04cacea06003,
+        type: 2}
+      propertyPath: AllScores.Array.data[8]
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 114969654599957296, guid: 20c13879b59ae4a4f85b04cacea06003,
+        type: 2}
+      propertyPath: AllScores.Array.data[9]
+      value: 7
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114153073015213994, guid: 20c13879b59ae4a4f85b04cacea06003, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 20c13879b59ae4a4f85b04cacea06003, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &950029569

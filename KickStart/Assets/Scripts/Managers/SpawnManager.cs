@@ -54,7 +54,6 @@ namespace VrFox
             }
         }
         
-
         private void GamePlay()
         {
             spawnTimer += Time.deltaTime;

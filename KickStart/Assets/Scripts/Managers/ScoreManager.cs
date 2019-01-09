@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,18 +20,59 @@ public class ScoreManager : MonoBehaviour
     [Header("All Other Scores:")]
     //public List<int> AllOtherScores = new List<int>();
 
+    SaveData saveEngine;
+
     public List<int> AllScores = new List<int>();
+
+    private readonly string safeFileName = "highScore";
 
     private void Start()
     {
-        //Add dummy score
-        for (int i = 0; i < 10; i++)
+        //Reset all values
+        saveEngine = new SaveData();
+        AllScores.Clear();
+
+        //Update all scores to the current saved list
+        int[] _temp = saveEngine.ReadData(safeFileName);
+        for (int i = 0; i < _temp.Length; i++)
         {
-            AllScores.Add(Random.Range(2, 35));
+            AllScores.Add(_temp[i]);
         }
-        AllScores.Sort(SortByScore);
+        //Always add dummy values
+        for (int i = 0; i < 6; i++)
+        {
+            AllScores.Add(0);
+        }
+
+        //Do check if there are yo many 0 values
+        //Remove 0 values
+        if (AllScores.Count > 15)
+        {
+            int _zeroCount = 0;
+            for (int i = 0; i < AllScores.Count; i++)
+            {
+                if (AllScores[i] == 0)
+                {
+                    _zeroCount++;
+                }
+            }
+
+            if ((15 - _zeroCount) > 6)
+            {
+                for (int i = 0; i < AllScores.Count; i++)
+                {
+                    if (AllScores[i] == 0)
+                    {
+                        AllScores.RemoveAt(i);
+                    }
+                }
+            }
+
+        }
+
+        saveEngine.SaveScore(safeFileName, AllScores.ToArray());
     }
-    
+
     static int SortByScore(int p1, int p2)
     {
         return p2.CompareTo(p1);
@@ -43,6 +83,7 @@ public class ScoreManager : MonoBehaviour
         // AllScores = AllOtherScores;
         AllScores.Add(_playerScore);
         AllScores.Sort(SortByScore);
+        saveEngine.SaveScore(safeFileName, AllScores.ToArray());
     }
 
     public GameObject CreateScoreBox(int _score)
@@ -62,7 +103,7 @@ public class ScoreManager : MonoBehaviour
         //Always the first found index if for the player
         int _scoreIndex = 0;
         int _positionInTable = 0;
-        
+
         _scoreIndex = GetPositionInAllScores(_score);
 
         //first check maximum 3 above the current score
