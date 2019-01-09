@@ -209,8 +209,7 @@ namespace VrFox
             }
             currentTimer += Time.deltaTime;
         }
-
-
+        
         private IEnumerator StartTutorial()
         {
             Debug.Log("Starting the tutorial...");
