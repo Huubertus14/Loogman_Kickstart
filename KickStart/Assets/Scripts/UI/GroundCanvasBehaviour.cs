@@ -3,19 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GroundCanvasBehaviour : MonoBehaviour {
-    
-    public GameObject PlayerGroundCanvasPlace;
-    private Vector3 orginPlace;
 
+    public GameObject PlayerOrientation;
+    private Vector3 offset;
 	// Use this for initialization
 	void Start () {
-        orginPlace = PlayerGroundCanvasPlace.transform.position;
+        offset = new Vector3(0,-5,2);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        transform.position = Vector3.Lerp(transform.position,orginPlace, Time.deltaTime * 10);
-        transform.position = new Vector3(transform.position.x, orginPlace.y,transform.position.z);
+
+        transform.position = PlayerOrientation.transform.forward * 5f;
+        transform.position += offset;
+
         transform.LookAt(Camera.main.transform.position);
         transform.Rotate(0,180,0);
 	}
