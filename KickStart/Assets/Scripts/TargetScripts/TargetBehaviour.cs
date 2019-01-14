@@ -218,8 +218,6 @@ public class TargetBehaviour : MonoBehaviour
         GameManager.Instance.Player.HitCount++;
 
 
-
-
         if (IsHit)
         {
             return;
@@ -238,19 +236,21 @@ public class TargetBehaviour : MonoBehaviour
                 Destroy(gameObject, 4);
             }
         }
-
+         
         Instantiate(BigBirdHitEffect, _hitPosition, Quaternion.identity);
+        AudioManager.Instance.PlayAudio(AudioSampleManager.Instance.getBirdHitSounds(), 1);
+
         switch (TypeOfBird)
         {
             case BirdType.Normal:
                 IsHit = true;
-                SpawnManager.Instance.CurrentBirdCount--;
+                //SpawnManager.Instance.CurrentBirdCount--;
                 Diaper.SetActive(true);
                 GameManager.Instance.Player.Score++;
                 GameManager.Instance.Indicator.RemoveIndicator(transform);
                 GameManager.Instance.Player.ScoreFlash();
 
-                AudioManager.Instance.PlayAudio(AudioSampleManager.Instance.GetExplosionSound(), 1);
+                
                 //hit effect
                 Instantiate(SmokeParticles, transform.position, Quaternion.identity);
                 break;
@@ -268,16 +268,15 @@ public class TargetBehaviour : MonoBehaviour
                     if (!IsHit)
                     {
                         IsHit = true;
-                        SpawnManager.Instance.CurrentBirdCount--;
+                        //SpawnManager.Instance.CurrentBirdCount--;
                         Diaper.SetActive(true);
                         GameManager.Instance.Player.Score += 3;
                         GameManager.Instance.Indicator.RemoveIndicator(transform); //incicator andere kleur!
-
-                        AudioManager.Instance.PlayAudio(AudioSampleManager.Instance.GetExplosionSound(), 1);
                         GameManager.Instance.Player.ScoreFlash();
 
                         //hit effect
                         Instantiate(SmokeParticles, transform.position, Quaternion.identity); // ander particle effect!
+                        AudioManager.Instance.PlayAudio(AudioSampleManager.Instance.getFatBirdExplosionSound(), 1);
                     }
                 }
                 break;

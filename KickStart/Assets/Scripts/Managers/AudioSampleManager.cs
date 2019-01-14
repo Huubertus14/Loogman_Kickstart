@@ -13,15 +13,28 @@ public class AudioSampleManager : MonoBehaviour
     [Header("Audio Clips:")]
     public AudioClip[] BirdSpawnSounds;
     public AudioClip[] BirdFlapSounds;
+    public AudioClip[] BirdHitSounds;
     public AudioClip getBirdSpawnSounds()
     {
         int x = Random.Range(0, BirdSpawnSounds.Length);
         return BirdSpawnSounds[x];
     }
+    public AudioClip getFatBirdExplosionSound()
+    {
+        int x = 6;
+        return BirdSpawnSounds[x];
+    }
+
     public AudioClip getBirdFlapSounds()
     {
         int x = Random.Range(0, BirdFlapSounds.Length);
         return BirdFlapSounds[x];
+    }
+
+    public AudioClip getBirdHitSounds()
+    {
+        int x = Random.Range(0, BirdHitSounds.Length);
+        return BirdHitSounds[x];
     }
 
     public AudioClip[] ShootSounds;
