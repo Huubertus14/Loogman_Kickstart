@@ -216,7 +216,7 @@ namespace VrFox
             SpawnManager.Instance.CurrentBirdCount = 0;
             yield return new WaitForSeconds(0.5f);
             //Show UI to verify sight
-            DustyManager.Instance.Messages.Add(new DustyTextFile("Hoi in ben Dusty", 5f, AudioSampleManager.Instance.DustyVoorWas[1], DustyManager.Instance.MouthSequence.GetText01));
+            DustyManager.Instance.Messages.Add(new DustyTextFile("Hoi in ben Dusty", 5f, AudioSampleManager.Instance.DustyVoorWas[1]));
             DustyManager.Instance.Messages.Add(new DustyTextFile("Wat leuk dat je bij Loogman in de wasstraat komt", 5f, AudioSampleManager.Instance.DustyVoorWas[2])); //Insert right texture amount
             DustyManager.Instance.Messages.Add(new DustyTextFile("Hopelijk zit je comfortabel in de auto", 5f, AudioSampleManager.Instance.DustyVoorWas[3]));
             SetAllInstructionsActive(true);

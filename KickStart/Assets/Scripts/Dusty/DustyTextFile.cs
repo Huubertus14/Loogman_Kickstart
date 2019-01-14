@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using VrFox;
 
 [System.Serializable]
 public class DustyTextFile
@@ -19,17 +20,9 @@ public class DustyTextFile
         duration = audio.length;
         fadeSpeed = _fadeSpeed;
         message = _message;
-        mouthTextures = new Texture[0];
+        mouthTextures = DustyManager.Instance.MouthSequence.GetText01;
     }
-
-    public DustyTextFile(string _message, float _fadeSpeed, AudioClip _audio, Texture[] _mouthSequence)
-    {
-        audio = _audio;
-        duration = audio.length;
-        fadeSpeed = _fadeSpeed;
-        message = _message;
-        mouthTextures = _mouthSequence;
-    }
+    
 
     public float GetDuration => duration;
     public float GetFadeSpeed => fadeSpeed;
