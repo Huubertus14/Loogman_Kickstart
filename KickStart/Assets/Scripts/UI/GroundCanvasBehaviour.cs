@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class GroundCanvasBehaviour : MonoBehaviour {
 
-    Vector3 offset;
-
+    public GameObject PlayerOrientation;
+    private Vector3 offset;
 	// Use this for initialization
 	void Start () {
-        offset = transform.position - Camera.main.transform.position;
+        offset = new Vector3(0,-5,2);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        transform.position = Camera.main.transform.position + offset;
+
+        transform.position = PlayerOrientation.transform.forward * 5f;
+        transform.position += offset;
+
+        transform.LookAt(Camera.main.transform.position);
+        transform.Rotate(0,180,0);
 	}
 }

@@ -29,13 +29,3 @@ public class SaveData
     }
 }
 
-public class HighScoreData
-{
-    public int[] Highscores;
-
-    public HighScoreData(int[] _highscore)
-    {
-        Highscores = _highscore;
-    }
-
-}
