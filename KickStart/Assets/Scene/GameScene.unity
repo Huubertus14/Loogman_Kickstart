@@ -549,11 +549,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114256099600199432, guid: 20c13879b59ae4a4f85b04cacea06003,
-        type: 2}
-      propertyPath: OrientationHolder
-      value: 
-      objectReference: {fileID: 1265798817}
     - target: {fileID: 114722359190857508, guid: 20c13879b59ae4a4f85b04cacea06003,
         type: 2}
       propertyPath: canvas
@@ -674,6 +669,11 @@ Prefab:
       propertyPath: InstructionLerps.Array.data[7]
       value: 
       objectReference: {fileID: 487865831}
+    - target: {fileID: 114256099600199432, guid: 20c13879b59ae4a4f85b04cacea06003,
+        type: 2}
+      propertyPath: OrientationHolder
+      value: 
+      objectReference: {fileID: 1265798817}
     - target: {fileID: 114755208706617680, guid: 20c13879b59ae4a4f85b04cacea06003,
         type: 2}
       propertyPath: PreWashDuration

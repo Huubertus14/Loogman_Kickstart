@@ -443,8 +443,8 @@ MonoBehaviour:
   CurrentRound: 0
   GameStarted: 1
   GameOver: 0
-  PreWashDuration: 10
-  CarWashDuration: 15
+  PreWashDuration: 90
+  CarWashDuration: 220
   TutorialFeedbackText: {fileID: 0}
   BoundaryIndicators: {fileID: 0}
   InstructionLerps:
