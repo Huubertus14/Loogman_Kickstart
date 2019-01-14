@@ -84,6 +84,13 @@ public class DustyText : MonoBehaviour
     {
         get
         {
+            if (lifeTime > duration)
+            {
+                //StopCoroutine(DustyMouth(0,null));
+                StopAllCoroutines();
+                DustyManager.Instance.SetDustyMouthTexture(DustyManager.Instance.DefaultMouthTexture);
+
+            }
             //Calculate if message is empty
             if (lifeTime < duration + 0.4f)
             {
