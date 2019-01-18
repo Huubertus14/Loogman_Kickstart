@@ -5257,7 +5257,7 @@ MonoBehaviour:
   birdScale: 0.4
   BigBirdLives: 0
   MovingBird: 0
-  Body: {fileID: 1943836031018648}
+  Body: {fileID: 1376163262876318}
   Beek:
   - {fileID: 1641048815902090}
   - {fileID: 1391268945481086}

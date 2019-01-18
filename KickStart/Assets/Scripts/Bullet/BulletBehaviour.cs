@@ -41,6 +41,7 @@ public class BulletBehaviour : MonoBehaviour
         {
             if(GameManager.Instance.CurrentRound != Round.Intro)
             DustyManager.Instance.Messages.Add(new DustyTextFile("Hey! Ik ben geen vogel!", 5f, AudioSampleManager.Instance.DustyHitSound));
+            DustyManager.Instance.PlayAnimation("Panic 2");
             Destroy(gameObject);
         }
     }

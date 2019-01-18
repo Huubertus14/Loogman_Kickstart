@@ -20,18 +20,7 @@ public class BirdPath
 
     public void SetNodes()
     {
-        float _dis = Vector3.Distance(beginPoint, endPoint);
-        int _nodeLength = (int)(_dis / 0.5f);
 
-        Vector3 _dir = endPoint - beginPoint;
-        _dir.Normalize();
-
-        Vector3 _increase = (_dir * _dis) / _nodeLength;
-
-        for (int i = 0; i < _nodeLength; i++)
-        {
-            Nodes.Add(new PathNode(beginPoint + (_increase * i)));
-        }
     }
 
     /// <summary>
@@ -54,47 +43,73 @@ public class BirdPath
                 }
                 Nodes[i].Mutate(_mutateValue);
             }
-        }        
+        }
     }
 
+
+    //making path bezier
     public void Swerving()
     {
-        bool _swerve = (Random.Range(0, 2) == 1);
-        Vector3 _swirlValue = new Vector3(0.5f, 0, 0.5f);
 
-        for (int i = 1; i < Nodes.Count - 1; i += 2)
-        {
-            if (_swerve)
-            {
-                _swerve = !_swerve;
-                Nodes[i].Mutate(_swirlValue);
-            }
-            else
-            {
-                _swerve = !_swerve;
-                Nodes[i].Mutate(-_swirlValue);
-            }
-        }
     }
 
     public void Bouncing()
     {
-        bool _up = (Random.Range(0, 2) == 1);
-        Vector3 _swirlValue = new Vector3(0, 0.5f, 0);
 
-        for (int i = 1; i < Nodes.Count - 1; i++)
+    }
+
+    private readonly int numPoints = 50;
+    private Vector3[] positions;// = new Vector3[50];
+    private Vector3 begin, end;
+
+    public void BezierLinear(Vector3 _begin, Vector3 _end) //time = 0 = begin, time = 1 = end
+    {
+        begin = _begin;
+        end = _end;
+        positions = new Vector3[numPoints];
+        MakeLinearCurve();
+        Nodes.Clear();
+        for (int i = 0; i < positions.Length; i++)
         {
-            if (_up)
-            {
-                _up = !_up;
-                Nodes[i].Mutate(_swirlValue);
-            }
-            else
-            {
-                _up = !_up;
-                Nodes[i].Mutate(-_swirlValue);
-            }
+            Nodes.Add(new PathNode(positions[i]));
         }
     }
 
+    public void BezierQuadratic(Vector3 _begin, Vector3 _end)
+    {
+        begin = _begin;
+        end = _end;
+        positions = new Vector3[numPoints];
+        MakeQuadraticCurve();
+        Nodes.Clear();
+        for (int i = 0; i < positions.Length; i++)
+        {
+            Nodes.Add(new PathNode(positions[i]));
+        }
+    }
+
+    private void MakeLinearCurve()
+    {
+        for (int i = 1; i < numPoints + 1; i++)
+        {
+            float t = i / (float)numPoints;
+            positions[i - 1] = CalculateLinearBezierPoint(t, begin, end);
+        }
+    }
+
+    private Vector3 CalculateLinearBezierPoint(float t, Vector3 p0, Vector3 p1)
+    {
+        return p0 + t * (p1 - p0);
+    }
+
+    private void MakeQuadraticCurve()
+    {
+
+    }
+
+    private Vector3 CalculateQuadraticCurve(float t, Vector2 p0, Vector2 p1, Vector3 p2)
+    {
+
+        return Vector3.zero;
+    }
 }
