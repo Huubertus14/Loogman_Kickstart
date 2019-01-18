@@ -6,7 +6,7 @@ using VrFox;
 public class GazeCursor : MonoBehaviour
 {
     private MeshRenderer[] meshRenderer;
-    public float FixedSize = .0005f;
+    //public float FixedSize = .0005f;
 
     // Use this for initialization
     void Start()

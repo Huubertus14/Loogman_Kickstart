@@ -148,8 +148,6 @@ public class TargetBehaviour : MonoBehaviour
 
         //get random colors 
         BirdMaterialPreset _preset = SpawnManager.Instance.GetPreset;
-        SetBeekMaterial(_preset.GetBeek);
-        SetBodyMaterial(_preset.GetBody);
 
         //fix model rotation
         transform.Rotate(new Vector3(0, 90, 0));
@@ -427,7 +425,6 @@ public class TargetBehaviour : MonoBehaviour
     /// <param given material="_mat"></param>
     private void SetBodyMaterial(Material _mat)
     {
-        return;
         Body.GetComponent<Renderer>().material = _mat;
     }
 

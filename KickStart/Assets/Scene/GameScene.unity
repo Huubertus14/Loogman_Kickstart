@@ -367,8 +367,8 @@ MonoBehaviour:
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: Score
 --- !u!1001 &200404622
@@ -1263,7 +1263,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0194d1166dd64004ab9448a791aea0a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FixedSize: 0.0005
 --- !u!4 &675029820
 Transform:
   m_ObjectHideFlags: 0
