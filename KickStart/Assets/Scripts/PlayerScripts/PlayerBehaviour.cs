@@ -21,6 +21,7 @@ namespace VrFox
         [Header("Values:")]
         public string PlayerName;
         public int Score;
+        public int Missed;
         public float TimeToRecharge;
         public Difficulty PlayerLevel;
         public bool InPrewash;

@@ -202,6 +202,10 @@ public class TargetBehaviour : MonoBehaviour
             audioSource.Stop();
         }
         SpawnManager.Instance.CurrentBirdCount--;
+
+        if (!IsHit)
+            GameManager.Instance.Player.Missed++;
+        
         GameManager.Instance.Indicator.RemoveIndicator(transform);
     }
 
