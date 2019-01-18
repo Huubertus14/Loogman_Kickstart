@@ -222,7 +222,9 @@ namespace VrFox
             SetAllInstructionsActive(true);
 
             yield return new WaitForSeconds(1.5f);
-            DustyManager.Instance.Wave();
+
+           DustyManager.Instance.PlayAnimation("Welcome");
+
             //let dusty say things
             DustyManager.Instance.Messages.Add(new DustyTextFile("Ik heb je hulp nodig", 5f, AudioSampleManager.Instance.DustyVoorWas[5]));
             DustyManager.Instance.Messages.Add(new DustyTextFile("Er zijn allemaal vogels in de wasstraat", 5f, AudioSampleManager.Instance.DustyVoorWas[6]));
