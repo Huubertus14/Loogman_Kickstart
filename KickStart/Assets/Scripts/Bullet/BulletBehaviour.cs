@@ -20,6 +20,7 @@ public class BulletBehaviour : MonoBehaviour
         {
             rb = GetComponent<Rigidbody>();
         }
+        transform.position = Camera.main.transform.position;
         rb.AddForce(Camera.main.transform.forward * GameManager.Instance.GetBulletForce);
     }
 
