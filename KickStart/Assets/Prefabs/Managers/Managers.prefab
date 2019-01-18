@@ -272,7 +272,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BirdPrefab: {fileID: 1314704429571224, guid: d418c88afd808cf448602106c7ead664, type: 2}
-  StaticBirdPrefab: {fileID: 1314704429571224, guid: fba484180115e434c8e26855362fc4d2,
+  StaticBirdPrefab: {fileID: 1314704429571224, guid: 056b6f160400f634ea46c2c1ea0cef4a,
     type: 2}
   FatBirdPrefab: {fileID: 1447957489476182, guid: e464dbdc8f8cb5b4e9b8b991c9cedeb9,
     type: 2}
@@ -313,7 +313,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: b71e7f59587f3704a8aed67cf82f2eb9, type: 3}
   - {fileID: 8300000, guid: 30ad5e660c7e880438de551bdc7a6fe0, type: 3}
   - {fileID: 8300000, guid: a54b5e1ca715ff94d8700894507efabd, type: 3}
-  - {fileID: 8300000, guid: bddde5c0b32841e42b87b401719f9cf4, type: 3}
+  - {fileID: 8300000, guid: 691b5d8f42bfed84482fce6638e89151, type: 3}
   BirdFlapSounds:
   - {fileID: 8300000, guid: 8e26156e7ac0d83448b69ce04991d737, type: 3}
   - {fileID: 8300000, guid: e78dea8f3a5fed54999307c7d482255a, type: 3}
@@ -430,7 +430,6 @@ MonoBehaviour:
   StartButton: {fileID: 0}
   Indicator: {fileID: 114722359190857508}
   messageText: {fileID: 0}
-  CrossHairEffect: {fileID: 0}
   ScoreText: {fileID: 0}
   GarbageText: {fileID: 0}
   TimeText: {fileID: 0}

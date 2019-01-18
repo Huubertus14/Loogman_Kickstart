@@ -3,7 +3,14 @@ guid: 59c5327fd2e763d4186f12a5fb546558
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - Body: {instanceID: 0}
+  - DeathParticle: {instanceID: 0}
+  - SmokeParticles: {fileID: 1774362150817566, guid: ac14dba2f78a0214090c60ac3d1c45e4,
+      type: 2}
+  - BirdHitEffect: {instanceID: 0}
+  - BigBirdHitEffect: {fileID: 1774362150817566, guid: b2672e931d913dc47a75e18e986df364,
+      type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
