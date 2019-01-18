@@ -59,7 +59,7 @@ public class DustyManager : MonoBehaviour
         Transform[] _childObjects = GetComponentsInChildren<Transform>();
         foreach (var _child in _childObjects)
         {
-            if (_child.GetComponent<MeshRenderer>())
+            if (_child.GetComponent<SkinnedMeshRenderer>())
             {
                 _child.gameObject.AddComponent(typeof(MeshCollider));
                 _child.gameObject.tag = "Dusty";
