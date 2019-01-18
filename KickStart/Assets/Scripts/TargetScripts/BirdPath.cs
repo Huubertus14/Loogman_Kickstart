@@ -4,7 +4,6 @@ using VrFox;
 
 public class BirdPath
 {
-
     public List<PathNode> Nodes = new List<PathNode>();
 
     private Vector3 beginPoint, endPoint;

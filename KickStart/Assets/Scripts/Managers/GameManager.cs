@@ -568,6 +568,11 @@ namespace VrFox
         /// </summary>
         private void StartRound_1()
         {
+            if (GameState == GameStates.Playing)
+            {
+                return;
+            }
+            DustyManager.Instance.Messages.Clear();
             DustyManager.Instance.Messages.Add(new DustyTextFile("De eerste ronde gaat beginnen", 5, AudioSampleManager.Instance.DustyRonde01[0]));
             hoverObject = null;
             //CrossHairEffect.SetActive(true, 1.4f);
