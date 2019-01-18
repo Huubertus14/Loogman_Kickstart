@@ -151,6 +151,7 @@ public class TargetBehaviour : MonoBehaviour
         SetBeekMaterial(_preset.GetBeek);
         SetBodyMaterial(_preset.GetBody);
 
+        Path.FixPath();
         //fix model rotation
         transform.Rotate(new Vector3(0, 90, 0));
     }

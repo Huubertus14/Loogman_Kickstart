@@ -17,6 +17,7 @@ namespace VrFox
         public UIWiggle WaterUIWiggle;
         public GameObject HighScoreObject;
         public Text AccuracyText;
+        public GameObject CursorPlace;
 
         [Header("Values:")]
         public string PlayerName;

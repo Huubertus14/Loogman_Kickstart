@@ -272,7 +272,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BirdPrefab: {fileID: 1314704429571224, guid: d418c88afd808cf448602106c7ead664, type: 2}
-  StaticBirdPrefab: {fileID: 1314704429571224, guid: 056b6f160400f634ea46c2c1ea0cef4a,
+  StaticBirdPrefab: {fileID: 1314704429571224, guid: fba484180115e434c8e26855362fc4d2,
     type: 2}
   FatBirdPrefab: {fileID: 1447957489476182, guid: e464dbdc8f8cb5b4e9b8b991c9cedeb9,
     type: 2}

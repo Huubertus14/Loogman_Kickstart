@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using VrFox;
 
 public class BirdPath
 {
@@ -34,6 +35,28 @@ public class BirdPath
         }
     }
 
+    /// <summary>
+    /// Makes sure that no nodes are closer than .85 units away from player
+    /// </summary>
+    public void FixPath()
+    {
+        Vector3 _playerPos = GameManager.Instance.Player.transform.position;
+        for (int i = 0; i < Nodes.Count; i++)
+        {
+            if (Vector3.Distance(Nodes[i].GetPosition, _playerPos) < 1.2f)
+            {
+                //replace node 0.5f units awat from player
+                Vector3 _mutateValue = Nodes[i].GetPosition - _playerPos;
+                _mutateValue.Normalize();
+                _mutateValue *= 1.1f;
+                if (_mutateValue.y < 0)
+                {
+                    _mutateValue.y = -_mutateValue.y;
+                }
+                Nodes[i].Mutate(_mutateValue);
+            }
+        }        
+    }
 
     public void Swerving()
     {

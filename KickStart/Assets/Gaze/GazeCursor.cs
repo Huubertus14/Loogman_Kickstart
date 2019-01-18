@@ -1,19 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using VrFox;
 
 public class GazeCursor : MonoBehaviour
 {
-    private MeshRenderer[] meshRenderer;
-    public float FixedSize = .0005f;
-
+    Vector3 orginScale;
     // Use this for initialization
     void Start()
     {
-        // Grab the mesh renderer that's on the same object as this script.
-        meshRenderer = GetComponentsInChildren<MeshRenderer>();
-
+        orginScale = transform.localScale;
+        transform.localScale = orginScale * 0.7f;
         // Set the cursor reference
         GameManager.Instance.Reticle = gameObject;
     }
@@ -35,19 +30,31 @@ public class GazeCursor : MonoBehaviour
         // If the raycast hit a hologram...
         if (Physics.Raycast(headPosition, gazeDirection, out hitInfo))
         {
-            // Move the cursor to the point where the raycast hit.
-            this.transform.position = hitInfo.point;
+            if (!hitInfo.collider.gameObject.tag.Contains("Bullet"))
+            {
+                // Move the cursor to the point where the raycast hit.
+                this.transform.position = hitInfo.point;
 
-            // Rotate the cursor to hug the surface of the hologram.
-            this.transform.rotation =
-                Quaternion.FromToRotation(Vector3.up, hitInfo.normal);
+                // Rotate the cursor to hug the surface of the hologram.
+                this.transform.rotation =
+                    Quaternion.FromToRotation(Vector3.up, hitInfo.normal);
+            }
+            else
+            {
+                DefaultPosition();
+            }
         }
         else
         {
-            // If the raycast did not hit a hologram, display mesh at certain distance
-            transform.position = Camera.main.transform.forward*3.0f;
-            transform.LookAt(Camera.main.transform.position);
-            transform.Rotate(-90,0,0);
+            DefaultPosition();
         }
+    }
+    private void DefaultPosition()
+    {
+        // If the raycast did not hit a hologram, display mesh at certain distance
+        //transform.position = Camera.main.transform.forward*3.0f;
+        transform.position = GameManager.Instance.Player.CursorPlace.transform.position;
+        transform.LookAt(Camera.main.transform.position);
+        transform.Rotate(-90, 0, 0);
     }
 }

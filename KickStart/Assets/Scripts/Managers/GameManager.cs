@@ -569,6 +569,7 @@ namespace VrFox
         private void StartRound_1()
         {
             DustyManager.Instance.Messages.Add(new DustyTextFile("De eerste ronde gaat beginnen", 5, AudioSampleManager.Instance.DustyRonde01[0]));
+            hoverObject = null;
             //CrossHairEffect.SetActive(true, 1.4f);
             GameState = GameStates.Playing;
             CurrentRound = Round.Round_1;
@@ -583,7 +584,8 @@ namespace VrFox
         {
             //dissable ground button
             StartButton.gameObject.SetActive(false);
-            
+            hoverObject = null;
+
             DustyManager.Instance.Messages.Add(new DustyTextFile("Pas goed op de dikke vogels", 5, AudioSampleManager.Instance.DustyRonde02[0]));
             CurrentRound = Round.Round_2;
             GameState = GameStates.Playing;
