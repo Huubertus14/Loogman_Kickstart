@@ -34,6 +34,10 @@ public class ScoreManager : MonoBehaviour
 
         //Update all scores to the current saved list
         int[] _temp = saveEngine.ReadData(safeFileName);
+        if (_temp == null)
+        {
+            _temp = new int[6]{0,0,0,0,0,0};
+        }
         for (int i = 0; i < _temp.Length; i++)
         {
             AllScores.Add(_temp[i]);

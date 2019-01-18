@@ -14,7 +14,7 @@ public class StartButtonBehaviour : MonoBehaviour
         buttonImg = GetComponent<Image>();
         buttonText = GetComponentInChildren<Text>();
 
-        imgGoalColor = Color.white;
+        imgGoalColor = new Color(32f/255, 81f/255, 132f/255, 1);
         textGoalColor = Color.white;
     }
 
@@ -22,12 +22,14 @@ public class StartButtonBehaviour : MonoBehaviour
     {
         imgGoalColor = new Color(.2f, 1, .7f, 1);
         textGoalColor = Color.cyan;
+        buttonText.fontStyle = FontStyle.Bold;
     }
 
     public void HoverExit()
     {
-        imgGoalColor = Color.white;
+        imgGoalColor = new Color(32f / 255, 81f / 255, 132f / 255, 1);
         textGoalColor = Color.white;
+        buttonText.fontStyle = FontStyle.Normal;
     }
 
     // Update is called once per frame

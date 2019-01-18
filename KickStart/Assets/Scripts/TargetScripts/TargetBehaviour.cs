@@ -49,6 +49,7 @@ public class TargetBehaviour : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         evadeScript = GetComponentInChildren<BulletEvadeScript>();
         evadeScript.SetBird(this);
+        evadeScript.gameObject.SetActive(false);
 
         //plays spawn sound of bird
         BirdSoundTimer = Random.Range(3f, 6f);

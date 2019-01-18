@@ -63,7 +63,7 @@ namespace VrFox
         [Space]
         public OffScreenIndicator Indicator;
         public MessageTextBehaviour messageText;
-        public CrossHairTween CrossHairEffect;
+        //public CrossHairTween CrossHairEffect;
 
         [Header("UI Elements:")]
         public Text ScoreText;
@@ -276,7 +276,7 @@ namespace VrFox
             EndScoreText.text = "";
 
             ScoreManager.Instance.CreateAllScores(Player.Score);
-            CrossHairEffect.SetActive(false, 0.9f);
+            //CrossHairEffect.SetActive(false, 0.9f);
 
             //Calculate the position of the player
             if (ScoreManager.Instance.GetPositionInTable(Player.Score) == 0)
@@ -502,7 +502,7 @@ namespace VrFox
             GameOver = true;
             GameState = GameStates.GameEnd;
             StartCoroutine(EndGame());
-            CrossHairEffect.SetActive(false, 2.2f);
+            //CrossHairEffect.SetActive(false, 2.2f);
 
             ShowEndScore();
 
@@ -569,7 +569,7 @@ namespace VrFox
         private void StartRound_1()
         {
             DustyManager.Instance.Messages.Add(new DustyTextFile("De eerste ronde gaat beginnen", 5, AudioSampleManager.Instance.DustyRonde01[0]));
-            CrossHairEffect.SetActive(true, 1.4f);
+            //CrossHairEffect.SetActive(true, 1.4f);
             GameState = GameStates.Playing;
             CurrentRound = Round.Round_1;
             SendTextMessage("Starting Round 1", 4f, Vector2.zero);
