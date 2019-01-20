@@ -32,7 +32,10 @@ public class DustyManager : MonoBehaviour
     [Header("Narrative:")]
     [SerializeField]
     public List<DustyTextFile> Messages = new List<DustyTextFile>();
-    
+
+    private string[] animationNames = new string[] {"Idle","Welcome","Panic","Shrug","Go on","Exaggorate", "Panic 2", "Arms up", "Bow"
+        ,"Lean In", "Hu", "Wave", "Point to self", "Arm move", "Snake arm", "No"
+    };
     
     private void Start()
     {
@@ -56,7 +59,7 @@ public class DustyManager : MonoBehaviour
         Transform[] _childObjects = GetComponentsInChildren<Transform>();
         foreach (var _child in _childObjects)
         {
-            if (_child.GetComponent<MeshRenderer>())
+            if (_child.GetComponent<SkinnedMeshRenderer>())
             {
                 _child.gameObject.AddComponent(typeof(MeshCollider));
                 _child.gameObject.tag = "Dusty";
@@ -125,9 +128,24 @@ public class DustyManager : MonoBehaviour
         get { return dustyTextMessage; }
     }
 
-    public void Wave()
+    public void PlayAnimation(string _animationName)
     {
-        animator.Play("Wave");
+        bool _contains = false;
+        for (int i = 0; i < animationNames.Length; i++)
+        {
+            if (animationNames[i] == _animationName)
+            {
+                _contains = true;
+            }
+        }
+        if (_contains)
+        {
+            animator.Play(_animationName);
+        }
+        else
+        {
+            Debug.LogError("Name Does not exist: " + _animationName);
+        }
     }
 
     public void DustyHit()

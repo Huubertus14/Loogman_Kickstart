@@ -29,6 +29,7 @@ public class TargetBehaviour : MonoBehaviour
     private Vector3 newEndPoint;
     private Vector3 playerOffset;
 
+
     //[Header("Refs:")]
     private GameObject Diaper;
     private MeshRenderer[] logoOnDiaper;
@@ -44,8 +45,9 @@ public class TargetBehaviour : MonoBehaviour
 
     private void Start()
     {
+
         transform.position += new Vector3(Random.Range(-4, 4), 0, Random.Range(-4, 4));
-        
+
         audioSource = GetComponent<AudioSource>();
         evadeScript = GetComponentInChildren<BulletEvadeScript>();
         evadeScript.SetBird(this);
@@ -146,9 +148,9 @@ public class TargetBehaviour : MonoBehaviour
         birdScale = Random.Range(birdScale * 0.8f, birdScale / 0.8f);
         transform.localScale = new Vector3(birdScale, birdScale, birdScale);
 
-        //get random colors 
-        BirdMaterialPreset _preset = SpawnManager.Instance.GetPreset;
 
+        Path.BezierLinear(transform.position, endPoint);
+        Path.FixPath();
         //fix model rotation
         transform.Rotate(new Vector3(0, 90, 0));
     }
@@ -178,7 +180,6 @@ public class TargetBehaviour : MonoBehaviour
 
             //Get direction to player
 
-
             //Randomize _dirToPlayer
             _dirToPlayer.x *= Random.Range(-5, 5);
             _dirToPlayer.z *= Random.Range(-10, -5);
@@ -201,6 +202,12 @@ public class TargetBehaviour : MonoBehaviour
             audioSource.Stop();
         }
         SpawnManager.Instance.CurrentBirdCount--;
+
+        if (!IsHit)
+        {
+            GameManager.Instance.Player.Missed++;
+        }
+
         GameManager.Instance.Indicator.RemoveIndicator(transform);
     }
 
@@ -235,7 +242,7 @@ public class TargetBehaviour : MonoBehaviour
                 Destroy(gameObject, 4);
             }
         }
-         
+
         Instantiate(BigBirdHitEffect, _hitPosition, Quaternion.identity);
         AudioManager.Instance.PlayAudio(AudioSampleManager.Instance.getBirdHitSounds(), 1);
 
@@ -249,7 +256,7 @@ public class TargetBehaviour : MonoBehaviour
                 GameManager.Instance.Indicator.RemoveIndicator(transform);
                 GameManager.Instance.Player.ScoreFlash();
 
-                
+
                 //hit effect
                 Instantiate(SmokeParticles, transform.position, Quaternion.identity);
                 break;
@@ -327,6 +334,7 @@ public class TargetBehaviour : MonoBehaviour
             {
                 if (goalNode < Path.Nodes.Count - 1)
                 {
+
                     goalNode++;
                 }
             }
@@ -335,8 +343,6 @@ public class TargetBehaviour : MonoBehaviour
                 transform.position = Vector3.MoveTowards(transform.position, Path.Nodes[goalNode].GetPosition, Speed * Time.deltaTime);
                 //SetGoalRotation(Path.Nodes[goalNode].GetPosition);
             }
-
-            // transform.rotation = Quaternion.Slerp(transform.rotation, goalRotation, Time.deltaTime * 5);
 
             //If end point is reached...
             if (Vector3.Distance(transform.position, endPoint) < 1)

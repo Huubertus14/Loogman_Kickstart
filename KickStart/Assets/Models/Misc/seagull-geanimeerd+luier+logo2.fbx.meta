@@ -1,0 +1,506 @@
+fileFormatVersion: 2
+guid: 53b57dd8f71c4423a9e652c003ae92b5
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: bevelPolygon11
+    100002: bevelPolygon11 1
+    100004: bevelPolygon12
+    100006: bevelPolygon12 1
+    100008: bevelPolygon13
+    100010: bevelPolygon13 1
+    100012: bevelPolygon14
+    100014: bevelPolygon14 1
+    100016: bevelPolygon15
+    100018: bevelPolygon15 1
+    100020: bevelPolygon16
+    100022: bevelPolygon16 1
+    100024: bevelPolygon17
+    100026: bevelPolygon17 1
+    100028: bevelPolygon18
+    100030: bevelPolygon18 1
+    100032: bevelPolygon19
+    100034: bevelPolygon19 1
+    100036: body
+    100038: bottom
+    100040: CompoundCurve12
+    100042: CompoundCurve12 1
+    100044: CompoundCurve13
+    100046: CompoundCurve13 1
+    100048: CompoundCurve14
+    100050: CompoundCurve14 1
+    100052: CompoundCurve15
+    100054: CompoundCurve15 1
+    100056: CompoundCurve16
+    100058: CompoundCurve16 1
+    100060: CompoundCurve17
+    100062: CompoundCurve17 1
+    100064: CompoundCurve18
+    100066: CompoundCurve18 1
+    100068: CompoundCurve19
+    100070: CompoundCurve19 1
+    100072: CompoundCurve20
+    100074: CompoundCurve20 1
+    100076: CompoundCurve21
+    100078: CompoundCurve21 1
+    100080: CompoundCurve22
+    100082: CompoundCurve22 1
+    100084: curve1
+    100086: curve1 1
+    100088: curve10
+    100090: curve10 1
+    100092: curve11
+    100094: curve11 1
+    100096: curve12
+    100098: curve12 1
+    100100: curve13
+    100102: curve13 1
+    100104: curve14
+    100106: curve14 1
+    100108: curve15
+    100110: curve15 1
+    100112: curve16
+    100114: curve16 1
+    100116: curve17
+    100118: curve17 1
+    100120: curve2
+    100122: curve2 1
+    100124: curve3
+    100126: curve3 1
+    100128: curve4
+    100130: curve4 1
+    100132: curve5
+    100134: curve5 1
+    100136: curve6
+    100138: curve6 1
+    100140: curve7
+    100142: curve7 1
+    100144: curve8
+    100146: curve8 1
+    100148: curve9
+    100150: curve9 1
+    100152: eye_l
+    100154: eye_r
+    100156: FOOT_L
+    100158: FOOT_R
+    100160: hair
+    100162: hair1
+    100164: hair2
+    100166: joint1
+    100168: joint10
+    100170: joint11
+    100172: joint12
+    100174: joint13
+    100176: joint14
+    100178: joint15
+    100180: joint16
+    100182: joint17
+    100184: joint18
+    100186: joint19
+    100188: joint2
+    100190: joint20
+    100192: joint21
+    100194: joint22
+    100196: joint23
+    100198: joint24
+    100200: joint25
+    100202: joint26
+    100204: joint27
+    100206: joint28
+    100208: joint29
+    100210: joint3
+    100212: joint30
+    100214: joint31
+    100216: joint31 1
+    100218: joint32
+    100220: joint33
+    100222: joint34
+    100224: joint35
+    100226: joint36
+    100228: joint37
+    100230: joint38
+    100232: joint39
+    100234: joint4
+    100236: joint40
+    100238: joint5
+    100240: joint6
+    100242: joint7
+    100244: joint8
+    100246: joint9
+    100248: logo2
+    100250: logo3
+    100252: luier
+    100254: mouth_low
+    100256: mouth_up
+    100258: NAILS
+    100260: NAILS 1
+    100262: pCone1
+    100264: pCone1 1
+    100266: pCone2
+    100268: pCone2 1
+    100270: pCone3
+    100272: pCone3 1
+    100274: pCube1
+    100276: pCube1 1
+    100278: seagull
+    100280: //RootNode
+    100282: Seagull1
+    100284: tonque
+    100286: transform1
+    400000: bevelPolygon11
+    400002: bevelPolygon11 1
+    400004: bevelPolygon12
+    400006: bevelPolygon12 1
+    400008: bevelPolygon13
+    400010: bevelPolygon13 1
+    400012: bevelPolygon14
+    400014: bevelPolygon14 1
+    400016: bevelPolygon15
+    400018: bevelPolygon15 1
+    400020: bevelPolygon16
+    400022: bevelPolygon16 1
+    400024: bevelPolygon17
+    400026: bevelPolygon17 1
+    400028: bevelPolygon18
+    400030: bevelPolygon18 1
+    400032: bevelPolygon19
+    400034: bevelPolygon19 1
+    400036: body
+    400038: bottom
+    400040: CompoundCurve12
+    400042: CompoundCurve12 1
+    400044: CompoundCurve13
+    400046: CompoundCurve13 1
+    400048: CompoundCurve14
+    400050: CompoundCurve14 1
+    400052: CompoundCurve15
+    400054: CompoundCurve15 1
+    400056: CompoundCurve16
+    400058: CompoundCurve16 1
+    400060: CompoundCurve17
+    400062: CompoundCurve17 1
+    400064: CompoundCurve18
+    400066: CompoundCurve18 1
+    400068: CompoundCurve19
+    400070: CompoundCurve19 1
+    400072: CompoundCurve20
+    400074: CompoundCurve20 1
+    400076: CompoundCurve21
+    400078: CompoundCurve21 1
+    400080: CompoundCurve22
+    400082: CompoundCurve22 1
+    400084: curve1
+    400086: curve1 1
+    400088: curve10
+    400090: curve10 1
+    400092: curve11
+    400094: curve11 1
+    400096: curve12
+    400098: curve12 1
+    400100: curve13
+    400102: curve13 1
+    400104: curve14
+    400106: curve14 1
+    400108: curve15
+    400110: curve15 1
+    400112: curve16
+    400114: curve16 1
+    400116: curve17
+    400118: curve17 1
+    400120: curve2
+    400122: curve2 1
+    400124: curve3
+    400126: curve3 1
+    400128: curve4
+    400130: curve4 1
+    400132: curve5
+    400134: curve5 1
+    400136: curve6
+    400138: curve6 1
+    400140: curve7
+    400142: curve7 1
+    400144: curve8
+    400146: curve8 1
+    400148: curve9
+    400150: curve9 1
+    400152: eye_l
+    400154: eye_r
+    400156: FOOT_L
+    400158: FOOT_R
+    400160: hair
+    400162: hair1
+    400164: hair2
+    400166: joint1
+    400168: joint10
+    400170: joint11
+    400172: joint12
+    400174: joint13
+    400176: joint14
+    400178: joint15
+    400180: joint16
+    400182: joint17
+    400184: joint18
+    400186: joint19
+    400188: joint2
+    400190: joint20
+    400192: joint21
+    400194: joint22
+    400196: joint23
+    400198: joint24
+    400200: joint25
+    400202: joint26
+    400204: joint27
+    400206: joint28
+    400208: joint29
+    400210: joint3
+    400212: joint30
+    400214: joint31
+    400216: joint31 1
+    400218: joint32
+    400220: joint33
+    400222: joint34
+    400224: joint35
+    400226: joint36
+    400228: joint37
+    400230: joint38
+    400232: joint39
+    400234: joint4
+    400236: joint40
+    400238: joint5
+    400240: joint6
+    400242: joint7
+    400244: joint8
+    400246: joint9
+    400248: logo2
+    400250: logo3
+    400252: luier
+    400254: mouth_low
+    400256: mouth_up
+    400258: NAILS
+    400260: NAILS 1
+    400262: pCone1
+    400264: pCone1 1
+    400266: pCone2
+    400268: pCone2 1
+    400270: pCone3
+    400272: pCone3 1
+    400274: pCube1
+    400276: pCube1 1
+    400278: seagull
+    400280: //RootNode
+    400282: Seagull1
+    400284: tonque
+    400286: transform1
+    2000000: bottom
+    2100000: white
+    2100002: grey
+    2100004: black
+    2100006: yellow
+    2100008: lambert6
+    2100010: blinn4
+    2100012: anisotropic5
+    2300000: bevelPolygon11
+    2300002: bevelPolygon11 1
+    2300004: bevelPolygon12
+    2300006: bevelPolygon12 1
+    2300008: bevelPolygon13
+    2300010: bevelPolygon13 1
+    2300012: bevelPolygon14
+    2300014: bevelPolygon14 1
+    2300016: bevelPolygon15
+    2300018: bevelPolygon15 1
+    2300020: bevelPolygon16
+    2300022: bevelPolygon16 1
+    2300024: bevelPolygon17
+    2300026: bevelPolygon17 1
+    2300028: bevelPolygon18
+    2300030: bevelPolygon18 1
+    2300032: bevelPolygon19
+    2300034: bevelPolygon19 1
+    2300036: luier
+    3300000: bevelPolygon11
+    3300002: bevelPolygon11 1
+    3300004: bevelPolygon12
+    3300006: bevelPolygon12 1
+    3300008: bevelPolygon13
+    3300010: bevelPolygon13 1
+    3300012: bevelPolygon14
+    3300014: bevelPolygon14 1
+    3300016: bevelPolygon15
+    3300018: bevelPolygon15 1
+    3300020: bevelPolygon16
+    3300022: bevelPolygon16 1
+    3300024: bevelPolygon17
+    3300026: bevelPolygon17 1
+    3300028: bevelPolygon18
+    3300030: bevelPolygon18 1
+    3300032: bevelPolygon19
+    3300034: bevelPolygon19 1
+    3300036: luier
+    4300000: body
+    4300002: eye_l
+    4300004: eye_r
+    4300006: mouth_up
+    4300008: mouth_low
+    4300010: pCone1
+    4300012: pCone3
+    4300014: pCone2
+    4300016: pCube1
+    4300018: pCone1
+    4300020: pCone3
+    4300022: pCone2
+    4300024: pCube1
+    4300026: hair
+    4300028: hair1
+    4300030: hair2
+    4300032: tonque
+    4300034: luier
+    4300036: bevelPolygon11
+    4300038: bevelPolygon12
+    4300040: bevelPolygon13
+    4300042: bevelPolygon14
+    4300044: bevelPolygon15
+    4300046: bevelPolygon16
+    4300048: bevelPolygon17
+    4300050: bevelPolygon18
+    4300052: bevelPolygon19
+    4300054: bevelPolygon11
+    4300056: bevelPolygon12
+    4300058: bevelPolygon13
+    4300060: bevelPolygon14
+    4300062: bevelPolygon15
+    4300064: bevelPolygon16
+    4300066: bevelPolygon17
+    4300068: bevelPolygon18
+    4300070: bevelPolygon19
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: body
+    13700002: eye_l
+    13700004: eye_r
+    13700006: hair
+    13700008: hair1
+    13700010: hair2
+    13700012: mouth_low
+    13700014: mouth_up
+    13700016: pCone1
+    13700018: pCone1 1
+    13700020: pCone2
+    13700022: pCone2 1
+    13700024: pCone3
+    13700026: pCone3 1
+    13700028: pCube1
+    13700030: pCube1 1
+    13700032: tonque
+    2186277476908879412: ImportLogs
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 85
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 10
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.099999994
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

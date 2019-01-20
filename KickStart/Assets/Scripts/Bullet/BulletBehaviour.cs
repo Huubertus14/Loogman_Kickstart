@@ -20,6 +20,7 @@ public class BulletBehaviour : MonoBehaviour
         {
             rb = GetComponent<Rigidbody>();
         }
+        transform.position = Camera.main.transform.position;
         rb.AddForce(Camera.main.transform.forward * GameManager.Instance.GetBulletForce);
     }
 
@@ -40,6 +41,7 @@ public class BulletBehaviour : MonoBehaviour
         {
             if(GameManager.Instance.CurrentRound != Round.Intro)
             DustyManager.Instance.Messages.Add(new DustyTextFile("Hey! Ik ben geen vogel!", 5f, AudioSampleManager.Instance.DustyHitSound));
+            DustyManager.Instance.PlayAnimation("Panic 2");
             Destroy(gameObject);
         }
     }

@@ -17,10 +17,12 @@ namespace VrFox
         public UIWiggle WaterUIWiggle;
         public GameObject HighScoreObject;
         public Text AccuracyText;
+        public GameObject CursorPlace;
 
         [Header("Values:")]
         public string PlayerName;
         public int Score;
+        public int Missed;
         public float TimeToRecharge;
         public Difficulty PlayerLevel;
         public bool InPrewash;

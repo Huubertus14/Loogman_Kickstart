@@ -16,6 +16,11 @@ public class PathNode {
         get { return position; }
     }
 
+    public void SetPosition(Vector3 _set)
+    {
+        position = _set;
+    }
+
     public void Mutate(Vector3 _mutationValue)
     {
         position += _mutationValue;
