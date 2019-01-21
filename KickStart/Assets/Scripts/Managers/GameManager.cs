@@ -232,7 +232,7 @@ namespace VrFox
             }
             currentTimer += Time.deltaTime;
         }
-        
+
         private IEnumerator StartTutorial()
         {
             Debug.Log("Starting the tutorial...");
@@ -246,7 +246,7 @@ namespace VrFox
 
             yield return new WaitForSeconds(1.5f);
 
-           DustyManager.Instance.PlayAnimation("Welcome");
+            DustyManager.Instance.PlayAnimation("Welcome");
 
             //let dusty say things
             DustyManager.Instance.Messages.Add(new DustyTextFile("Ik heb je hulp nodig", 5f, AudioSampleManager.Instance.DustyVoorWas[5]));
@@ -552,7 +552,7 @@ namespace VrFox
             GameState = GameStates.GameEnd;
             StartCoroutine(EndGame());
             //CrossHairEffect.SetActive(false, 2.2f);
-
+            Reticle.SetActive(false);
             ShowEndScore();
 
             //Debug.Log("SetGameOver");
@@ -582,7 +582,7 @@ namespace VrFox
             CurrentRound = Round.Intro;
 
             StartCoroutine(StartTutorial());
-
+            Reticle.SetActive(true);
             //remove all instructions
             SetAllInstructionsActive(false);
         }
@@ -593,7 +593,7 @@ namespace VrFox
         public void SetScoreText()
         {
             ScoreText.text = "Score: " + Player.Score.ToString();
-            ScoreFloorText.text = "Score: " + Player.Score.ToString() + "   Birds hit: " + Player.HitCount.ToString() + "   Diapers shot: " + Player.ShootCount.ToString();
+            ScoreFloorText.text = "Score: " + Player.Score.ToString() + "\nBirds hit: " + Player.HitCount.ToString() + "\nDiapers shot: " + Player.ShootCount.ToString();
         }
 
         /// <summary>
@@ -603,7 +603,7 @@ namespace VrFox
         {
             if (Player.ShootCount > 0)
             {
-                float Accuracy = (Player.HitCount / Player.ShootCount) * 100;
+                float Accuracy = (Player.HitCount * 100 / Player.ShootCount);
                 AccuracyText.text = "Accuracy: " + Accuracy.ToString() + "%";
             }
             else
@@ -737,7 +737,7 @@ namespace VrFox
 
         public float GetBulletForce => bulletForce;
 
-        public Difficulty GetDifficulty => Player.PlayerLevel;
+        public Difficulty GetDiffictuly => Player.PlayerLevel;
 
         public GameObject GetHoverObject => hoverObject;
 

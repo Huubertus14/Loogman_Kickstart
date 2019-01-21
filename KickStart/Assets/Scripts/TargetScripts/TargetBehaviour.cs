@@ -18,10 +18,6 @@ public class TargetBehaviour : MonoBehaviour
     public GameObject Body;
     public GameObject[] Beek;
 
-    [Header("Fluff Attributes:")]
-    public GameObject[] FluffEyes;
-    public Material Fluff;
-
     private float BirdSoundCounter;
     private float BirdSoundTimer;// = Random.Range(2f, 6f);
 
@@ -109,16 +105,9 @@ public class TargetBehaviour : MonoBehaviour
                         Path.Swerve();
                     }
                 }
-                if (GameManager.Instance.CurrentRound == Round.Round_3)
-                {
-                    if (Random.Range(1, 4) == 3)
-                    {
-                        SetBirdFluffy();
-                    }
-                }
                 Path.BezierLinear(transform.position, endPoint);
                 //Give birds speed multipliers
-                switch (GameManager.Instance.GetDifficulty)
+                switch (GameManager.Instance.GetDiffictuly)
                 {
                     case Difficulty.Noob:
                         Speed *= 0.8f;
@@ -272,7 +261,6 @@ public class TargetBehaviour : MonoBehaviour
                 GameManager.Instance.Indicator.RemoveIndicator(transform);
                 GameManager.Instance.Player.ScoreFlash();
 
-               
 
                 //hit effect
                 Instantiate(SmokeParticles, transform.position, Quaternion.identity);
@@ -392,7 +380,7 @@ public class TargetBehaviour : MonoBehaviour
         else
         {
             //Stay in front of player
-            transform.position = GameManager.Instance.Player.transform.position + (playerOffset / 1.5f);
+            transform.position = GameManager.Instance.Player.transform.position + (playerOffset);
             if (GameManager.Instance.GameState == GameStates.Playing)
             {
                 Destroy(gameObject);
@@ -454,19 +442,7 @@ public class TargetBehaviour : MonoBehaviour
     /// <param given material="_mat"></param>
     private void SetBodyMaterial(Material _mat)
     {
-        Body.GetComponentInChildren<SkinnedMeshRenderer>().material = _mat;
-      //  Debug.Break();
-    }
-
-    /// <summary>
-    /// Set the Bird Fluffy
-    /// </summary>
-    public void SetBirdFluffy()
-    {
-        SetBodyMaterial(Fluff);
-        Diaper.transform.localScale *= 1.2f;
-
-        
+        Body.GetComponent<Renderer>().material = _mat;
     }
 
     private void DrawDebug()

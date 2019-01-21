@@ -66,18 +66,18 @@ namespace VrFox
                         if (FirstBirdFat)
                         {
                             FirstBirdFat = false;
-                            SpawnBird(FatBirdPrefab);//spawn fat bird
+                            SpawnBird(FatBirdPrefab);//spawn normal bird
                             spawnTimer = 0;
                             return;
                         }
                         if (Random.Range(0, 5) == 2)//dice roll which bird is to spawn
                         {
-                            SpawnBird(FatBirdPrefab);//spawn fat bird
+                            SpawnBird(FatBirdPrefab);//spawn normal bird
                             spawnTimer = 0;
                         }
                         else
                         {
-                            SpawnBird(BirdPrefab);//spawn normal bird
+                            SpawnBird(BirdPrefab);//spawn fat bird
                             spawnTimer = 0;
                         }
                     }
@@ -96,9 +96,9 @@ namespace VrFox
         }
         
         /// <summary>
-        /// Called to check the round and difficulty of the game
+        /// Called to check the round and difficutly of the game
         /// </summary>
-        private void DetermineDifficulty()
+        private void DetermineDiffictuly()
         {
             switch (GameManager.Instance.CurrentRound)
             {
@@ -151,7 +151,7 @@ namespace VrFox
 
             _bird.transform.position = _spawnPos;
 
-            DetermineDifficulty();
+            DetermineDiffictuly();
         }
 
         public void SpawnBirdInFrontOfPlayer()

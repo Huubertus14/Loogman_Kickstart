@@ -26,11 +26,7 @@ public class ScoreManager : MonoBehaviour
 
     private readonly string safeFileName = "highScore";
 
-    private void Start()
-    {
-        LoadAll();
-    }
-
+    
     public void LoadAll()
     {
         //Reset all values
