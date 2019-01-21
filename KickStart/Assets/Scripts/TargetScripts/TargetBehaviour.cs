@@ -29,7 +29,9 @@ public class TargetBehaviour : MonoBehaviour
     private Vector3 newEndPoint;
     private Vector3 playerOffset;
 
-
+    [Header("Fluff Attributes:")]
+    public GameObject FluffEyes;
+    public Material Fluff;
     //[Header("Refs:")]
     private GameObject Diaper;
     private MeshRenderer[] logoOnDiaper;
@@ -59,7 +61,7 @@ public class TargetBehaviour : MonoBehaviour
         BirdSoundTimer = Random.Range(3f, 6f);
         BirdSoundCounter = 0;
         AudioManager.Instance.PlayAudio(AudioSampleManager.Instance.getBirdSpawnSounds(), 1, gameObject);
-
+        FluffEyes.SetActive(false);
         //First next node
         goalNode = 1;
 
@@ -103,6 +105,13 @@ public class TargetBehaviour : MonoBehaviour
                     {
                         //Fuck up path of bird?
                         Path.Swerve();
+                    }
+                    if (GameManager.Instance.CurrentRound == Round.Round_3)
+                    {
+                        if (Random.Range(1, 4) == 3)
+                        {
+                            SetBirdFluffy();
+                        }
                     }
                 }
                 Path.BezierLinear(transform.position, endPoint);
@@ -424,7 +433,14 @@ public class TargetBehaviour : MonoBehaviour
     /// <param given material="_mat"></param>
     private void SetBodyMaterial(Material _mat)
     {
-        Body.GetComponent<Renderer>().material = _mat;
+        Body.GetComponentInChildren<SkinnedMeshRenderer>().material = _mat;
+    }
+
+    public void SetBirdFluffy()
+    {
+        SetBodyMaterial(Fluff);
+        Diaper.transform.localScale *= 1.2f;
+        FluffEyes.SetActive(true);
     }
 
     private void DrawDebug()
