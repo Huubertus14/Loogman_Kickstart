@@ -439,7 +439,6 @@ public class TargetBehaviour : MonoBehaviour
     /// <param given material="_mat"></param>
     private void SetBodyMaterial(Material _mat)
     {
-        return;
         Body.GetComponent<Renderer>().material = _mat;
     }
 

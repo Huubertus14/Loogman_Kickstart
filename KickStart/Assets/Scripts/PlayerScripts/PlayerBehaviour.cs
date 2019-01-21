@@ -29,6 +29,7 @@ namespace VrFox
 
         public int ShootCount;
         public int HitCount;
+        public int Accuracy;
 
         [Space]
         public bool IsSynced;
@@ -101,7 +102,8 @@ namespace VrFox
         private void Update()
         {
             PlayerDebug();
-            SetAccuracyText();
+            //SetAccuracyText();
+
             //Increase Water Value
             if (!GameManager.Instance.GameStarted)
             {
@@ -152,14 +154,14 @@ namespace VrFox
             }
         }
 
-        private void SetAccuracyText()
-        {
-            if (ShootCount > 0)
-            {
-                float _accuracy = (HitCount / ShootCount) * 100;
-                AccuracyText.text = "";
-            }
-        }
+        //private void SetAccuracyText()
+        //{
+        //    if (ShootCount > 0)
+        //    {
+        //        float _accuracy = (HitCount / ShootCount) * 100;
+        //        AccuracyText.text = "";
+        //    }
+        //}
 
         private void PlayerDebug()
         {

@@ -21,7 +21,7 @@ public class StartButtonBehaviour : MonoBehaviour
     public void HoverEnter()
     {
         imgGoalColor = new Color(.2f, 1, .7f, 1);
-        textGoalColor = Color.cyan;
+        textGoalColor = new Color(32f / 255, 81f / 255, 132f / 255, 1);
         buttonText.fontStyle = FontStyle.Bold;
     }
 

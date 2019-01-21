@@ -4,11 +4,13 @@ using VrFox;
 public class GazeCursor : MonoBehaviour
 {
     Vector3 orginScale;
+
     // Use this for initialization
     void Start()
     {
         orginScale = transform.localScale;
         transform.localScale = orginScale * 0.7f;
+
         // Set the cursor reference
         GameManager.Instance.Reticle = gameObject;
     }

@@ -71,6 +71,7 @@ namespace VrFox
         public Text TimeText;
         public Text EndScoreText;
         public Text ScoreFloorText;
+        public Text AccuracyText;
         public UIFadeScript HighScoreFade;
 
         [Header("Material Colors:")]
@@ -127,8 +128,11 @@ namespace VrFox
             {
                 case GameStates.Playing:
                     Playing();
+                    SetScoreText();
+                    SetAccuracyText();
                     break;
                 case GameStates.Instructions:
+                    SetScoreText();
                     currentTimer += Time.deltaTime;
                     if (currentTimer > introDuration)
                     {
@@ -460,7 +464,8 @@ namespace VrFox
             EndScoreText.text = "";
             TimeText.text = "";
             ScoreText.text = "";
-            ScoreFloorText.text = "Score:";
+            ScoreFloorText.text = "";
+            AccuracyText.text = "";
             GameStarted = false;
 
             FirstBirdHit = false;
@@ -544,7 +549,19 @@ namespace VrFox
         public void SetScoreText()
         {
             ScoreText.text = "Score: " + Player.Score.ToString();
-            ScoreFloorText.text = "Score: " + Player.Score.ToString();
+            ScoreFloorText.text = "Score: " + Player.Score.ToString() + "   Birds hit: " + Player.HitCount.ToString() + "   Diapers shot: " + Player.ShootCount.ToString();
+        }
+
+        /// <summary>
+        /// Set the Accuracy of the player, if ShootCount exceeds 0.
+        /// </summary>
+        private void SetAccuracyText()
+        {
+            if (Player.ShootCount > 0)
+            {
+                float Accuracy = (Player.HitCount / Player.ShootCount) * 100;
+                AccuracyText.text = "Accuracy: " + Player.Accuracy.ToString() + "%";
+            }
         }
 
         /// <summary>
@@ -580,6 +597,11 @@ namespace VrFox
             CurrentRound = Round.Round_1;
             SendTextMessage("Starting Round 1", 4f, Vector2.zero);
             Debug.Log("Start round 01");
+
+            Player.Score = 0;
+            Player.Accuracy = 0;
+            Player.ShootCount = 0;
+            Player.HitCount = 0;
         }
 
         /// <summary>
