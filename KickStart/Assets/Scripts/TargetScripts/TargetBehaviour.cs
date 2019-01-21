@@ -47,9 +47,11 @@ public class TargetBehaviour : MonoBehaviour
     public BirdPath Path;
     public int goalNode;
 
+    private bool bouncing;
+
     private void Start()
     {
-
+        bouncing = false;
         transform.position += new Vector3(Random.Range(-4, 4), 0, Random.Range(-4, 4));
 
         audioSource = GetComponent<AudioSource>();
@@ -91,18 +93,20 @@ public class TargetBehaviour : MonoBehaviour
                     //Give the birds a swirving or bouncing effect
                     if (Random.Range(0, 3) != 2)
                     {
-                        if (Random.Range(0, 3) == 2)
+                        if (Random.Range(1,3) == 2)
                         {
-                            Path.Bouncing();
+                            Path.ClasicSwerving();
                         }
                         else
                         {
-                            Path.Swerving();
+                            Path.Bouncing();
+                            bouncing = true;
                         }
                     }
                     else
                     {
                         //Fuck up path of bird?
+                        Path.Swerve();
                     }
                 }
                 if (GameManager.Instance.CurrentRound == Round.Round_3)
@@ -112,6 +116,7 @@ public class TargetBehaviour : MonoBehaviour
                         SetBirdFluffy();
                     }
                 }
+                Path.BezierLinear(transform.position, endPoint);
                 //Give birds speed multipliers
                 switch (GameManager.Instance.GetDifficulty)
                 {
@@ -133,7 +138,9 @@ public class TargetBehaviour : MonoBehaviour
 
                 break;
             case BirdType.Fat:
-                Path.Bouncing(); //fat birds always are bouncing
+                Path.Bouncing();
+                bouncing = true;
+                
                 break;
             case BirdType.Fast:
 
@@ -158,9 +165,7 @@ public class TargetBehaviour : MonoBehaviour
         //give bird random scale
         birdScale = Random.Range(birdScale * 0.8f, birdScale / 0.8f);
         transform.localScale = new Vector3(birdScale, birdScale, birdScale);
-
-
-        Path.BezierLinear(transform.position, endPoint);
+        
         Path.FixPath();
         //fix model rotation
         transform.Rotate(new Vector3(0, 90, 0));
@@ -346,18 +351,21 @@ public class TargetBehaviour : MonoBehaviour
             {
                 if (goalNode < Path.Nodes.Count - 1)
                 {
-
                     goalNode++;
                 }
             }
             else
             {
                 transform.position = Vector3.MoveTowards(transform.position, Path.Nodes[goalNode].GetPosition, Speed * Time.deltaTime);
-                //SetGoalRotation(Path.Nodes[goalNode].GetPosition);
+                if (!bouncing)
+                {
+                    transform.LookAt(Path.Nodes[goalNode].GetPosition);
+                    transform.Rotate(new Vector3(0, 90, 0));
+                }
             }
 
             //If end point is reached...
-            if (Vector3.Distance(transform.position, endPoint) < 1)
+            if (Vector3.Distance(transform.position, Path.Nodes[Path.Nodes.Count - 1].GetPosition) < 1)
             {
                 SpawnManager.Instance.CreateParticleEffect(IsHit, transform.position);
                 if (!IsHit)

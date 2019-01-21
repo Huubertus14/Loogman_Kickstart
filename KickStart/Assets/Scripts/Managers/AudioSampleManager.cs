@@ -64,6 +64,7 @@ public class AudioSampleManager : MonoBehaviour
     public AudioClip[] DustyRonde01;
     public AudioClip[] DustyRonde02;
     public AudioClip[] DustyRonde03;
+    public AudioClip[] DustyTimeReminder;
     public AudioClip[] DustyMisc;
 
     [Space]

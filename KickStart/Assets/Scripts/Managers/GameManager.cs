@@ -112,6 +112,8 @@ namespace VrFox
         public bool CanContinueNextGame;
         public bool FirstBirdHit = false;
         public bool SecondBirdHit = false;
+        private bool timeReminder30, timeReminder60;
+
 
         private void Start()
         {
@@ -143,6 +145,10 @@ namespace VrFox
                         //Stop the current running coroutine
                         StopCoroutine(StartTutorial());
                     }
+                    TimeText.text = "";
+                    ScoreText.text = "";
+                    ScoreFloorText.text = "";
+                    AccuracyText.text = "";
                     break;
                 case GameStates.GameEnd:
                     break;
@@ -203,6 +209,17 @@ namespace VrFox
                         CurrentRound = Round.Score;
                         currentTimer = 0;
                         SetGameOver();
+                    }
+
+                    if (round_3Duration - currentTimer < 60 && !timeReminder60)
+                    {
+                        timeReminder60 = true;
+                        DustyManager.Instance.Messages.Add(new DustyTextFile("nog 60 seconde!", 5, AudioSampleManager.Instance.DustyTimeReminder[0]));
+                    }
+                    else if (round_3Duration - currentTimer < 30 && !timeReminder30)
+                    {
+                        timeReminder30 = true;
+                        DustyManager.Instance.Messages.Add(new DustyTextFile("nog 30 seconde!", 5, AudioSampleManager.Instance.DustyTimeReminder[1]));
                     }
                     break;
                 case Round.Score:
@@ -280,6 +297,7 @@ namespace VrFox
             EndScoreText.text = "";
 
             ScoreManager.Instance.CreateAllScores(Player.Score);
+            DustyManager.Instance.PlayAnimation("Bow");
             //CrossHairEffect.SetActive(false, 0.9f);
 
             //Calculate the position of the player
@@ -452,6 +470,12 @@ namespace VrFox
             {
                 _allScores[i].SetActive(true, Random.Range(0.8f, 2.5f));
             }
+
+            yield return new WaitForSeconds(2f);
+
+            //activate restart button
+            CanContinueNextGame = true;
+
             yield return null;
         }
 
@@ -476,6 +500,9 @@ namespace VrFox
             round_1Duration = PreWashDuration * 0.4f;
             round_2Duration = CarWashDuration * 0.45f;
             round_3Duration = CarWashDuration * 0.45f;
+
+            timeReminder30 = false;
+            timeReminder60 = false;
 
             //rempve arrows
             BoundaryIndicators.SetActive(false);
@@ -560,7 +587,11 @@ namespace VrFox
             if (Player.ShootCount > 0)
             {
                 float Accuracy = (Player.HitCount / Player.ShootCount) * 100;
-                AccuracyText.text = "Accuracy: " + Player.Accuracy.ToString() + "%";
+                AccuracyText.text = "Accuracy: " + Accuracy.ToString() + "%";
+            }
+            else
+            {
+                AccuracyText.text = "Accuracy: " + "100" + "%";
             }
         }
 
@@ -599,7 +630,6 @@ namespace VrFox
             Debug.Log("Start round 01");
 
             Player.Score = 0;
-            Player.Accuracy = 0;
             Player.ShootCount = 0;
             Player.HitCount = 0;
         }

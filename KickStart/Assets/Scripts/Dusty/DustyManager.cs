@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using VrFox;
-using EnumStates;
 
 public class DustyManager : MonoBehaviour
 {
@@ -15,36 +12,40 @@ public class DustyManager : MonoBehaviour
     [Header("Refs:")]
     public GameObject TextBillboard;
     public GameObject Mouth;
+    private DustyBlink[] eyeBlinks;
     private Renderer dustyMouthRenderer;
 
     private DustyText dustyTextMessage;
     public DustyMouthSequence MouthSequence;
     private AudioSource sourceAudio;
     private Animator animator;
-
-    float headSpinTimer;
+    readonly float headSpinTimer;
 
     [Header("Values")]
     public Vector3 PositionAwayFromPlayer;
     private Vector3 goalPos;
     public Texture DefaultMouthTexture;
-    
+
     [Header("Narrative:")]
     [SerializeField]
     public List<DustyTextFile> Messages = new List<DustyTextFile>();
 
+    private float blinkCounter, blinkTimer;
+
     private string[] animationNames = new string[] {"Idle","Welcome","Panic","Shrug","Go on","Exaggorate", "Panic 2", "Arms up", "Bow"
         ,"Lean In", "Hu", "Wave", "Point to self", "Arm move", "Snake arm", "No"
     };
-    
+
     private void Start()
     {
         Messages.Clear();
-        
+
         dustyTextMessage = GetComponentInChildren<DustyText>();
         sourceAudio = GetComponentInChildren<AudioSource>();
         dustyMouthRenderer = Mouth.GetComponentInChildren<Renderer>();
         MouthSequence = GetComponent<DustyMouthSequence>();
+        eyeBlinks = GetComponentsInChildren<DustyBlink>();
+
 
         SetDustyMouthTexture(DefaultMouthTexture);
 
@@ -53,6 +54,9 @@ public class DustyManager : MonoBehaviour
         animator = GetComponent<Animator>();
 
         animator.Play("Idle");
+
+        blinkTimer = Random.Range(3,8);
+        blinkCounter = 0;
 
         goalPos = Camera.main.transform.position + PositionAwayFromPlayer;
 
@@ -66,11 +70,12 @@ public class DustyManager : MonoBehaviour
             }
         }
     }
-    
+
     private void Update()
     {
         goalPos = Camera.main.transform.position + PositionAwayFromPlayer;
 
+        Blink();
         //lerp to right position
         SetDustyPosition();
         HandleNarrative();
@@ -80,7 +85,7 @@ public class DustyManager : MonoBehaviour
     {
         transform.position = Vector3.Lerp(transform.position, goalPos, Time.deltaTime * 5);
     }
-    
+
     /// <summary>
     /// handles the text above Dusty, And says new thing when its done
     /// </summary>
@@ -94,6 +99,22 @@ public class DustyManager : MonoBehaviour
         {
             dustyTextMessage.SayMessage(Messages[0]);
             Messages.Remove(Messages[0]);
+        }
+    }
+
+    private void Blink()
+    {
+        blinkCounter += Time.deltaTime;
+        if (blinkCounter > blinkTimer)
+        {
+            blinkTimer = Random.Range(3, 6);
+            blinkCounter = 0;
+
+            float _blinkTime = Random.Range(0.3f, 0.8f);
+            foreach (var item in eyeBlinks)
+            {
+                item.Blink(_blinkTime);
+            }
         }
     }
 
@@ -123,10 +144,7 @@ public class DustyManager : MonoBehaviour
         }
     }
 
-    public DustyText GetDustyText
-    {
-        get { return dustyTextMessage; }
-    }
+    public DustyText GetDustyText => dustyTextMessage;
 
     public void PlayAnimation(string _animationName)
     {
@@ -153,6 +171,6 @@ public class DustyManager : MonoBehaviour
 
     }
 
-    public AudioSource GetAudioSource => sourceAudio; 
+    public AudioSource GetAudioSource => sourceAudio;
 
 }

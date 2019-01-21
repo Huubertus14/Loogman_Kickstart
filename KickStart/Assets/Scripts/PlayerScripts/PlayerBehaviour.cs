@@ -29,7 +29,6 @@ namespace VrFox
 
         public int ShootCount;
         public int HitCount;
-        public int Accuracy;
 
         [Space]
         public bool IsSynced;
