@@ -12,6 +12,7 @@ public class DustyManager : MonoBehaviour
     [Header("Refs:")]
     public GameObject TextBillboard;
     public GameObject Mouth;
+    private DustyBlink[] eyeBlinks;
     private Renderer dustyMouthRenderer;
 
     private DustyText dustyTextMessage;
@@ -29,6 +30,8 @@ public class DustyManager : MonoBehaviour
     [SerializeField]
     public List<DustyTextFile> Messages = new List<DustyTextFile>();
 
+    private float blinkCounter, blinkTimer;
+
     private string[] animationNames = new string[] {"Idle","Welcome","Panic","Shrug","Go on","Exaggorate", "Panic 2", "Arms up", "Bow"
         ,"Lean In", "Hu", "Wave", "Point to self", "Arm move", "Snake arm", "No"
     };
@@ -41,6 +44,8 @@ public class DustyManager : MonoBehaviour
         sourceAudio = GetComponentInChildren<AudioSource>();
         dustyMouthRenderer = Mouth.GetComponentInChildren<Renderer>();
         MouthSequence = GetComponent<DustyMouthSequence>();
+        eyeBlinks = GetComponentsInChildren<DustyBlink>();
+
 
         SetDustyMouthTexture(DefaultMouthTexture);
 
@@ -49,6 +54,9 @@ public class DustyManager : MonoBehaviour
         animator = GetComponent<Animator>();
 
         animator.Play("Idle");
+
+        blinkTimer = Random.Range(3,8);
+        blinkCounter = 0;
 
         goalPos = Camera.main.transform.position + PositionAwayFromPlayer;
 
@@ -67,6 +75,7 @@ public class DustyManager : MonoBehaviour
     {
         goalPos = Camera.main.transform.position + PositionAwayFromPlayer;
 
+        Blink();
         //lerp to right position
         SetDustyPosition();
         HandleNarrative();
@@ -90,6 +99,22 @@ public class DustyManager : MonoBehaviour
         {
             dustyTextMessage.SayMessage(Messages[0]);
             Messages.Remove(Messages[0]);
+        }
+    }
+
+    private void Blink()
+    {
+        blinkCounter += Time.deltaTime;
+        if (blinkCounter > blinkTimer)
+        {
+            blinkTimer = Random.Range(3, 6);
+            blinkCounter = 0;
+
+            float _blinkTime = Random.Range(0.3f, 0.8f);
+            foreach (var item in eyeBlinks)
+            {
+                item.Blink(_blinkTime);
+            }
         }
     }
 

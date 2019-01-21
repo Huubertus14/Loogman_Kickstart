@@ -224,6 +224,7 @@ GameObject:
   - component: {fileID: 4001603164832362}
   - component: {fileID: 33781288755878148}
   - component: {fileID: 23483264086635650}
+  - component: {fileID: 114704219216862708}
   m_Layer: 0
   m_Name: eye_L
   m_TagString: Untagged
@@ -938,6 +939,7 @@ GameObject:
   - component: {fileID: 4928520917357284}
   - component: {fileID: 33137219143351776}
   - component: {fileID: 23314150459691418}
+  - component: {fileID: 114091279656656160}
   m_Layer: 0
   m_Name: eye_R
   m_TagString: Untagged
@@ -1246,7 +1248,7 @@ Transform:
   m_GameObject: {fileID: 1275285792559894}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0.008, y: 0, z: 0}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_LocalScale: {x: 0.25, y: 0.05, z: 0.25}
   m_Children: []
   m_Father: {fileID: 4783774228578848}
   m_RootOrder: 0
@@ -1318,7 +1320,7 @@ Transform:
   m_Children:
   - {fileID: 4626151018706120}
   m_Father: {fileID: 4513815614913306}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4123060628649342
 Transform:
@@ -1535,7 +1537,7 @@ Transform:
   m_Children:
   - {fileID: 4926546295030922}
   m_Father: {fileID: 4513815614913306}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4339322426784572
 Transform:
@@ -1615,7 +1617,7 @@ Transform:
   m_Children:
   - {fileID: 4429338071194922}
   m_Father: {fileID: 4513815614913306}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4386316269800482
 Transform:
@@ -1808,7 +1810,6 @@ Transform:
   m_LocalPosition: {x: -0.03546595, y: -4.474005e-16, z: 5.542991e-21}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4744910514342744}
   - {fileID: 4381521162584004}
   - {fileID: 4293726300374946}
   - {fileID: 4110026322536738}
@@ -1908,6 +1909,7 @@ Transform:
   m_Children:
   - {fileID: 4797487477794012}
   - {fileID: 4783774228578848}
+  - {fileID: 4744910514342744}
   m_Father: {fileID: 4745831431640570}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2061,14 +2063,14 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1111067128509638}
-  m_LocalRotation: {x: -0.7071068, y: 0.7071068, z: -0, w: 0}
-  m_LocalPosition: {x: -0.037, y: 0.0001, z: 0.0099}
+  m_LocalRotation: {x: -7.7075826e-19, y: -7.8466534e-19, z: -0.70710677, w: -0.7071069}
+  m_LocalPosition: {x: 0.0003935378, y: -0.00013733286, z: -0.009899996}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4680812676851238}
   - {fileID: 4052436767835186}
-  m_Father: {fileID: 4513815614913306}
-  m_RootOrder: 0
+  m_Father: {fileID: 4618981119948222}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: -90}
 --- !u!4 &4745831431640570
 Transform:
@@ -2636,6 +2638,41 @@ TextMesh:
   m_Color:
     serializedVersion: 2
     rgba: 4294967295
+--- !u!114 &114091279656656160
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1767705223887424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6204c2bbed6c129428d19e302e0db7b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BlinkCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: -3.35683
+      outSlope: -3.35683
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.5043794
+      value: 0.00852564
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1.0010986
+      value: 1
+      inSlope: 0.62778777
+      outSlope: 0.62778777
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!114 &114243344260168426
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2673,13 +2710,45 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TextBillboard: {fileID: 1058042154579188}
   Mouth: {fileID: 1111067128509638}
-  Eyes:
-  - {fileID: 1275285792559894}
-  - {fileID: 1767705223887424}
   MouthSequence: {fileID: 0}
   PositionAwayFromPlayer: {x: 0.6, y: -0.2, z: 1.6}
   DefaultMouthTexture: {fileID: 2800000, guid: d95f33a80a9283c48a6f39980e3da562, type: 3}
   Messages: []
+--- !u!114 &114704219216862708
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1275285792559894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6204c2bbed6c129428d19e302e0db7b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BlinkCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: -3.35683
+      outSlope: -3.35683
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.5043794
+      value: 0.00852564
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1.0010986
+      value: 1
+      inSlope: 0.62778777
+      outSlope: 0.62778777
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!114 &114965579087827058
 MonoBehaviour:
   m_ObjectHideFlags: 1
