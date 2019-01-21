@@ -61,7 +61,11 @@ public class TargetBehaviour : MonoBehaviour
         BirdSoundTimer = Random.Range(3f, 6f);
         BirdSoundCounter = 0;
         AudioManager.Instance.PlayAudio(AudioSampleManager.Instance.getBirdSpawnSounds(), 1, gameObject);
-        FluffEyes.SetActive(false);
+
+        if (FluffEyes)
+        {
+            FluffEyes.SetActive(false);
+        }
         //First next node
         goalNode = 1;
 
@@ -91,9 +95,13 @@ public class TargetBehaviour : MonoBehaviour
                     //Give the birds a swirving or bouncing effect
                     if (Random.Range(0, 3) != 2)
                     {
-                        if (Random.Range(1,3) == 2)
+                        if (Random.Range(1, 3) == 2)
                         {
                             Path.ClasicSwerving();
+                        }
+                        else if (Random.Range(1, 3) == 1)
+                        {
+                            Path.BezierLinear(transform.position, endPoint);
                         }
                         else
                         {
@@ -114,7 +122,11 @@ public class TargetBehaviour : MonoBehaviour
                         }
                     }
                 }
-                Path.BezierLinear(transform.position, endPoint);
+                else
+                {
+                    Path.BezierLinear(transform.position, endPoint);
+                }
+               
                 //Give birds speed multipliers
                 switch (GameManager.Instance.GetDiffictuly)
                 {
