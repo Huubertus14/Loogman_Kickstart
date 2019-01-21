@@ -469,6 +469,12 @@ namespace VrFox
             {
                 _allScores[i].SetActive(true, Random.Range(0.8f, 2.5f));
             }
+
+            yield return new WaitForSeconds(2f);
+
+            //activate restart button
+            CanContinueNextGame = true;
+
             yield return null;
         }
 
