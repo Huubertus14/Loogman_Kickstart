@@ -1,0 +1,312 @@
+fileFormatVersion: 2
+guid: 7757d1875a9e64e3f8745a6b56be785f
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: arm_L
+    100002: arm_R
+    100004: armJoint_L
+    100006: armJoint_R
+    100008: armProtection_L
+    100010: armProtection_R
+    100012: armTube_L
+    100014: armTube_R
+    100016: body
+    100018: body 1
+    100020: C_Arm_L
+    100022: C_Arm_R
+    100024: C_Dusty
+    100026: C_Hand_L
+    100028: C_Hand_R
+    100030: C_Head
+    100032: C_Neck
+    100034: C_Shoulder_L
+    100036: C_Shoulder_R
+    100038: C_Waist
+    100040: camera
+    100042: camera 1
+    100044: cameraCase
+    100046: Dusty
+    100048: Dusty4_bones1:transform5
+    100050: Dusty4_bones:transform5
+    100052: //RootNode
+    100054: ear
+    100056: ear 1
+    100058: earCase
+    100060: eyes
+    100062: hand_L
+    100064: hand_R
+    100066: handJoint_L
+    100068: handJoint_R
+    100070: head
+    100072: head 1
+    100074: headTop
+    100076: J_Arm_L
+    100078: J_Arm_R
+    100080: J_Body
+    100082: J_BottomNeck
+    100084: J_Hand_L
+    100086: J_Hand_R
+    100088: J_Head
+    100090: J_Joint_L
+    100092: J_Joint_R
+    100094: J_Lowerarm_L
+    100096: J_Lowerarm_R
+    100098: J_Motor
+    100100: J_Neck
+    100102: J_NeckTube
+    100104: J_Shoulder_L
+    100106: J_Shoulder_R
+    100108: J_Skeleton
+    100110: J_TopHead
+    100112: J_Tube
+    100114: J_Wrist_L
+    100116: J_Wrist_R
+    100118: joint_L
+    100120: joint_R
+    100122: lowerArm_L
+    100124: lowerArm_R
+    100126: motor
+    100128: motorTube
+    100130: neck
+    100132: neckBody
+    100134: neckHead
+    100136: neckTube
+    100138: shoulderProtection_L
+    100140: shoulderProtectionR
+    100142: transform5
+    400000: arm_L
+    400002: arm_R
+    400004: armJoint_L
+    400006: armJoint_R
+    400008: armProtection_L
+    400010: armProtection_R
+    400012: armTube_L
+    400014: armTube_R
+    400016: body
+    400018: body 1
+    400020: C_Arm_L
+    400022: C_Arm_R
+    400024: C_Dusty
+    400026: C_Hand_L
+    400028: C_Hand_R
+    400030: C_Head
+    400032: C_Neck
+    400034: C_Shoulder_L
+    400036: C_Shoulder_R
+    400038: C_Waist
+    400040: camera
+    400042: camera 1
+    400044: cameraCase
+    400046: Dusty
+    400048: Dusty4_bones1:transform5
+    400050: Dusty4_bones:transform5
+    400052: //RootNode
+    400054: ear
+    400056: ear 1
+    400058: earCase
+    400060: eyes
+    400062: hand_L
+    400064: hand_R
+    400066: handJoint_L
+    400068: handJoint_R
+    400070: head
+    400072: head 1
+    400074: headTop
+    400076: J_Arm_L
+    400078: J_Arm_R
+    400080: J_Body
+    400082: J_BottomNeck
+    400084: J_Hand_L
+    400086: J_Hand_R
+    400088: J_Head
+    400090: J_Joint_L
+    400092: J_Joint_R
+    400094: J_Lowerarm_L
+    400096: J_Lowerarm_R
+    400098: J_Motor
+    400100: J_Neck
+    400102: J_NeckTube
+    400104: J_Shoulder_L
+    400106: J_Shoulder_R
+    400108: J_Skeleton
+    400110: J_TopHead
+    400112: J_Tube
+    400114: J_Wrist_L
+    400116: J_Wrist_R
+    400118: joint_L
+    400120: joint_R
+    400122: lowerArm_L
+    400124: lowerArm_R
+    400126: motor
+    400128: motorTube
+    400130: neck
+    400132: neckBody
+    400134: neckHead
+    400136: neckTube
+    400138: shoulderProtection_L
+    400140: shoulderProtectionR
+    400142: transform5
+    2100000: UVTextureDusty
+    4300000: camera
+    4300002: cameraCase
+    4300004: earCase
+    4300006: ear
+    4300008: headTop
+    4300010: head
+    4300012: neckHead
+    4300014: neckTube
+    4300016: neckBody
+    4300018: shoulderProtectionR
+    4300020: armJoint_R
+    4300022: joint_R
+    4300024: handJoint_R
+    4300026: hand_R
+    4300028: armTube_R
+    4300030: armProtection_R
+    4300032: motorTube
+    4300034: body
+    4300036: motor
+    4300038: shoulderProtection_L
+    4300040: armJoint_L
+    4300042: joint_L
+    4300044: handJoint_L
+    4300046: hand_L
+    4300048: armTube_L
+    4300050: armProtection_L
+    7400000: DustyIdle
+    9500000: //RootNode
+    13700000: armJoint_L
+    13700002: armJoint_R
+    13700004: armProtection_L
+    13700006: armProtection_R
+    13700008: armTube_L
+    13700010: armTube_R
+    13700012: body 1
+    13700014: camera 1
+    13700016: cameraCase
+    13700018: ear 1
+    13700020: earCase
+    13700022: hand_L
+    13700024: hand_R
+    13700026: handJoint_L
+    13700028: handJoint_R
+    13700030: head 1
+    13700032: headTop
+    13700034: joint_L
+    13700036: joint_R
+    13700038: motor
+    13700040: motorTube
+    13700042: neckBody
+    13700044: neckHead
+    13700046: neckTube
+    13700048: shoulderProtection_L
+    13700050: shoulderProtectionR
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: DustyIdle
+      takeName: Take 001
+      firstFrame: 2250
+      lastFrame: 2330
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
