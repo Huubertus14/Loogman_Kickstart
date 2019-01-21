@@ -2,7 +2,7 @@
 using UnityEngine;
 using VrFox;
 
-public class BirdPath : MonoBehaviour
+public class BirdPath
 {
     public System.Collections.Generic.List<PathNode> Nodes = new List<PathNode>();
 
@@ -112,15 +112,7 @@ public class BirdPath : MonoBehaviour
 
         firstMiddle += _mutate;
         secondMiddle += -_mutate;
-
-        GameObject o = Instantiate(new GameObject(), beginPoint, Quaternion.identity);
-        GameObject e = Instantiate(new GameObject(), middlePoint, Quaternion.identity);
-        GameObject w = Instantiate(new GameObject(), endPoint, Quaternion.identity);
-
-        o.name = "begin";
-        e.name = "middle";
-        w.name = "end" +
-            "";
+        
         BezierQuadratic(middlePoint, endPoint, beginPoint);
        // BezierQuadratic(middlePoint, endPoint, secondMiddle);
 

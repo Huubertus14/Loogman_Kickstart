@@ -364,6 +364,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 14fb6cbfb5db83549a85e3bbb81a901c, type: 3}
   DustyRonde03:
   - {fileID: 8300000, guid: 85784c7670a601f4682008a4074460bc, type: 3}
+  DustyTimeReminder:
+  - {fileID: 8300000, guid: 097df42688ab8ed40870b861e40e4f29, type: 3}
+  - {fileID: 8300000, guid: b4307c357c804dd40b78b82ce4cbb40d, type: 3}
   DustyMisc:
   - {fileID: 8300000, guid: 3fcc86520398a9b47ad44c66ae573984, type: 3}
   DustyHitSound: {fileID: 8300000, guid: 72eef4b1214538a4b942ca8d2e0e89f6, type: 3}

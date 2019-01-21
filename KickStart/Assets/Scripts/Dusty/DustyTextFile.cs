@@ -16,6 +16,7 @@ public class DustyTextFile
 
     public DustyTextFile(string _message, float _fadeSpeed, AudioClip _audio)
     {
+        Debug.Log(_message);
         audio = _audio;
         duration = audio.length;
         fadeSpeed = _fadeSpeed;
