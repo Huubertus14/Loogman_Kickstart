@@ -688,7 +688,7 @@ namespace VrFox
 
         public float GetBulletForce => bulletForce;
 
-        public Difficulty GetDiffictuly => Player.PlayerLevel;
+        public Difficulty GetDifficulty => Player.PlayerLevel;
 
         public GameObject GetHoverObject => hoverObject;
 
