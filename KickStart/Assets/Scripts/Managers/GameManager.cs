@@ -207,7 +207,7 @@ namespace VrFox
                     if (currentTimer > round_3Duration)
                     {
                         DustyManager.Instance.Messages.Add(new DustyTextFile("Je bent nu bij het einde", 5, AudioSampleManager.Instance.DustyMisc[0]));
-                        SendTextMessage("Game Over", 4f, new Vector2(0, -40));
+                       // SendTextMessage("Game Over", 4f, new Vector2(0, -40));
                         CurrentRound = Round.Score;
                         currentTimer = 0;
                         SetGameOver();
