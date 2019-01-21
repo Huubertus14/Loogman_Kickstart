@@ -31,9 +31,14 @@ public class DustyManager : MonoBehaviour
     public List<DustyTextFile> Messages = new List<DustyTextFile>();
 
     private float blinkCounter, blinkTimer;
+    private float animationCounter, animationTimer;
 
     private string[] animationNames = new string[] {"Idle","Welcome","Panic","Shrug","Go on","Exaggorate", "Panic 2", "Arms up", "Bow"
         ,"Lean In", "Hu", "Wave", "Point to self", "Arm move", "Snake arm", "No"
+    };
+
+    private string[] randomAnimationNames = new string[] {"Idle","Shrug","Go on", "Panic 2", "Arms up", "Bow"
+        ,"Lean In", "Hu", "Wave",  "Arm move", "Snake arm", "No"
     };
 
     private void Start()
@@ -55,8 +60,11 @@ public class DustyManager : MonoBehaviour
 
         animator.Play("Idle");
 
-        blinkTimer = Random.Range(3,8);
+        blinkTimer = Random.Range(3, 8);
         blinkCounter = 0;
+
+        animationTimer = 30;
+        animationCounter = 0;
 
         goalPos = Camera.main.transform.position + PositionAwayFromPlayer;
 
@@ -75,6 +83,7 @@ public class DustyManager : MonoBehaviour
     {
         goalPos = Camera.main.transform.position + PositionAwayFromPlayer;
 
+        RandomAnimation();
         Blink();
         //lerp to right position
         SetDustyPosition();
@@ -99,6 +108,19 @@ public class DustyManager : MonoBehaviour
         {
             dustyTextMessage.SayMessage(Messages[0]);
             Messages.Remove(Messages[0]);
+        }
+    }
+
+    private void RandomAnimation()
+    {
+        animationCounter += Time.deltaTime;
+        if (animationCounter > animationTimer)
+        {
+            animationCounter = 0;
+            animationTimer = Random.Range(15, 22);
+
+            int _x = Random.Range(0, randomAnimationNames.Length - 1);
+            PlayAnimation(randomAnimationNames[_x]);
         }
     }
 

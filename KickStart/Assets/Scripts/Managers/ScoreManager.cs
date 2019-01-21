@@ -28,6 +28,11 @@ public class ScoreManager : MonoBehaviour
 
     private void Start()
     {
+        LoadAll();
+    }
+
+    public void LoadAll()
+    {
         //Reset all values
         saveEngine = new SaveData();
         AllScores.Clear();
@@ -36,7 +41,7 @@ public class ScoreManager : MonoBehaviour
         int[] _temp = saveEngine.ReadData(safeFileName);
         if (_temp == null)
         {
-            _temp = new int[6]{0,0,0,0,0,0};
+            _temp = new int[6] { 0, 0, 0, 0, 0, 0 };
         }
         for (int i = 0; i < _temp.Length; i++)
         {

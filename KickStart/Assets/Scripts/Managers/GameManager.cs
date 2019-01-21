@@ -1,6 +1,7 @@
 ﻿using EnumStates;
 using Greyman;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -196,7 +197,8 @@ namespace VrFox
                     if (currentTimer > round_2Duration)
                     {
                         SendTextMessage("Starting Round 3", 4f, Vector2.zero);
-                        DustyManager.Instance.Messages.Add(new DustyTextFile("Je bent nu aan het einde van ronde 3", 5, AudioSampleManager.Instance.DustyRonde02[2]));
+                        DustyManager.Instance.Messages.Add(new DustyTextFile("Je bent nu aan het einde van ronde 2", 5, AudioSampleManager.Instance.DustyRonde02[2]));
+                        DustyManager.Instance.Messages.Add(new DustyTextFile("We beginnen met ronde 3", 5, AudioSampleManager.Instance.DustyMisc[3]));
                         CurrentRound = Round.Round_3;
                         currentTimer = 0;
                     }
@@ -286,6 +288,9 @@ namespace VrFox
 
             yield return null;
         }
+
+        [HideInInspector]
+        public List<GameObject> highScoreObjects = new List<GameObject>();
 
         /// <summary>
         /// Shows the score of the player and it's current rank in the high scores
@@ -439,6 +444,7 @@ namespace VrFox
             foreach (var _score in OtherScores)
             {
                 _score.GetComponentInChildren<Text>().color = new Color(.9f, .9f, .9f, .8f);
+                highScoreObjects.Add(_score);
             }
 
             Vector3 _xPosOffset = new Vector3(800, 0, 0);
@@ -484,6 +490,17 @@ namespace VrFox
         /// </summary>
         public void ResetGame()
         {
+            if (highScoreObjects.Count > 0)
+            {
+                foreach (var item in highScoreObjects)
+                {
+                    Destroy(item);
+                }
+                highScoreObjects.Clear();
+            }
+
+            ScoreManager.Instance.LoadAll();
+            HighScoreFade.Active(false);
             TutorialFeedbackText.text = "";
             EndScoreText.text = "";
             TimeText.text = "";
@@ -699,6 +716,8 @@ namespace VrFox
             playerEndScoreObject.transform.localPosition = new Vector3(EndScoreText.transform.localPosition.x, EndScoreText.transform.localPosition.y - 100, EndScoreText.transform.localPosition.z);
             playerEndScoreObject.GetComponent<PositionLerp>().SetActivePosition(new Vector3(EndScoreText.transform.localPosition.x, EndScoreText.transform.localPosition.y - 100, EndScoreText.transform.localPosition.z));
             playerEndScoreObject.GetComponent<PositionLerp>().SetActive(true);
+
+            highScoreObjects.Add(playerEndScoreObject);
         }
 
         /// <summary>

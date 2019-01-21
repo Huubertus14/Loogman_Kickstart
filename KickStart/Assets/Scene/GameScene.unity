@@ -3660,7 +3660,7 @@ Prefab:
     - target: {fileID: 114322428844149892, guid: 20c13879b59ae4a4f85b04cacea06003,
         type: 2}
       propertyPath: DustyMisc.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4431195185167114, guid: 20c13879b59ae4a4f85b04cacea06003, type: 2}
       propertyPath: m_LocalPosition.x
@@ -3829,6 +3829,21 @@ Prefab:
       propertyPath: DustyMisc.Array.data[2]
       value: 
       objectReference: {fileID: 8300000, guid: 3fcc86520398a9b47ad44c66ae573984, type: 3}
+    - target: {fileID: 114755208706617680, guid: 20c13879b59ae4a4f85b04cacea06003,
+        type: 2}
+      propertyPath: PreWashDuration
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 114755208706617680, guid: 20c13879b59ae4a4f85b04cacea06003,
+        type: 2}
+      propertyPath: CarWashDuration
+      value: 220
+      objectReference: {fileID: 0}
+    - target: {fileID: 114322428844149892, guid: 20c13879b59ae4a4f85b04cacea06003,
+        type: 2}
+      propertyPath: DustyMisc.Array.data[3]
+      value: 
+      objectReference: {fileID: 8300000, guid: fe603540225cc7544811d43c3b0b6819, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 20c13879b59ae4a4f85b04cacea06003, type: 2}
   m_IsPrefabParent: 0

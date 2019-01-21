@@ -381,6 +381,10 @@ public class TargetBehaviour : MonoBehaviour
         {
             //Stay in front of player
             transform.position = GameManager.Instance.Player.transform.position + (playerOffset / 1.5f);
+            if (GameManager.Instance.GameState == GameStates.Playing)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 
@@ -426,7 +430,6 @@ public class TargetBehaviour : MonoBehaviour
     /// <param material of the bird="_mat"></param>
     private void SetBeekMaterial(Material _mat)
     {
-        return;
         foreach (var item in Beek)
         {
             item.GetComponent<Renderer>().material = _mat;

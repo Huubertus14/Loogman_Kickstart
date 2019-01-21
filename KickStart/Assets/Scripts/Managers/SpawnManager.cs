@@ -166,7 +166,7 @@ namespace VrFox
             float _distance = Random.Range(4, 6);
 
             _bird.transform.position = _direction * _distance;
-            _bird.transform.position = new Vector3(_bird.transform.position.x, Random.Range(-0.5f, 1.2f), _bird.transform.position.z);
+            //_bird.transform.position = new Vector3(_bird.transform.position.x, Random.Range(-0.5f, 1.2f), _bird.transform.position.z);
             
         }
 

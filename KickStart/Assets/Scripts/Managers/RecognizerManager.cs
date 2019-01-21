@@ -34,11 +34,6 @@ public class RecognizerManager : MonoBehaviour
         switch (GameManager.Instance.GameState)
         {
             case GameStates.Playing:
-                if (dubbeltap < 0.4f && dubbeltap > 0.1f)
-                {
-                    Debug.Log("Dubbel Tap");
-                }
-                dubbeltap = 0;
 
                 GameManager.Instance.Player.Shoot();
                 break;
@@ -49,6 +44,7 @@ public class RecognizerManager : MonoBehaviour
                 if (GameManager.Instance.CanContinueNextGame)
                 {
                     GameManager.Instance.ResetGame();
+
                     return;
                 }
                 break;
