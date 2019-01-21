@@ -21,6 +21,8 @@ public class DustyManager : MonoBehaviour
     private Animator animator;
     readonly float headSpinTimer;
 
+    public float DustyHitTimer;
+
     [Header("Values")]
     public Vector3 PositionAwayFromPlayer;
     private Vector3 goalPos;
@@ -88,6 +90,7 @@ public class DustyManager : MonoBehaviour
         //lerp to right position
         SetDustyPosition();
         HandleNarrative();
+        DustyHitTimer += Time.deltaTime;
     }
 
     private void SetDustyPosition()

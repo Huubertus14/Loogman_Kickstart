@@ -163,7 +163,7 @@ namespace VrFox
 
             //Set right spawn point 
             Vector3 _direction = new Vector3(0,0,1);
-            float _distance = Random.Range(4, 6);
+            float _distance = Random.Range(7, 9);
 
             _bird.transform.position = _direction * _distance;
             //_bird.transform.position = new Vector3(_bird.transform.position.x, Random.Range(-0.5f, 1.2f), _bird.transform.position.z);

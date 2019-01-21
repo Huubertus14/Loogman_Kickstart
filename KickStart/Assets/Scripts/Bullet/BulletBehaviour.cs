@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using EnumStates;
 using UnityEngine;
 using VrFox;
-using EnumStates;
 
 public class BulletBehaviour : MonoBehaviour
 {
@@ -32,17 +30,23 @@ public class BulletBehaviour : MonoBehaviour
             //Target HIT!
             //AudioManager.Instance.PlayAudio(AudioSampleManager.Instance.GetExplosionSound(), 1);
             collision.gameObject.GetComponent<TargetBehaviour>().Hit(transform.position);
-            
+
             GameManager.Instance.SetScoreText();
 
             Destroy(gameObject);
         }
         if (collision.gameObject.tag.Contains("Dusty"))
         {
-            if(GameManager.Instance.CurrentRound != Round.Intro)
-            DustyManager.Instance.Messages.Add(new DustyTextFile("Hey! Ik ben geen vogel!", 5f, AudioSampleManager.Instance.DustyHitSound));
-            DustyManager.Instance.PlayAnimation("Panic 2");
-            Destroy(gameObject);
+            if (DustyManager.Instance.DustyHitTimer > 5)
+            {
+                if (GameManager.Instance.CurrentRound != Round.Intro)
+                {
+                    DustyManager.Instance.Messages.Add(new DustyTextFile("Hey! Ik ben geen vogel!", 5f, AudioSampleManager.Instance.DustyHitSound));
+                }
+                DustyManager.Instance.DustyHitTimer = 0;
+                DustyManager.Instance.PlayAnimation("Panic 2");
+                Destroy(gameObject);
+            }
         }
     }
 }
