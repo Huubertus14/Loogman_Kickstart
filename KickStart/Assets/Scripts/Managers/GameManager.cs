@@ -297,6 +297,7 @@ namespace VrFox
             EndScoreText.text = "";
 
             ScoreManager.Instance.CreateAllScores(Player.Score);
+            DustyManager.Instance.PlayAnimation("Bow");
             //CrossHairEffect.SetActive(false, 0.9f);
 
             //Calculate the position of the player

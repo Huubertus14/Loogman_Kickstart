@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using VrFox;
-using EnumStates;
 
 public class DustyManager : MonoBehaviour
 {
@@ -21,14 +18,13 @@ public class DustyManager : MonoBehaviour
     public DustyMouthSequence MouthSequence;
     private AudioSource sourceAudio;
     private Animator animator;
-
-    float headSpinTimer;
+    readonly float headSpinTimer;
 
     [Header("Values")]
     public Vector3 PositionAwayFromPlayer;
     private Vector3 goalPos;
     public Texture DefaultMouthTexture;
-    
+
     [Header("Narrative:")]
     [SerializeField]
     public List<DustyTextFile> Messages = new List<DustyTextFile>();
@@ -36,11 +32,11 @@ public class DustyManager : MonoBehaviour
     private string[] animationNames = new string[] {"Idle","Welcome","Panic","Shrug","Go on","Exaggorate", "Panic 2", "Arms up", "Bow"
         ,"Lean In", "Hu", "Wave", "Point to self", "Arm move", "Snake arm", "No"
     };
-    
+
     private void Start()
     {
         Messages.Clear();
-        
+
         dustyTextMessage = GetComponentInChildren<DustyText>();
         sourceAudio = GetComponentInChildren<AudioSource>();
         dustyMouthRenderer = Mouth.GetComponentInChildren<Renderer>();
@@ -66,7 +62,7 @@ public class DustyManager : MonoBehaviour
             }
         }
     }
-    
+
     private void Update()
     {
         goalPos = Camera.main.transform.position + PositionAwayFromPlayer;
@@ -80,7 +76,7 @@ public class DustyManager : MonoBehaviour
     {
         transform.position = Vector3.Lerp(transform.position, goalPos, Time.deltaTime * 5);
     }
-    
+
     /// <summary>
     /// handles the text above Dusty, And says new thing when its done
     /// </summary>
@@ -123,10 +119,7 @@ public class DustyManager : MonoBehaviour
         }
     }
 
-    public DustyText GetDustyText
-    {
-        get { return dustyTextMessage; }
-    }
+    public DustyText GetDustyText => dustyTextMessage;
 
     public void PlayAnimation(string _animationName)
     {
@@ -153,6 +146,6 @@ public class DustyManager : MonoBehaviour
 
     }
 
-    public AudioSource GetAudioSource => sourceAudio; 
+    public AudioSource GetAudioSource => sourceAudio;
 
 }
