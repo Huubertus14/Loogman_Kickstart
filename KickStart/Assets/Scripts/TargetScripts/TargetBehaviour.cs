@@ -391,25 +391,7 @@ public class TargetBehaviour : MonoBehaviour
     private bool CheckIfBirdBehindPlayer()
     {
         return false;
-        if (transform.position.z < (Camera.main.transform.position.z - 0.5))
-        {
-            return true;
-        }
-        if (transform.position.x < (Camera.main.transform.position.x) - 3.8)
-        {
-            if (transform.position.z < Camera.main.transform.position.z - 0.5)
-            {
-                return true;
-            }
-        }
-        if (transform.position.x > (Camera.main.transform.position.x) + 3.8)
-        {
-            if (transform.position.z < (Camera.main.transform.position.z) - 0.5)
-            {
-                return true;
-            }
-        }
-        return false;
+        
     }
 
     private void BirdFlapSound()

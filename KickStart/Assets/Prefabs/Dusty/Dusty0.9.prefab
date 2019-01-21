@@ -2712,7 +2712,7 @@ MonoBehaviour:
   Mouth: {fileID: 1111067128509638}
   MouthSequence: {fileID: 0}
   PositionAwayFromPlayer: {x: 0.6, y: -0.2, z: 1.6}
-  DefaultMouthTexture: {fileID: 2800000, guid: d95f33a80a9283c48a6f39980e3da562, type: 3}
+  DefaultMouthTexture: {fileID: 2800000, guid: 81e5c9165ac34934ca5effc871493ae1, type: 3}
   Messages: []
 --- !u!114 &114704219216862708
 MonoBehaviour:
