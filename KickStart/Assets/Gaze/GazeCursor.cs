@@ -3,14 +3,14 @@ using VrFox;
 
 public class GazeCursor : MonoBehaviour
 {
-    private MeshRenderer[] meshRenderer;
-    public float FixedSize = .0005f;
+    Vector3 orginScale;
 
     // Use this for initialization
     void Start()
     {
         orginScale = transform.localScale;
         transform.localScale = orginScale * 0.7f;
+
         // Set the cursor reference
         GameManager.Instance.Reticle = gameObject;
     }
@@ -60,5 +60,3 @@ public class GazeCursor : MonoBehaviour
         transform.Rotate(-90, 0, 0);
     }
 }
-
-    Vector3 orginScale;

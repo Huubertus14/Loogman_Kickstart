@@ -323,7 +323,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 94dbd4febab734210a43c84263f5e116, type: 3}
   - {fileID: 8300000, guid: 3ff9fcf8763db443d8c48710cdf9ab60, type: 3}
   - {fileID: 8300000, guid: a1382e4f297374edea614c369f31dcb2, type: 3}
-  - {fileID: 8300000, guid: fa6cba83a4316904f9489e7d058b2c15, type: 3}
   ExplosionSounds:
   - {fileID: 8300000, guid: 7bef0064f8567430cac22499c6b93d4f, type: 3}
   - {fileID: 8300000, guid: cd5817e224b2b4d579cf0d0d8bfce316, type: 3}
@@ -339,7 +338,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 077ddcef32ac7ba4eb87b4b1f4290e25, type: 3}
   - {fileID: 8300000, guid: 576ed0c9ad5bca14baa94414fa558eee, type: 3}
   - {fileID: 8300000, guid: 1261eaa073dff564eaea3b84a911d56c, type: 3}
-  - {fileID: 8300000, guid: 669f19b2f7b2133469e575158bec7ab9, type: 3}
+  - {fileID: 8300000, guid: 019e27cb384ab9440badbb41f3b3dad4, type: 3}
   - {fileID: 8300000, guid: 8254b226fae739b4eae6266a4eeafcfe, type: 3}
   - {fileID: 8300000, guid: 4453062ad63590548a2f6b4c78c6405b, type: 3}
   - {fileID: 8300000, guid: 79519e39cef9308498ab2cddda5f761a, type: 3}
@@ -435,6 +434,7 @@ MonoBehaviour:
   TimeText: {fileID: 0}
   EndScoreText: {fileID: 0}
   ScoreFloorText: {fileID: 0}
+  AccuracyText: {fileID: 0}
   HighScoreFade: {fileID: 0}
   Blue: {fileID: 2100000, guid: 726022aa4e92617449c3beaa066b623c, type: 2}
   White: {fileID: 2100000, guid: 7fec446aa0041d4489c5236084374df9, type: 2}
