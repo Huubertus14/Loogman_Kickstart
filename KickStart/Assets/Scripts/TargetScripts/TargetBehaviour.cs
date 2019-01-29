@@ -126,7 +126,7 @@ public class TargetBehaviour : MonoBehaviour
                 {
                     Path.BezierLinear(transform.position, endPoint);
                 }
-               
+
                 //Give birds speed multipliers
                 switch (GameManager.Instance.GetDiffictuly)
                 {
@@ -150,7 +150,7 @@ public class TargetBehaviour : MonoBehaviour
             case BirdType.Fat:
                 Path.Bouncing();
                 bouncing = true;
-                
+
                 break;
             case BirdType.Fast:
 
@@ -175,7 +175,7 @@ public class TargetBehaviour : MonoBehaviour
         //give bird random scale
         birdScale = Random.Range(birdScale * 0.8f, birdScale / 0.8f);
         transform.localScale = new Vector3(birdScale, birdScale, birdScale);
-        
+
         Path.FixPath();
         //fix model rotation
         transform.Rotate(new Vector3(0, 90, 0));
@@ -356,17 +356,18 @@ public class TargetBehaviour : MonoBehaviour
     {
         if (MovingBird)
         {
-            if (Vector3.Distance(transform.position, Path.Nodes[goalNode].GetPosition) < 0.1f)
+            if (Vector3.Distance(transform.position, Path.Nodes[goalNode].GetPosition) < 0.1f) //Check if bird is near goal node
             {
                 if (goalNode < Path.Nodes.Count - 1)
                 {
+                    //Increase goal node to the next
                     goalNode++;
                 }
             }
             else
             {
-                transform.position = Vector3.MoveTowards(transform.position, Path.Nodes[goalNode].GetPosition, Speed * Time.deltaTime);
-                if (!bouncing)
+                transform.position = Vector3.MoveTowards(transform.position, Path.Nodes[goalNode].GetPosition, Speed * Time.deltaTime); //Move the bird tot he next node
+                if (!bouncing) //Only look to goal node when bird is not bouncing
                 {
                     transform.LookAt(Path.Nodes[goalNode].GetPosition);
                     transform.Rotate(new Vector3(0, 90, 0));
@@ -377,25 +378,7 @@ public class TargetBehaviour : MonoBehaviour
             if (Vector3.Distance(transform.position, Path.Nodes[Path.Nodes.Count - 1].GetPosition) < 1)
             {
                 SpawnManager.Instance.CreateParticleEffect(IsHit, transform.position);
-                if (!IsHit)
-                {
-                    //Get minus points when a birds get trough
-                    //GameManager.Instance.Player.Score -= 1;
-                }
                 Destroy(gameObject);
-
-            }
-            else if (CheckIfBirdBehindPlayer())
-            {
-                SpawnManager.Instance.CreateParticleEffect(IsHit, transform.position);
-                if (!IsHit)
-                {
-                    //Get minus points when a birds get trough
-                    //GameManager.Instance.Player.Score -= 1;
-                }
-
-                Destroy(gameObject);
-
             }
         }
         else
@@ -408,13 +391,7 @@ public class TargetBehaviour : MonoBehaviour
             }
         }
     }
-
-    private bool CheckIfBirdBehindPlayer()
-    {
-        return false;
-        
-    }
-
+    
     private void BirdFlapSound()
     {
         BirdSoundCounter += Time.deltaTime;

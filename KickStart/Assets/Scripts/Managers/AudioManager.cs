@@ -46,20 +46,11 @@ public class AudioManager : MonoBehaviour
 
             return;
         }
-
-        //Create the audio object
-        _audioSource = Instantiate(AudioPrefab, _sourceObject.transform.position, Quaternion.identity);
-
-        //Get the audio source
-        _source = _audioSource.GetComponent<AudioSource>();
+        else
+        {
+            PlayAudio(_clip, _volume);
+        }
         
-        //Set the audio value
-        _source.clip = _clip;
-        _source.volume = _volume;
-
-        //Start the audio
-        _source.Play();
-        _audioSource.GetComponent<AudioCleanup>().StartChecking();
     }
 
     /// <summary>

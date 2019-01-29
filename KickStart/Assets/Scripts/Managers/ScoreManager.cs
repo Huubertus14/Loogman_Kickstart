@@ -29,6 +29,7 @@ public class ScoreManager : MonoBehaviour
     
     public void LoadAll()
     {
+
         //Reset all values
         saveEngine = new SaveData();
         AllScores.Clear();

@@ -191,10 +191,6 @@ public class DustyManager : MonoBehaviour
         }
     }
 
-    public void DustyHit()
-    {
-
-    }
 
     public AudioSource GetAudioSource => sourceAudio;
 

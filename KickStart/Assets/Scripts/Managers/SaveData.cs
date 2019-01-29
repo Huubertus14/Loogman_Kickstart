@@ -28,4 +28,3 @@ public class SaveData
         Debug.Log("Saved");
     }
 }
-
