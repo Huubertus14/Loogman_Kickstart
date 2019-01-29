@@ -16,8 +16,7 @@ public class BirdPath
         beginPoint = _begin;
         endPoint = _end;
     }
-
-
+    
     public void SetNodes()
     {
         float _dis = Vector3.Distance(beginPoint, endPoint);
@@ -123,17 +122,18 @@ public class BirdPath
     }
 
     private readonly int numPoints = 50;
-    private Vector3[] positions;// = new Vector3[50];
+    private Vector3[] positions;
     private Vector3 begin, middle, end;
     System.Collections.Generic.List<PathNode> temp = new List<PathNode>();
 
-    public void BezierLinear(Vector3 _begin, Vector3 _end) //time = 0 = begin, time = 1 = end
+    public void BezierLinear(Vector3 _begin, Vector3 _end) 
     {
         begin = _begin;
         end = _end;
         positions = new Vector3[numPoints];
         MakeLinearCurve();
         Nodes.Clear();
+        //time = 0 = begin, time = 1 = end
         for (int i = 0; i < positions.Length; i++)
         {
             Nodes.Add(new PathNode(positions[i]));

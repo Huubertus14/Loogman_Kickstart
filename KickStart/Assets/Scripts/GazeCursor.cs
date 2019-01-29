@@ -18,11 +18,6 @@ public class GazeCursor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //var distance = (Camera.main.transform.position - transform.position).magnitude;
-        //var size = distance * FixedSize * Camera.main.fieldOfView;
-        //transform.localScale = Vector3.one * size;
-        //transform.forward = transform.position - Camera.main.transform.position;
-
         // Do a raycast into the world based on the user's
         // head position and orientation.
         var headPosition = Camera.main.transform.position;
@@ -51,6 +46,7 @@ public class GazeCursor : MonoBehaviour
             DefaultPosition();
         }
     }
+
     private void DefaultPosition()
     {
         // If the raycast did not hit a hologram, display mesh at certain distance

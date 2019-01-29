@@ -5,12 +5,10 @@ using VrFox;
 
 public class RecognizerManager : MonoBehaviour
 {
-
     public static RecognizerManager Instance;
 
     private GestureRecognizer recognizer;
 
-    private float dubbeltap;
 
     private void Awake()
     {
@@ -93,8 +91,6 @@ public class RecognizerManager : MonoBehaviour
                 }
             }
         }
-
-        dubbeltap += Time.deltaTime;
     }
 
 

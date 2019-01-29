@@ -24,7 +24,7 @@ public class AudioManager : MonoBehaviour
             Debug.LogError("No Audioclip attached!");
             return;
         }
-        GameObject _audioSource;
+
         AudioSource _source;
 
         //clamp volume
@@ -33,7 +33,6 @@ public class AudioManager : MonoBehaviour
         //Check if the current object has a audiosource
         if (_sourceObject.GetComponent<AudioSource>())
         {
-            _audioSource = _sourceObject;
             _source = _sourceObject.GetComponent<AudioSource>();
 
             _source.clip = _clip;
@@ -50,7 +49,7 @@ public class AudioManager : MonoBehaviour
         {
             PlayAudio(_clip, _volume);
         }
-        
+
     }
 
     /// <summary>
@@ -67,7 +66,7 @@ public class AudioManager : MonoBehaviour
         //Create the audio object
         GameObject _audioSource = Instantiate(AudioPrefab, Camera.main.transform.position, Quaternion.identity);
         AudioSource _source = _audioSource.GetComponent<AudioSource>();
-        
+
         _volume = Mathf.Clamp01(_volume);
 
         //Set the values
